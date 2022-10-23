@@ -7,7 +7,7 @@ public class Holidays {
     static Scanner s=new Scanner(System.in);
     public Holidays()
     {
-       //manually insert dates then initialize
+       //manually insert dates or initialize (decide later) testing
    
        datesList.add("2020-03-25");
        datesList.add("2019-01-27");
@@ -30,7 +30,7 @@ public class Holidays {
      Collections.sort(datesList);
   
        
-      /*  System.out.println("Dates Object after sorting : ");
+      /*  System.out.println("Dates Object after sorting : "); testing purposes
  
        
         for (String dates : datesList) {
@@ -46,7 +46,7 @@ public class Holidays {
 
     }
 
-  /*  public static void main(String[] args)
+  /*  public static void main(String[] args) testing purposes
     {
         Ratings r=new Ratings();
         System.out.println(r.getAllRatingInfo());
