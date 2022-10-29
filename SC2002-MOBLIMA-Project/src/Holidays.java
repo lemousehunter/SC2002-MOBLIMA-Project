@@ -1,13 +1,15 @@
 import java.util.*;
 
+
+
 public class Holidays {
 
     private static String date="";
-    private ArrayList<String> datesList = new ArrayList<>();
-    static Scanner s=new Scanner(System.in);
+    private static ArrayList<String> datesList = new ArrayList<>();
+     Scanner s=new Scanner(System.in);
     public Holidays()
     {
-       //manually insert dates or initialize (decide later) testing
+       //manually insert dates or initialize during runtime (decide later) testing
    
        datesList.add("2020-03-25");
        datesList.add("2019-01-27");
@@ -43,6 +45,20 @@ public class Holidays {
     public ArrayList<String> getHolidayList()
     {
         return datesList;
+
+    }
+
+    public boolean isHoliday(String date)
+    {
+
+        for (String dates : datesList) {
+            if(date.equals(dates))
+            {
+                return true;
+
+            }
+        }
+        return false;
 
     }
 

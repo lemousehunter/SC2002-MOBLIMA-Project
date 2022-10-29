@@ -1,3 +1,4 @@
+import java.nio.channels.NonWritableChannelException;
 import java.util.*;
 
 public class Ratings {
@@ -52,7 +53,20 @@ public class Ratings {
    }
 
    
+   /*public static void main(String[] args) testing purposes
+   {
+      Holidays a=new Holidays();
 
+
+      for (String date : a.getHolidayList()) {
+        System.out.println(date);
+      }
+
+
+      System.out.println(a.isHoliday("2020-03-30"));
+   }
+
+  */
 
     
 }
