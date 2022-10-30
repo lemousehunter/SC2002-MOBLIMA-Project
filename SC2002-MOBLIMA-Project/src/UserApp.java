@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 import java.util.Scanner;
 
 public class UserApp{

@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 public class Screen {
 
 	private String screenName;

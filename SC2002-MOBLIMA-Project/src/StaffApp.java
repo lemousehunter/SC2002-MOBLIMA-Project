@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 import java.util.Scanner;
 
 public class StaffApp {
@@ -17,6 +15,10 @@ public class StaffApp {
             DisplayUserMenu();
         }while (choice<=10);
     }
+
+    private void DisplayUserMenu() {
+    }
+
     public void DisplayStaffMenu(){
         System.out.println("==================== Welcome to Staff  APP ====================\n" +
                 " 1. View Movie Details                                              \n" +

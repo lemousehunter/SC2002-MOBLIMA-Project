@@ -1,6 +1,3 @@
-package com.moblima.app;
-
-
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileWriter;

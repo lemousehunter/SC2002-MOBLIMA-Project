@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 public class TicketPrice {
 
 	private DayType dayType;

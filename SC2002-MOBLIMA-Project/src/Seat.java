@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 public class Seat {
 
 	private char seatRow;

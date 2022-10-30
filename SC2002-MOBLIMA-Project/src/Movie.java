@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 import java.util.*;
 public class Movie {
 
@@ -164,4 +162,6 @@ public class Movie {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean getMovieType() {
+	}
 }

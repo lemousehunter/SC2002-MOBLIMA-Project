@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 import java.util.ArrayList;
 
 public class Cineplex {

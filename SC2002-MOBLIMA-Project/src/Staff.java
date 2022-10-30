@@ -1,5 +1,3 @@
-package com.moblima.app;
-
 public class Staff extends User {
 	private String password;
 
