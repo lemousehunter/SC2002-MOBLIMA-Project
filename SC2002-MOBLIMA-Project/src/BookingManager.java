@@ -1,6 +1,7 @@
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.stream.Stream;
 
 public class BookingManager {
     final private String userID;
@@ -83,8 +84,14 @@ public class BookingManager {
 
     public ArrayList<String> getAllBookings(String userID) {
         if (Objects.equals(userID, "")){ // userID not provided so get all bookingIDs
-            Set<String> bookingIDSet = this.bookingIDDict.keySet();
-            return new ArrayList<>(bookingIDSet);
+            Collection<ArrayList<String>> bookingIDSet = this.bookingUserDict.values();
+            ArrayList<ArrayList<String>> bookingIDList = new ArrayList<>(bookingIDSet);
+            ArrayList<String> bookingIDConcatList = new ArrayList<String>();
+            for (ArrayList<String> strings : bookingIDList) {
+                bookingIDConcatList.addAll(strings);
+            }
+            return bookingIDConcatList;
+
         }
         else{ // userID provided so get all bookingIDs for that userID
             return this.bookingUserDict.get(userID);
