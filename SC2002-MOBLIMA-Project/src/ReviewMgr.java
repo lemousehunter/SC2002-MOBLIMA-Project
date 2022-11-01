@@ -7,10 +7,11 @@ public class ReviewMgr {
     private String review;
     private RatingScale rating;
     private ViewerRatings reviewer;
+    public static HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
     public static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>();
      private Scanner s=new Scanner(System.in);
      private Scanner q=new Scanner(System.in);
-  
+     
    
     
 
@@ -19,24 +20,13 @@ public class ReviewMgr {
       review=setReview();
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);
-      addToList(reviewer); //same userID cannot review twice
-      ListOfViewerRatingObj.add(reviewer);//same userID person can review twice
+      addToList(reviewer);
+      ListOfViewerRatingObj.add(reviewer);
       
         
     }   
-
-    private String setReview() //set the review
-  {
-    String review;
-    System.out.println("Please enter review");
-    review=s.nextLine();
-    s.close();
-    return review;
-    
-  }
    
-    private RatingScale setScale() //convert int rating to enum to initialize obj 
-    {
+    private RatingScale setScale() {
       int scale=0;
       
        RatingScale rate=RatingScale.ONE;
@@ -44,8 +34,9 @@ public class ReviewMgr {
 			{
 
 				System.out.println("Set rating scale (1-5)");
-        scale=q.nextInt();
-        q.close();
+        try {scale=q.nextInt();} 
+        catch (Exception e) {System.out.println("Enter Integer Value only");q.nextLine();}
+        
 				switch(scale)
 				{
 					case 1: rate=RatingScale.ONE;break;
@@ -61,53 +52,75 @@ public class ReviewMgr {
       return rate;
 		
 	}
-  
-  private double getRating(RatingScale scale)// method to convert rating class enum for  avg calculation
+  private String setReview() 
   {
-    double rating=0;
-    switch(scale)
-      {
-        case ONE: rating= 1.00; break;
-        case TWO: rating= 2.00; break;
-        case THREE:rating= 3.00; break;
-        case FOUR:rating= 4.00; break;
-        case FIVE:rating= 5.00; break;
-        default: break;
-      }
-      return rating;
-  }
-
-  private void addToList(ViewerRatings pass)// add to list if its not the same person reviewing the same movie
-  {
-   boolean presentFlag=false;
+    String review;
+    System.out.println("Please enter review");
+    review=s.nextLine();
+    return review;
     
-    for(ViewerRatings temp:ListOfViewerRatingObj)
-    {
-        if(temp.getMovieId().equals(reviewer.getMovieId())&&temp.getUserId().equals(reviewer.getUserId()))
-        {
-
-          presentFlag=true;
-        }
-
-    }
-
-    if(presentFlag==false)
-    {
-
-        ListOfViewerRatingObj.add(pass);
-    }else{
-
-      System.out.println("User already gave a review for this movie");
-    }
-   
   }
  
+  private void addToList(ViewerRatings pass)
+  {
+   
+    if(reviewMap.containsKey(pass.getMovieId()))
+    {
+        reviewMap.get(pass.getMovieId()).add(pass);
+
+    }else{
+
+      reviewMap.put(pass.getMovieId(), new ArrayList<ViewerRatings>());
+      reviewMap.get(pass.getMovieId()).add(pass);
+    }
+   
+   
+  }
+  public  ArrayList<String> top5Movies()
+  { 
     
-   public ArrayList<ViewerRatings> getListByMovieID(String movieId)//pass a list with same movieid
+    HashMap <String,Double>avgRatingOfMovies=new HashMap<String,Double>();
+    ArrayList<String> top5mv=new ArrayList<String>();
+    double max=0.00;    
+    double avgRating=0;
+
+    
+          for (String key: reviewMap.keySet()) 
+          {                 
+                avgRating=getAvgRating(key);
+                avgRatingOfMovies.put(key,avgRating); 
+          }
+
+          
+            //System.out.println(avgRatingOfMovies);
+
+            for(int i=0;i<5;i++)
+            { 
+            try { max=(Collections.max(avgRatingOfMovies.values()));} 
+            catch (Exception e) {  return top5mv; }
+               
+                  
+              for (String key :avgRatingOfMovies.keySet()) 
+              { 
+                   if (avgRatingOfMovies.get(key) == max) 
+                   { 
+                      avgRatingOfMovies.put(key,-1.0);
+                      top5mv.add(key);
+                   }
+              }
+            }        
+  
+
+          return top5mv;
+           
+   }
+    
+   public ArrayList<ViewerRatings> getListByMovieID(String movieId)
    {
     ArrayList<ViewerRatings> reviewByMovies=new ArrayList<ViewerRatings>();
       
-      for (ViewerRatings temp :ListOfViewerRatingObj) {
+      for (ViewerRatings temp :ListOfViewerRatingObj) 
+      {
         if(temp.getMovieId().equals(movieId))
         {
             reviewByMovies.add(temp);
@@ -122,7 +135,7 @@ public class ReviewMgr {
    }
     
 
-   public ArrayList<ViewerRatings> getListByUserID(String userId)//pass a list with same userId
+   public ArrayList<ViewerRatings> getListByUserID(String userId)
    {
     ArrayList<ViewerRatings> reviewByUser=new ArrayList<ViewerRatings>();
 
@@ -140,7 +153,7 @@ public class ReviewMgr {
 
    } 
 
-   public double getAvgRating(String movieId)// get the average rating
+   public double getAvgRating(String movieId)
    {
      double sum=0;
      int i=0;
@@ -149,14 +162,14 @@ public class ReviewMgr {
        sum+=getRating(temp.get(i).getRating()) ;
     }
 
-      sum=sum/i;// minor computation for rounding
-      sum = sum*10;
+      sum=sum/i;
+      sum = sum*100;
       sum = Math.round(sum);
-     sum = sum /10;
+     sum = sum /100;
      return sum;
 
    }
-   public String getViewerRatingID(String userId)//get entity id of existing reviews(not necessary)
+   public String getViewerRatingID(String userId)
    {
     
      for (ViewerRatings temp:ListOfViewerRatingObj) {
@@ -172,7 +185,20 @@ public class ReviewMgr {
 
 
 
-   
+   private double getRating(RatingScale scale)
+		{
+			double rating=0;
+			switch(scale)
+				{
+					case ONE: rating= 1.00; break;
+					case TWO: rating= 2.00; break;
+					case THREE:rating= 3.00; break;
+					case FOUR:rating= 4.00; break;
+					case FIVE:rating= 5.00; break;
+					default: break;
+				}
+				return rating;
+		}
  
     
 }
