@@ -15,6 +15,10 @@ public class Screen {
 	 */
 	public Screen(String screenName, ScreenClass screenClass, int numberOfRows, int seatsPerRow) {
 
+		this.screenName=screenName;
+		this.screenClass=screenClass;
+		this.numberOfRows=numberOfRows;
+		this.seatsPerRow=seatsPerRow;
 	}
 
 	/**
@@ -23,8 +27,9 @@ public class Screen {
 	 * @param SeatsPerRow
 	 */
 	public void addScreenSeatLayout(int numberOfRows, int SeatsPerRow) {
-		// TODO - implement Screen.addScreenSeatLayou
-		throw new UnsupportedOperationException();
+		
+		this.numberOfRows=numberOfRows;
+		this.seatsPerRow=SeatsPerRow;
 	}
 
 }
