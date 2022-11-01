@@ -1,18 +1,20 @@
 
-
 import java.util.*;
 
-public class ReviewMgr {
 
+public class ReviewMgr {
     private String review;
     private RatingScale rating;
     private ViewerRatings reviewer;
     public static HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
-    public static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>();
-     private Scanner s=new Scanner(System.in);
+    private ArrayList<ViewerRatings> ListOfViewerRatingObj; //changed access modifier because the record will be maintained on the Master Array
+    private ArrayList<String> viewerRatingsID; 
+    private Scanner s=new Scanner(System.in);
      private Scanner q=new Scanner(System.in);
      
-   
+   public ReviewMgr(ArrayList<ViewerRatings> ratings) {
+    this.ListOfViewerRatingObj = ratings;
+   }
     
 
    public void addReview(String userID, String movieID)
@@ -20,11 +22,24 @@ public class ReviewMgr {
       review=setReview();
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);
+      viewerRatingsID.add(reviewer.getViewerRatingId());
       addToList(reviewer);
       ListOfViewerRatingObj.add(reviewer);
-      
-        
     }   
+
+    private void addToList(ViewerRatings pass)
+  {
+   
+    if(reviewMap.containsKey(pass.getMovieId()))
+    {
+        reviewMap.get(pass.getMovieId()).add(pass);
+
+    }else{
+
+      reviewMap.put(pass.getMovieId(), new ArrayList<ViewerRatings>());
+      reviewMap.get(pass.getMovieId()).add(pass);
+    }
+}
    
     private RatingScale setScale() {
       int scale=0;
@@ -60,22 +75,7 @@ public class ReviewMgr {
     return review;
     
   }
- 
-  private void addToList(ViewerRatings pass)
-  {
    
-    if(reviewMap.containsKey(pass.getMovieId()))
-    {
-        reviewMap.get(pass.getMovieId()).add(pass);
-
-    }else{
-
-      reviewMap.put(pass.getMovieId(), new ArrayList<ViewerRatings>());
-      reviewMap.get(pass.getMovieId()).add(pass);
-    }
-   
-   
-  }
   public  ArrayList<String> top5Movies()
   { 
     

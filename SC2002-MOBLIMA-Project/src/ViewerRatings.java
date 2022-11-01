@@ -8,7 +8,7 @@ public class ViewerRatings {
 	String viewerRatingID;
 	
 	
-	public ViewerRatings(String userID, String movieID,  RatingScale scale,String review) {
+	public ViewerRatings(String userID, String movieID,  RatingScale scale, String review) {
 		this.userID=userID;
 		this.movieID=movieID;
 		this.review=review;	

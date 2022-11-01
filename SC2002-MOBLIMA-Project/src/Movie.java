@@ -1,6 +1,9 @@
 import java.util.*;
+import java.util.UUID;
+
 public class Movie {
 
+	private String movieID;
 	private String name;
 	private String movieLanguage;
 	private MovieType movieType;
@@ -9,20 +12,7 @@ public class Movie {
 	private String synopsis;
 	private String director;
 	private ArrayList<String> cast;
-	private ArrayList<ViewerRatings> ratings;
-
-	public Movie() {
-		name = "";
-		movieLanguage = "";
-		movieType = MovieType.BLOCKBUSTER;
-		movieRating = MovieRating.G;
-		showStatus = ShowStatus.COMINGSOON;
-		synopsis = "";
-		director = "";
-		cast = new ArrayList<String>();
-		ratings = new ArrayList<ViewerRatings>();
-		throw new UnsupportedOperationException();
-	}
+	
 
 	/**
 	 *
@@ -31,7 +21,8 @@ public class Movie {
 	 * @param movieRating
 	 * @param showStatus
 	 */
-	public Movie(String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<ViewerRatings> ratings) {
+	public Movie(String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast) {
+		this.movieID = UUID.randomUUID().toString();
 		this.name = name;
 		this.movieLanguage = movieLanguage;
 		this.movieType = movieType;
@@ -40,11 +31,10 @@ public class Movie {
 		this.synopsis = synopsis;
 		this.director = director;
 		this.cast = cast;
-		this.ratings = ratings;
 		throw new UnsupportedOperationException();
 	}
 
-	public void viewMovieDetails() {
+	public void viewMovieDetails(ArrayList<ViewerRatings> ratings) {
 		System.out.println("Movie Name: " + this.name);
 		System.out.println("Movie Status: " + this.showStatus);
 		System.out.println("Movie Type: " + this.movieType);
@@ -53,11 +43,48 @@ public class Movie {
 		System.out.println("Synopsis: " + this.synopsis);
 		System.out.println("Director: " + this.director);
 		System.out.println("Cast: " + this.cast);
-		for(ViewerRatings vr: ratings) {
-			System.out.println(vr.getReview());
-			System.out.println(vr.getRating());
+
+		int count=0; //this variable counts the total number of reviews for a particular movie and helps us do the count for overall ratings
+		double sum_for_overall_rating = 0;
+		for(ViewerRatings vr: ratings)
+		{
+			if(vr.getMovieId().equals(this.movieID))
+			{
+				System.out.println("Review: " + vr.getReview());
+				System.out.println("Rating: " + vr.getRating());
+				count++;
+				sum_for_overall_rating+=getNumberRating(vr.getRating());
+			}
+		}
+
+		if(count>1)
+		{
+			System.out.printf("Overall Ratings: %.1f / 5\n", sum_for_overall_rating/count);
+		}
+		else
+		{
+			System.out.println("Overall Ratings: NA");
 		}
 		throw new UnsupportedOperationException();
+	}
+
+	private double getNumberRating(RatingScale scale)
+		{
+			double rating=0;
+			switch(scale)
+				{
+					case ONE: rating= 1.0; break;
+					case TWO: rating= 2.0; break;
+					case THREE:rating= 3.0; break;
+					case FOUR:rating= 4.0; break;
+					case FIVE:rating= 5.0; break;
+					default: break;
+				}
+				return rating;
+		}
+
+	public String getMovieID() {
+		return this.movieID;
 	}
 
 	public String getName() {
@@ -144,24 +171,15 @@ public class Movie {
 		this.cast = cast;
 	}
 
-	public ArrayList<ViewerRatings> getRatings() {
-		return this.ratings;
-	}
-
-	public void setRatings(ArrayList<ViewerRatings> ratings) {
-		this.ratings = ratings;
-	}
 
 
 	/**
 	 *
 	 * @param viewerRatings
 	 */
-	public void addViewerRating(ViewerRatings viewerRatings) {
-		ratings.add(viewerRatings);
+	public void addViewerRating(ReviewMgr reviewMgrObj, String userID) {
+		
+		reviewMgrObj.addReview(userID, this.movieID);
 		throw new UnsupportedOperationException();
-	}
-
-	public boolean getMovieType() {
 	}
 }
