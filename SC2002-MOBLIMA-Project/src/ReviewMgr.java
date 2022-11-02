@@ -6,14 +6,22 @@ public class ReviewMgr {
     private String review;
     private RatingScale rating;
     private ViewerRatings reviewer;
-    public static HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
-    private ArrayList<ViewerRatings> ListOfViewerRatingObj; //changed access modifier because the record will be maintained on the Master Array
-    private ArrayList<String> viewerRatingsID; 
+    private HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
+    private static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>(); //changed access modifier because the record will be maintained on the Master Array
+    private static ArrayList<String> viewerRatingsID; 
     private Scanner s=new Scanner(System.in);
-     private Scanner q=new Scanner(System.in);
+    private Scanner q=new Scanner(System.in);
      
-   public ReviewMgr(ArrayList<ViewerRatings> ratings) {
-    this.ListOfViewerRatingObj = ratings;
+   
+   public ReviewMgr() // constructor for movie goer to instantiate review manager to add object 
+   {
+
+   }
+      
+  public ReviewMgr(ArrayList<ViewerRatings> ratings) {
+  
+    ListOfViewerRatingObj.addAll(ratings);
+    buildHashMap(ratings);
    }
     
 
@@ -22,23 +30,28 @@ public class ReviewMgr {
       review=setReview();
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);
-      viewerRatingsID.add(reviewer.getViewerRatingId());
-      addToList(reviewer);
+      viewerRatingsID.add(reviewer.getViewerRatingId());   
       ListOfViewerRatingObj.add(reviewer);
+      buildHashMap(ListOfViewerRatingObj);
     }   
 
-    private void addToList(ViewerRatings pass)
+    private void buildHashMap(ArrayList<ViewerRatings> pass)
   {
    
-    if(reviewMap.containsKey(pass.getMovieId()))
+    for(int i=0;i<pass.size();i++)
     {
-        reviewMap.get(pass.getMovieId()).add(pass);
+      if(reviewMap.containsKey(pass.get(i).getMovieId()))
+    {
+        reviewMap.get(pass.get(i).getMovieId()).add(pass.get(i));
 
     }else{
 
-      reviewMap.put(pass.getMovieId(), new ArrayList<ViewerRatings>());
-      reviewMap.get(pass.getMovieId()).add(pass);
+      reviewMap.put(pass.get(i).getMovieId(), new ArrayList<ViewerRatings>());
+      reviewMap.get(pass.get(i).getMovieId()).add(pass.get(i));
     }
+
+    }
+    
 }
    
     private RatingScale setScale() {
