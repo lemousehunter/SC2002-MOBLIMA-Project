@@ -6,7 +6,7 @@ public class ReviewMgr {
     private String review;
     private RatingScale rating;
     private ViewerRatings reviewer;
-    private static HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
+    private HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
     private static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>(); //changed access modifier because the record will be maintained on the Master Array  
     private Scanner s=new Scanner(System.in);
     private Scanner q=new Scanner(System.in);
@@ -20,7 +20,7 @@ public class ReviewMgr {
   public ReviewMgr(ArrayList<ViewerRatings> ratings) {
   
     ListOfViewerRatingObj.addAll(ratings);
-    buildHashMap(ratings);
+    
    }
     
 
@@ -30,7 +30,7 @@ public class ReviewMgr {
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);       
       ListOfViewerRatingObj.add(reviewer);
-      buildHashMap(ListOfViewerRatingObj);
+     
     }   
 
     private void buildHashMap(ArrayList<ViewerRatings> pass)
@@ -54,13 +54,13 @@ public class ReviewMgr {
    
     private RatingScale setScale() {
       int scale=0;
-      
+    
        RatingScale rate=RatingScale.ONE;
 			while(scale>5||scale<1)
 			{
 
 				System.out.println("Set rating scale (1-5)");
-        try {scale=q.nextInt();} 
+      try {scale=q.nextInt();} 
         catch (Exception e) {System.out.println("Enter Integer Value only");q.nextLine();}
         
 				switch(scale)
@@ -95,7 +95,7 @@ public class ReviewMgr {
     double max=0.00;    
     double avgRating=0;
 
-    
+          buildHashMap(ListOfViewerRatingObj);
           for (String key: reviewMap.keySet()) 
           {                 
                 avgRating=getAvgRating(key);
@@ -130,11 +130,14 @@ public class ReviewMgr {
    {
     ArrayList<ViewerRatings> reviewByMovies=new ArrayList<ViewerRatings>();
       
-     if(reviewMap.containsKey(movieId))
-     {
+    for (ViewerRatings temp :ListOfViewerRatingObj) {
+      if(temp.getMovieId().equals(movieId))
+      {
+          reviewByMovies.add(temp);
 
-        reviewByMovies=reviewMap.get(movieId);
-     }
+      }
+      
+    }
 
       return reviewByMovies;
 
