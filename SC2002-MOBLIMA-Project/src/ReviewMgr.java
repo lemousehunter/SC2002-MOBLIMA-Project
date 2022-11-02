@@ -6,15 +6,14 @@ public class ReviewMgr {
     private String review;
     private RatingScale rating;
     private ViewerRatings reviewer;
-    private HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
-    private static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>(); //changed access modifier because the record will be maintained on the Master Array
-    private static ArrayList<String> viewerRatingsID; 
+    private static HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
+    private static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>(); //changed access modifier because the record will be maintained on the Master Array  
     private Scanner s=new Scanner(System.in);
     private Scanner q=new Scanner(System.in);
      
    
-   public ReviewMgr() // constructor for movie goer to instantiate review manager to add object 
-   {
+   public ReviewMgr() // constructor for movie goer to instantiate review manager controller to add viewer object 
+   {                  // without creating the manager object multiple times
 
    }
       
@@ -29,8 +28,7 @@ public class ReviewMgr {
     {
       review=setReview();
       rating=setScale();
-      reviewer=new ViewerRatings(userID, movieID, rating,review);
-      viewerRatingsID.add(reviewer.getViewerRatingId());   
+      reviewer=new ViewerRatings(userID, movieID, rating,review);       
       ListOfViewerRatingObj.add(reviewer);
       buildHashMap(ListOfViewerRatingObj);
     }   
@@ -132,15 +130,11 @@ public class ReviewMgr {
    {
     ArrayList<ViewerRatings> reviewByMovies=new ArrayList<ViewerRatings>();
       
-      for (ViewerRatings temp :ListOfViewerRatingObj) 
-      {
-        if(temp.getMovieId().equals(movieId))
-        {
-            reviewByMovies.add(temp);
+     if(reviewMap.containsKey(movieId))
+     {
 
-        }
-        
-      }
+        reviewByMovies=reviewMap.get(movieId);
+     }
 
       return reviewByMovies;
 
@@ -184,7 +178,7 @@ public class ReviewMgr {
    }
    public String getViewerRatingID(String userId)
    {
-    
+   
      for (ViewerRatings temp:ListOfViewerRatingObj) {
        if(temp.getUserId().equals(userId))
        {
