@@ -3,12 +3,8 @@ import java.util.Scanner;
 
 public class screenManager {
 	
-
-
 	    static Scanner sc = new Scanner(System.in);
-	   
-
-	    
+	       
 	    public Screen getScreenByID(String screenID, ArrayList<Screen> screen) {
 	        for(Screen s:screen) {
 	            if(screenID.equals(s.getScreenID()))
@@ -39,49 +35,8 @@ public class screenManager {
 	            break;
 	        }
 	        
-	        screenType type = null;
-	        System.out.println("Enter Screen Type: 1 - 2D Screen, 2 - 3D Screen, 3 - 4D Screen 4 - ImaxScreen");
-	        int ch2 = sc.nextInt();
-	        switch(ch2)
-	        {
-	            case 1: type=screenType.TwoDScreen;
-	            break;
-	            case 2: type=screenType.ThreeDScreen;
-	            break;
-	            case 3: type=screenType.FourDScreen;
-	            break;
-	            case 4: type=screenType.ImaxScreen;
-	    	     break;
-	        }
-	        
-	        Screen screen=new Screen(name,screenClass,noRows,seatsRow,type);
+	        Screen screen=new Screen(name,screenClass,noRows,seatsRow);
 	        screens.add(screen);
-	    }
-
-	    public void updateScreen(Screen screen) {
-	       screenType type = null;
-	    	System.out.println("The current Type of the Screen is " + screen.getScreenType());
-	        System.out.println("Enter Updated Screen Type");
-	        System.out.println("Enter Screen Type: 1 - 2D Screen, 2 - 3D Screen, 3 - 4D Screen 4 - ImaxScreen");
-	        int ch = sc.nextInt();
-	        switch(ch)
-	        {
-	            case 1: type=screenType.TwoDScreen;
-	            break;
-	            case 2: type=screenType.ThreeDScreen;
-	            break;
-	            case 3: type=screenType.FourDScreen;
-	            break;
-	            case 4: type=screenType.ImaxScreen;
-	    	     break;
-	        }
-	        
-	        screen.setScreenType(type);
-	    }
-
-	    public void removeScreen(Screen screen)
-	    {
-	       screen.setScreenType(screenType.Removed);
 	    }
 	    
 	    public void viewScreens(ArrayList<Screen> screen) {
@@ -94,7 +49,7 @@ public class screenManager {
 	    public void screenListing(ArrayList<Screen> screen) {
 	        System.out.println("List of Screens:");
 	        for(Screen s:screen) {
-	            System.out.println(s.getScreenName() + " - " + s.getScreenType());
+	            System.out.println(s.getScreenName());
 	        }
 	    }
 
@@ -104,7 +59,7 @@ public class screenManager {
 	        for(Screen s:screen) {
 	            if(s.getScreenName().equalsIgnoreCase(user_input)) {
 	                System.out.println("Screen Found!");
-	                System.out.println(s.getScreenName() + " - " + s.getScreenType());
+	                System.out.println(s.getScreenName());
 	            }
 	            else
 	                System.out.println("Screen not Found!");
