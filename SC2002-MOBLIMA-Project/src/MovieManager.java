@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class MovieManager {
 
@@ -20,6 +21,7 @@ public class MovieManager {
     }
     
     public void addMovie(ArrayList<Movie> masterMovies) {
+        String movieID = UUID.randomUUID().toString();
         System.out.println("Enter Movie Name: ");
         String name = sc.nextLine();
         System.out.println("Enter Movie Language: ");
@@ -74,36 +76,10 @@ public class MovieManager {
             else
                 cast.add(temp_cast);
         }
-        /*ViewerRatings temp = new ViewerRatings();
-        System.out.println("Enter Viewer Ratings: (Enter NA when done)");
-        ArrayList<ViewerRatings> vr = new ArrayList<ViewerRatings>();
-        String review = "";
-        while(true) { //NEEED TO COMPLETE THIS
-            System.out.println("Enter Review");
-            review = sc.nextLine();
-            if(review.equalsIgnoreCase("NA"))
-                break;
-            else
-                temp.setReview(review);
-            System.out.println("Enter Ratings from 1 to 5");
-            int ch4 = sc.nextInt();
-            switch(ch4)
-            {
-                case 1: temp.setRating(RatingScale.ONE);
-                break;
-                case 2: temp.setRating(RatingScale.TWO);
-                break;
-                case 3: temp.setRating(RatingScale.THREE);
-                break;
-                case 4: temp.setRating(RatingScale.FOUR);
-                break;
-                case 5: temp.setRating(RatingScale.FIVE);
-                break;
-            }
-            vr.add(temp);*/
         
+        ArrayList<ViewerRatings> ratings = new ArrayList<ViewerRatings>();
         
-        Movie movie = new Movie(name, movieLanguage, movieType, movieRating, showStatus, synopsis, director, cast);
+        Movie movie = new Movie(movieID, name, movieLanguage, movieType, movieRating, showStatus, synopsis, director, cast, ratings);
         masterMovies.add(movie);
     }
 
