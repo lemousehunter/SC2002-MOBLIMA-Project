@@ -1,7 +1,7 @@
 import java.util.ArrayList;
-
+import java.util.UUID; 
 public class Show {
-
+	private String showID;
 	private String showDate;
 	private String  showTime;
 	private String movieID;
@@ -19,6 +19,8 @@ public class Show {
 	 */
 	public Show(String showDate, String showTime, String movieID,Screen screen) {
 		// TODO - implement Show.Show
+		String showID=UUID.randomUUID().toString();
+		this.showID=showID;
 		this.showDate=showDate;
 		this.showTime=showTime;
 		this.movieID=movieID;
@@ -34,6 +36,18 @@ public class Show {
 		}
 
 	}
+	
+	public Show(String showID,String showDate, String showTime, String movieID,String screenID,int emptySeats,int numberOfRows,int seatsPerRow, ArrayList<ShowSeat> showSeats){
+		this.showID=showID;
+		this.showDate=showDate;
+		this.showTime=showTime;
+		this.movieID=movieID;
+		this.screenID=screenID;
+		this.emptySeats=emptySeats;
+		this.numberOfRows=numberOfRows;
+		this.seatsPerRow=seatsPerRow;
+		this.showSeats=showSeats;
+	}
 
 	
 
@@ -48,6 +62,10 @@ public class Show {
 	 * 
 	 * @param movie
 	 */
+	public String getShowID(){
+		return this.showID;
+	}
+	
 
 
 	public int getEmptySeats() {

@@ -131,10 +131,10 @@ public class MoblimaApp {
             StringTokenizer star = new StringTokenizer(st, bookingSEPARATOR);// pass in the string to the string tokenizer using delimiter ","
             String viewerRatingID = star.nextToken().trim();    // first token
             String review = star.nextToken().trim();
-            String rating= star.nextToken().trim();
+            String ratingString= star.nextToken().trim();
             String userID= star.nextToken().trim();
             String movieID  = star.nextToken().trim();
-            ViewerRatings rating= new ViewerRatings(viewerRatingID,review,RatingScale.valueOf(rating),userID,movieID);
+            ViewerRatings rating= new ViewerRatings(viewerRatingID,userID,movieID,RatingScale.valueOf(ratingString),review);
             ratings.add(rating);
         }
     }
@@ -250,11 +250,12 @@ public class MoblimaApp {
             String showTime = star.nextToken().trim();    // third token
             String movieID = star.nextToken().trim();    // fourth token
             String screenID = star.nextToken().trim();    // fifth token
+            int numberOfRows=Integer.parseInt(star.nextToken().trim());
+	        int seatsPerRow=Integer.parseInt(star.nextToken().trim());
             int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
             ArrayList<ShowSeat> showSeats = new ArrayList<ShowSeat>();
             String showSeatsString, showSeatID, showSeatRow,showSeatType,occupiedString;
             boolean isOccupied;
-
             while (star.hasMoreTokens()){
                  showSeatsString= star.nextToken().trim();
                  StringTokenizer showSeatsToken= new StringTokenizer(showSeatsString, showSeatSEPARATOR);
@@ -273,8 +274,7 @@ public class MoblimaApp {
                 showSeats.add(showSeat);
 
             }
-            Show show= new Show(showID, showDate,showTime, movieID,screenID, emptySeats,showSeats);
-            shows.add(show);
+            Show show= new Show( showID, showDate,  showTime,  movieID, screenID, emptySeats, numberOfRows, seatsPerRow, showSeats);
         }
 
 
