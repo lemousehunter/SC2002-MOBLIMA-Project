@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class Cineplex {
@@ -7,17 +6,15 @@ public class Cineplex {
 	private String cineplexID;
 	private String name;
 	private String location;
-	private Screen[] screens;
+	private ArrayList<Screen> screens;
 	private cineplexType type;
-	private int size;
 
 	public Cineplex() {
 
 		this.cineplexID=UUID.randomUUID().toString();
 		this.name=null;
 		this.location=null;
-		this.screens=new Screen[0];
-		this.size=0;
+		this.screens=new ArrayList<Screen>();
 	}
 
 	/**
@@ -26,21 +23,19 @@ public class Cineplex {
 	 * @param location
 	 * @param screens
 	 */
-	public Cineplex(String name, String location,int totalScreens,cineplexType type) {
+	public Cineplex(String name, String location,cineplexType type) {
 		
 		this.cineplexID=UUID.randomUUID().toString();
 		this.name=name;
 		this.location=location;
-		this.size=0;
-		this.screens=new Screen[totalScreens];
+		this.screens=new ArrayList<Screen>();
 		this.type=type;
 
 		
 	}
 
 	public void addScreen(Screen screen) {
-		this.screens[size]=screen;
-		size++;
+		this.screens.add(screen);
 		
 	}
 
@@ -65,26 +60,19 @@ public class Cineplex {
 		this.location = location;
 	}
 
-	public Screen[] getScreens() {
-		return screens;
+	public Screen getScreen(int index) {
+		return screens.get(index);
 	}
 
-	public void setScreens(Screen[] screens) {
-		this.screens = screens;
+	public void setScreens(Screen screen,int index) {
+		this.screens.set(index, screen);
 	}
 
-	public int getSize() {
-		return size;
+	public int getTotalScreens() {
+		return screens.size();
 	}
 
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public int gettotalScreens() {
-		return size;
-		
-	}
+	
 
 	public cineplexType getType() {
 		return type;
@@ -101,11 +89,10 @@ public class Cineplex {
 	@Override
 	public String toString() {
 		return "Cineplex [cineplexID=" + cineplexID + ", name=" + name + ", location=" + location + ", screens="
-				+ Arrays.toString(screens) + ", type=" + type + ", size=" + size + "]";
+				+ screens.toArray().toString() + ", type=" + type;
 	}
 	
 	
 	
 	
 }
-

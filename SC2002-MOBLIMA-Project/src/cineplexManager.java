@@ -23,8 +23,7 @@ public class cineplexManager {
         String name = sc.nextLine();
         System.out.println("Enter Location: ");
         String loc = sc.next();
-        System.out.println("How Many Screens You Want to Add in Cineplex");
-        int totalScreens=sc.nextInt();
+        
        
         cineplexType type = null;
 	      
@@ -39,7 +38,7 @@ public class cineplexManager {
         }
          
         
-        Cineplex c=new Cineplex(name,loc,totalScreens,type);
+        Cineplex c=new Cineplex(name,loc,type);
         cineplex.add(c);
         
  
