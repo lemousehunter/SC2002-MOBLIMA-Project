@@ -21,9 +21,9 @@ public class StaffApp {
 
     public void DisplayStaffMenu(){
         System.out.println("==================== Welcome to Staff  APP ====================\n" +
-                " 1. View Movie Details                                              \n" +
-                " 2. Moving Listing                                            \n" +
-                " 3. Search Movie                                \n" +
+                " 1. Create Movie Listing                                              \n" +
+                " 2. Update Movie listing                                            \n" +
+                " 3. Remove Movie Listing                                 \n" +
                 " 4. Check Seat Availability                                \n" +
                 "5. Make a Booking                                           \n"+
                 "6. View Booking History                              \n" +

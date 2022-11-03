@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Screen {
@@ -9,7 +10,7 @@ public class Screen {
 	private ScreenClass screenClass;
 	private int numberOfRows;
 	private int seatsPerRow;
-	private screenType screenType;
+	private ArrayList<Seat> seatLayout= new ArrayList<Seat>();
 
 	/**
 	 *
@@ -18,26 +19,40 @@ public class Screen {
 	 * @param numberOfRows
 	 * @param seatsPerRow
 	 */
-	public Screen(String screenName, ScreenClass screenClass, int numberOfRows, int seatsPerRow,screenType type) {
+	public Screen(String screenName, ScreenClass screenClass, int numberOfRows, int seatsPerRow) {
 		
 		this.screenID = UUID.randomUUID().toString();
 		this.screenName=screenName;
 		this.screenClass=screenClass;
 		this.numberOfRows=numberOfRows;
 		this.seatsPerRow=seatsPerRow;
-		this.screenType=type;
+		this.numberOfSeats=numberOfRows*seatsPerRow;
+		String seatID;
+		String seatRow;
+		int seatNumber;
+		String seatType;
+		int leftAisle= seatsPerRow/2;
+		int rightAisle=leftAisle+1;
+		for(int i=1;i<=numberOfRows;i++){
+			for(int j=1;j<=seatsPerRow;j++){
+				seatRow=getRowByNumber(i);
+				seatNumber=j;
+				seatID=seatRow;
+				seatID=seatID.concat(Integer.toString(seatNumber));
+				if(j==leftAisle || j==rightAisle){
+					seatType="AISLE";
+				}
+				else{
+					seatType="REGULAR";
+				}
+				Seat seat=new Seat(seatID, seatRow, seatNumber, seatType);
+				this.seatLayout.add(seat);
+			}
+			
+		}
+
 	}
 
-	/**
-	 *
-	 * @param numberOfRows
-	 * @param SeatsPerRow
-	 */
-	public void addScreenSeatLayout(int numberOfRows, int SeatsPerRow) {
-		
-		this.numberOfRows=numberOfRows;
-		this.seatsPerRow=SeatsPerRow;
-	}
 
 	public String getScreenID() {
 		return screenID;
@@ -84,12 +99,25 @@ public class Screen {
 		this.seatsPerRow = seatsPerRow;
 	}
 
-	public screenType getScreenType() {
-		return screenType;
+	public ArrayList<Seat> getSeatLayout() {
+		return seatLayout;
 	}
 
-	public void setScreenType(screenType screenType) {
-		this.screenType = screenType;
+	private String getRowByNumber(int rowNumber){
+		int quotient=rowNumber/26;
+		int remainder=rowNumber%26;
+		String rowString="";
+		if (quotient>0){
+			rowString=rowString.concat(Character.toString(mapNumberToChar(quotient)));
+		}
+		if (remainder>0){
+			rowString=rowString.concat(Character.toString(mapNumberToChar(remainder)));
+		}
+		return rowString;
+
+	}
+	private char mapNumberToChar(int number){
+		return (char) (64+number);
 	}
 
 	

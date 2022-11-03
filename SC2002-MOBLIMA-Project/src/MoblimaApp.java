@@ -1,19 +1,23 @@
-import java.util.Scanner;
+//package com.moblima.app;
+
+
+import java.util.*;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileInputStream;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class MoblimaApp {
     String inputFolder = System.getProperty("dataFolder");
     static ArrayList<User> userList = new ArrayList<User>();
     static ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>();
-    ArrayList<Booking> bookings = new ArrayList<Booking>();
+    static ArrayList<Screen> screens = new ArrayList<Screen>();
+    static ArrayList<Booking> bookings = new ArrayList<Booking>();
+    static ArrayList<Show> shows = new ArrayList<Show>();
     static ArrayList<Movie> movies = new ArrayList<Movie>();
-    ArrayList<ShowDate> showDates= new ArrayList<ShowDate>();
+    static ArrayList<Holidays> holidaysList= new ArrayList<Holidays>();
+    static ArrayList<ViewerRatings> ratings= new ArrayList<ViewerRatings>();
+
 
     static Scanner sc = new Scanner(System.in);
     private static User sessionUser = null;
@@ -71,23 +75,139 @@ public class MoblimaApp {
 
     private static void primeAllObjects() throws IOException {
         primeCineplex();
+        primeScreen();
         primeMovie();
         primeShow();
+        primeBookings();
+        primeViewerRatings();
         primeUser();
+
     }
 
-    private static void primeUser() {
+    private static void primeScreen() throws IOException {
+        String screenSEPARATOR = "|";
+        String SeatSEPARATOR="~";
+        if (movies.size()==0 && cineplexes.size()==0){
+            primeCineplex();
+            primeMovie();
+        }
+        String filename = dataFolder.concat("Screens.txt");
+        ArrayList stringArray = (ArrayList) read(filename);
+        for (int i = 0; i < stringArray.size(); i++) {
+            String st = (String) stringArray.get(i);
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, screenSEPARATOR);    // pass in the string to the string tokenizer using delimiter ","
+            String screenID = star.nextToken().trim();    // first token
+            String screenName = star.nextToken().trim();    // second token
+            String screenClass = star.nextToken().trim();    // third token
+            int numberOfRows = Integer.parseInt(star.nextToken().trim());    // fourth token
+            int seatsPerRow = Integer.parseInt(star.nextToken().trim());    // fifth token
+            int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
+            ArrayList<Seat> seatLayout = new ArrayList<Seat>();
+            String SeatsString, SeatID, SeatRow,SeatType;
+            while (star.hasMoreTokens()){
+                SeatsString= star.nextToken().trim();
+                StringTokenizer SeatsToken= new StringTokenizer(SeatsString, SeatSEPARATOR);
+                SeatID=SeatsToken.nextToken().trim();
+                SeatRow=SeatsToken.nextToken().trim();
+                int SeatNumber= Integer.parseInt(SeatsToken.nextToken().trim());
+                SeatType=SeatsToken.nextToken().trim();
+                Seat Seat= new Seat(SeatRow,SeatNumber,SeatType);
+                seatLayout.add(Seat);
+
+            }
+            Screen screen= new Screen(screenID, screenName,screenClass,numberOfRows,seatsPerRow,seatLayout);
+            screens.add(screen);
+        }
+    }
+
+    private static void primeViewerRatings() throws IOException {
+        String bookingSEPARATOR = "|";
+        String filename = dataFolder.concat("Ratings.txt");
+        ArrayList stringArray = (ArrayList) read(filename);
+        for (int i = 0; i < stringArray.size(); i++) {
+            String st = (String) stringArray.get(i);
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, bookingSEPARATOR);// pass in the string to the string tokenizer using delimiter ","
+            String viewerRatingID = star.nextToken().trim();    // first token
+            String review = star.nextToken().trim();
+            String rating= star.nextToken().trim();
+            String userID= star.nextToken().trim();
+            String movieID  = star.nextToken().trim();
+            ViewerRatings rating= new ViewerRatings(viewerRatingID,review,RatingScale.valueOf(rating),userID,movieID);
+            ratings.add(rating);
+        }
+    }
+
+    private static void primeBookings() {
+        String bookingSEPARATOR = "|";
+        String filename = dataFolder.concat("Bookings.txt");
+        ArrayList stringArray = (ArrayList) read(filename);
+        for (int i = 0; i < stringArray.size(); i++) {
+            String st = (String) stringArray.get(i);
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, bookingSEPARATOR);// pass in the string to the string tokenizer using delimiter ","
+            String bookingID = star.nextToken().trim();    // first token
+            String userID = star.nextToken().trim();
+            String movieID= star.nextToken().trim();
+            String screenID= star.nextToken().trim();
+            String cineplexID= star.nextToken().trim();
+            String date= star.nextToken().trim();
+            String time= star.nextToken().trim();
+            Double price= Double.valueOf(star.nextToken().trim());
+            Booking booking= new Booking(bookingID,userID,movieID,screenID,cineplexID,date,time,price);
+            bookings.add(booking);
+        }
+
+    }
+
+    private static void primeUser() throws IOException {
+        String userSEPARATOR = "|";
+        String bookingSEPERATOR = "~";
+        String filename = dataFolder.concat("Users.txt");
+        ArrayList stringArray = (ArrayList) read(filename);
+        for (int i = 0; i < stringArray.size(); i++) {
+            String st = (String) stringArray.get(i);
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, userSEPARATOR);// pass in the string to the string tokenizer using delimiter ","
+            String userID = star.nextToken().trim();    // first token
+            String userName = star.nextToken().trim();
+            String userType = star.nextToken().trim();
+            if (userType.equals(UserType.STAFF)) {
+                String password = star.nextToken().trim();// first token
+                Staff staff= new MovieGoer(userID,userName, userType, password);
+                userList.add((User)staff);
+            }
+            else {
+                String emailID = star.nextToken().trim();
+                int  mobileNumber = Integer.parseInt(star.nextToken().trim());
+                String movieGoerAge = star.nextToken().trim();
+                ArrayList<String> bookings = new ArrayList<String>();
+                String bookingIDString= star.nextToken().trim();
+                StringTokenizer bookingToken = new StringTokenizer(bookingIDString, bookingSEPERATOR);
+                while (bookingToken.hasMoreTokens()) {
+                    bookings.add(bookingToken.nextToken().trim());
+                }
+                MovieGoer movieGoer= new MovieGoer(userID,userName, userType, emailID,mobileNumber,movieGoerAge,bookings);
+                userList.add((User)movieGoer);
+
+
+            }
+
+        }
     }
 
     private static void primeMovie() throws IOException {
         String movieSEPARATOR = "|";
         String castSEPERATOR = "~";
+        String ratingSEPERATOR="~";
         String filename = dataFolder.concat("Movies.txt");
         ArrayList stringArray = (ArrayList) read(filename);
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
-            StringTokenizer star = new StringTokenizer(st, movieSEPARATOR);    // pass in the string to the string tokenizer using delimiter ","
+            StringTokenizer star = new StringTokenizer(st, movieSEPARATOR);// pass in the string to the string tokenizer using delimiter ","
+            String movieID = star.nextToken().trim();    // first token
             String movieName = star.nextToken().trim();    // first token
             String movieLanguage = star.nextToken().trim();    // second token
             String movieType = star.nextToken().trim();    // third token
@@ -101,22 +221,20 @@ public class MoblimaApp {
             while (castToken.hasMoreTokens()) {
                 castList.add(castToken.nextToken().trim());
             }
-            ArrayList<ViewerRatings> ratings = new ArrayList<ViewerRatings>();
-            Movie movie = new Movie(movieName, movieLanguage, MovieType.valueOf(movieType), MovieRating.valueOf(movieRating), ShowStatus.valueOf(showStatus), synopsis, director, castList, ratings);
-            while (star.hasMoreTokens()) {
-                String ratingTextAndScale = star.nextToken().trim();
-                StringTokenizer ratingToken = new StringTokenizer(ratingTextAndScale, castSEPERATOR);
-                String ratingText = ratingToken.nextToken().trim();
-                String ratingScale = ratingToken.nextToken().trim();
-                ViewerRatings rating = new ViewerRatings(ratingText, RatingScale.valueOf(ratingScale));
-                ratings.add(rating);
+            String rating= star.nextToken().trim();
+            ArrayList<String> ratings = new ArrayList<String>();
+            StringTokenizer ratingToken = new StringTokenizer(rating, ratingSEPERATOR);
+            while (ratingToken.hasMoreTokens()) {
+                ratings.add(ratingToken.nextToken().trim());
             }
+            Movie movie = new Movie(movieID,movieName, movieLanguage, MovieType.valueOf(movieType), MovieRating.valueOf(movieRating), ShowStatus.valueOf(showStatus), synopsis, director, castList, ratings);
             movies.add(movie);
 
         }
     }
     private static void primeShow() throws IOException {
         String showSEPARATOR = "|";
+        String showSeatSEPARATOR="~";
         if (movies.size()==0 && cineplexes.size()==0){
             primeCineplex();
             primeMovie();
@@ -127,16 +245,36 @@ public class MoblimaApp {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
             StringTokenizer star = new StringTokenizer(st, showSEPARATOR);    // pass in the string to the string tokenizer using delimiter ","
-            String movieName = star.nextToken().trim();    // first token
-            String movieLanguage = star.nextToken().trim();    // second token
-            String movieType = star.nextToken().trim();    // third token
-            String movieRating = star.nextToken().trim();    // fourth token
-            String showStatus = star.nextToken().trim();    // fifth token
-            String synopsis = star.nextToken().trim();    // sixth token
-            String director = star.nextToken().trim();    // seventh token
-            String cast = star.nextToken().trim();    // eighth token
-            ArrayList<String> castList = new ArrayList<String>();
-            StringTokenizer castToken = new StringTokenizer(cast, castSEPERATOR);
+            String showID = star.nextToken().trim();    // first token
+            String showDate = star.nextToken().trim();    // second token
+            String showTime = star.nextToken().trim();    // third token
+            String movieID = star.nextToken().trim();    // fourth token
+            String screenID = star.nextToken().trim();    // fifth token
+            int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
+            ArrayList<ShowSeat> showSeats = new ArrayList<ShowSeat>();
+            String showSeatsString, showSeatID, showSeatRow,showSeatType,occupiedString;
+            boolean isOccupied;
+
+            while (star.hasMoreTokens()){
+                 showSeatsString= star.nextToken().trim();
+                 StringTokenizer showSeatsToken= new StringTokenizer(showSeatsString, showSeatSEPARATOR);
+                 showSeatID=showSeatsToken.nextToken().trim();
+                 showSeatRow=showSeatsToken.nextToken().trim();
+                 int showSeatNumber= Integer.parseInt(showSeatsToken.nextToken().trim());
+                 showSeatType=showSeatsToken.nextToken().trim();
+                 occupiedString=showSeatsToken.nextToken().trim();
+                 if (occupiedString.equals("Y")) {
+                     isOccupied=true;
+                 }
+                 else {
+                     isOccupied=false;
+                 }
+                 ShowSeat showSeat= new ShowSeat(showSeatID,showSeatRow,showSeatNumber,showSeatType,isOccupied);
+                showSeats.add(showSeat);
+
+            }
+            Show show= new Show(showID, showDate,showTime, movieID,screenID, emptySeats,showSeats);
+            shows.add(show);
         }
 
 
@@ -151,7 +289,7 @@ public class MoblimaApp {
             String st = (String)stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
             StringTokenizer star = new StringTokenizer(st , cineplexSEPARATOR);	// pass in the string to the string tokenizer using delimiter ","
-
+            String  cineplexID = star.nextToken().trim();	// first token
             String  cineplexName = star.nextToken().trim();	// first token
             String  location = star.nextToken().trim();	// second token
             ArrayList<Screen> screens= new ArrayList<Screen>();
@@ -159,6 +297,7 @@ public class MoblimaApp {
             while (star.hasMoreTokens()){
                 String screenText= star.nextToken().trim();
                 StringTokenizer screenToken= new StringTokenizer(screenText, screenSEPARATOR);
+                String  screenID = star.nextToken().trim();	// first token
                 String screenName=screenToken.nextToken().trim();
                 String screenClass= screenToken.nextToken().trim();
                 int numberOfRows= Integer.parseInt(screenToken.nextToken().trim());
