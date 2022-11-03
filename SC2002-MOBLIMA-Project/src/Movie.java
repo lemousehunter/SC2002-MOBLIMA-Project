@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.UUID;
+
 
 public class Movie {
 
@@ -12,6 +12,7 @@ public class Movie {
 	private String synopsis;
 	private String director;
 	private ArrayList<String> cast;
+	private ArrayList<ViewerRatings> ratings;
 	
 
 	/**
@@ -21,8 +22,8 @@ public class Movie {
 	 * @param movieRating
 	 * @param showStatus
 	 */
-	public Movie(String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast) {
-		this.movieID = UUID.randomUUID().toString();
+	public Movie(String movieID, String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<ViewerRatings> ratings) {
+		this.movieID = movieID;
 		this.name = name;
 		this.movieLanguage = movieLanguage;
 		this.movieType = movieType;
@@ -31,10 +32,11 @@ public class Movie {
 		this.synopsis = synopsis;
 		this.director = director;
 		this.cast = cast;
+		this.ratings = ratings;
 		throw new UnsupportedOperationException();
 	}
 
-	public void viewMovieDetails(ArrayList<ViewerRatings> ratings) {
+	public void viewMovieDetails(ArrayList<ViewerRatings> reviews) {
 		System.out.println("Movie Name: " + this.name);
 		System.out.println("Movie Status: " + this.showStatus);
 		System.out.println("Movie Type: " + this.movieType);
@@ -46,7 +48,7 @@ public class Movie {
 
 		int count=0; //this variable counts the total number of reviews for a particular movie and helps us do the count for overall ratings
 		double sum_for_overall_rating = 0;
-		for(ViewerRatings vr: ratings)
+		for(ViewerRatings vr: reviews)
 		{
 			if(vr.getMovieId().equals(this.movieID))
 			{
@@ -171,15 +173,17 @@ public class Movie {
 		this.cast = cast;
 	}
 
-
+	public ArrayList<ViewerRatings> getViewerRating() {
+		return ratings;
+	}
 
 	/**
 	 *
 	 * @param viewerRatings
 	 */
-	public void addViewerRating(ReviewMgr reviewMgrObj, String userID) {
+	public void addViewerRating(ViewerRatings viewerRatings) {
 		
-		reviewMgrObj.addReview(userID, this.movieID);
+		this.ratings.add(viewerRatings);
 		throw new UnsupportedOperationException();
 	}
 }
