@@ -7,38 +7,27 @@ public class ReviewMgr {
     private RatingScale rating;
     private ViewerRatings reviewer;
     private HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
-    private ArrayList<ViewerRatings> ListOfViewerRatingObj;
-    private ArrayList<Movie> movies;
+    private ArrayList<ViewerRatings> masterReviews;
+    private ArrayList<Movie> masterMovies;
 
     private Scanner s=new Scanner(System.in);
     private Scanner q=new Scanner(System.in);
-    public void setListOfViewerRatingObj(ArrayList<ViewerRatings> listOfViewerRatingObj) {
-      ListOfViewerRatingObj = listOfViewerRatingObj;
+    
+    public void setmasterReviews(ArrayList<ViewerRatings> masterReviews) {
+      this.masterReviews = masterReviews;
     }
      
-    public void setMovies(ArrayList<Movie> movies) {
-      this.movies = movies;
+    public void setmasterMovies(ArrayList<Movie> masterMovies) {
+      this.masterMovies = masterMovies;
     }
-
-   public ReviewMgr() // constructor for movie goer to instantiate review manager controller to add viewer object 
-   {                  // without creating the manager object multiple times
-
-   }
-      
-  public ReviewMgr(ArrayList<ViewerRatings> ratings) {
-  
-    ListOfViewerRatingObj.addAll(ratings);
-    
-   }
-    
 
    public void addReview(String userID, String movieID)
     {
       review=setReview();
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);       
-      ListOfViewerRatingObj.add(reviewer);
-      for(Movie m: movies) {
+      masterReviews.add(reviewer);
+      for(Movie m: masterMovies) {
         if(m.getMovieID().equals(movieID))
           m.addViewerRatingsID(reviewer.getViewerRatingId());
       }
@@ -98,35 +87,35 @@ public class ReviewMgr {
     
   }
    
-  public  ArrayList<String> top5Movies()
+  public  ArrayList<String> top5masterMovies()
   { 
     
-    HashMap <String,Double>avgRatingOfMovies=new HashMap<String,Double>();
+    HashMap <String,Double>avgRatingOfmasterMovies=new HashMap<String,Double>();
     ArrayList<String> top5mv=new ArrayList<String>();
     double max=0.00;    
     double avgRating=0;
 
-          buildHashMap(ListOfViewerRatingObj);
+          buildHashMap(masterReviews);
           for (String key: reviewMap.keySet()) 
           {                 
                 avgRating=getAvgRating(key);
-                avgRatingOfMovies.put(key,avgRating); 
+                avgRatingOfmasterMovies.put(key,avgRating); 
           }
 
           
-            //System.out.println(avgRatingOfMovies);
+            //System.out.println(avgRatingOfmasterMovies);
 
             for(int i=0;i<5;i++)
             { 
-            try { max=(Collections.max(avgRatingOfMovies.values()));} 
+            try { max=(Collections.max(avgRatingOfmasterMovies.values()));} 
             catch (Exception e) {  return top5mv; }
                
                   
-              for (String key :avgRatingOfMovies.keySet()) 
+              for (String key :avgRatingOfmasterMovies.keySet()) 
               { 
-                   if (avgRatingOfMovies.get(key) == max) 
+                   if (avgRatingOfmasterMovies.get(key) == max) 
                    { 
-                      avgRatingOfMovies.put(key,-1.0);
+                      avgRatingOfmasterMovies.put(key,-1.0);
                       top5mv.add(key);
                    }
               }
@@ -139,18 +128,18 @@ public class ReviewMgr {
     
    public ArrayList<ViewerRatings> getListByMovieID(String movieId)
    {
-    ArrayList<ViewerRatings> reviewByMovies=new ArrayList<ViewerRatings>();
+    ArrayList<ViewerRatings> reviewBymasterMovies=new ArrayList<ViewerRatings>();
       
-    for (ViewerRatings temp :ListOfViewerRatingObj) {
+    for (ViewerRatings temp :masterReviews) {
       if(temp.getMovieId().equals(movieId))
       {
-          reviewByMovies.add(temp);
+          reviewBymasterMovies.add(temp);
 
       }
       
     }
 
-      return reviewByMovies;
+      return reviewBymasterMovies;
 
 
    }
@@ -160,7 +149,7 @@ public class ReviewMgr {
    {
     ArrayList<ViewerRatings> reviewByUser=new ArrayList<ViewerRatings>();
 
-      for (ViewerRatings temp :ListOfViewerRatingObj) {
+      for (ViewerRatings temp :masterReviews) {
         if(temp.getUserId().equals(userId))
         {
             reviewByUser.add(temp);
@@ -193,7 +182,7 @@ public class ReviewMgr {
    public String getViewerRatingID(String userId)
    {
    
-     for (ViewerRatings temp:ListOfViewerRatingObj) {
+     for (ViewerRatings temp:masterReviews) {
        if(temp.getUserId().equals(userId))
        {
           return temp.getUserId();

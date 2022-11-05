@@ -6,6 +6,7 @@ import java.util.*;
  * <p>
  * A <code>Movie</code> object contains all the parameters used to define 
  * a movie in the project
+ * </p>
  * 
  */
 

@@ -9,6 +9,7 @@ public class MovieManager {
     private MovieRating movieRating;
     private ShowStatus showStatus;
     private ArrayList<Movie> masterMovies;
+    private ArrayList<ViewerRatings> masterRatings;
 
     
     public void setMasterMovies(ArrayList<Movie> masterMovies) {
@@ -85,6 +86,7 @@ public class MovieManager {
         ArrayList<String> ratingsID = new ArrayList<String>();
         
         Movie movie = new Movie(movieID, name, movieLanguage, movieType, movieRating, showStatus, synopsis, director, cast, ratingsID);
+        movie.setReviews(masterRatings);
         masterMovies.add(movie);
     }
 
