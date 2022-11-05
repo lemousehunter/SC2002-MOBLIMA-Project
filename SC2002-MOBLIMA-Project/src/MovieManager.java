@@ -8,10 +8,15 @@ public class MovieManager {
     private MovieType movieType;
     private MovieRating movieRating;
     private ShowStatus showStatus;
+    private ArrayList<Movie> masterMovies;
 
     
-    public Movie getMovieByID(String movieID, ArrayList<Movie> movie) {
-        for(Movie m: movie) {
+    public void setMasterMovies(ArrayList<Movie> masterMovies) {
+        this.masterMovies = masterMovies;
+    }
+
+    public Movie getMovieByID(String movieID) {
+        for(Movie m: masterMovies) {
             if(movieID.equals(m.getMovieID()))
                 return m;
             else
@@ -20,7 +25,7 @@ public class MovieManager {
         return null;
     }
     
-    public void addMovie(ArrayList<Movie> masterMovies) {
+    public void addMovie() {
         String movieID = UUID.randomUUID().toString();
         System.out.println("Enter Movie Name: ");
         String name = sc.nextLine();
@@ -77,9 +82,9 @@ public class MovieManager {
                 cast.add(temp_cast);
         }
         
-        ArrayList<ViewerRatings> ratings = new ArrayList<ViewerRatings>();
+        ArrayList<String> ratingsID = new ArrayList<String>();
         
-        Movie movie = new Movie(movieID, name, movieLanguage, movieType, movieRating, showStatus, synopsis, director, cast, ratings);
+        Movie movie = new Movie(movieID, name, movieLanguage, movieType, movieRating, showStatus, synopsis, director, cast, ratingsID);
         masterMovies.add(movie);
     }
 
@@ -106,24 +111,24 @@ public class MovieManager {
         movie.setShowStatus(ShowStatus.ENDOFSHOWING);
     }
     
-    public void viewMovies(ArrayList<Movie> movie, ArrayList<ViewerRatings> ratings) {
-        for(Movie m: movie) {
-            m.viewMovieDetails(ratings);
+    public void viewMovies() {
+        for(Movie m: masterMovies) {
+            m.viewMovieDetails();
             System.out.println("---------------------------X---------------------------");
         }
     }
 
-    public void movieListing(ArrayList<Movie> movie) {
+    public void movieListing() {
         System.out.println("List of Movies:");
-        for(Movie m: movie) {
+        for(Movie m: masterMovies) {
             System.out.println(m.getName() + " - " + m.getShowStatus());
         }
     }
 
-    public void searchMovie(ArrayList<Movie> movie) {
+    public void searchMovie() {
         System.out.println("Enter the movie name you want to search for: ");
         String user_input = sc.nextLine();
-        for(Movie m: movie) {
+        for(Movie m: masterMovies) {
             if(m.getName().equalsIgnoreCase(user_input)) {
                 System.out.println("Movie Found!");
                 System.out.println(m.getName() + " - " + m.getShowStatus());

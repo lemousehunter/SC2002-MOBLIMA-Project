@@ -1,5 +1,13 @@
 import java.util.*;
 
+/**
+ * A Movie Object
+ * 
+ * <p>
+ * A <code>Movie</code> object contains all the parameters used to define 
+ * a movie in the project
+ * 
+ */
 
 public class Movie {
 
@@ -12,17 +20,30 @@ public class Movie {
 	private String synopsis;
 	private String director;
 	private ArrayList<String> cast;
-	private ArrayList<ViewerRatings> ratings;
+	private ArrayList<String> ratingsID;
+	private ArrayList<ViewerRatings> reviews;
 	
 
+	public void setReviews(ArrayList<ViewerRatings> reviews) {
+		this.reviews = reviews;
+	}
+
+
 	/**
-	 *
-	 * @param name
-	 * @param movieType
-	 * @param movieRating
-	 * @param showStatus
+	 * Movie Constructor
+	 * 
+	 * @param movieID The ID of the movie
+	 * @param name Movie Name
+	 * @param movieLanguage The language spoken in the movie
+	 * @param movieType The type of movie (Blockbuster/3D/Documentary)
+	 * @param movieRating The rating of the movie (G/PG/PG-13/R/X)
+	 * @param showStatus The current status of the movie (ComingSoon/NowShowing/Preview/EndOfShowing)
+	 * @param synopsis A brief description of the movie plot
+	 * @param director The director of the movie
+	 * @param cast The cast of the movie
+	 * @param ratingsID The ratings given by users to the movie
 	 */
-	public Movie(String movieID, String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<ViewerRatings> ratings) {
+	public Movie(String movieID, String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
 		this.movieID = movieID;
 		this.name = name;
 		this.movieLanguage = movieLanguage;
@@ -32,11 +53,17 @@ public class Movie {
 		this.synopsis = synopsis;
 		this.director = director;
 		this.cast = cast;
-		this.ratings = ratings;
-		throw new UnsupportedOperationException();
+		this.ratingsID = ratingsID;
+		
 	}
 
-	public void viewMovieDetails(ArrayList<ViewerRatings> reviews) {
+	
+	/** 
+	 * The method displays all the details of the current movie object
+	 * 
+	 * @param reviews The array of all the ratings given to all the movies
+	 */
+	public void viewMovieDetails() {
 		System.out.println("Movie Name: " + this.name);
 		System.out.println("Movie Status: " + this.showStatus);
 		System.out.println("Movie Type: " + this.movieType);
@@ -67,9 +94,15 @@ public class Movie {
 		{
 			System.out.println("Overall Ratings: NA");
 		}
-		throw new UnsupportedOperationException();
 	}
 
+	
+	/** 
+	 * The method is used to convert the string constant of Ratings to its respective numeric values
+	 * 
+	 * @param scale The object of the RatingScale
+	 * @return The integer value of the rating given to the movie
+	 */
 	private double getNumberRating(RatingScale scale)
 		{
 			double rating=0;
@@ -85,105 +118,188 @@ public class Movie {
 				return rating;
 		}
 
+	
+	/** 
+	 * Get method for the ID of the movie
+	 * 
+	 * @return The movieID of the current movie object
+	 */
 	public String getMovieID() {
 		return this.movieID;
 	}
 
+	
+	/** 
+	 * Get method for the name of the movie
+	 * 
+	 * @return The name of the movie
+	 */
 	public String getName() {
 		return this.name;
 	}
 
 	/**
+	 * Set method for the name of the movie
 	 *
-	 * @param name
+	 * @param name The new name of the movie
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	
+	/** 
+	 * Get method for the spoken language in the movie
+	 * 
+	 * @return The spoken language in the movie
+	 */
 	public String getLanguage() {
 		return this.movieLanguage;
 	}
 
+	
+	/** 
+	 * Set method for the language of the movie
+	 * 
+	 * @param lang The new langauge for the movie
+	 */
 	public void setLanguage(String lang) {
 		this.movieLanguage = lang;
 	}
 
+	
+	/** 
+	 * Get method for the type of the movie
+	 * 
+	 * @return The type of the movie
+	 */
 	public MovieType getType() {
 		return this.movieType;
-		//throw new UnsupportedOperationException();
 	}
 
 	/**
-	 *
-	 * @param type
+	 * Set method for the type of the movie
+	 * 
+	 * @param type The type of the movie
 	 */
 	public void setType(MovieType type) {
 		this.movieType = type;
-		throw new UnsupportedOperationException();
 	}
 
+	
+	/** 
+	 * Get method for the rating of the movie
+	 * 
+	 * @return The movie rating
+	 */
 	public MovieRating getMovieRating() {
 		return this.movieRating;
-		//throw new UnsupportedOperationException();
 	}
 
 	/**
-	 *
-	 * @param movieRating
+	 * Set method for the name of the movie
+	 * 
+	 * @param movieRating The new rating of the movie
 	 */
 	public void setMovieRating(MovieRating movieRating) {
 		this.movieRating = movieRating;
-		throw new UnsupportedOperationException();
 	}
 
+	
+	/** 
+	 * Get method for the current status of the movie
+	 * 
+	 * @return the current show status
+	 */
 	public ShowStatus getShowStatus() {
 		return this.showStatus;
 	}
 
 	/**
+	 * Set method for the status of the movie
 	 *
-	 * @param showStatus
+	 * @param showStatus The new show status of the movie
 	 */
 	public void setShowStatus(ShowStatus showStatus) {
 		this.showStatus = showStatus;
 	}
 
+	
+	/** 
+	 * Get method for the description of the movie
+	 * 
+	 * @return The brief description of the movie
+	 */
 	public String getSynopsis() {
 		return this.synopsis;
 	}
 
+	
+	/** 
+	 * Set method for the description of the movie
+	 * 
+	 * @param synopsis The new brief description of the movie
+	 */
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
 
+	
+	/** 
+	 * Get method for the director of the movie
+	 * 
+	 * @return The director of the movie
+	 */
 	public String getDirector() {
 		return this.director;
 	}
 
+	
+	/** 
+	 * Set method for the director of the movie
+	 * 
+	 * @param director The new director of the movie
+	 */
 	public void setDirector(String director) {
 		this.director = director;
 	}
 
+	
+	/** 
+	 * Get method for the cast of the movie
+	 * 
+	 * @return The cast of the movie
+	 */
 	public ArrayList<String> getCast() {
 		return this.cast;
 	}
 
+	
+	/** 
+	 * Set method for the cast of the movie
+	 * 
+	 * @param cast The new cast of the movie
+	 */
 	public void setCast(ArrayList<String> cast) {
 		this.cast = cast;
 	}
 
-	public ArrayList<ViewerRatings> getViewerRating() {
-		return ratings;
+	
+	/** 
+	 * Get method for the ratingsID of the movie
+	 * 
+	 * @return The ratings IDs
+	 */
+	public ArrayList<String> getViewerRatingsID() {
+		return ratingsID;
 	}
 
 	/**
-	 *
-	 * @param viewerRatings
+	 * Set method for the ratingsID of the movie
+	 * 
+	 * @param ratingsID The ratings IDs of the movie
 	 */
-	public void addViewerRating(ViewerRatings viewerRatings) {
-		
-		this.ratings.add(viewerRatings);
-		throw new UnsupportedOperationException();
+	public void addViewerRatingsID(String ratingsID) {
+		this.ratingsID.add(ratingsID);
 	}
 }
