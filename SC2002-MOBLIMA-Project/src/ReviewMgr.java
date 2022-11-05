@@ -7,11 +7,19 @@ public class ReviewMgr {
     private RatingScale rating;
     private ViewerRatings reviewer;
     private HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
-    private static ArrayList<ViewerRatings> ListOfViewerRatingObj=new ArrayList<ViewerRatings>(); //changed access modifier because the record will be maintained on the Master Array  
+    private ArrayList<ViewerRatings> ListOfViewerRatingObj;
+    private ArrayList<Movie> movies;
+
     private Scanner s=new Scanner(System.in);
     private Scanner q=new Scanner(System.in);
+    public void setListOfViewerRatingObj(ArrayList<ViewerRatings> listOfViewerRatingObj) {
+      ListOfViewerRatingObj = listOfViewerRatingObj;
+    }
      
-   
+    public void setMovies(ArrayList<Movie> movies) {
+      this.movies = movies;
+    }
+
    public ReviewMgr() // constructor for movie goer to instantiate review manager controller to add viewer object 
    {                  // without creating the manager object multiple times
 
@@ -30,7 +38,10 @@ public class ReviewMgr {
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);       
       ListOfViewerRatingObj.add(reviewer);
-     
+      for(Movie m: movies) {
+        if(m.getMovieID().equals(movieID))
+          m.addViewerRatingsID(reviewer.getViewerRatingId());
+      }
     }   
 
     private void buildHashMap(ArrayList<ViewerRatings> pass)
