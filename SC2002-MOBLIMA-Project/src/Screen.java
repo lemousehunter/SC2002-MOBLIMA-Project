@@ -120,6 +120,9 @@ public class Screen {
 		return (char) (64+number);
 	}
 
+	public String viewDetails() {
+		return "ScreenID: " + this.screenID + ", Screen Name: " + this.screenName + ", ScreenClass: " +this.screenClass;
+	}
 	
 	
 	
