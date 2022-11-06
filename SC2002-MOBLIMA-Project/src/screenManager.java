@@ -45,7 +45,7 @@ public class screenManager {
 	    
 	    public void viewScreens() {
 	        for(Screen s: masterScreens) {
-	            s.toString();
+	            s.viewDetails();
 	            System.out.println("---------------------------X---------------------------");
 	        }
 	    }
@@ -66,8 +66,7 @@ public class screenManager {
 	                System.out.println(s.getScreenName());
 	            }
 	            else
-	                System.out.println("Screen not Found!");
-	                
+	                System.out.println("Screen not Found!");    
 	        }
 	    }
 	}
