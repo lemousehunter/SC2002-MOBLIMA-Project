@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class screenManager {
 		private ArrayList<Screen> masterScreens;
@@ -21,6 +22,7 @@ public class screenManager {
 	    
 	    public void addScreen() {
 	    	
+			String screenID = UUID.randomUUID().toString();
 	        System.out.println("Enter Screen Name: ");
 	        String name = sc.nextLine();
 	        System.out.println("Enter Number of Rows: ");
@@ -40,7 +42,7 @@ public class screenManager {
 	        }
 
 			assert screenClass != null;
-			Screen screen=new Screen(name,screenClass.name(),numRows,seatsRow);
+			Screen screen=new Screen(screenID, name,screenClass.name(),numRows,seatsRow);
 	        masterScreens.add(screen);
 	    }
 	    

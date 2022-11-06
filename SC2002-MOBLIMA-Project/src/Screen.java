@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Screen {
 
@@ -19,9 +18,8 @@ public class Screen {
 	 * @param numberOfRows
 	 * @param seatsPerRow
 	 */
-	public Screen(String screenName, String screenClass, int numberOfRows, int seatsPerRow) {
-		
-		this.screenID = UUID.randomUUID().toString();
+	public Screen(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow) {
+		this.screenID = screenID;
 		this.screenName=screenName;
 		this.screenClass= ScreenClass.valueOf(screenClass);
 		this.numberOfRows=numberOfRows;
