@@ -2,11 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class screenManager {
-	
-	    static Scanner sc = new Scanner(System.in);
+		private ArrayList<Screen> masterScreens;
+		static Scanner sc = new Scanner(System.in);
 	       
-	    public Screen getScreenByID(String screenID, ArrayList<Screen> screen) {
-	        for(Screen s:screen) {
+		public void setMasterScreens(ArrayList<Screen> masterScreens) {
+			this.masterScreens = masterScreens;
+		}
+
+	    public Screen getScreenByID(String screenID) {
+	        for(Screen s:masterScreens) {
 	            if(screenID.equals(s.getScreenID()))
 	                return s;
 	            else
@@ -15,7 +19,7 @@ public class screenManager {
 	        return null;
 	    }
 	    
-	    public void addScreen(ArrayList<Screen> screens) {
+	    public void addScreen() {
 	    	
 	        System.out.println("Enter Screen Name: ");
 	        String name = sc.nextLine();
@@ -36,27 +40,27 @@ public class screenManager {
 	        }
 	        
 	        Screen screen=new Screen(name,screenClass,noRows,seatsRow);
-	        screens.add(screen);
+	        masterScreens.add(screen);
 	    }
 	    
-	    public void viewScreens(ArrayList<Screen> screen) {
-	        for(Screen s: screen) {
+	    public void viewScreens() {
+	        for(Screen s: masterScreens) {
 	            s.toString();
 	            System.out.println("---------------------------X---------------------------");
 	        }
 	    }
 
-	    public void screenListing(ArrayList<Screen> screen) {
+	    public void screenListing() {
 	        System.out.println("List of Screens:");
-	        for(Screen s:screen) {
+	        for(Screen s:masterScreens) {
 	            System.out.println(s.getScreenName());
 	        }
 	    }
 
-	    public void searchScreen(ArrayList<Screen> screen) {
+	    public void searchScreen() {
 	        System.out.println("Enter the screen name you want to search for: ");
 	        String user_input = sc.nextLine();
-	        for(Screen s:screen) {
+	        for(Screen s:masterScreens) {
 	            if(s.getScreenName().equalsIgnoreCase(user_input)) {
 	                System.out.println("Screen Found!");
 	                System.out.println(s.getScreenName());
