@@ -44,11 +44,11 @@ public class Movie {
 	 * @param cast The cast of the movie
 	 * @param ratingsID The ratings given by users to the movie
 	 */
-	public Movie(String movieID, String name, String movieLanguage, MovieType movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
+	public Movie(String movieID, String name, String movieLanguage, String movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
 		this.movieID = movieID;
 		this.name = name;
 		this.movieLanguage = movieLanguage;
-		this.movieType = movieType;
+		this.movieType = MovieType.valueOf(movieType);
 		this.movieRating = movieRating;
 		this.showStatus = showStatus;
 		this.synopsis = synopsis;
@@ -176,6 +176,14 @@ public class Movie {
 	 */
 	public MovieType getType() {
 		return this.movieType;
+	}
+	/**
+	 * Get method for the type of the movie in boolean
+	 *
+	 * @return The boolean type of the movie
+	 */
+	public Boolean getBoolType() {
+		return this.movieType.equals("BLOCKBUSTER") || this.movieType.equals("THREEDIMENSION");
 	}
 
 	/**

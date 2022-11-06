@@ -10,7 +10,7 @@ public class screenManager {
 		}
 
 	    public Screen getScreenByID(String screenID) {
-	        for(Screen s:masterScreens) {
+	        for(Screen s:this.masterScreens) {
 	            if(screenID.equals(s.getScreenID()))
 	                return s;
 	            else
@@ -24,7 +24,7 @@ public class screenManager {
 	        System.out.println("Enter Screen Name: ");
 	        String name = sc.nextLine();
 	        System.out.println("Enter Number of Rows: ");
-	        int noRows = sc.nextInt();
+	        int numRows = sc.nextInt();
 	        System.out.println("Enter Seats Per Row: ");
 	        int seatsRow = sc.nextInt();
 	        ScreenClass screenClass = null;
@@ -38,8 +38,9 @@ public class screenManager {
 	            case 2: screenClass = ScreenClass.REGULAR_SCREEN;
 	            break;
 	        }
-	        
-	        Screen screen=new Screen(name,screenClass,noRows,seatsRow);
+
+			assert screenClass != null;
+			Screen screen=new Screen(name,screenClass.name(),numRows,seatsRow);
 	        masterScreens.add(screen);
 	    }
 	    

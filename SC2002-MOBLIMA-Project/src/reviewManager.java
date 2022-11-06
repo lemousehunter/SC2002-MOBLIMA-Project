@@ -2,7 +2,7 @@
 import java.util.*;
 
 
-public class ReviewMgr {
+public class reviewManager {
     private String review;
     private RatingScale rating;
     private ViewerRatings reviewer;
@@ -23,7 +23,7 @@ public class ReviewMgr {
 
    public void addReview(String userID, String movieID)
     {
-      review=setReview();
+      review=addReview();
       rating=setScale();
       reviewer=new ViewerRatings(userID, movieID, rating,review);       
       masterReviews.add(reviewer);
@@ -78,7 +78,7 @@ public class ReviewMgr {
       return rate;
 		
 	}
-  private String setReview() 
+  String addReview()
   {
     String review;
     System.out.println("Please enter review");

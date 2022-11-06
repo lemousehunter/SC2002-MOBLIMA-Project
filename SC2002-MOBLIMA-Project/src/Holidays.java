@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -50,16 +54,14 @@ public class Holidays {
 
     public boolean isHoliday(String date)
     {
+        return datesList.contains(date);
+    }
 
-        for (String dates : datesList) {
-            if(date.equals(dates))
-            {
-                return true;
-
-            }
-        }
-        return false;
-
+    public Boolean getWeekend(String date) throws ParseException {
+        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date_dt = LocalDate.parse(date, dtFormatter);
+        DayOfWeek day = date_dt.getDayOfWeek();
+        return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
     }
 
   /*  public static void main(String[] args) testing purposes

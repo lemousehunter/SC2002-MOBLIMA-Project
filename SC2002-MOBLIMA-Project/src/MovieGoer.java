@@ -8,7 +8,7 @@ public class MovieGoer {
     public final Integer age;
     public BookingManager bookingMgr;
 
-    private final ViewerRatings reviewMgr;
+    private final reviewManager reviewMgr;
 
 
     public MovieGoer(String name, String userID, String email, Integer mobileNumber, Integer age, ArrayList<String> bookings)
@@ -19,7 +19,7 @@ public class MovieGoer {
         this.mobileNumber = mobileNumber;
         this.age = age;
         this.bookingMgr = new BookingManager(this.userID);
-        this.reviewMgr = new ViewerRatings(this.userID, RatingScale.valueOf(ratingScale));
+        this.reviewMgr = new reviewManager();
     }
 
     public Boolean getAgeType() {
@@ -33,8 +33,8 @@ public class MovieGoer {
         ); // returns BookingID: String
     }
 
-    String AddReview(){
-        return this.reviewMgr.addReview(this.userID); // returns reviewID: String
+    String addReview(){
+        return this.reviewMgr.addReview();
     }
 
     ArrayList<String> getAllBookings(){

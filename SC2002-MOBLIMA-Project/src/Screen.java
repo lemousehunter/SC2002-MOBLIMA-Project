@@ -19,11 +19,11 @@ public class Screen {
 	 * @param numberOfRows
 	 * @param seatsPerRow
 	 */
-	public Screen(String screenName, ScreenClass screenClass, int numberOfRows, int seatsPerRow) {
+	public Screen(String screenName, String screenClass, int numberOfRows, int seatsPerRow) {
 		
 		this.screenID = UUID.randomUUID().toString();
 		this.screenName=screenName;
-		this.screenClass=screenClass;
+		this.screenClass= ScreenClass.valueOf(screenClass);
 		this.numberOfRows=numberOfRows;
 		this.seatsPerRow=seatsPerRow;
 		this.numberOfSeats=numberOfRows*seatsPerRow;
@@ -53,7 +53,18 @@ public class Screen {
 
 	}
 
+	public ScreenClass getScreenType() {
+		return this.screenClass;
+	}
 
+	public Boolean getBooleanScreenType() {
+		ScreenClass sc = this.getScreenType();
+		if (this.screenClass.equals(sc))
+		{
+			return true;
+		}
+		else return false;
+	}
 	public String getScreenID() {
 		return screenID;
 	}

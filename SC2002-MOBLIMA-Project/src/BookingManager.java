@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 public class BookingManager {
-    final private String userID;
+    private String userID;
     final private Integer count;
 
     private MovieManager movieMgr;
@@ -40,46 +40,8 @@ public class BookingManager {
         return BookingID;
     }
 
-    Double ComputePrice(String movieID, String date, String Hall){
-        Movie movie = new Movie();
-        Boolean isHoliday = Holidays.getHoliday(); // 1: holiday, 0: not holiday
-        Boolean isWeekend = Holidays.getWeekend(); // 1: weekend, 0: weekday
-        boolean isSpecial = isHoliday || isWeekend; // 1: special, 0: weekday
-
-        movie = this.movieMgr.getMovieByID(movieID);
-        Boolean HallType = Hall.type; // 1: Premium Hall, 0: Regular Hall
-
-        MovieGoerManager movieGoerMgr = new MovieGoerManager();
-        MovieGoer movieGoer = movieGoerMgr.getUserByID(this.userID);
-
-        Boolean movieGoerAge = movieGoer.getAgeType(); // 1: discounted price, 0: normal price
-
-        double price;
-
-        if (movie.getMovieType()){ // 1: blockbuster, 0: regular movies
-            price = 15.0;
-        }
-        else{
-            price = 10.0;
-        }
-
-        if (isSpecial){
-            price *= 1.5;
-        }
-
-        if (HallType){
-            price *= 2;
-        }
-
-        if (HallType){
-            price *= 1;
-        }
-
-        if (movieGoerAge){
-            price *= 0.5;
-        }
-
-        return price;
+    Double ComputePrice(String movieID, String date, String HallID){
+        return new TicketPrice(movieID, this.userID, HallID, date).getPrice();
     }
 
     public ArrayList<String> getAllBookings(String userID) {
