@@ -20,7 +20,7 @@ public class MoblimaApp {
     private static User sessionUser = null;
     private static String dataFolder;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
             dataFolder = System.getProperty("dataFolder");
             // prime the array lists from files
@@ -224,7 +224,7 @@ public class MoblimaApp {
         for (int i = 0; i < bookings.size(); i++) {
             booking = bookings.get(i);
             StringBuilder st = new StringBuilder();
-            st.append(booking.getBookingID().trim());
+            st.append(booking.bookingID.trim());
             st.append(bookingSEPARATOR);
             st.append(booking.getUserID().trim());
             st.append(bookingSEPARATOR);

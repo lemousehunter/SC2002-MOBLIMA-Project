@@ -21,4 +21,36 @@ public class Booking {
         this.time = time;
         this.price = price;
     }
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public String getMovieID() {
+        return movieID;
+    }
+
+    public String getHallID() {
+        return hallID;
+    }
+
+    public String getCinemaID() {
+        return cinemaID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
 }

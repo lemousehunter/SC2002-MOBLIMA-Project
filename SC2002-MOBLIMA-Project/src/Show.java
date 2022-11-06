@@ -1,83 +1,62 @@
 import java.util.ArrayList;
-import java.util.UUID; 
+import java.util.UUID;
+
+
 public class Show {
 	private String showID;
+	private String showName;
 	private String showDate;
-	private String  showTime;
+	private String showTime;
+	private Screen screen;
+	private Movie movie;
 	private String movieID;
-	private String screenID;
-	private int numberOfRows;
-	private int seatsPerRow;
-	private int emptySeats;
 	private ArrayList<ShowSeat>showSeats=new ArrayList<ShowSeat>();
 
-
 	/**
-	 * 
+	 *
 	 * @param showDate
 	 * @param showTime
 	 */
-	public Show(String showDate, String showTime, String movieID,Screen screen) {
+	public Show(String movieID, String showDate, String showTime, String screenID, int emptySeats, int numberOfRows, int seatsPerRow) {
+		MovieManager movieMgr = new MovieManager();
+
 		// TODO - implement Show.Show
-		String showID=UUID.randomUUID().toString();
-		this.showID=showID;
-		this.showDate=showDate;
-		this.showTime=showTime;
-		this.movieID=movieID;
-		this.screenID=screen.getScreenID();
-		emptySeats=screen.getNumberOfSeats();
-		numberOfRows=screen.getNumberOfRows();
-		seatsPerRow=screen.getSeatsPerRow();
-		ArrayList<Seat> seats= screen.getSeatLayout(); 
-		for (int i=0;i<seats.size();i++){
-			Seat seat=seats.get(i);
-			ShowSeat showSeat= new ShowSeat(seat.getSeatID(), seat.getSeatRow(), seat.getSeatNumber(), seat.getSeatType());
-			showSeats.add(showSeat);
-		}
-
-	}
-	
-	public Show(String showID,String showDate, String showTime, String movieID,String screenID,int emptySeats,int numberOfRows,int seatsPerRow, ArrayList<ShowSeat> showSeats){
-		this.showID=showID;
-		this.showDate=showDate;
-		this.showTime=showTime;
-		this.movieID=movieID;
-		this.screenID=screenID;
-		this.emptySeats=emptySeats;
-		this.numberOfRows=numberOfRows;
-		this.seatsPerRow=seatsPerRow;
-		this.showSeats=showSeats;
+		this.showID = UUID.randomUUID().toString();
+		this.movieID = movieID;
+		this.movie = movieMgr.getMovieByID(movieID);
+		this.showName = this.movie.getName();
+		this.showDate = showDate;
+		this.showTime = showTime;
+		screenManager screenMgr = new screenManager();
+		this.screen = screenMgr.getScreenByID(screenID);
 	}
 
-	
-
-	/**
-	 * 
-	 * @param showDate
-	 * @param showTime
-	 * @param screen
-	 */
-
-	/**
-	 * 
-	 * @param movie
-	 */
 	public String getShowID(){
 		return this.showID;
 	}
-	
 
-
-	public int getEmptySeats() {
-		return this.emptySeats;
+	public String getMovieID() {
+		return this.movieID;
 	}
 
-	/**
-	 * 
-	 * @param emptySeats
-	 */
-	public void setEmptySeats(int emptySeats) {
-		this.emptySeats = emptySeats;
+	public String getShowName() {
+		return showName;
+	}
+
+	public String getShowDate() {
+		return this.showDate;
+	}
+
+	public String getShowTime() {
+		return this.showTime;
+	}
+
+	public void changeShowTime(String showTime) {
+		this.showTime = showTime;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
 	}
 
 	public void ShowSeatLayout() {
@@ -85,14 +64,14 @@ public class Show {
 		boolean aisleSpace=true;
 		String printRowString="      ";
 
-		for (int j=1;j<=seatsPerRow;j++){
+		for (int j=1;j<=screen.getSeatsPerRow();j++){
 			if (j<10){
 				printRowString=printRowString.concat( "  "+Integer.toString(j)+"  ");
 			}
 			else{
 				printRowString=printRowString.concat( " "+Integer.toString(j)+"  ");
 			}
-			if(j==seatsPerRow/2){
+			if(j==screen.getSeatsPerRow()/2){
 				printRowString=printRowString.concat("          ");
 			}
 		}
@@ -110,7 +89,7 @@ public class Show {
 				printRowString="";
 				if (RowString.length()==1){
 					printRowString=printRowString.concat("  "+RowString+"   ");
-	
+
 				}
 				else{
 					printRowString=printRowString.concat("  "+RowString+"  ");
@@ -133,17 +112,6 @@ public class Show {
 				System.out.println(printRowString+"\n\n");
 
 			}
-
 		}
-	}
-
-
-}
-class Test{
-	public static void main(String[] args){
-		Screen screen=new Screen("abcdl", ScreenClass.PLATINUM_MOVIE_SUITES, 5, 10);
-		Show show=new Show("03-11-22","9:00 pm","abcd",screen);
-		show.ShowSeatLayout();
-
 	}
 }
