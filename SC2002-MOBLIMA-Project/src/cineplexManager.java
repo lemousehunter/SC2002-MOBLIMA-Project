@@ -5,10 +5,14 @@ public class cineplexManager {
 
 
     static Scanner sc = new Scanner(System.in);
-
+    private ArrayList<Cineplex> masterCineplex;
    
-    public Cineplex getCineplexByID(String cineplexID, ArrayList<Cineplex> cineplex) {
-        for(Cineplex c: cineplex) {
+    public void setMasterCineplex(ArrayList<Cineplex> masterCineplex) {
+        this.masterCineplex = masterCineplex;
+    }
+
+    public Cineplex getCineplexByID(String cineplexID) {
+        for(Cineplex c: masterCineplex) {
             if(cineplexID.equals(c.getCineplexID()))
                 return c;
             else
@@ -17,7 +21,7 @@ public class cineplexManager {
         return null;
     }
     
-    public void addCineplex(ArrayList<Cineplex> cineplex) {
+    public void addCineplex() {
     	
         System.out.println("Enter Cineplex Name: ");
         String name = sc.nextLine();
@@ -39,7 +43,7 @@ public class cineplexManager {
          
         
         Cineplex c=new Cineplex(name,loc,type);
-        cineplex.add(c);
+        masterCineplex.add(c);
         
  
     }
@@ -69,24 +73,24 @@ public class cineplexManager {
     	
     }
     
-    public void viewCineplex(ArrayList<Cineplex> cineplex) {
-        for(Cineplex c: cineplex) {
-            System.out.println(c.toString());
+    public void viewCineplex() {
+        for(Cineplex c: masterCineplex) {
+            System.out.println(c.viewDetails());
             System.out.println("---------------------------X---------------------------");
         }
     }
 
-    public void cineplexListing(ArrayList<Cineplex> cineplex) {
+    public void cineplexListing() {
         System.out.println("List of Cineplex:");
-        for(Cineplex c: cineplex) {
+        for(Cineplex c: masterCineplex) {
             System.out.println(c.getName() + " - " + c.getType());
         }
     }
 
-    public void searchCineplex(ArrayList<Cineplex> cineplex) {
+    public void searchCineplex() {
         System.out.println("Enter the cineplex name you want to search for: ");
         String user_input = sc.nextLine();
-        for(Cineplex c:cineplex) {
+        for(Cineplex c:masterCineplex) {
             if(c.getName().equalsIgnoreCase(user_input)) {
                 System.out.println("Cineplex Found!");
                 System.out.println( c.getName() + " - " + c.getType());

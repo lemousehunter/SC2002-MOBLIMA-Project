@@ -6,15 +6,16 @@ public class Cineplex {
 	private String cineplexID;
 	private String name;
 	private String location;
-	private ArrayList<Screen> screens;
+	private ArrayList<String> screenID;
 	private cineplexType type;
+	private ArrayList<Screen> masterScreens;
 
 	public Cineplex() {
 
 		this.cineplexID=UUID.randomUUID().toString();
 		this.name=null;
 		this.location=null;
-		this.screens=new ArrayList<Screen>();
+		this.screenID=new ArrayList<String>();
 	}
 
 	/**
@@ -28,15 +29,16 @@ public class Cineplex {
 		this.cineplexID=UUID.randomUUID().toString();
 		this.name=name;
 		this.location=location;
-		this.screens=new ArrayList<Screen>();
+		this.screenID=new ArrayList<String>();
 		this.type=type;
-
-		
 	}
 
-	public void addScreen(Screen screen) {
-		this.screens.add(screen);
-		
+	public void setMasterScreens(ArrayList<Screen> masterScreens) {
+		this.masterScreens = masterScreens;
+	}
+
+	public void addScreenID(Screen screen) {
+		this.screenID.add(screen.getScreenID());	
 	}
 
 	public String getCineplexID() {
@@ -60,19 +62,17 @@ public class Cineplex {
 		this.location = location;
 	}
 
-	public Screen getScreen(int index) {
-		return screens.get(index);
+	public String getScreenID(int index) {
+		return screenID.get(index);
 	}
 
-	public void setScreens(Screen screen,int index) {
-		this.screens.set(index, screen);
+	public void setScreens(String screenID, int index) {
+		this.screenID.set(index, screenID);
 	}
 
 	public int getTotalScreens() {
-		return screens.size();
+		return screenID.size();
 	}
-
-	
 
 	public cineplexType getType() {
 		return type;
@@ -86,13 +86,21 @@ public class Cineplex {
 		this.cineplexID = cineplexID;
 	}
 
-	@Override
-	public String toString() {
-		return "Cineplex [cineplexID=" + cineplexID + ", name=" + name + ", location=" + location + ", screens="
-				+ screens.toArray().toString() + ", type=" + type;
+	public ArrayList<String> getScreenNames() {
+		ArrayList<String> screens = new ArrayList<String>();
+		for(String screenid: screenID) {
+			for(Screen screen: masterScreens) {
+				if(screenid.equals(screen.getScreenID())) {
+					screens.add(screen.getScreenName());
+					break;
+				}
+			}
+		}
+		return screens;
 	}
-	
-	
-	
-	
+
+	public String viewDetails() {
+		return "Cineplex cineplexID = " + cineplexID + " , name = " + name + " , location = " + location + " , screens = "
+				+ getScreenNames().toArray().toString() + " , type = " + type;
+	}
 }
