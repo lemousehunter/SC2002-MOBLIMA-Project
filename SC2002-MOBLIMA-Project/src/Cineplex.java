@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Cineplex {
 
@@ -7,30 +6,19 @@ public class Cineplex {
 	private String name;
 	private String location;
 	private ArrayList<String> screenID;
-	private cineplexType type;
 	private ArrayList<Screen> masterScreens;
 
-	public Cineplex() {
-
-		this.cineplexID=UUID.randomUUID().toString();
-		this.name=null;
-		this.location=null;
-		this.screenID=new ArrayList<String>();
-	}
-
 	/**
-	 *
+	 * @param cineplexID
 	 * @param name
 	 * @param location
-	 * @param screens
 	 */
-	public Cineplex(String name, String location,cineplexType type) {
+	public Cineplex(String cineplexID, String name, String location) {
 		
-		this.cineplexID=UUID.randomUUID().toString();
+		this.cineplexID=cineplexID;
 		this.name=name;
 		this.location=location;
 		this.screenID=new ArrayList<String>();
-		this.type=type;
 	}
 
 	public void setMasterScreens(ArrayList<Screen> masterScreens) {
@@ -38,13 +26,17 @@ public class Cineplex {
 	}
 
 	public void addScreenID(Screen screen) {
-		this.screenID.add(screen.getScreenID());	
+		this.screenID.add(screen.getScreenID());
+		masterScreens.add(screen);
 	}
 
 	public String getCineplexID() {
 		return cineplexID;
 	}
 
+	public void setCineplexID(String cineplexID) {
+		this.cineplexID = cineplexID;
+	}
 
 	public String getName() {
 		return name;
@@ -62,28 +54,12 @@ public class Cineplex {
 		this.location = location;
 	}
 
-	public String getScreenID(int index) {
-		return screenID.get(index);
+	public ArrayList<String> getScreenID() {
+		return screenID;
 	}
 
-	public void setScreens(String screenID, int index) {
-		this.screenID.set(index, screenID);
-	}
-
-	public int getTotalScreens() {
-		return screenID.size();
-	}
-
-	public cineplexType getType() {
-		return type;
-	}
-
-	public void setType(cineplexType type) {
-		this.type = type;
-	}
-
-	public void setCineplexID(String cineplexID) {
-		this.cineplexID = cineplexID;
+	public void setScreenID(ArrayList<String> screenID) {
+		this.screenID = screenID;
 	}
 
 	public ArrayList<String> getScreenNames() {
@@ -101,6 +77,6 @@ public class Cineplex {
 
 	public String viewDetails() {
 		return "Cineplex cineplexID = " + cineplexID + " , name = " + name + " , location = " + location + " , screens = "
-				+ getScreenNames().toArray().toString() + " , type = " + type;
+				+ getScreenNames().toArray().toString();
 	}
 }
