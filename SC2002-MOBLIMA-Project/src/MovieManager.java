@@ -85,7 +85,7 @@ public class MovieManager {
         
         ArrayList<String> ratingsID = new ArrayList<String>();
         
-        Movie movie = new Movie(movieID, name, movieLanguage, movieType, movieRating, showStatus, synopsis, director, cast, ratingsID);
+        Movie movie = new Movie(movieID, name, movieLanguage, movieType.toString(), movieRating, showStatus, synopsis, director, cast, ratingsID);
         movie.setReviews(masterRatings);
         masterMovies.add(movie);
     }
