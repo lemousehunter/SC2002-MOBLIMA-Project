@@ -608,8 +608,22 @@ public class MoblimaApp {
             String showID = star.nextToken().trim(); // first token
             String showDate = star.nextToken().trim(); // second token
             String showTime = star.nextToken().trim(); // third token
-            String movieID = star.nextToken().trim(); // fourth token
+            String movieID = star.nextToken().trim(); 
+            Movie movie=null;
+            for (Movie movieIterator : movies) {
+                if (movieIterator.getMovieID().equals(movieID)) {
+                    movie = movieIterator;
+                    break;
+                }
+            }
             String screenID = star.nextToken().trim(); // fifth token
+            Screen screen=null;
+            for (Screen screenIterator : screens) {
+                if (screenIterator.getScreenID().equals(screenID)) {
+                    screen = screenIterator;
+                    break;
+                }
+            }
             int numberOfRows = Integer.parseInt(star.nextToken().trim());
             int seatsPerRow = Integer.parseInt(star.nextToken().trim());
             int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token

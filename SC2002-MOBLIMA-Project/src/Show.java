@@ -4,12 +4,15 @@ import java.util.UUID;
 
 public class Show {
 	private String showID;
-	private String showName;
 	private String showDate;
 	private String showTime;
+	private String screenID;
+	private String movieID;
 	private Screen screen;
 	private Movie movie;
-	private String movieID;
+	private int emptySeats;
+	private int numberOfRows;
+	private int seatsPerRow;
 	private ArrayList<ShowSeat>showSeats=new ArrayList<ShowSeat>();
 
 	/**
@@ -17,18 +20,34 @@ public class Show {
 	 * @param showDate
 	 * @param showTime
 	 */
-	public Show(String movieID, String showDate, String showTime, String screenID, int emptySeats, int numberOfRows, int seatsPerRow) {
-		MovieManager movieMgr = new MovieManager();
-
+	public Show(String movieID,Movie movie,Screen screen, String showDate, String showTime, String screenID, int emptySeats, int numberOfRows, int seatsPerRow) {
+	
 		// TODO - implement Show.Show
 		this.showID = UUID.randomUUID().toString();
 		this.movieID = movieID;
-		this.movie = movieMgr.getMovieByID(movieID);
-		this.showName = this.movie.getName();
+		this.movie=movie;
+		this.screen=screen;
 		this.showDate = showDate;
 		this.showTime = showTime;
-		screenManager screenMgr = new screenManager();
-		this.screen = screenMgr.getScreenByID(screenID);
+		this.screenID =screenID;
+		this.emptySeats=emptySeats;
+		this.numberOfRows=numberOfRows;
+		this.seatsPerRow=seatsPerRow;
+
+
+	}
+	public Show(String showID, String movieID,Movie movie,Screen screen, String showDate, String showTime, String screenID, int emptySeats, int numberOfRows, int seatsPerRow) {
+		// TODO - implement Show.Show
+		this.showID=showID;
+		this.movieID = movieID;
+		this.movie=movie;
+		this.screen=screen;
+		this.showDate = showDate;
+		this.showTime = showTime;
+		this.screenID =screenID;
+		this.emptySeats=emptySeats;
+		this.numberOfRows=numberOfRows;
+		this.seatsPerRow=seatsPerRow;
 	}
 
 	public String getShowID(){
@@ -37,10 +56,6 @@ public class Show {
 
 	public String getMovieID() {
 		return this.movieID;
-	}
-
-	public String getShowName() {
-		return showName;
 	}
 
 	public String getShowDate() {
@@ -55,23 +70,30 @@ public class Show {
 		this.showTime = showTime;
 	}
 
-	public void setShowName(String showName) {
-		this.showName = showName;
+	
+	public String getScreenID() {
+		return screenID;
+	}
+	public Screen getScreen() {
+		return screen;
+	}
+	public Movie getMovie() {
+		return movie;
 	}
 
+
 	public void ShowSeatLayout() {
-		// TODO - implement Show.ShowAvailableSeats
 		boolean aisleSpace=true;
 		String printRowString="      ";
 
-		for (int j=1;j<=screen.getSeatsPerRow();j++){
+		for (int j=1;j<=seatsPerRow;j++){
 			if (j<10){
 				printRowString=printRowString.concat( "  "+Integer.toString(j)+"  ");
 			}
 			else{
 				printRowString=printRowString.concat( " "+Integer.toString(j)+"  ");
 			}
-			if(j==screen.getSeatsPerRow()/2){
+			if(j==seatsPerRow/2){
 				printRowString=printRowString.concat("          ");
 			}
 		}
@@ -89,7 +111,7 @@ public class Show {
 				printRowString="";
 				if (RowString.length()==1){
 					printRowString=printRowString.concat("  "+RowString+"   ");
-
+	
 				}
 				else{
 					printRowString=printRowString.concat("  "+RowString+"  ");
@@ -112,6 +134,9 @@ public class Show {
 				System.out.println(printRowString+"\n\n");
 
 			}
+
 		}
 	}
+
+
 }
