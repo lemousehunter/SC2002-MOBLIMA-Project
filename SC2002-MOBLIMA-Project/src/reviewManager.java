@@ -5,15 +5,12 @@ import java.util.*;
 public class reviewManager {
       
       private ReviewBoundary reviewIO;     
-      private HashMap<String,ArrayList< ViewerRatings>>reviewMap;
       private ArrayList<ViewerRatings> masterReviews;
       private ArrayList<Movie> masterMovies;
     
 
       public reviewManager()
-      {
-       
-        reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();// to build map to get top5movies        
+      {          
         reviewIO=new ReviewBoundary();
       }
       
@@ -24,7 +21,7 @@ public class reviewManager {
       
       public void setmasterMovies(ArrayList<Movie> masterMovies) 
       {
-        this.masterMovies = masterMovies; //(it is passing by value))
+        this.masterMovies = masterMovies; //(it is passing by ref))
       }
 
       public void addReview(String userID, String movieID)
@@ -112,14 +109,13 @@ public class reviewManager {
      
       public void top5masterMovies()
       { 
-        
-        HashMap <String,Double>avgRatingOfmasterMovies=new HashMap<String,Double>();
-        ArrayList<String> top5mv=new ArrayList<String>();
-        
+        HashMap<String,ArrayList< ViewerRatings>>reviewMap=buildHashMap(masterReviews);// build hashmap of master reviews based on movieID as key
+        HashMap <String,Double>avgRatingOfmasterMovies=new HashMap<String,Double>();        
+        ArrayList<String> top5mv=new ArrayList<String>();        
         double max=0.00;    
         double avgRating=0;
 
-        buildHashMap(masterReviews);// build hashmap of master reviews based on movieID as key
+        
         for (String key: reviewMap.keySet()) 
         {               
           if(reviewMap.get(key).size()>1)
@@ -181,9 +177,9 @@ public class reviewManager {
           return rating;
       }
  
-      private void buildHashMap(ArrayList<ViewerRatings> pass)
+      private HashMap<String,ArrayList< ViewerRatings>> buildHashMap(ArrayList<ViewerRatings> pass)
       {
-        
+        HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
         for(int i=0;i<pass.size();i++)
         {
             if(reviewMap.containsKey(pass.get(i).getMovieId()))
@@ -196,6 +192,7 @@ public class reviewManager {
             }
 
         }
+        return reviewMap;
       
       }  
     
