@@ -1,7 +1,18 @@
+import java.util.UUID;
+
 public class User {
 
 	private UserType userType;
 	private String userName;
+	private String userID;
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 
 	public UserType getUserType() {
 		return userType;
@@ -20,6 +31,7 @@ public class User {
 	}
 
 	public User(UserType userType, String userName) {
+		this.userID = UUID.randomUUID().toString();
 		this.userType = userType;
 		this.userName = userName;
 	}

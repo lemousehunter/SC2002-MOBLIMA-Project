@@ -11,6 +11,22 @@ public class BookingManager {
 
     private HashMap<String, ArrayList<String>> bookingUserDict; // {User: [BookingID1, BookingID2]}
     private Hashtable<String, Booking> bookingIDDict; // {bookingID: Booking}
+    private ArrayList<User> masterUsers;
+    private ArrayList<Movie> masterMovies;
+    private ArrayList<Screen> mastersScreens;
+    private ArrayList<Holidays> masterHolidays;
+    public void setMasterUsers(ArrayList<User> masterUsers) {
+        this.masterUsers = masterUsers;
+    }
+    public void setMasterMovies(ArrayList<Movie> masterMovies) {
+        this.masterMovies = masterMovies;
+    }
+    public void setMastersScreens(ArrayList<Screen> mastersScreens) {
+        this.mastersScreens = mastersScreens;
+    }
+    public void setMasterHolidays(ArrayList<Holidays> masterHolidays) {
+        this.masterHolidays = masterHolidays;
+    }
     public BookingManager(String userID){
         this.userID = userID;
         this.count = 0; // to ensure that all booking IDs are unique
@@ -41,7 +57,17 @@ public class BookingManager {
     }
 
     Double ComputePrice(String movieID, String date, String HallID){
-        return new TicketPrice(movieID, this.userID, HallID, date).getPrice();
+        String movieGoerAge = null;
+        String screenClass = null;
+        String dayType = DayType.WEEKDAY.toString();
+        String movieType = null;
+        for(User user: masterUsers){
+            if(user.getUserID().equals(this.userID)){
+                movieGoerAge=((MovieGoer)user).getAgeType();
+            }
+
+        }
+        return new TicketPriceDefault(movieID, this.userID, HallID, date).getPrice();
     }
 
     public ArrayList<String> getAllBookings(String userID) {
