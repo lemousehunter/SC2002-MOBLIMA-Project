@@ -24,7 +24,7 @@ public class reviewManager {
       
       public void setmasterMovies(ArrayList<Movie> masterMovies) 
       {
-        this.masterMovies = masterMovies; //(it is passing by value))
+        this.masterMovies = masterMovies; //(it is passing by ref))
       }
 
       public void addReview(String userID, String movieID)
