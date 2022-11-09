@@ -22,6 +22,7 @@ public class reviewManager {
       public void setmasterMovies(ArrayList<Movie> masterMovies) 
       {
         this.masterMovies = masterMovies; //(it is passing by ref))
+        
       }
 
       public void addReview(String userID, String movieID)
@@ -107,7 +108,7 @@ public class reviewManager {
         
       }
      
-      public void top5masterMovies()
+      public void top5masterMovies() // prints the movie name
       { 
         HashMap<String,ArrayList< ViewerRatings>>reviewMap=buildHashMap(masterReviews);// build hashmap of master reviews based on movieID as key
         HashMap <String,Double>avgRatingOfmasterMovies=new HashMap<String,Double>();        
@@ -147,11 +148,20 @@ public class reviewManager {
             if (avgRatingOfmasterMovies.get(key) == max) 
             { 
               avgRatingOfmasterMovies.put(key,-1.0);
-              top5mv.add(key);
+              
+              for (Movie m : masterMovies) 
+              {
+                if(m.getMovieID().equals(key))
+                {
+                    top5mv.add(m.getName());// adds the movie name 
+                }
+              }
+              
             }
           }
         }        
-
+        
+        
 
         reviewIO.Top5MovPrint(top5mv);
         
