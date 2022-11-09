@@ -50,6 +50,15 @@ public class Screen {
 		}
 
 	}
+	public Screen(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow,ArrayList<Seat> seatLayout) {
+		this.screenID = screenID;
+		this.screenName=screenName;
+		this.screenClass= ScreenClass.valueOf(screenClass);
+		this.numberOfRows=numberOfRows;
+		this.seatsPerRow=seatsPerRow;
+		this.numberOfSeats=numberOfRows*seatsPerRow;
+		this.seatLayout=seatLayout;
+	}
 
 	public ScreenClass getScreenType() {
 		return this.screenClass;

@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class StaffApp {
     private static StaffApp currentInstance;
     static Scanner sc=new Scanner(System.in);
+    private int choice;
     private StaffApp(){}
 
     public static synchronized StaffApp  getInstance() {
@@ -21,22 +22,22 @@ public class StaffApp {
 
     public void DisplayStaffMenu(){
         System.out.println("==================== Welcome to Staff  APP ====================\n" +
-                " 1. Create Movie Listing                                              \n" +
-                " 2. Update Movie listing                                            \n" +
-                " 3. Remove Movie Listing                                 \n" +
-                " 4. Check Seat Availability                                \n" +
+                "1. Create Movie Listing                                              \n" +
+                "2. Update Movie listing                                            \n" +
+                "3. Remove Movie Listing                                 \n" +
+                "4. Check Seat Availability                                \n" +
                 "5. Make a Booking                                           \n"+
                 "6. View Booking History                              \n" +
                 "7. List Top 5 Movies by Sales                             \n" +
-                " 8. List Top 5 Movies by Ratings                               \n" +
-                " 9. Review and Rate a Movie                              \n" +
+                "8. List Top 5 Movies by Ratings                               \n" +
+                "9. Review and Rate a Movie                              \n" +
                 "===========================================================");
         System.out.println("Enter choice: ");
         while (!sc.hasNextInt()) {
             System.out.println("Please enter an integer value.");
             sc.next();
         }
-        int subchoice = sc.nextInt();
+        choice = sc.nextInt();
     }
 
 
@@ -86,13 +87,13 @@ public class StaffApp {
 
         /**
          *
-         * @param cinePlex
+         * @param cineplex
          */
-        public void addCinePlex(CinePlex cinePlex) {
+        public void addCinePlex(Cineplex cineplex) {
         // TODO - implement Staff.addCinePlex
         throw new UnsupportedOperationException();
     }
 
-    }
+    
 
 }

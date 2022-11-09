@@ -83,7 +83,7 @@ public class Movie {
 				System.out.println("Review: " + vr.getReview());
 				System.out.println("Rating: " + vr.getRating());
 				count++;
-				sum_for_overall_rating+=getNumberRating(vr.getRating());
+				sum_for_overall_rating+=vr.getRating();
 			}
 		}
 
@@ -98,26 +98,26 @@ public class Movie {
 	}
 
 	
-	/** 
-	 * The method is used to convert the string constant of Ratings to its respective numeric values
-	 * 
-	 * @param scale The object of the RatingScale
-	 * @return The integer value of the rating given to the movie
-	 */
-	private double getNumberRating(RatingScale scale)
-		{
-			double rating=0;
-			switch(scale)
-				{
-					case ONE: rating= 1.0; break;
-					case TWO: rating= 2.0; break;
-					case THREE:rating= 3.0; break;
-					case FOUR:rating= 4.0; break;
-					case FIVE:rating= 5.0; break;
-					default: break;
-				}
-				return rating;
-		}
+	// /** 
+	//  * The method is used to convert the string constant of Ratings to its respective numeric values
+	//  * 
+	//  * @param scale The object of the RatingScale
+	//  * @return The integer value of the rating given to the movie
+	//  */
+	// private double getNumberRating(RatingScale scale)
+	// 	{
+	// 		double rating=0;
+	// 		switch(scale)
+	// 			{
+	// 				case ONE: rating= 1.0; break;
+	// 				case TWO: rating= 2.0; break;
+	// 				case THREE:rating= 3.0; break;
+	// 				case FOUR:rating= 4.0; break;
+	// 				case FIVE:rating= 5.0; break;
+	// 				default: break;
+	// 			}
+	// 			return rating;
+	// 	}
 
 	
 	/** 
@@ -183,7 +183,7 @@ public class Movie {
 	 * @return The boolean type of the movie
 	 */
 	public Boolean getBoolType() {
-		return this.movieType.equals("BLOCKBUSTER") || this.movieType.equals("THREEDIMENSION");
+		return this.movieType.equals(MovieType.BLOCKBUSTER) || this.movieType.equals(MovieType.THREEDIMENSION);
 	}
 
 	/**

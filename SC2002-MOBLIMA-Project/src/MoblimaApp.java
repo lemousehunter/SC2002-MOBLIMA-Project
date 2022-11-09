@@ -1,30 +1,79 @@
+import java.text.ParseException;
 import java.util.*;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class MoblimaApp {
-    String inputFolder = System.getProperty("dataFolder");
-    static ArrayList<User> userList = new ArrayList<User>();
-    static ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>();
-    static ArrayList<Screen> screens = new ArrayList<Screen>();
-    static ArrayList<Booking> bookings = new ArrayList<Booking>();
-    static ArrayList<Show> shows = new ArrayList<Show>();
-    static ArrayList<Movie> movies = new ArrayList<Movie>();
-    static ArrayList<Holidays> holidaysList = new ArrayList<Holidays>();
-    static ArrayList<ViewerRatings> ratings = new ArrayList<ViewerRatings>();
-    static ArrayList<TicketPrice> ticketPrices = new ArrayList<TicketPrice>();
+    ArrayList<User> masterUserList;
+    ArrayList<Cineplex> masterCineplexes;
+    ArrayList<Screen> masterScreens;
+    ArrayList<Booking> masterBookings;
+    ArrayList<Show> masterShows;
+    ArrayList<Movie> masterMovies;
+    ArrayList<String> masterHolidaysList;
+    ArrayList<ViewerRatings> masterRatings;
+    //ArrayList<Ticket> tickets;
 
-    static Scanner sc = new Scanner(System.in);
-    private static User sessionUser = null;
-    private static String dataFolder;
+    // Managers
+    MovieManager movieMgr;
+    MovieGoerManager movieGoerMgr;
+    screenManager screenMgr;
+    cineplexManager cineplexMgr;
+    HolidayManager holidayMgr;
+    BookingManager bookingMgr;
 
-    public static void main(String[] args) throws IOException {
+
+    Scanner sc = new Scanner(System.in);
+    private User sessionUser = null;
+    private String dataFolder;
+
+    public MoblimaApp() {
+        // attributes
+        this.masterUserList = new ArrayList<User>();
+        this.masterCineplexes = new ArrayList<Cineplex>();
+        this.masterScreens = new ArrayList<Screen>();
+        this.masterBookings = new ArrayList<Booking>();
+        this.masterShows = new ArrayList<Show>();
+        this.masterMovies = new ArrayList<Movie>();
+        this.masterHolidaysList = new ArrayList<String>();
+        this.masterRatings = new ArrayList<ViewerRatings>();
+        //this.tickets = new ArrayList<Ticket>();
+
+     }
+
+    public static void main(String[] args) throws IOException{
+        MoblimaApp moblimaApp = new MoblimaApp();
+        moblimaApp.process(args);
+    
+    }
+    public void process(String[] args) throws IOException {
         try {
-            dataFolder = System.getProperty("dataFolder");
+            this.dataFolder = System.getProperty("dataFolder");
+            if (this.dataFolder == null){
+                this.dataFolder = "";
+            }
             // prime the array lists from files
             primeAllObjects();
+            // managers
+            this.movieMgr = new MovieManager();
+        
+            this.movieGoerMgr = new MovieGoerManager();
+            this.movieGoerMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+       
+            this.screenMgr = new screenManager();
+       
+            this.cineplexMgr = new cineplexManager();
+       
+            this.holidayMgr = new HolidayManager(); 
+            this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+            
+            this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr);
+            this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+
+
             System.out.println("==================== Welcome to Moblima Application ====================\n" +
                     " 1. Staff  Application                                             \n" +
                     " 2. User   Application                         \n" +
@@ -48,35 +97,34 @@ public class MoblimaApp {
 
     }
 
-    private static void writeDataFiles() throws IOException {
-        writeCineplex();
-        writeScreen();
-        writeMovie();
-        writeShow();
-        writeBookings();
-        writeViewerRatings();
-        writeUser();
-        writeHolidays();
-        writeTicketPrices();
-
+    private void writeDataFiles() throws IOException {
+        this.writeCineplex();
+        this.writeScreen();
+        this.writeMovie();
+        this.writeShow();
+        this.writeBookings();
+        this.writeViewerRatings();
+        this.writeUser();
+        this.writeHolidays();
+        //this.writeTicket();
     }
 
-    private static void writeViewerRatings() throws IOException {
-        String ratingSEPARATOR = "|";
-        String filename = dataFolder.concat("Ratings.txt");
+    private void writeViewerRatings() throws IOException {
+        String ratingsEPARATOR = " | ";
+        String filename = this.dataFolder.concat("Ratings.txt");
         List alw = new ArrayList();
         ViewerRatings rating;
-        for (int i = 0; i < ratings.size(); i++) {
-            rating = ratings.get(i);
+        for (int i = 0; i < this.masterRatings.size(); i++) {
+            rating = this.masterRatings.get(i);
             StringBuilder st = new StringBuilder();
             st.append(rating.getViewerRatingId().trim());
-            st.append(ratingSEPARATOR);
+            st.append(ratingsEPARATOR);
             st.append(rating.getReview().trim());
-            st.append(ratingSEPARATOR);
-            st.append(rating.getRating().toString().trim());
-            st.append(ratingSEPARATOR);
+            st.append(ratingsEPARATOR);
+            st.append(String.valueOf(rating.getRating()));
+            st.append(ratingsEPARATOR);
             st.append(rating.getUserId().trim());
-            st.append(ratingSEPARATOR);
+            st.append(ratingsEPARATOR);
             st.append(rating.getMovieId().trim());
             alw.add(st.toString());
 
@@ -84,15 +132,15 @@ public class MoblimaApp {
         write(filename, alw);
     }
 
-    private static void writeShow() {
-        String showSEPARATOR = "|";
-        String showSeatSEPARATOR = "~";
-        String filename = dataFolder.concat("Shows.txt");
+    private void writeShow() throws IOException {
+        String showSEPARATOR = " | ";
+        String ShowSeatSEPARATOR = " ~ ";
+        String filename = this.dataFolder.concat("Shows.txt");
         List alw = new ArrayList();
-        ArrayList<ShowSeat> showSeats;
+        ArrayList<ShowSeat> ShowSeats;
         Show show;
-        for (int i = 0; i < shows.size(); i++) {
-            show = shows.get(i);
+        for (int i = 0; i < this.masterShows.size(); i++) {
+            show = this.masterShows.get(i);
             StringBuilder st = new StringBuilder();
             st.append(show.getShowID().trim());
             st.append(showSEPARATOR);
@@ -111,18 +159,18 @@ public class MoblimaApp {
             st.append(show.getEmptySeats());
             st.append(showSEPARATOR);
 
-            showSeats = show.getShowSeatLayout();
-            for (int j = 0; j < showSeats.size(); j++) {
-                ShowSeat showSeat = showSeats.get(j);
-                st.append(showSeat.getShowSeatID().trim());
-                st.append(showSeatSEPARATOR);
-                st.append(showSeat.getShowSeatRow().trim());
-                st.append(showSeatSEPARATOR);
-                st.append(showSeat.getShowSeatNumber());
-                st.append(showSeatSEPARATOR);
-                st.append(showSeat.getShowSeatType().trim());
-                st.append(showSeatSEPARATOR);
-                if (showSeat.isOccupied()) {
+            ShowSeats = show.getSeatLayout();
+            for (int j = 0; j < ShowSeats.size(); j++) {
+                ShowSeat ShowSeat = ShowSeats.get(j);
+                st.append(ShowSeat.getSeatID().trim());
+                st.append(ShowSeatSEPARATOR);
+                st.append(ShowSeat.getSeatRow().trim());
+                st.append(ShowSeatSEPARATOR);
+                st.append(ShowSeat.getSeatNumber());
+                st.append(ShowSeatSEPARATOR);
+                st.append(ShowSeat.getSeatType().trim());
+                st.append(ShowSeatSEPARATOR);
+                if (ShowSeat.isOccupied()) {
                     st.append("Y");
                 } else {
                     st.append("N");
@@ -135,53 +183,54 @@ public class MoblimaApp {
 
     }
 
-    private static void writeTicketPrices() throws IOException {
-        String filename = dataFolder.concat("TicketPrices.txt");
-        String priceSEPARATOR = "|";
-        List alw = new ArrayList();
-        TicketPrice ticketPrice;
-        for (int i = 0; i < ticketPrices.size(); i++) {
-            ticketPrice = ticketPrices.get(i);
-            StringBuilder st = new StringBuilder();
-            st.append(ticketPrice.getDayType().toString().trim());
-            st.append(priceSEPARATOR);
-            st.append(ticketPrice.getScreenClass().toString().trim());
-            st.append(priceSEPARATOR);
-            st.append(ticketPrice.getMovieGoerAge().toString().trim());
-            st.append(priceSEPARATOR);
-            st.append(ticketPrice.getMovieType().toString().trim());
-            st.append(priceSEPARATOR);
-            st.append(ticketPrice.getPrice());
-            alw.add(st.toString());
+    // private void writeTicket() throws IOException {
+    //     String filename = this.dataFolder.concat("TicketPrices.txt");
+    //     String SEPARATOR = "|";
+    //     List alw = new ArrayList();
+    //     Ticket ticket;
+    //     for (int i = 0; i < this.tickets.size(); i++) {
+    //         ticket = this.tickets.get(i);
+    //         StringBuilder st = new StringBuilder();
+    //         st.append(ticket.getMovieID());
+    //         st.append(SEPARATOR);
+    //         st.append(ticket.getUserID());
+    //         st.append(SEPARATOR);
+    //         st.append(ticket.getScreenID());
+    //         st.append(SEPARATOR);
+    //         st.append(ticket.getDate());
+    //         st.append(SEPARATOR);
+    //         st.append(ticket.getPrice());
+    //         st.append(SEPARATOR);
+    //         alw.add(st.toString());
 
+    //     }
+    //     write(filename, alw);
+
+    // }
+
+    private void writeHolidays() throws IOException {
+        String filename = this.dataFolder.concat("Holidays.txt");
+        List alw = new ArrayList();
+        HolidayManager holidayMgr;
+        for (int i = 0; i < this.masterHolidaysList.size(); i++) {
+            String holiday = this.masterHolidaysList.get(i);
+            StringBuilder st = new StringBuilder();
+            st.append(holiday.trim());
+            alw.add(st.toString());
         }
         write(filename, alw);
 
     }
 
-    private static void writeHolidays() throws IOException {
-        String filename = dataFolder.concat("Holidays.txt");
-        List alw = new ArrayList();
-        Holidays holiday;
-        for (int i = 0; i < holidaysList.size(); i++) {
-            holiday = holidaysList.get(i);
-            StringBuilder st = new StringBuilder();
-            st.append(holiday.getDate().trim());
-            alw.add(st.toString());
-        }
-        write(filename, alw);
-
-    }
-
-    private static void writeUser() {
-        String userSEPARATOR = "|";
-        String bookingSEPARATOR = "~";
-        String filename = dataFolder.concat("Users.txt");
+    private void writeUser() throws IOException {
+        String userSEPARATOR = " | ";
+        String bookingSEPARATOR = " ~ ";
+        String filename = this.dataFolder.concat("Users.txt");
         List alw = new ArrayList();
         ArrayList<String> bookings;
         User user;
-        for (int i = 0; i < userList.size(); i++) {
-            user = userList.get(i);
+        for (int i = 0; i < this.masterUserList.size(); i++) {
+            user = this.masterUserList.get(i);
             StringBuilder st = new StringBuilder();
             st.append(user.getUserID().trim());
             st.append(userSEPARATOR);
@@ -190,18 +239,18 @@ public class MoblimaApp {
             String userType = user.getUserType().toString().trim();
             st.append(userType);
             st.append(userSEPARATOR);
-            if (userType.equals(UserType.STAFF)) {
+            if (userType.equals(UserType.STAFF.toString())) {
                 Staff staff = (Staff) user;
                 st.append(staff.getPassword().trim());
             } else {
                 MovieGoer movieGoer = (MovieGoer) user;
                 st.append(movieGoer.getEmailID().trim());
                 st.append(userSEPARATOR);
-                st.append(movieGoer.getMobileNumber().trim());
+                st.append(Integer.toString(movieGoer.getMobileNumber()));
                 st.append(userSEPARATOR);
-                st.append(movieGoer.getMovieGoerAge().trim());
+                st.append(Integer.toString(movieGoer.getAge()));
                 st.append(userSEPARATOR);
-                ArrayList<String> bookingIDs = movieGoer.getAllBookings();
+                ArrayList<String> bookingIDs = movieGoer.getBookings();
                 for (int j = 0; j < bookingIDs.size(); j++) {
                     String bookingID = bookingIDs.get(j);
                     st.append(bookingID);
@@ -216,21 +265,22 @@ public class MoblimaApp {
 
     }
 
-    private static void writeBookings() throws IOException {
-        String bookingSEPARATOR = "|";
-        String filename = dataFolder.concat("Bookings.txt");
+    private void writeBookings() throws IOException {
+        String bookingSEPARATOR = " | ";
+        String seatSEPARATOR = " ~ ";
+        String filename = this.dataFolder.concat("Bookings.txt");
         List alw = new ArrayList();
         Booking booking;
-        for (int i = 0; i < bookings.size(); i++) {
-            booking = bookings.get(i);
+        for (int i = 0; i < this.masterBookings.size(); i++) {
+            booking = this.masterBookings.get(i);
             StringBuilder st = new StringBuilder();
-            st.append(booking.bookingID.trim());
+            st.append(booking.getBookingID().trim());
             st.append(bookingSEPARATOR);
             st.append(booking.getUserID().trim());
             st.append(bookingSEPARATOR);
             st.append(booking.getMovieID().trim());
             st.append(bookingSEPARATOR);
-            st.append(booking.getHallID().trim());
+            st.append(booking.getScreenID().trim());
             st.append(bookingSEPARATOR);
             st.append(booking.getCinemaID().trim());
             st.append(bookingSEPARATOR);
@@ -238,7 +288,13 @@ public class MoblimaApp {
             st.append(bookingSEPARATOR);
             st.append(booking.getTime().trim());
             st.append(bookingSEPARATOR);
-            st.append(booking.getPrice());
+            st.append(booking.getBookingAmount());
+            st.append(bookingSEPARATOR);
+            for (Ticket ticket : booking.getTickets()) {
+                st.append(ticket.getSeatId());
+                st.append(seatSEPARATOR);
+            }
+            st.append(bookingSEPARATOR);
             alw.add(st.toString());
 
         }
@@ -246,37 +302,35 @@ public class MoblimaApp {
 
     }
 
-    private static void writeMovie() throws IOException {
-        String movieSEPARATOR = "|";
-        String castSEPARATOR = "~";
-        String ratingSEPARATOR = "~";
-        String filename = dataFolder.concat("Movies.txt");
+    private void writeMovie() throws IOException {
+        String moviesEPARATOR = " | ";
+        String castSEPARATOR = " ~ ";
+        String ratingsEPARATOR = " ~ ";
+        String filename = this.dataFolder.concat("Movies.txt");
         List alw = new ArrayList();
         ArrayList<String> castList;
         ArrayList<String> ratingList;
 
         Movie movie;
-        for (int i = 0; i < movies.size(); i++) {
-            movie = movies.get(i);
+        for (int i = 0; i < this.masterMovies.size(); i++) {
+            movie = this.masterMovies.get(i);
             StringBuilder st = new StringBuilder();
             st.append(movie.getMovieID().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getName().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getLanguage().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getType());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getMovieRating().toString().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getShowStatus().toString().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getSynopsis().toString().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             st.append(movie.getDirector().toString().trim());
-            st.append(movieSEPARATOR);
-            st.append(movie.getShowStatus().toString().trim());
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
 
             castList = movie.getCast();
             for (int j = 0; j < castList.size(); j++) {
@@ -284,12 +338,12 @@ public class MoblimaApp {
                 st.append(cast.trim());
                 st.append(castSEPARATOR);
             }
-            st.append(movieSEPARATOR);
+            st.append(moviesEPARATOR);
             ratingList = movie.getViewerRatingsID();
             for (int j = 0; j < ratingList.size(); j++) {
                 String ratingID = ratingList.get(j);
                 st.append(ratingID.trim());
-                st.append(ratingSEPARATOR);
+                st.append(ratingsEPARATOR);
             }
 
             alw.add(st.toString());
@@ -298,29 +352,29 @@ public class MoblimaApp {
         write(filename, alw);
     }
 
-    private static void writeScreen() {
-        String screenSEPARATOR = "|";
+    private void writeScreen() throws IOException {
+        String screenEPARATOR = " | ";
         String seatSEPARATOR = "~";
-        String filename = dataFolder.concat("Screens.txt");
+        String filename = this.dataFolder.concat("Screens.txt");
         List alw = new ArrayList();
         ArrayList<Seat> seats;
         Screen screen;
-        for (int i = 0; i < screens.size(); i++) {
-            screen = screens.get(i);
+        for (int i = 0; i < this.masterScreens.size(); i++) {
+            screen = this.masterScreens.get(i);
             StringBuilder st = new StringBuilder();
-            st.append(screen.getscreenID().trim());
-            st.append(screenSEPARATOR);
+            st.append(screen.getScreenID().trim());
+            st.append(screenEPARATOR);
             st.append(screen.getScreenName().trim());
-            st.append(screenSEPARATOR);
-            st.append(screen.getScreenClass().trim());
-            st.append(screenSEPARATOR);
+            st.append(screenEPARATOR);
+            st.append(screen.getScreenClass().toString().trim());
+            st.append(screenEPARATOR);
             st.append(screen.getNumberOfRows());
-            st.append(screenSEPARATOR);
+            st.append(screenEPARATOR);
             st.append(screen.getSeatsPerRow());
-            st.append(screenSEPARATOR);
+            st.append(screenEPARATOR);
             int emptySeats = screen.getNumberOfRows() * screen.getSeatsPerRow();
             st.append(emptySeats);
-            st.append(screenSEPARATOR);
+            st.append(screenEPARATOR);
 
             seats = screen.getSeatLayout();
             for (int j = 0; j < seats.size(); j++) {
@@ -340,15 +394,15 @@ public class MoblimaApp {
         write(filename, alw);
     }
 
-    private static void writeCineplex() {
-        String cineplexSEPARATOR = "|";
-        String screenSEPARATOR = "~";
-        String filename = dataFolder.concat("Cineplex.txt");
+    private void writeCineplex() throws IOException {
+        String cineplexSEPARATOR = " | ";
+        String screenEPARATOR = " ~ ";
+        String filename = this.dataFolder.concat("Cineplex.txt");
         List alw = new ArrayList();
         ArrayList<String> screenIDs;
         Cineplex cineplex;
-        for (int i = 0; i < cineplexes.size(); i++) {
-            cineplex = cineplexes.get(i);
+        for (int i = 0; i < this.masterCineplexes.size(); i++) {
+            cineplex = this.masterCineplexes.get(i);
             StringBuilder st = new StringBuilder();
             st.append(cineplex.getCineplexID().trim());
             st.append(cineplexSEPARATOR);
@@ -356,11 +410,11 @@ public class MoblimaApp {
             st.append(cineplexSEPARATOR);
             st.append(cineplex.getLocation().trim());
             st.append(cineplexSEPARATOR);
-            screenIDs = cineplex.getScreenIDs();
+            screenIDs = cineplex.getScreenID();
             for (int j = 0; j < screenIDs.size(); j++) {
                 String screenID = screenIDs.get(j);
                 st.append(screenID);
-                st.append(screenSEPARATOR);
+                st.append(screenEPARATOR);
             }
 
             alw.add(st.toString());
@@ -396,7 +450,7 @@ public class MoblimaApp {
         return data;
     }
 
-    private static void primeAllObjects() throws IOException {
+    private void primeAllObjects() throws IOException, ParseException {
         primeCineplex();
         primeScreen();
         primeMovie();
@@ -405,53 +459,67 @@ public class MoblimaApp {
         primeViewerRatings();
         primeUser();
         primeHolidays();
-        primeTicketPrices();
+        //primeTickets();
 
     }
 
-    private static void primeTicketPrices() throws IOException {
-        String priceSEPARATOR = "|";
-        String filename = dataFolder.concat("TicketPrices.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
-        for (int i = 0; i < stringArray.size(); i++) {
-            String st = (String) stringArray.get(i);
-            // get individual 'fields' of the string separated by SEPARATOR
-            StringTokenizer star = new StringTokenizer(st, priceSEPARATOR);// pass in the string to the string tokenizer
-                                                                           // using delimiter ","
-            String dayType = star.nextToken().trim(); // first token
-            String screenClass = star.nextToken().trim();
-            String moviegoerAge = star.nextToken().trim();
-            String movieType = star.nextToken().trim();
-            int price = Integer.parseInt(star.nextToken().trim());
-            TicketPrice ticketPrice = new TicketPrice(DayType.valueOf(dayType), ScreenClass.valueOf(screenClass),
-                    MovieGoerAge.valueOf(moviegoerAge), MovieType.valueOf(movieType), price);
-            ticketPrices.add(ticketPrice);
+    // private void primeTickets() throws IOException {
+    //     String SEPARATOR = "|";
+    //     String filename = this.dataFolder.concat("TicketPrices.txt");
+    //     ArrayList stringArray = (ArrayList) read(filename);
+    //     for (int i = 0; i < stringArray.size(); i++) {
+    //         String st = (String) stringArray.get(i);
+    //         // get individual 'fields' of the string separated by SEPARATOR
+    //         StringTokenizer star = new StringTokenizer(st, SEPARATOR);// pass in the string to the string tokenizer
+    //                                                                        // using delimiter "|"
+    //         String movieID = star.nextToken().trim(); // first token
+    //         String userID = star.nextToken().trim();
+    //         String screenID = star.nextToken().trim();
+    //         String date = star.nextToken().trim();
+    //         double price = Double.parseDouble(star.nextToken().trim());
+    //         Ticket ticketPrice = new Ticket(movieID, userID, screenID, date, price, this.holidays, this.movieMgr);
+    //         this.tickets.add(ticketPrice);
+    //     }
+    // }
+
+    private void primeHolidays() throws IOException {
+        String filename = this.dataFolder.concat("Holidays.txt");
+        
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
         }
-    }
-
-    private static void primeHolidays() throws IOException {
-        String filename = dataFolder.concat("Holidays.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        catch (FileNotFoundException e){
+            System.out.println("Priming of Holidays objects is skipped as there is no master data");
+            return;
+        }
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
             StringTokenizer star = new StringTokenizer(st);// pass in the string to the string tokenizer using delimiter
                                                            // ","
             String holidayDate = star.nextToken().trim(); // first token
-            Holidays holiday = new Holidays(holidayDate);
-            holidaysList.add(holiday);
+
+            this.masterHolidaysList.add(holidayDate);
         }
     }
 
-    private static void primeScreen() throws IOException {
-        String screenSEPARATOR = "|";
+    private  void primeScreen() throws IOException {
+        String screenEPARATOR = "|";
         String SeatSEPARATOR = "~";
-        String filename = dataFolder.concat("Screens.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        String filename = this.dataFolder.concat("Screens.txt");
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Priming of Screen objects is skipped as there is no master data");
+            return;
+        }
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
-            StringTokenizer star = new StringTokenizer(st, screenSEPARATOR); // pass in the string to the string
+            StringTokenizer star = new StringTokenizer(st, screenEPARATOR); // pass in the string to the string
                                                                              // tokenizer using delimiter ","
             String screenID = star.nextToken().trim(); // first token
             String screenName = star.nextToken().trim(); // second token
@@ -460,27 +528,35 @@ public class MoblimaApp {
             int seatsPerRow = Integer.parseInt(star.nextToken().trim()); // fifth token
             int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
             ArrayList<Seat> seatLayout = new ArrayList<Seat>();
-            String SeatsString, SeatID, SeatRow, SeatType;
-            while (star.hasMoreTokens()) {
-                SeatsString = star.nextToken().trim();
-                StringTokenizer SeatsToken = new StringTokenizer(SeatsString, SeatSEPARATOR);
-                SeatID = SeatsToken.nextToken().trim();
-                SeatRow = SeatsToken.nextToken().trim();
-                int SeatNumber = Integer.parseInt(SeatsToken.nextToken().trim());
-                SeatType = SeatsToken.nextToken().trim();
-                Seat Seat = new Seat(SeatRow, SeatNumber, SeatType);
+            String seatsString, seatID, seatRow, seatType;
+            seatsString = star.nextToken().trim();
+            StringTokenizer SeatsToken = new StringTokenizer(seatsString, SeatSEPARATOR);
+
+            while (SeatsToken.hasMoreTokens()) {
+                seatID = SeatsToken.nextToken().trim();
+                seatRow = SeatsToken.nextToken().trim();
+                int seatNumber = Integer.parseInt(SeatsToken.nextToken().trim());
+                seatType = SeatsToken.nextToken().trim();
+                Seat Seat = new Seat(seatID, seatRow, seatNumber, seatType);
                 seatLayout.add(Seat);
 
             }
             Screen screen = new Screen(screenID, screenName, screenClass, numberOfRows, seatsPerRow, seatLayout);
-            screens.add(screen);
+            this.masterScreens.add(screen);
         }
     }
 
-    private static void primeViewerRatings() throws IOException {
+    private void primeViewerRatings() throws IOException {
         String bookingSEPARATOR = "|";
-        String filename = dataFolder.concat("Ratings.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        String filename = this.dataFolder.concat("Ratings.txt");
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Priming of ViewerRatings objects is skipped as there is no master data");
+            return;
+        }        
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
@@ -488,19 +564,27 @@ public class MoblimaApp {
                                                                              // tokenizer using delimiter ","
             String viewerRatingID = star.nextToken().trim(); // first token
             String review = star.nextToken().trim();
-            String ratingString = star.nextToken().trim();
+            Double scale = Double.parseDouble(star.nextToken().trim());
             String userID = star.nextToken().trim();
             String movieID = star.nextToken().trim();
-            ViewerRatings rating = new ViewerRatings(viewerRatingID, userID, movieID, RatingScale.valueOf(ratingString),
-                    review);
-            ratings.add(rating);
+            ViewerRatings rating = new ViewerRatings(viewerRatingID, userID, movieID, scale, review);
+            this.masterRatings.add(rating);
         }
     }
 
-    private static void primeBookings() throws IOException {
+    private void primeBookings() throws IOException, ParseException {
         String bookingSEPARATOR = "|";
-        String filename = dataFolder.concat("Bookings.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        String SeatSEPARATOR = "~";
+        ArrayList stringArray = null;
+        String filename = this.dataFolder.concat("Bookings.txt");
+        try{
+            stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+           System.out.println("Priming of Booking objects is skipped as there is no master data");
+           return;
+        }
+        
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
@@ -514,17 +598,32 @@ public class MoblimaApp {
             String date = star.nextToken().trim();
             String time = star.nextToken().trim();
             Double price = Double.valueOf(star.nextToken().trim());
-            Booking booking = new Booking(bookingID, userID, movieID, screenID, cineplexID, date, time, price);
-            bookings.add(booking);
+            ArrayList<String> seatIds = new ArrayList<String>();
+            String seatID=null;
+            String seatIdString = star.nextToken().trim();
+            StringTokenizer SeatsToken = new StringTokenizer(seatIdString, SeatSEPARATOR);
+            while (SeatsToken.hasMoreTokens()) {
+                seatID = SeatsToken.nextToken().trim();
+                seatIds.add(seatID);
+            }            
+            Booking booking = new Booking(bookingID, userID, movieID, screenID, cineplexID, date, time, seatIds, price, this.holidayMgr, this.movieMgr);
+            this.masterBookings.add(booking);
         }
 
     }
 
-    private static void primeUser() throws IOException {
+    private void primeUser() throws IOException {
         String userSEPARATOR = "|";
-        String bookingSEPERATOR = "~";
-        String filename = dataFolder.concat("Users.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        String bookingsEPERATOR = "~";
+        String filename = this.dataFolder.concat("Users.txt");
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Priming of User objects is skipped as there is no master data");
+            return;
+        }
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
@@ -533,46 +632,52 @@ public class MoblimaApp {
             String userID = star.nextToken().trim(); // first token
             String userName = star.nextToken().trim();
             String userType = star.nextToken().trim();
-            if (userType.equals(UserType.STAFF)) {
+            if (userType.equals(UserType.STAFF.toString())) {
                 String password = star.nextToken().trim();// first token
-                Staff staff = new MovieGoer(userID, userName, userType, password);
-                userList.add((User) staff);
+                Staff staff = new Staff(userID, userName, password);
+                masterUserList.add((User) staff);
             } else {
                 String emailID = star.nextToken().trim();
                 int mobileNumber = Integer.parseInt(star.nextToken().trim());
-                String movieGoerAge = star.nextToken().trim();
+                int  movieGoerAge = Integer.parseInt(star.nextToken().trim());
                 ArrayList<String> bookings = new ArrayList<String>();
                 String bookingIDString = star.nextToken().trim();
-                StringTokenizer bookingToken = new StringTokenizer(bookingIDString, bookingSEPERATOR);
+                StringTokenizer bookingToken = new StringTokenizer(bookingIDString, bookingsEPERATOR);
                 while (bookingToken.hasMoreTokens()) {
                     bookings.add(bookingToken.nextToken().trim());
                 }
-                MovieGoer movieGoer = new MovieGoer(userID, userName, userType, emailID, mobileNumber, movieGoerAge,
-                        bookings);
-                userList.add((User) movieGoer);
+                MovieGoer movieGoer = new MovieGoer(userID, userName, emailID, mobileNumber, movieGoerAge,
+                bookings);
+                this.masterUserList.add(movieGoer);
 
             }
 
         }
     }
 
-    private static void primeMovie() throws IOException {
-        String movieSEPARATOR = "|";
+    private void primeMovie() throws IOException {
+        String moviesEPARATOR = "|";
         String castSEPERATOR = "~";
         String ratingSEPERATOR = "~";
-        String filename = dataFolder.concat("Movies.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
-        for (int i = 0; i < stringArray.size(); i++) {
+        String filename = this.dataFolder.concat("Movies.txt");
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Priming of Movie objects is skipped as there is no master data");
+            return;
+        }        for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
-            StringTokenizer star = new StringTokenizer(st, movieSEPARATOR);// pass in the string to the string tokenizer
+            StringTokenizer star = new StringTokenizer(st, moviesEPARATOR);// pass in the string to the string tokenizer
                                                                            // using delimiter ","
             String movieID = star.nextToken().trim(); // first token
             String movieName = star.nextToken().trim(); // first token
             String movieLanguage = star.nextToken().trim(); // second token
             String movieType = star.nextToken().trim(); // third token
             String movieRating = star.nextToken().trim(); // fourth token
-            String showStatus = star.nextToken().trim(); // fifth token
+            String showstatus = star.nextToken().trim(); // fifth token
             String synopsis = star.nextToken().trim(); // sixth token
             String director = star.nextToken().trim(); // seventh token
             String cast = star.nextToken().trim(); // eighth token
@@ -587,19 +692,26 @@ public class MoblimaApp {
             while (ratingToken.hasMoreTokens()) {
                 ratings.add(ratingToken.nextToken().trim());
             }
-            Movie movie = new Movie(movieID, movieName, movieLanguage, MovieType.valueOf(movieType),
-                    MovieRating.valueOf(movieRating), ShowStatus.valueOf(showStatus), synopsis, director, castList,
+            Movie movie = new Movie(movieID, movieName, movieLanguage, movieType,
+                    MovieRating.valueOf(movieRating), ShowStatus.valueOf(showstatus), synopsis, director, castList,
                     ratings);
-            movies.add(movie);
+            this.masterMovies.add(movie);
 
         }
     }
 
-    private static void primeShow() throws IOException {
+    private void primeShow() throws IOException {
         String showSEPARATOR = "|";
-        String showSeatSEPARATOR = "~";
-        String filename = dataFolder.concat("Shows.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        String ShowSeatSEPARATOR = "~";
+        String filename = this.dataFolder.concat("Shows.txt");
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Priming of Show objects is skipped as there is no master data");
+            return;
+        }
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
@@ -609,56 +721,64 @@ public class MoblimaApp {
             String showDate = star.nextToken().trim(); // second token
             String showTime = star.nextToken().trim(); // third token
             String movieID = star.nextToken().trim(); 
-            Movie movie=null;
-            for (Movie movieIterator : movies) {
-                if (movieIterator.getMovieID().equals(movieID)) {
-                    movie = movieIterator;
-                    break;
-                }
-            }
             String screenID = star.nextToken().trim(); // fifth token
-            Screen screen=null;
-            for (Screen screenIterator : screens) {
-                if (screenIterator.getScreenID().equals(screenID)) {
-                    screen = screenIterator;
-                    break;
-                }
-            }
+            // Movie movie=null;
+            // for (Movie movieIterator : masterMovies) {
+            //     if (movieIterator.getMovieID().equals(movieID)) {
+            //         movie = movieIterator;
+            //         break;
+            //     }
+            // }
+            // String screenID = star.nextToken().trim(); // fifth token
+            // Screen screen=null;
+            // for (Screen screenIterator : masterScreens) {
+            //     if (screenIterator.getScreenID().equals(screenID)) {
+            //         screen = screenIterator;
+            //         break;
+            //     }
+            // }
             int numberOfRows = Integer.parseInt(star.nextToken().trim());
             int seatsPerRow = Integer.parseInt(star.nextToken().trim());
             int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
-            ArrayList<ShowSeat> showSeats = new ArrayList<ShowSeat>();
-            String showSeatsString, showSeatID, showSeatRow, showSeatType, occupiedString;
+            ArrayList<ShowSeat> ShowSeats = new ArrayList<ShowSeat>();
+            String ShowSeatsString, ShowSeatID, ShowSeatRow, ShowSeatType, occupiedString;
             boolean isOccupied;
-            while (star.hasMoreTokens()) {
-                showSeatsString = star.nextToken().trim();
-                StringTokenizer showSeatsToken = new StringTokenizer(showSeatsString, showSeatSEPARATOR);
-                showSeatID = showSeatsToken.nextToken().trim();
-                showSeatRow = showSeatsToken.nextToken().trim();
-                int showSeatNumber = Integer.parseInt(showSeatsToken.nextToken().trim());
-                showSeatType = showSeatsToken.nextToken().trim();
-                occupiedString = showSeatsToken.nextToken().trim();
+            ShowSeatsString = star.nextToken().trim();
+            StringTokenizer ShowSeatsToken = new StringTokenizer(ShowSeatsString, ShowSeatSEPARATOR);
+
+            while (ShowSeatsToken.hasMoreTokens()) {
+                ShowSeatID = ShowSeatsToken.nextToken().trim();
+                ShowSeatRow = ShowSeatsToken.nextToken().trim();
+                int ShowSeatNumber = Integer.parseInt(ShowSeatsToken.nextToken().trim());
+                ShowSeatType = ShowSeatsToken.nextToken().trim();
+                occupiedString = ShowSeatsToken.nextToken().trim();
                 if (occupiedString.equals("Y")) {
                     isOccupied = true;
                 } else {
                     isOccupied = false;
                 }
-                ShowSeat showSeat = new ShowSeat(showSeatID, showSeatRow, showSeatNumber, showSeatType, isOccupied);
-                showSeats.add(showSeat);
+                ShowSeat ShowSeat = new ShowSeat(ShowSeatID, ShowSeatRow, ShowSeatNumber, ShowSeatType, isOccupied);
+                ShowSeats.add(ShowSeat);
 
             }
-            Show show = new Show(showID, showDate, showTime, movieID, screenID, emptySeats, numberOfRows, seatsPerRow,
-                    showSeats);
-            shows.add(show);
+            Show show = new Show(showID, movieID, screenID, showDate, showTime, emptySeats,numberOfRows, seatsPerRow, this.movieMgr , this.screenMgr);
+            this.masterShows.add(show);
         }
 
     }
 
-    private static void primeCineplex() throws IOException {
+    private void primeCineplex() throws IOException {
         String cineplexSEPARATOR = "|";
-        String screenSEPARATOR = "~";
-        String filename = dataFolder.concat("Cineplex.txt");
-        ArrayList stringArray = (ArrayList) read(filename);
+        String screenEPARATOR = "~";
+        String filename = this.dataFolder.concat("Cineplex.txt");
+        ArrayList stringArray = null;
+        try{
+             stringArray = (ArrayList) read(filename);
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Priming of Cineplex objects is skipped as there is no master data");
+            return;
+        }
         for (int i = 0; i < stringArray.size(); i++) {
             String st = (String) stringArray.get(i);
             // get individual 'fields' of the string separated by SEPARATOR
@@ -668,18 +788,19 @@ public class MoblimaApp {
             String cineplexName = star.nextToken().trim(); // first token
             String location = star.nextToken().trim(); // second token
             ArrayList<String> screenIDs = new ArrayList<String>();
-            Cineplex cineplex = new Cineplex(cineplexID, cineplexName, location, screenIDs);
-            while (star.hasMoreTokens()) {
-                String screenText = star.nextToken().trim();
-                StringTokenizer screenToken = new StringTokenizer(screenText, screenSEPARATOR);
-                String screenID = star.nextToken().trim(); // first token
+            String screenText = star.nextToken().trim();
+            StringTokenizer screenToken = new StringTokenizer(screenText, screenEPARATOR);
+            while (screenToken.hasMoreTokens()) {
+                
+                String screenID = screenToken.nextToken().trim(); // first token
                 screenIDs.add(screenID);
             }
-            cineplexes.add(cineplex);
+            Cineplex cineplex = new Cineplex(cineplexID, cineplexName, location, screenIDs);
+            this.masterCineplexes.add(cineplex);
         }
     }
 
-    private static void ManageStaffApp() {
+    private void ManageStaffApp() {
         int subchoice;
         do {
             System.out.println("==================== Welcome to STAFF APP ====================\n" +
@@ -700,22 +821,22 @@ public class MoblimaApp {
                     String userName = sc.nextLine();
                     System.out.println("Enter Password: ");
                     String password = sc.nextLine();
-                    int userListSize;
-                    if (userList.isEmpty()) {
-                        userListSize = 0;
+                    int masterUserListSize;
+                    if (this.masterUserList.isEmpty()) {
+                        masterUserListSize = 0;
                     } else {
-                        userListSize = userList.size();
+                        masterUserListSize = this.masterUserList.size();
                     }
                     boolean userFound = false;
-                    for (int i = 0; i < userListSize; i++) {
-                        if (userList.get(i).getUserName().equals(userName)) {
+                    for (int i = 0; i < masterUserListSize; i++) {
+                        if (this.masterUserList.get(i).getUserName().equals(userName)) {
                             System.out.println("User Already Registered");
                             userFound = true;
                         }
                     }
                     if (!userFound) {
-                        Staff staff = new Staff(UserType.STAFF, userName, password);
-                        userList.add(staff);
+                        Staff staff = new Staff(userName, password);
+                        masterUserList.add(staff);
                         System.out.println("Successfully Registered");
 
                     }
@@ -726,15 +847,15 @@ public class MoblimaApp {
                     System.out.println("Enter Password: ");
                     password = sc.nextLine();
                     userFound = false;
-                    for (int i = 0; i < userList.size(); i++) {
-                        if (userList.get(i) instanceof Staff) {
+                    for (int i = 0; i < this.masterUserList.size(); i++) {
+                        if (this.masterUserList.get(i) instanceof Staff) {
 
-                            Staff staffUser = (Staff) userList.get(i);
+                            Staff staffUser = (Staff) this.masterUserList.get(i);
                             if (staffUser.getUserName().equals(userName)) {
                                 userFound = true;
                                 if (staffUser.getPassword().equals(password)) {
                                     System.out.println("Succesfully Logged in");
-                                    sessionUser = userList.get(i);
+                                    this.sessionUser = this.masterUserList.get(i);
                                     break;
                                 } else {
                                     System.out.println("Wrong Password");
@@ -747,23 +868,14 @@ public class MoblimaApp {
                         break;
                     }
 
-                case 3:
-                    sessionUser = null;
+                case 3: // return to mainMenu
+                    this.sessionUser = null;
             }
         } while (subchoice <= 3);
     }
 
-    private static void ManageUserApp() {
+    private void ManageUserApp() {
         UserApp userapp = new UserApp();
-        userapp.setUserList(userList);
-        userapp.setBookings(bookings);
-        userapp.setCineplexes(cineplexes);
-        userapp.setHolidaysList(holidaysList);
-        userapp.setMovies(movies);
-        userapp.setRatings(ratings);
-        userapp.setScreens(screens);
-        userapp.setShows(shows);
-
         userapp.Process();
     }
 

@@ -13,41 +13,47 @@ public class Show {
 	private int emptySeats;
 	private int numberOfRows;
 	private int seatsPerRow;
-	private ArrayList<ShowSeat>showSeats=new ArrayList<ShowSeat>();
+	private ArrayList<ShowSeat> showSeats;
+
+	private MovieManager movieMgr;
+	private screenManager screenMgr;
 
 	/**
 	 *
 	 * @param showDate
 	 * @param showTime
 	 */
-	public Show(String movieID,Movie movie,Screen screen, String showDate, String showTime, String screenID, int emptySeats, int numberOfRows, int seatsPerRow) {
-	
+	public Show(String showID, String movieID, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, screenManager screenMgr) {
 		// TODO - implement Show.Show
-		this.showID = UUID.randomUUID().toString();
+		// Managers
+		this.movieMgr = movieMgr;
+		this.screenMgr = screenMgr;
+
+		// Attributes
+		if (showID.isEmpty()) {
+			this.showID = UUID.randomUUID().toString();
+		}
+		else {
+			this.showID = showID;
+		}
+		this.showID = showID;
 		this.movieID = movieID;
-		this.movie=movie;
-		this.screen=screen;
 		this.showDate = showDate;
 		this.showTime = showTime;
-		this.screenID =screenID;
-		this.emptySeats=emptySeats;
-		this.numberOfRows=numberOfRows;
-		this.seatsPerRow=seatsPerRow;
+		this.screenID = screenID;
+		this.emptySeats = emptySeats;
+		this.numberOfRows = numberOfRows;
+		this.seatsPerRow = seatsPerRow;
+		this.movie = this.movieMgr.getMovieByID(movieID);
+		this.screenID=screenID;
+		this.screen = this.screenMgr.getScreenByID(screenID);
+		ArrayList<Seat> seats= screen.getSeatLayout(); 
+		for (int i=0;i<seats.size();i++){
+			Seat seat=seats.get(i);
+			ShowSeat showSeat= new ShowSeat(seat.getSeatID(), seat.getSeatRow(), seat.getSeatNumber(), seat.getSeatType());
+			showSeats.add(showSeat);
+		}
 
-
-	}
-	public Show(String showID, String movieID,Movie movie,Screen screen, String showDate, String showTime, String screenID, int emptySeats, int numberOfRows, int seatsPerRow) {
-		// TODO - implement Show.Show
-		this.showID=showID;
-		this.movieID = movieID;
-		this.movie=movie;
-		this.screen=screen;
-		this.showDate = showDate;
-		this.showTime = showTime;
-		this.screenID =screenID;
-		this.emptySeats=emptySeats;
-		this.numberOfRows=numberOfRows;
-		this.seatsPerRow=seatsPerRow;
 	}
 
 	public String getShowID(){
@@ -65,11 +71,6 @@ public class Show {
 	public String getShowTime() {
 		return this.showTime;
 	}
-
-	public void changeShowTime(String showTime) {
-		this.showTime = showTime;
-	}
-
 	
 	public String getScreenID() {
 		return screenID;
@@ -81,6 +82,24 @@ public class Show {
 		return movie;
 	}
 
+	public int getNumberOfRows() {
+		return this.numberOfRows;
+	}
+	public int getSeatsPerRow() {
+		return this.seatsPerRow;
+	}
+
+	public int getEmptySeats() {
+		return this.emptySeats;
+	}
+
+	public ArrayList<ShowSeat> getSeatLayout() {
+		return showSeats;
+	}
+
+	public void changeShowTime(String showTime) {
+		this.showTime = showTime;
+	}
 
 	public void ShowSeatLayout() {
 		boolean aisleSpace=true;

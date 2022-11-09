@@ -1,21 +1,21 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class MovieGoer extends User{
     public final String email;
     public final Integer mobileNumber;
     public final Integer age;
+    public final ArrayList<String> bookings;
+
+
     private MovieGoerAge ageType;
-    public BookingManager bookingMgr;
 
-    private final reviewManager reviewMgr;
-
-
-    public MovieGoer(String name, String userID, String email, Integer mobileNumber, Integer age, ArrayList<String> bookings)
+    public MovieGoer(String userID, String name, String email, Integer mobileNumber, Integer age, ArrayList<String> bookings)
     {
         super(UserType.MOVIEGOER, name);
         this.email = email;
         this.mobileNumber = mobileNumber;
         this.age = age;
+        this.setUserID(userID);
         if(age<=5){
             this.ageType = MovieGoerAge.CHILD;
         }
@@ -26,27 +26,24 @@ public class MovieGoer extends User{
             this.ageType = MovieGoerAge.ADULT;
         else
             this.ageType = MovieGoerAge.SENIOR;
-        this.bookingMgr = new BookingManager(super.getUserID());
-        this.reviewMgr = new reviewManager();
+        this.bookings=bookings;
+
     }
 
     public String getAgeType() {
         return this.ageType.toString();
     }
+    public String getEmailID() { return this.email; }
 
+    public Integer getMobileNumber() { return this.mobileNumber; }
 
-    String BookTicket(String movieName, String date, String time, String Location, String Hall){
-        return this.bookingMgr.BookTicket(
-            movieName=movieName, date=date, time=time, Location=Location, Hall=Hall
-        ); // returns BookingID: String
+    public Integer getAge() { return this.age; }
+
+    public ArrayList<String> getBookings() { return this.bookings; }
+
+    public void addBookingID (String bookingID) {
+        bookings.add(bookingID);
     }
 
-    String addReview(){
-        return this.reviewMgr.addReview();
-    }
-
-    ArrayList<String> getAllBookings(){
-        return this.bookingMgr.getAllBookings(super.getUserID());
-    }
 }
 

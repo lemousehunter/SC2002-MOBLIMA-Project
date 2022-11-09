@@ -2,20 +2,41 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class MovieManager {
+public class MovieManager implements Manager{
 
     static Scanner sc = new Scanner(System.in);
     private MovieType movieType;
     private MovieRating movieRating;
     private ShowStatus showStatus;
+    private ArrayList<User> masterUserList;
+    private ArrayList<Cineplex> masterCineplexes;
+    private ArrayList<Screen> masterScreens;
+    private ArrayList<Booking> masterBookings;
+    private ArrayList<Show> masterShows;
     private ArrayList<Movie> masterMovies;
+    private ArrayList<String> masterHolidaysList;
     private ArrayList<ViewerRatings> masterRatings;
 
     
-    public void setMasterMovies(ArrayList<Movie> masterMovies) {
-        this.masterMovies = masterMovies;
-    }
-
+    @Override
+    public void setMasterLists(
+    ArrayList<User> masterUserList,
+    ArrayList<Cineplex> masterCineplexes,
+    ArrayList<Screen> masterScreens,
+    ArrayList<Booking> masterBookings,
+    ArrayList<Show> masterShows,
+    ArrayList<Movie> masterMovies,
+    ArrayList<String> masterHolidaysList,
+    ArrayList<ViewerRatings> masterRatings) {
+    this.masterUserList = masterUserList;
+    this.masterCineplexes = masterCineplexes;
+    this.masterScreens = masterScreens;
+    this.masterBookings = masterBookings;
+    this.masterShows = masterShows;
+    this.masterMovies = masterMovies;
+    this.masterHolidaysList = masterHolidaysList;
+    this.masterRatings = masterRatings;
+  }
     public Movie getMovieByID(String movieID) {
         for(Movie m: masterMovies) {
             if(movieID.equals(m.getMovieID()))

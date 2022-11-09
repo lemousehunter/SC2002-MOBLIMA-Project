@@ -1,11 +1,12 @@
 import java.util.Scanner;
 
 public class UserApp{
+         int choice;
          static Scanner sc=new Scanner(System.in);
          public void Process(){
              do{
                  DisplayUserMenu();
-             }while (choice<=10);
+             }while (choice <=10);
          }
          public void DisplayUserMenu(){
              System.out.println("==================== Welcome to User  APP ====================\n" +
@@ -24,7 +25,7 @@ public class UserApp{
                  System.out.println("Please enter an integer value.");
                  sc.next();
              }
-             int subchoice = sc.nextInt();
+             choice = sc.nextInt();
          }
 
 }

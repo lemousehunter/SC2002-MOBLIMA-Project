@@ -13,7 +13,7 @@ import java.util.*;
 public class ViewerRatings {
 
 	private String review;
-	private RatingScale scale;
+	private double scale;
 	private String userID;
 	private String movieID;
 	String viewerRatingID;
@@ -25,7 +25,7 @@ public class ViewerRatings {
 	 * @param scale The rating being given to the movie
 	 * @param review The review being given to the movie
 	 */
-	public ViewerRatings(String userID, String movieID,  RatingScale scale, String review) {
+	public ViewerRatings(String userID, String movieID,  double scale, String review) {
 		this.userID=userID;
 		this.movieID=movieID;
 		this.review=review;	
@@ -39,7 +39,7 @@ public class ViewerRatings {
 	 * @param scale The rating being given to the movie
 	 * @param review The review being given to the movie
 	 */
-	public ViewerRatings(String viewerRatingID,String userID, String movieID,  RatingScale scale, String review) {
+	public ViewerRatings(String viewerRatingID,String userID, String movieID,  double scale, String review) {
 		this.userID=userID;
 		this.movieID=movieID;
 		this.review=review;	
@@ -88,7 +88,7 @@ public class ViewerRatings {
 		 * 
 		 * @return The Rating given
 		 */
-		public RatingScale getRating()
+		public double getRating()
 		{
 			return scale;
 			

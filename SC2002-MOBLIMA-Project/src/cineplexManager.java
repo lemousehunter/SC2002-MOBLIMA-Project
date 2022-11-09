@@ -2,18 +2,41 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class cineplexManager {
+public class cineplexManager implements Manager{
 
 
     static Scanner sc = new Scanner(System.in);
-    private ArrayList<Cineplex> masterCineplex;
+    private ArrayList<User> masterUserList;
+    private ArrayList<Cineplex> masterCineplexes;
+    private ArrayList<Screen> masterScreens;
+    private ArrayList<Booking> masterBookings;
+    private ArrayList<Show> masterShows;
+    private ArrayList<Movie> masterMovies;
+    private ArrayList<String> masterHolidaysList;
+    private ArrayList<ViewerRatings> masterRatings;
    
-    public void setMasterCineplex(ArrayList<Cineplex> masterCineplex) {
-        this.masterCineplex = masterCineplex;
-    }
+    @Override
+    public void setMasterLists(
+    ArrayList<User> masterUserList,
+    ArrayList<Cineplex> masterCineplexes,
+    ArrayList<Screen> masterScreens,
+    ArrayList<Booking> masterBookings,
+    ArrayList<Show> masterShows,
+    ArrayList<Movie> masterMovies,
+    ArrayList<String> masterHolidaysList,
+    ArrayList<ViewerRatings> masterRatings) {
+    this.masterUserList = masterUserList;
+    this.masterCineplexes = masterCineplexes;
+    this.masterScreens = masterScreens;
+    this.masterBookings = masterBookings;
+    this.masterShows = masterShows;
+    this.masterMovies = masterMovies;
+    this.masterHolidaysList = masterHolidaysList;
+    this.masterRatings = masterRatings;
+  }
 
     public Cineplex getCineplexByID(String cineplexID) {
-        for(Cineplex c: masterCineplex) {
+        for(Cineplex c: masterCineplexes) {
             if(cineplexID.equals(c.getCineplexID()))
                 return c;
             else
@@ -30,11 +53,11 @@ public class cineplexManager {
         String loc = sc.next();
          
         Cineplex c=new Cineplex(cineplexID, name,loc);
-        masterCineplex.add(c);
+        masterCineplexes.add(c);
     }
     
     public void viewCineplex() {
-        for(Cineplex c: masterCineplex) {
+        for(Cineplex c: masterCineplexes) {
             System.out.println(c.viewDetails());
             System.out.println("---------------------------X---------------------------");
         }
@@ -42,7 +65,7 @@ public class cineplexManager {
 
     public void cineplexListing() {
         System.out.println("List of Cineplex:");
-        for(Cineplex c: masterCineplex) {
+        for(Cineplex c: masterCineplexes) {
             System.out.println(c.getName());
         }
     }
@@ -51,7 +74,7 @@ public class cineplexManager {
         System.out.println("Enter the cineplex name you want to search for: ");
         String user_input = sc.nextLine();
         boolean flag = false;
-        for(Cineplex c:masterCineplex) {
+        for(Cineplex c:masterCineplexes) {
             if(c.getName().equalsIgnoreCase(user_input)) {
                 flag = true;
                 break;

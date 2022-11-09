@@ -17,7 +17,7 @@ public class Cineplex {
 	private String location;
 	private ArrayList<String> screenID;
 	private ArrayList<Screen> masterScreens;
-
+	
 	/**
 	 * Cineplex Constructor
 	 * 
@@ -25,15 +25,24 @@ public class Cineplex {
 	 * @param name The cineplex name
 	 * @param location The location of the cineplex
 	 */
-	public Cineplex(String cineplexID, String name, String location) {
+	public Cineplex(String cineplexID, String name, String location, ArrayList<String>  screenID) {
 		
 		this.cineplexID=cineplexID;
 		this.name=name;
 		this.location=location;
-		this.screenID=new ArrayList<String>();
+		this.screenID = screenID;
 	}
 
 	
+	public Cineplex(String cineplexID, String name, String loc) {
+		this.cineplexID=cineplexID;
+		this.name=name;
+		this.location=loc;
+		this.screenID = new ArrayList<String>();
+	}
+
+
+
 	/** 
 	 * Set method for storing a reference to the master arraylist of Screens
 	 * 
@@ -141,16 +150,16 @@ public class Cineplex {
 	 * @return The arraylist of all the screens in the current cineplex
 	 */
 	public ArrayList<String> getScreenNames() {
-		ArrayList<String> screens = new ArrayList<String>();
+		ArrayList<String> screenNames = new ArrayList<String>();
 		for(String screenid: screenID) {
 			for(Screen screen: masterScreens) {
 				if(screenid.equals(screen.getScreenID())) {
-					screens.add(screen.getScreenName());
+					screenNames.add(screen.getScreenName());
 					break;
 				}
 			}
 		}
-		return screens;
+		return screenNames;
 	}
 
 	

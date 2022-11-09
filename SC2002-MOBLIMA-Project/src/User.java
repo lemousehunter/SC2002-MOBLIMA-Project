@@ -5,7 +5,16 @@ public class User {
 	private UserType userType;
 	private String userName;
 	private String userID;
-
+	public User(UserType userType, String userName) {
+		this.userID = UUID.randomUUID().toString();
+		this.userType = userType;
+		this.userName = userName;
+	}
+	public User(String userID, UserType userType, String userName) {
+		this.userID = userID;
+		this.userType = userType;
+		this.userName = userName;
+	}
 	public String getUserID() {
 		return userID;
 	}
@@ -27,12 +36,6 @@ public class User {
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public User(UserType userType, String userName) {
-		this.userID = UUID.randomUUID().toString();
-		this.userType = userType;
 		this.userName = userName;
 	}
 

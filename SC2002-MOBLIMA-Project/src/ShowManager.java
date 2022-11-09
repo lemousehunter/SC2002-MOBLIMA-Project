@@ -1,35 +1,44 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class ShowManager {
+public class ShowManager implements Manager {
 
     static Scanner sc = new Scanner(System.in);
-    private ArrayList<Show> shows;
-    private ArrayList<Movie> movies;
-    private ArrayList<Holidays> holidaysList;
-    private ArrayList<TicketPrice> ticketPrices;
-    private ArrayList<Screen> screens;
-
-    public void setScreens(ArrayList<Screen> screens) {
-        this.screens = screens;
+    private ArrayList<User> masterUserList;
+    private ArrayList<Cineplex> masterCineplexes;
+    private ArrayList<Screen> masterScreens;
+    private ArrayList<Booking> masterBookings;
+    private ArrayList<Show> masterShows;
+    private ArrayList<Movie> masterMovies;
+    private ArrayList<String> masterHolidaysList;
+    private ArrayList<ViewerRatings> masterRatings;
+        
+    screenManager screenMgr;
+    MovieManager movieMgr;
+    public ShowManager(screenManager screenMgr, MovieManager movieMgr) {
+        this.screenMgr = screenMgr;
+        this.movieMgr = movieMgr;
     }
 
-    public void setShows(ArrayList<Show> shows) {
-        this.shows = shows;
-    }
-
-    public void setMovies(ArrayList<Movie> movies) {
-        this.movies = movies;
-    }
-
-    public void setHolidaysList(ArrayList<Holidays> holidaysList) {
-        this.holidaysList = holidaysList;
-    }
-
-    public void setTicketPrices(ArrayList<TicketPrice> ticketPrices) {
-        this.ticketPrices = ticketPrices;
-    }
+    @Override
+    public void setMasterLists(
+    ArrayList<User> masterUserList,
+    ArrayList<Cineplex> masterCineplexes,
+    ArrayList<Screen> masterScreens,
+    ArrayList<Booking> masterBookings,
+    ArrayList<Show> masterShows,
+    ArrayList<Movie> masterMovies,
+    ArrayList<String> masterHolidaysList,
+    ArrayList<ViewerRatings> masterRatings) {
+    this.masterUserList = masterUserList;
+    this.masterCineplexes = masterCineplexes;
+    this.masterScreens = masterScreens;
+    this.masterBookings = masterBookings;
+    this.masterShows = masterShows;
+    this.masterMovies = masterMovies;
+    this.masterHolidaysList = masterHolidaysList;
+    this.masterRatings = masterRatings;
+  }
 
     public void addShowC(String showDate, String showTime, String movieName, String screenName, int emptySeats, int numofRows,
             int seatsPerRow) {
@@ -38,8 +47,8 @@ public class ShowManager {
         boolean movieFound = false;
         String movieID=null;
         Movie movie=null;
-        for (int i = 0; i < movies.size(); i++) {
-            Movie movieIterator = movies.get(i);
+        for (int i = 0; i < masterMovies.size(); i++) {
+            Movie movieIterator = masterMovies.get(i);
             if (movieIterator.getName().equals(movieName)) {
                 movie=movieIterator;
                 movieID = movieIterator.getMovieID();
@@ -55,8 +64,8 @@ public class ShowManager {
         boolean screenFound = false;
         String screenID=null;
         Screen screen=null;
-        for (int i = 0; i < screens.size(); i++) {
-            Screen screenIterator = screens.get(i);
+        for (int i = 0; i < masterScreens.size(); i++) {
+            Screen screenIterator = masterScreens.get(i);
             if (screenIterator.getScreenName().equals(screenName)) {
                 screen=screenIterator;
                 screenID = screenIterator.getScreenID();
@@ -70,8 +79,8 @@ public class ShowManager {
 
         // lookup shows to make sure that showdate and showtime is not already
         // configured with a show
-        for (int i = 0; i < shows.size(); i++) {
-            Show show = shows.get(i);
+        for (int i = 0; i < masterShows.size(); i++) {
+            Show show = masterShows.get(i);
             if (show.getShowDate().equals(showDate) && show.getShowTime().equals(showTime)
                     && show.getScreen().getScreenName().equals(screenName)) {
                 throw new showException("Movie slot on " + screenName + " is already scheduled at " + showTime + " on "
@@ -79,8 +88,8 @@ public class ShowManager {
             }
         }
 
-        Show show = new Show(movieID,movie,screen,showDate, showTime, screenID,emptySeats, numofRows, seatsPerRow);
-        shows.add(show);
+        Show show = new Show("", movieID, screenID, showDate, showTime, emptySeats, numofRows, seatsPerRow, this.movieMgr, this.screenMgr);
+        masterShows.add(show);
     }
     // public ArrayList<String> getShowListByDate(String showDate) {
     //     ArrayList<String> showListbyDate = new ArrayList<String>();
@@ -138,7 +147,7 @@ public class ShowManager {
 
     public ArrayList<Show> viewShowbyMovieAndScreen(String movieName, String screenName) {
         String movieID = "";
-        for (Movie movie : movies) {
+        for (Movie movie : masterMovies) {
             if (movie.getName().equals(movieName)) {
                 movieID = movie.getMovieID();
                 break;
@@ -148,7 +157,7 @@ public class ShowManager {
             throw new showException("No shows for Movie " + movieName);
         }
         String screenID = "";
-        for (Screen screen : screens) {
+        for (Screen screen : masterScreens) {
             if (screen.getScreenName().equals(screenName)) {
                 screenID = screen.getScreenID();
                 break;
@@ -162,7 +171,7 @@ public class ShowManager {
         StringBuilder st = new StringBuilder();
         String prevShowDate="";
         ArrayList<Show> showListForMovie = new ArrayList<Show>();
-        for (Show show : shows) {
+        for (Show show : masterShows) {
 
             if (show.getMovieID().equals(movieID) && show.getScreenID().equals(screenID)) {
                 showListForMovie.add(show);
@@ -176,7 +185,7 @@ public class ShowManager {
                 st.append("   " + show.getShowTime().trim());
             }
         }
-        if (!st.isEmpty()){
+        if (st.length() != 0 ){
             printShows.add(st.toString());
         }
         for (String printline : printShows){
@@ -187,7 +196,7 @@ public class ShowManager {
     }
     public ArrayList<Screen> viewShowScreensByMovie(String movieName){
         String movieID = "";
-        for (Movie movie : movies) {
+        for (Movie movie : masterMovies) {
             if (movie.getName().equals(movieName)) {
                 movieID = movie.getMovieID();
                 break;
@@ -197,7 +206,7 @@ public class ShowManager {
             throw new showException("No shows for the Movie " + movieName);
         }
         ArrayList<Screen> movieScreens= new ArrayList<Screen>();
-        for (Show show : shows) {
+        for (Show show : masterShows) {
 
             if (show.getMovieID().equals(movieID) && !(movieScreens.contains(show.getScreen()))) {
                movieScreens.add(show.getScreen());
@@ -215,7 +224,7 @@ public class ShowManager {
     }
     public ArrayList<Movie> viewMovieListing(ShowStatus showStatus){
         ArrayList<Movie> movieList= new ArrayList<Movie>();
-        for (Movie movie : movies){
+        for (Movie movie : masterMovies){
             if (movie.getShowStatus().equals(showStatus)){
                 movieList.add(movie);
             }

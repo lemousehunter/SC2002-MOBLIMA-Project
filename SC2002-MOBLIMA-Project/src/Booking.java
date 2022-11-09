@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.util.ArrayList;
 /**
  * A Booking Object
  * 
@@ -12,11 +14,14 @@ public class Booking {
     private String bookingID;
     private String userID;
     private String movieID;
-    private String hallID;
+    private String screenID;
     private String cinemaID;
     private String date;
     private String time;
-    private double price;
+    private ArrayList<String> seatIds;
+    private double bookingAmount;
+    private ArrayList<Ticket> tickets;
+
 
     /**
      * Booking Constructor
@@ -24,24 +29,32 @@ public class Booking {
      * @param bookingID The Booking ID
      * @param userID The User ID
      * @param movieID The Movie ID
-     * @param hallID The Hall ID
+     * @param screenID The Screen ID
      * @param cinemaID The Cinema ID
      * @param date The Date
      * @param time The Time
-     * @param price The total price
+     * @param seatIds The SeatIds
+     * @param bookingAmount The total price
      */
-    public Booking(String bookingID, String userID, String movieID, String hallID, String cinemaID, String date, String time, double price){
+    public Booking(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time,  ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
         this.bookingID = bookingID;
         this.userID = userID;
         this.movieID = movieID;
-        this.hallID = hallID;
+        this.screenID = screenID;
         this.cinemaID = cinemaID;
         this.date = date;
         this.time = time;
-        this.price = price;
+        this.bookingAmount = bookingAmount;
+        int numTickets = seatIds.size();
+        for (int i=0; i<numTickets; i++)
+        {
+            this.tickets.add(new Ticket(movieID, userID, screenID, date, seatIds.get(i) , -1, bookingID , holidayManager, movieMgr));
+        }
+        if (this.bookingAmount == -1) {         // prime methods would always have bookingAmount
+            this.bookingAmount = this.computeBookingAmout();
+        }
     }
 
-    
     /** 
      * The method returns the Booking ID
      * 
@@ -77,8 +90,8 @@ public class Booking {
      * 
      * @return Hall ID
      */
-    public String getHallID() {
-        return hallID;
+    public String getScreenID() {
+        return screenID;
     }
 
     
@@ -112,12 +125,26 @@ public class Booking {
     }
 
     
+    /**
+     * @return Tickets
+     */
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
+    
     /** 
      * The method returns the total price of the tickets
      * 
-     * @return Price
+     * @return Booking Amount
      */
-    public double getPrice() {
-        return price;
+    public double getBookingAmount() {
+        return bookingAmount;
+    }
+    public double computeBookingAmout() {
+        double bookingAmout=0;
+        for (Ticket ticket : this.tickets) {  
+            bookingAmout += ticket.getPrice();   
+        }
+        return bookingAmout;
     }
 }
