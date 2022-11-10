@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 
-public class Show {
+public class ShowEY {
 	private String showID;
 	private String showDate;
 	private String showTime;
 	private String screenID;
 	private String movieID;
-	private Screen screen;
-	private Movie movie;
+	private ScreenEY screen;
+	private MovieEY movie;
 	private int emptySeats;
 	private int numberOfRows;
 	private int seatsPerRow;
-	private ArrayList<ShowSeat> showSeats;
+	private ArrayList<ShowSeatEY> showSeats;
 
 	private MovieManager movieMgr;
 	private ScreenManager screenMgr;
@@ -23,7 +23,7 @@ public class Show {
 	 * @param showDate
 	 * @param showTime
 	 */
-	public Show(String showID, String movieID, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, ScreenManager screenMgr) {
+	public ShowEY(String showID, String movieID, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, ScreenManager screenMgr) {
 		// TODO - implement Show.Show
 		// Managers
 		this.movieMgr = movieMgr;
@@ -47,10 +47,10 @@ public class Show {
 		this.movie = this.movieMgr.getMovieByID(movieID);
 		this.screenID=screenID;
 		this.screen = this.screenMgr.getScreenByID(screenID);
-		ArrayList<Seat> seats= screen.getSeatLayout(); 
+		ArrayList<SeatEY> seats= screen.getSeatLayout();
 		for (int i=0;i<seats.size();i++){
-			Seat seat=seats.get(i);
-			ShowSeat showSeat= new ShowSeat(seat.getSeatID(), seat.getSeatRow(), seat.getSeatNumber(), seat.getSeatType());
+			SeatEY seat=seats.get(i);
+			ShowSeatEY showSeat= new ShowSeatEY(seat.getSeatID(), seat.getSeatRow(), seat.getSeatNumber(), seat.getSeatType());
 			showSeats.add(showSeat);
 		}
 
@@ -75,10 +75,10 @@ public class Show {
 	public String getScreenID() {
 		return screenID;
 	}
-	public Screen getScreen() {
+	public ScreenEY getScreen() {
 		return screen;
 	}
-	public Movie getMovie() {
+	public MovieEY getMovie() {
 		return movie;
 	}
 
@@ -93,7 +93,7 @@ public class Show {
 		return this.emptySeats;
 	}
 
-	public ArrayList<ShowSeat> getSeatLayout() {
+	public ArrayList<ShowSeatEY> getSeatLayout() {
 		return showSeats;
 	}
 
@@ -123,7 +123,7 @@ public class Show {
 
 		printRowString="";
 		for (int i=0;i<showSeats.size();i++){
-			ShowSeat showSeat=showSeats.get(i);
+			ShowSeatEY showSeat=showSeats.get(i);
 			if (showSeat.getSeatNumber()==1){
 				System.out.println(printRowString+"\n");
 				String RowString=showSeat.getSeatRow();

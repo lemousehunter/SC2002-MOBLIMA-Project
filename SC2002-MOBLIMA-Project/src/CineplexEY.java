@@ -11,13 +11,13 @@ import java.util.UUID;
  * 
  */
 
-public class Cineplex {
+public class CineplexEY {
 
 	private String cineplexID;
 	private String name;
 	private String location;
 	private ArrayList<String> screenID;
-	private ArrayList<Screen> masterScreens;
+	private ArrayList<ScreenEY> masterScreens;
 	
 	/**
 	 * Cineplex Constructor
@@ -26,7 +26,7 @@ public class Cineplex {
 	 * @param name The cineplex name
 	 * @param location The location of the cineplex
 	 */
-	public Cineplex(String cineplexID, String name, String location, ArrayList<String>  screenID) {
+	public CineplexEY(String cineplexID, String name, String location, ArrayList<String>  screenID) {
 		// Attributes
 		if (cineplexID.isEmpty()) {
 			this.cineplexID = UUID.randomUUID().toString();
@@ -45,7 +45,7 @@ public class Cineplex {
 	 * 
 	 * @param masterScreens The master arraylist of all the screens
 	 */
-	public void setMasterScreens(ArrayList<Screen> masterScreens) {
+	public void setMasterScreens(ArrayList<ScreenEY> masterScreens) {
 		this.masterScreens = masterScreens;
 	}
 
@@ -55,7 +55,7 @@ public class Cineplex {
 	 * 
 	 * @param screen An object of class Screen
 	 */
-	public void addScreenID(Screen screen) {
+	public void addScreenID(ScreenEY screen) {
 		this.screenID.add(screen.getScreenID());
 		masterScreens.add(screen);
 	}
@@ -149,7 +149,7 @@ public class Cineplex {
 	public ArrayList<String> getScreenNames() {
 		ArrayList<String> screenNames = new ArrayList<String>();
 		for(String screenid: screenID) {
-			for(Screen screen: masterScreens) {
+			for(ScreenEY screen: masterScreens) {
 				if(screenid.equals(screen.getScreenID())) {
 					screenNames.add(screen.getScreenName());
 					break;

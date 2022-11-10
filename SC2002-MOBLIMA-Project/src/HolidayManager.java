@@ -7,13 +7,14 @@ import java.util.*;
 public class HolidayManager implements Manager {
 
   private ArrayList<User> masterUserList;
-  private ArrayList<Cineplex> masterCineplexes;
-  private ArrayList<Screen> masterScreens;
-  private ArrayList<Booking> masterBookings;
-  private ArrayList<Show> masterShows;
-  private ArrayList<Movie> masterMovies;
+  private ArrayList<CineplexEY> masterCineplexes;
+  private ArrayList<ScreenEY> masterScreens;
+  private ArrayList<BookingEY> masterBookings;
+  private ArrayList<ShowEY> masterShows;
+  private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ViewerRatings> masterRatings;
+  private ArrayList<ReviewE> masterRatings;
+  private ArrayList<ShowSeatEY> masterShowSeats;
 
   public HolidayManager() {
   }
@@ -21,13 +22,14 @@ public class HolidayManager implements Manager {
   @Override
   public void setMasterLists(
     ArrayList<User> masterUserList,
-    ArrayList<Cineplex> masterCineplexes,
-    ArrayList<Screen> masterScreens,
-    ArrayList<Booking> masterBookings,
-    ArrayList<Show> masterShows,
-    ArrayList<Movie> masterMovies,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings
+    ArrayList<ReviewE> masterRatings,
+    ArrayList<ShowSeatEY> masterShowSeats
   ) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
@@ -37,6 +39,7 @@ public class HolidayManager implements Manager {
     this.masterMovies = masterMovies;
     this.masterHolidaysList = masterHolidaysList;
     this.masterRatings = masterRatings;
+    this.masterShowSeats = masterShowSeats;
 
   }
  

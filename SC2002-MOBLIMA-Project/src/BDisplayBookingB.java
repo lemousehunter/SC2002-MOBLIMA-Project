@@ -15,7 +15,7 @@ public class BDisplayBookingB extends Boundary implements DisplayItemB {
 
     @Override
     public void show(String bookingID) {
-        Booking booking = this.bookingMgr.getBookingByID(bookingID);
+        BookingEY booking = this.bookingMgr.getBookingByID(bookingID);
         this.println("================================");
         this.println("Booking: " + bookingID);
         this.println("--------------------------------");

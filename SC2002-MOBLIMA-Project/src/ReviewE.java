@@ -10,13 +10,13 @@ import java.util.*;
  * 
  */
 
-public class ViewerRatings {
+public class ReviewE {
 
 	private String review;
 	private double scale;
 	private String userID;
 	private String movieID;
-	String viewerRatingID;
+	String reviewID;
 	
 	
 	/**
@@ -25,12 +25,12 @@ public class ViewerRatings {
 	 * @param scale The rating being given to the movie
 	 * @param review The review being given to the movie
 	 */
-	public ViewerRatings(String userID, String movieID,  double scale, String review) {
+	public ReviewE(String userID, String movieID, double scale, String review) {
 		this.userID=userID;
 		this.movieID=movieID;
 		this.review=review;	
 		this.scale=scale;
-		viewerRatingID=UUID.randomUUID().toString();
+		reviewID =UUID.randomUUID().toString();
 	}
 	/**
 	 * @param viewerRatingID The ID of the rating
@@ -39,12 +39,12 @@ public class ViewerRatings {
 	 * @param scale The rating being given to the movie
 	 * @param review The review being given to the movie
 	 */
-	public ViewerRatings(String viewerRatingID,String userID, String movieID,  double scale, String review) {
+	public ReviewE(String viewerRatingID, String userID, String movieID, double scale, String review) {
 		this.userID=userID;
 		this.movieID=movieID;
 		this.review=review;	
 		this.scale=scale;
-		this.viewerRatingID=viewerRatingID;
+		this.reviewID =viewerRatingID;
 	}
 
 	
@@ -101,7 +101,7 @@ public class ViewerRatings {
 		 */
 		public String getViewerRatingId()
 		{
-			return viewerRatingID;
+			return reviewID;
 
 		}
 }

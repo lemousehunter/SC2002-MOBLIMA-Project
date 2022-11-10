@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
-public class MovieGoer extends User{
+public class MovieGoerEY extends User{
     public final String email;
     public final Integer mobileNumber;
     public final Integer age;
     public final ArrayList<String> bookings;
 
 
-    private MovieGoerAge ageType;
+    private MovieGoerAgeEN ageType;
 
-    public MovieGoer(String userID, String name, String email, Integer mobileNumber, Integer age, ArrayList<String> bookings)
+    public MovieGoerEY(String userID, String name, String email, Integer mobileNumber, Integer age, ArrayList<String> bookings)
     {
         super(UserType.MOVIEGOER, name);
         this.email = email;
@@ -17,15 +17,15 @@ public class MovieGoer extends User{
         this.age = age;
         this.setUserID(userID);
         if(age<=5){
-            this.ageType = MovieGoerAge.CHILD;
+            this.ageType = MovieGoerAgeEN.CHILD;
         }
         else if(age>5 && age<=21){
-            this.ageType = MovieGoerAge.STUDENT;
+            this.ageType = MovieGoerAgeEN.STUDENT;
         }
         else if(age>21 && age<=59)
-            this.ageType = MovieGoerAge.ADULT;
+            this.ageType = MovieGoerAgeEN.ADULT;
         else
-            this.ageType = MovieGoerAge.SENIOR;
+            this.ageType = MovieGoerAgeEN.SENIOR;
         this.bookings=bookings;
 
     }

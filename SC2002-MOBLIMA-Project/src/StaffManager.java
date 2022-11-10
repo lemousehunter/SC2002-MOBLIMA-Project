@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class StaffManager implements Manager {
 
   private ArrayList<User> masterUserList;
-  private ArrayList<Cineplex> masterCineplexes;
-  private ArrayList<Screen> masterScreens;
-  private ArrayList<Booking> masterBookings;
-  private ArrayList<Show> masterShows;
-  private ArrayList<Movie> masterMovies;
+  private ArrayList<CineplexEY> masterCineplexes;
+  private ArrayList<ScreenEY> masterScreens;
+  private ArrayList<BookingEY> masterBookings;
+  private ArrayList<ShowEY> masterShows;
+  private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ViewerRatings> masterRatings;
+  private ArrayList<ReviewE> masterRatings;
 
   private CineplexManager cineplexManager;
   private ScreenManager screenManager;
@@ -36,13 +35,13 @@ public class StaffManager implements Manager {
   @Override
   public void setMasterLists(
     ArrayList<User> masterUserList,
-    ArrayList<Cineplex> masterCineplexes,
-    ArrayList<Screen> masterScreens,
-    ArrayList<Booking> masterBookings,
-    ArrayList<Show> masterShows,
-    ArrayList<Movie> masterMovies,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings
+    ArrayList<ReviewE> masterRatings
   ) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;

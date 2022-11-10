@@ -61,10 +61,10 @@ public class ScreenBoundary {
         return seatsPerRow;    
     }
 
-    public void printAllScreens(ArrayList<Screen> masterScreens) {
+    public void printAllScreens(ArrayList<ScreenEY> masterScreens) {
         System.out.println("\n---------------------------X---------------------------\n");
         System.out.println("\nScreen List :  \n ");
-        for(Screen s: masterScreens) {
+        for(ScreenEY s: masterScreens) {
               System.out.println(s.viewDetails());
         }
         System.out.println("\n---------------------------X---------------------------\n");
@@ -94,7 +94,7 @@ public class ScreenBoundary {
     }
 
 
-    public void printScreenFoundMessaage(Screen matchingScreen) {
+    public void printScreenFoundMessaage(ScreenEY matchingScreen) {
         System.out.println("\nScreen " + String.format("| %-20s",matchingScreen.getScreenName())  + String.format("| %-22s |",matchingScreen.getScreenClass().toString()) + " #Rows = " + Integer.toString(matchingScreen.getNumberOfRows()) + " ; #Seats per Row = " + Integer.toString(matchingScreen.getSeatsPerRow()) );
 
     }

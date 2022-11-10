@@ -8,7 +8,7 @@ public class MovieBoundary {
     }
 
     public void viewMovieDetails(String movieID) {
-        Movie movie = this.movieMgr.getMovieByID(movieID);
+        MovieEY movie = this.movieMgr.getMovieByID(movieID);
         System.out.println("Movie Name: " + movie.getName());
         System.out.println("Movie Status: " + movie.getShowStatus());
         System.out.println("Movie Type: " + movie.getMovieType().toString());
@@ -18,7 +18,7 @@ public class MovieBoundary {
         System.out.println("Director: " + movie.getDirector());
         System.out.println("Cast: " + movie.getCast());
 
-        for(ViewerRatings vr: this.reviewMgr.getMasterRatings())
+        for(ReviewE vr: this.reviewMgr.getMasterRatings())
         {
             if(vr.getMovieId().equals(movieID))
             {
@@ -44,12 +44,12 @@ public class MovieBoundary {
         int count = 1;
         System.out.println("List of Movies:");
         if (currentlyShowing) {
-            for(Movie m: this.movieMgr.getCurrentMovies()) {
+            for(MovieEY m: this.movieMgr.getCurrentMovies()) {
                 System.out.println(count + ": " + m.getName() + " - " + m.getShowStatus());
             }
         }
         else {
-            for(Movie m: this.movieMgr.getMasterList()) {
+            for(MovieEY m: this.movieMgr.getMasterList()) {
                 System.out.println(count + ": " + m.getName() + " - " + m.getShowStatus());
             }
         }

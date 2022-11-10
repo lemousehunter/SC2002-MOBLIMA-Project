@@ -2,7 +2,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Ticket {
+public class TicketEY {
     private MovieManager movieMgr;
     private double price;
     private String movieID;
@@ -24,7 +24,7 @@ public class Ticket {
      * @param screenID
      * @param time
      */
-    public Ticket(String movieID, String userID, String screenID, String date, String time, String seatId, double price, String  bookingID, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
+    public TicketEY(String movieID, String userID, String screenID, String date, String time, String seatId, double price, String  bookingID, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
         // Passing in controller instances from MainApp
         this.movieMgr = movieMgr;
         this.movieGoerMgr = new MovieGoerManager();
@@ -85,11 +85,11 @@ public class Ticket {
         Date time = sdf.parse(this.time);
         boolean isBefore6 = (time.before(sdf.parse("18:00")));
 
-        Movie movie = this.movieMgr.getMovieByID(this.movieID);
-        Screen screen = this.screenMgr.getScreenByID(this.screenID);
+        MovieEY movie = this.movieMgr.getMovieByID(this.movieID);
+        ScreenEY screen = this.screenMgr.getScreenByID(this.screenID);
         boolean HallType = screen.getBooleanScreenType(); // 1: Premium Hall, 0: Regular Hall
 
-        MovieGoer movieGoer = movieGoerMgr.getUserByID(this.userID);
+        MovieGoerEY movieGoer = movieGoerMgr.getUserByID(this.userID);
 
         String movieGoerAge = movieGoer.getAgeType(); // 1: discounted price, 0: normal price
 
@@ -115,10 +115,10 @@ public class Ticket {
             price *= 2; // double price for premium halls
         }
 
-        if(movieGoerAge.equals(MovieGoerAge.STUDENT.toString()) || movieGoerAge.equals(MovieGoerAge.SENIOR.toString())){
+        if(movieGoerAge.equals(MovieGoerAgeEN.STUDENT.toString()) || movieGoerAge.equals(MovieGoerAgeEN.SENIOR.toString())){
             price *= 0.5; // half price for students and seniors
         }
-        if(movieGoerAge.equals(MovieGoerAge.CHILD.toString())){
+        if(movieGoerAge.equals(MovieGoerAgeEN.CHILD.toString())){
             price = 0; // FOC entrance for children
         }
 

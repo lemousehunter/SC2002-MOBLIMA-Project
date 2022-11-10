@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * 
  */
 
-public class Booking {
+public class BookingEY {
     private String bookingID;
     private String userID;
     private String movieID;
@@ -20,7 +20,7 @@ public class Booking {
     private String time;
     private ArrayList<String> seatIds;
     private double bookingAmount;
-    private ArrayList<Ticket> tickets;
+    private ArrayList<TicketEY> tickets;
 
 
     /**
@@ -36,7 +36,7 @@ public class Booking {
      * @param seatIds The SeatIds
      * @param bookingAmount The total price
      */
-    public Booking(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time,  ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
+    public BookingEY(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time, ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
         this.bookingID = bookingID;
         this.userID = userID;
         this.movieID = movieID;
@@ -48,7 +48,7 @@ public class Booking {
         int numTickets = seatIds.size();
         for (int i=0; i<numTickets; i++)
         {
-            this.tickets.add(new Ticket(movieID, userID, screenID, date, time, seatIds.get(i), -1, bookingID, holidayManager, movieMgr));
+            this.tickets.add(new TicketEY(movieID, userID, screenID, date, time, seatIds.get(i), -1, bookingID, holidayManager, movieMgr));
         }
         if (this.bookingAmount == -1) {         // prime methods would always have bookingAmount
             this.bookingAmount = this.computeBookingAmount();
@@ -128,7 +128,7 @@ public class Booking {
     /**
      * @return Tickets
      */
-    public ArrayList<Ticket> getTickets() {
+    public ArrayList<TicketEY> getTickets() {
         return tickets;
     }
     
@@ -142,7 +142,7 @@ public class Booking {
     }
     public double computeBookingAmount() {
         double bookingAmount=0;
-        for (Ticket ticket : this.tickets) {  
+        for (TicketEY ticket : this.tickets) {
             bookingAmount += ticket.getPrice();
         }
         return bookingAmount;

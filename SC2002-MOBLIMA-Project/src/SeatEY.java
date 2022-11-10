@@ -1,4 +1,4 @@
-public class Seat {
+public class SeatEY {
 	private String seatID;
 	private String seatRow;
 	private int seatNumber;
@@ -9,7 +9,7 @@ public class Seat {
 	 * @param seatNuber
 	 * @param seatType
 	 */
-	public Seat(String seatRow, int seatNumber, String seatType) {
+	public SeatEY(String seatRow, int seatNumber, String seatType) {
 		this.seatID=seatRow;
 		this.seatID=this.seatID.concat(Integer.toString(seatNumber));
 		this.seatRow = seatRow;
@@ -24,7 +24,7 @@ public class Seat {
 	 * @param seatType
 	 * 
 	 */
-	public Seat(String seatID, String seatRow, int seatNumber, String seatType) {
+	public SeatEY(String seatID, String seatRow, int seatNumber, String seatType) {
 		this.seatID=seatID;
 		this.seatRow = seatRow;
 		this.seatNumber = seatNumber;

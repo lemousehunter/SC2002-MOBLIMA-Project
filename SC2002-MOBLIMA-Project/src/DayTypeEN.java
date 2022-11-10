@@ -1,4 +1,4 @@
-public enum DayType {
+public enum DayTypeEN {
 	HOLIDAY,
 	WEEKDAY,
 	WEEKEND

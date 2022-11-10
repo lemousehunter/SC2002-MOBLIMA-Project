@@ -1,4 +1,4 @@
-public enum MovieGoerAge {
+public enum MovieGoerAgeEN {
 	ADULT,
 	SENIOR,
 	CHILD,

@@ -45,7 +45,7 @@ public class StaffApp {
          *
          * @param ticket
          */
-        public void setTicketPrices(Ticket ticket) {
+        public void setTicketPrices(TicketEY ticket) {
         // TODO - implement Staff.setTicketPrices
         throw new UnsupportedOperationException();
     }
@@ -80,7 +80,7 @@ public class StaffApp {
          *
          * @param movie
          */
-        public void updateMovie(Movie movie) {
+        public void updateMovie(MovieEY movie) {
         // TODO - implement Staff.updateMovie
         throw new UnsupportedOperationException();
     }
@@ -89,7 +89,7 @@ public class StaffApp {
          *
          * @param cineplex
          */
-        public void addCinePlex(Cineplex cineplex) {
+        public void addCinePlex(CineplexEY cineplex) {
         // TODO - implement Staff.addCinePlex
         throw new UnsupportedOperationException();
     }

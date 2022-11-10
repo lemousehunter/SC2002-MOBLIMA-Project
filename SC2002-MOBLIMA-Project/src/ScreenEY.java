@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Screen {
+public class ScreenEY {
 
 	
 	private String screenID;
 	private String screenName;
 	private int numberOfSeats;
-	private ScreenClass screenClass;
+	private ScreenClassEN screenClass;
 	private int numberOfRows;
 	private int seatsPerRow;
-	private ArrayList<Seat> seatLayout= new ArrayList<Seat>();
+	private ArrayList<SeatEY> seatLayout= new ArrayList<SeatEY>();
 
 	/**
 	 *
@@ -19,7 +19,7 @@ public class Screen {
 	 * @param numberOfRows
 	 * @param seatsPerRow
 	 */
-	public Screen(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow) {
+	public ScreenEY(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow) {
 		if (screenID.isEmpty()) {
 			this.screenID = UUID.randomUUID().toString();
 		}
@@ -27,7 +27,7 @@ public class Screen {
 			this.screenID = screenID;
 		}
 		this.screenName=screenName;
-		this.screenClass= ScreenClass.valueOf(screenClass);
+		this.screenClass= ScreenClassEN.valueOf(screenClass);
 		this.numberOfRows=numberOfRows;
 		this.seatsPerRow=seatsPerRow;
 		this.numberOfSeats=numberOfRows*seatsPerRow;
@@ -49,29 +49,29 @@ public class Screen {
 				else{
 					seatType="REGULAR";
 				}
-				Seat seat=new Seat(seatID, seatRow, seatNumber, seatType);
+				SeatEY seat=new SeatEY(seatID, seatRow, seatNumber, seatType);
 				this.seatLayout.add(seat);
 			}
 			
 		}
 
 	}
-	public Screen(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow,ArrayList<Seat> seatLayout) {
+	public ScreenEY(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow, ArrayList<SeatEY> seatLayout) {
 		this.screenID = screenID;
 		this.screenName=screenName;
-		this.screenClass= ScreenClass.valueOf(screenClass);
+		this.screenClass= ScreenClassEN.valueOf(screenClass);
 		this.numberOfRows=numberOfRows;
 		this.seatsPerRow=seatsPerRow;
 		this.numberOfSeats=numberOfRows*seatsPerRow;
 		this.seatLayout=seatLayout;
 	}
 
-	public ScreenClass getScreenType() {
+	public ScreenClassEN getScreenType() {
 		return this.screenClass;
 	}
 
 	public Boolean getBooleanScreenType() {
-		ScreenClass sc = this.getScreenType();
+		ScreenClassEN sc = this.getScreenType();
 		if (this.screenClass.equals(sc))
 		{
 			return true;
@@ -99,11 +99,11 @@ public class Screen {
 		this.numberOfSeats = numberOfSeats;
 	}
 
-	public ScreenClass getScreenClass() {
+	public ScreenClassEN getScreenClass() {
 		return screenClass;
 	}
 
-	public void setScreenClass(ScreenClass screenClass) {
+	public void setScreenClass(ScreenClassEN screenClass) {
 		this.screenClass = screenClass;
 	}
 
@@ -123,7 +123,7 @@ public class Screen {
 		this.seatsPerRow = seatsPerRow;
 	}
 
-	public ArrayList<Seat> getSeatLayout() {
+	public ArrayList<SeatEY> getSeatLayout() {
 		return seatLayout;
 	}
 

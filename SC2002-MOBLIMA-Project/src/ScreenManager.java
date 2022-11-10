@@ -1,16 +1,14 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
 
 public class ScreenManager implements Manager {
 	private ArrayList<User> masterUserList;
-    private ArrayList<Cineplex> masterCineplexes;
-    private ArrayList<Screen> masterScreens;
-    private ArrayList<Booking> masterBookings;
-    private ArrayList<Show> masterShows;
-    private ArrayList<Movie> masterMovies;
+    private ArrayList<CineplexEY> masterCineplexes;
+    private ArrayList<ScreenEY> masterScreens;
+    private ArrayList<BookingEY> masterBookings;
+    private ArrayList<ShowEY> masterShows;
+    private ArrayList<MovieEY> masterMovies;
     private ArrayList<String> masterHolidaysList;
-    private ArrayList<ViewerRatings> masterRatings;
+    private ArrayList<ReviewE> masterRatings;
     private ScreenBoundary screenIO;
 
 	public ScreenManager() {
@@ -20,13 +18,13 @@ public class ScreenManager implements Manager {
 	@Override
     public void setMasterLists(
     ArrayList<User> masterUserList,
-    ArrayList<Cineplex> masterCineplexes,
-    ArrayList<Screen> masterScreens,
-    ArrayList<Booking> masterBookings,
-    ArrayList<Show> masterShows,
-    ArrayList<Movie> masterMovies,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings) {
+    ArrayList<ReviewE> masterRatings) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;
@@ -37,8 +35,8 @@ public class ScreenManager implements Manager {
     this.masterRatings = masterRatings;
   }
 
-	    public Screen getScreenByID(String screenID) {
-	        for(Screen s:this.masterScreens) {
+	    public ScreenEY getScreenByID(String screenID) {
+	        for(ScreenEY s:this.masterScreens) {
 	            if(screenID.equals(s.getScreenID()))
 	                return s;
 	            else
@@ -56,7 +54,7 @@ public class ScreenManager implements Manager {
 			String cineplexID = "";
 			
 			boolean cineplexFound = false;
-			for(Cineplex c: masterCineplexes) {
+			for(CineplexEY c: masterCineplexes) {
 				if(c.getName().equals(cineplex))
 				{
 					cineplexFound = true;
@@ -68,7 +66,7 @@ public class ScreenManager implements Manager {
 				return;
 			}
 	
-			for(Screen s: masterScreens) {
+			for(ScreenEY s: masterScreens) {
 				if(s.getScreenName().equalsIgnoreCase(name))
 				{
 					screenIO.printScreenDuplicateError();
@@ -76,7 +74,7 @@ public class ScreenManager implements Manager {
 				}
 			}
 			 
-			Screen s=new Screen(cineplexID,name,screenClass,numRows,seatsPerRow);
+			ScreenEY s=new ScreenEY(cineplexID,name,screenClass,numRows,seatsPerRow);
 			masterScreens.add(s);
 			screenIO.printAddScreenSuccessMessaage();
 
@@ -103,8 +101,8 @@ public class ScreenManager implements Manager {
 			String name=screenIO.setScreen();
 	
 			boolean screenFound = false;
-			Screen matchingScreen=null;
-			for(Screen s: masterScreens) {
+			ScreenEY matchingScreen=null;
+			for(ScreenEY s: masterScreens) {
 				if(s.getScreenName().equalsIgnoreCase(name))
 				{
 					screenFound=true;

@@ -5,29 +5,29 @@ import java.util.UUID;
 public class MovieManager implements Manager{
 
     static Scanner sc = new Scanner(System.in);
-    private MovieType movieType;
-    private MovieRating movieRating;
+    private MovieTypeEN movieType;
+    private MovieRatingEN movieRating;
     private ShowStatus showStatus;
     private ArrayList<User> masterUserList;
-    private ArrayList<Cineplex> masterCineplexes;
-    private ArrayList<Screen> masterScreens;
-    private ArrayList<Booking> masterBookings;
-    private ArrayList<Show> masterShows;
-    private ArrayList<Movie> masterMovies;
+    private ArrayList<CineplexEY> masterCineplexes;
+    private ArrayList<ScreenEY> masterScreens;
+    private ArrayList<BookingEY> masterBookings;
+    private ArrayList<ShowEY> masterShows;
+    private ArrayList<MovieEY> masterMovies;
     private ArrayList<String> masterHolidaysList;
-    private ArrayList<ViewerRatings> masterRatings;
+    private ArrayList<ReviewE> masterRatings;
 
     
     @Override
     public void setMasterLists(
     ArrayList<User> masterUserList,
-    ArrayList<Cineplex> masterCineplexes,
-    ArrayList<Screen> masterScreens,
-    ArrayList<Booking> masterBookings,
-    ArrayList<Show> masterShows,
-    ArrayList<Movie> masterMovies,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings) {
+    ArrayList<ReviewE> masterRatings) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;
@@ -37,8 +37,8 @@ public class MovieManager implements Manager{
     this.masterHolidaysList = masterHolidaysList;
     this.masterRatings = masterRatings;
   }
-    public Movie getMovieByID(String movieID) {
-        for(Movie m: masterMovies) {
+    public MovieEY getMovieByID(String movieID) {
+        for(MovieEY m: masterMovies) {
             if(movieID.equals(m.getMovieID()))
                 return m;
             else
@@ -57,25 +57,25 @@ public class MovieManager implements Manager{
         int ch1 = sc.nextInt();
         switch(ch1)
         {
-            case 1: movieType = MovieType.BLOCKBUSTER;
+            case 1: movieType = MovieTypeEN.BLOCKBUSTER;
             break;
-            case 2: movieType = MovieType.THREEDIMENSION;
+            case 2: movieType = MovieTypeEN.THREEDIMENSION;
             break;
-            case 3: movieType = MovieType.DOCUMENTARY;
+            case 3: movieType = MovieTypeEN.DOCUMENTARY;
         }
         System.out.println("Enter Movie Rating: 1 - G, 2 - PG, 3 - PG-13, 4 - R, 5 - X");
         int ch2 = sc.nextInt();
         switch(ch2)
         {
-            case 1: movieRating = MovieRating.G;
+            case 1: movieRating = MovieRatingEN.G;
             break;
-            case 2: movieRating = MovieRating.PG;
+            case 2: movieRating = MovieRatingEN.PG;
             break;
-            case 3: movieRating = MovieRating.PG13;
+            case 3: movieRating = MovieRatingEN.PG13;
             break;
-            case 4: movieRating = MovieRating.R;
+            case 4: movieRating = MovieRatingEN.R;
             break;
-            case 5: movieRating = MovieRating.X;
+            case 5: movieRating = MovieRatingEN.X;
         }
         System.out.println("Enter Show Status: 1 - Coming Soon, 2 - Preview, 3 - Showing, 4 - End of Showing");
         int ch3 = sc.nextInt();
@@ -106,16 +106,16 @@ public class MovieManager implements Manager{
         
         ArrayList<String> ratingsID = new ArrayList<String>();
         
-        Movie movie = new Movie(movieID, name, movieLanguage, movieType.toString(), movieRating, showStatus, synopsis, director, cast, ratingsID);
+        MovieEY movie = new MovieEY(movieID, name, movieLanguage, movieType.toString(), movieRating, showStatus, synopsis, director, cast, ratingsID);
         movie.setReviews(masterRatings);
         masterMovies.add(movie);
     }
 
-    public ArrayList<Movie> getMasterList() {
+    public ArrayList<MovieEY> getMasterList() {
         return masterMovies;
     }
 
-    public void updateMovie(Movie movie) {
+    public void updateMovie(MovieEY movie) {
         System.out.println("The current status of the Movie is " + movie.getShowStatus());
         System.out.println("Enter 1 for Coming Soon, 2 for Preview, 3 for Showing, 4 for End of Showing");
         int ch = sc.nextInt();
@@ -133,7 +133,7 @@ public class MovieManager implements Manager{
         }
     }
 
-    public void removeMovie(Movie movie)
+    public void removeMovie(MovieEY movie)
     {
         movie.setShowStatus(ShowStatus.ENDOFSHOWING);
     }
@@ -141,7 +141,7 @@ public class MovieManager implements Manager{
     public void searchMovie() {
         System.out.println("Enter the movie name you want to search for: ");
         String user_input = sc.nextLine();
-        for(Movie m: masterMovies) {
+        for(MovieEY m: masterMovies) {
             if(m.getName().equalsIgnoreCase(user_input)) {
                 System.out.println("Movie Found!");
                 System.out.println(m.getName() + " - " + m.getShowStatus());
@@ -152,9 +152,9 @@ public class MovieManager implements Manager{
         }
     }
 
-    public ArrayList<Movie> getCurrentMovies() {
-        ArrayList<Movie> movies = new ArrayList<Movie>();
-        for (Movie movie: masterMovies) {
+    public ArrayList<MovieEY> getCurrentMovies() {
+        ArrayList<MovieEY> movies = new ArrayList<MovieEY>();
+        for (MovieEY movie: masterMovies) {
             if (movie.getShowStatus() == ShowStatus.SHOWING) {
                 movies.add(movie);
             }

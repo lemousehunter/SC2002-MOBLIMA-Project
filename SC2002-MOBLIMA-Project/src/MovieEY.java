@@ -10,22 +10,22 @@ import java.util.*;
  * 
  */
 
-public class Movie {
+public class MovieEY {
 
 	private String movieID;
 	private String name;
 	private String movieLanguage;
-	private MovieType movieType;
-	private MovieRating movieRating;
+	private MovieTypeEN movieType;
+	private MovieRatingEN movieRating;
 	private ShowStatus showStatus;
 	private String synopsis;
 	private String director;
 	private ArrayList<String> cast;
 	private ArrayList<String> ratingsID;
-	private ArrayList<ViewerRatings> reviews;
+	private ArrayList<ReviewE> reviews;
 	
 
-	public void setReviews(ArrayList<ViewerRatings> reviews) {
+	public void setReviews(ArrayList<ReviewE> reviews) {
 		this.reviews = reviews;
 	}
 
@@ -44,11 +44,11 @@ public class Movie {
 	 * @param cast The cast of the movie
 	 * @param ratingsID The ratings given by users to the movie
 	 */
-	public Movie(String movieID, String name, String movieLanguage, String movieType, MovieRating movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
+	public MovieEY(String movieID, String name, String movieLanguage, String movieType, MovieRatingEN movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
 		this.movieID = movieID;
 		this.name = name;
 		this.movieLanguage = movieLanguage;
-		this.movieType = MovieType.valueOf(movieType);
+		this.movieType = MovieTypeEN.valueOf(movieType);
 		this.movieRating = movieRating;
 		this.showStatus = showStatus;
 		this.synopsis = synopsis;
@@ -142,7 +142,7 @@ public class Movie {
 	 * 
 	 * @return The type of the movie
 	 */
-	public MovieType getType() {
+	public MovieTypeEN getType() {
 		return this.movieType;
 	}
 	/**
@@ -151,7 +151,7 @@ public class Movie {
 	 * @return The boolean type of the movie
 	 */
 	public Boolean getBoolType() {
-		return this.movieType.equals(MovieType.BLOCKBUSTER) || this.movieType.equals(MovieType.THREEDIMENSION);
+		return this.movieType.equals(MovieTypeEN.BLOCKBUSTER) || this.movieType.equals(MovieTypeEN.THREEDIMENSION);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class Movie {
 	 * 
 	 * @param type The type of the movie
 	 */
-	public void setType(MovieType type) {
+	public void setType(MovieTypeEN type) {
 		this.movieType = type;
 	}
 
@@ -169,7 +169,7 @@ public class Movie {
 	 * 
 	 * @return The movie rating
 	 */
-	public MovieRating getMovieRating() {
+	public MovieRatingEN getMovieRating() {
 		return this.movieRating;
 	}
 
@@ -178,7 +178,7 @@ public class Movie {
 	 * 
 	 * @param movieRating The new rating of the movie
 	 */
-	public void setMovieRating(MovieRating movieRating) {
+	public void setMovieRating(MovieRatingEN movieRating) {
 		this.movieRating = movieRating;
 	}
 
@@ -280,7 +280,7 @@ public class Movie {
 		this.ratingsID.add(ratingsID);
 	}
 
-	public MovieType getMovieType() {
+	public MovieTypeEN getMovieType() {
 		return movieType;
 	}
 }

@@ -1,4 +1,4 @@
-public enum RatingScale {
+public enum RatingScaleEN {
 	ONE,
 	TWO,
 	THREE,

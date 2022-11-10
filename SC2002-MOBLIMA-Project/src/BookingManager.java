@@ -10,32 +10,32 @@ public class BookingManager implements Manager {
   private final MovieManager movieMgr;
 
   private final HashMap<String, ArrayList<String>> bookingUserDict; // {User: [BookingID1, BookingID2]}
-  private final Hashtable<String, Booking> bookingIDDict; // {bookingID: Booking}
-  private Ticket ticket;
+  private final Hashtable<String, BookingEY> bookingIDDict; // {bookingID: Booking}
+  private TicketEY ticket;
   private final HolidayManager holidayManager;
   private ArrayList<User> masterUserList;
-  private ArrayList<Cineplex> masterCineplexes;
-  private ArrayList<Screen> masterScreens;
-  private ArrayList<Booking> masterBookings;
-  private ArrayList<Show> masterShows;
-  private ArrayList<Movie> masterMovies;
+  private ArrayList<CineplexEY> masterCineplexes;
+  private ArrayList<ScreenEY> masterScreens;
+  private ArrayList<BookingEY> masterBookings;
+  private ArrayList<ShowEY> masterShows;
+  private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ViewerRatings> masterRatings;
-  private ArrayList<ShowSeat> masterShowSeats;
+  private ArrayList<ReviewE> masterRatings;
+  private ArrayList<ShowSeatEY> masterShowSeats;
   private SeatManager seatMgr;
 
 
   @Override
   public void setMasterLists(
     ArrayList<User> masterUserList,
-    ArrayList<Cineplex> masterCineplexes,
-    ArrayList<Screen> masterScreens,
-    ArrayList<Booking> masterBookings,
-    ArrayList<Show> masterShows,
-    ArrayList<Movie> masterMovies,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings,
-    ArrayList<ShowSeat> masterShowSeats
+    ArrayList<ReviewE> masterRatings,
+    ArrayList<ShowSeatEY> masterShowSeats
   ) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
@@ -51,14 +51,14 @@ public class BookingManager implements Manager {
   public BookingManager(MovieManager movieMgr, HolidayManager holidayManager, SeatManager seatMgr) {
     this.count = 0; // to ensure that all booking IDs are unique
     this.bookingUserDict = new HashMap<String, ArrayList<String>>();
-    this.bookingIDDict = new Hashtable<String, Booking>();
+    this.bookingIDDict = new Hashtable<String, BookingEY>();
     this.movieMgr = movieMgr;
     this.holidayManager = holidayManager;
     this.seatMgr = seatMgr;
     this.initializeHashMaps();
   }
 
-  public Booking getBookingByID(String bookingID) {
+  public BookingEY getBookingByID(String bookingID) {
     return this.bookingIDDict.get(bookingID);
   }
 
@@ -70,7 +70,7 @@ public class BookingManager implements Manager {
     }
     ArrayList<String> user_booking_lst;
     if (this.masterBookings != null) {
-      for (Booking booking : this.masterBookings) {
+      for (BookingEY booking : this.masterBookings) {
         user_booking_lst = this.bookingUserDict.get(booking.getUserID());
         user_booking_lst.add(booking.getBookingID());
         this.bookingIDDict.put(booking.getBookingID(), booking);
@@ -87,7 +87,7 @@ public class BookingManager implements Manager {
 
   public String BookTicket( String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
     String BookingID = genBookingID(userID);
-    Booking booking = new Booking(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayManager, this.movieMgr);
+    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayManager, this.movieMgr);
     ArrayList<String> bookingList = this.bookingUserDict.get(userID);
     if (bookingList == null) { // initializes user list if not exist in hashmap
       bookingList = new ArrayList<String>();
@@ -100,7 +100,7 @@ public class BookingManager implements Manager {
 
     for (User user : masterUserList){
         if (user.getUserID().equals(userID)){
-            MovieGoer movieGoer = (MovieGoer) user;
+            MovieGoerEY movieGoer = (MovieGoerEY) user;
             movieGoer.addBookingID(BookingID);
         }
     }
@@ -132,7 +132,7 @@ public class BookingManager implements Manager {
     Hashtable<String, Double> costDict = new Hashtable<String, Double>(); // costDict[MovieID]
     masterMovies.forEach((movie) -> costDict.put(movie.getMovieID(), 0.0)); // initialize costDict with all movieIDs,0.0 in masterMovies
     for (String bookingID : bookingIDDict.keySet()) { // for all bookings
-      Booking booking = this.getBookingByID(bookingID);
+      BookingEY booking = this.getBookingByID(bookingID);
       Double cost = booking.getBookingAmount(); // get cost of booking
       cost += costDict.get(booking.getMovieID()); // update cost var with running total
       costDict.put(booking.getMovieID(), cost); // write cost back to costDict
@@ -171,11 +171,11 @@ public class BookingManager implements Manager {
   }
 
   public ArrayList<String> getListOfSeats (String bookingID){
-    ArrayList<Ticket> tickets = getBookingByID(bookingID).getTickets();
+    ArrayList<TicketEY> tickets = getBookingByID(bookingID).getTickets();
     ArrayList<String> seats = new ArrayList<String>();
-    for (Ticket ticket: tickets) {
+    for (TicketEY ticket: tickets) {
       String seatID = ticket.getSeatId();
-      Seat seat = this.seatMgr.getSeatByID(seatID);
+      SeatEY seat = this.seatMgr.getSeatByID(seatID);
       String seatNumber = String.valueOf(seat.getSeatNumber());
       String rowNumber = seat.getSeatRow();
       seats.add("R" + rowNumber + "S" + seatNumber);

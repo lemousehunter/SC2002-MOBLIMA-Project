@@ -4,14 +4,14 @@ public class ReviewManager implements Manager{
 
   private ReviewBoundary reviewIO;    
   private ArrayList<User> masterUserList;
-  private ArrayList<Cineplex> masterCineplexes;
-  private ArrayList<Screen> masterScreens;
-  private ArrayList<Booking> masterBookings;
-  private ArrayList<Show> masterShows;
-  private ArrayList<Movie> masterMovies;
+  private ArrayList<CineplexEY> masterCineplexes;
+  private ArrayList<ScreenEY> masterScreens;
+  private ArrayList<BookingEY> masterBookings;
+  private ArrayList<ShowEY> masterShows;
+  private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ViewerRatings> masterRatings;
-  private ArrayList<ShowSeat> masterShowSeats;
+  private ArrayList<ReviewE> masterRatings;
+  private ArrayList<ShowSeatEY> masterShowSeats;
   
   public ReviewManager()
       {          
@@ -21,14 +21,14 @@ public class ReviewManager implements Manager{
   @Override
     public void setMasterLists(
     ArrayList<User> masterUserList,
-    ArrayList<Cineplex> masterCineplexes,
-    ArrayList<Screen> masterScreens,
-    ArrayList<Booking> masterBookings,
-    ArrayList<Show> masterShows,
-    ArrayList<Movie> masterMovies,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings,
-    ArrayList<ShowSeat> masterShowSeats) {
+    ArrayList<ReviewE> masterRatings,
+    ArrayList<ShowSeatEY> masterShowSeats) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;
@@ -44,9 +44,9 @@ public class ReviewManager implements Manager{
     double scale=reviewIO.setScale();
     String reviewString=reviewIO.addReview();
     
-    ViewerRatings review = new ViewerRatings(userID, movieID, scale, reviewString);
+    ReviewE review = new ReviewE(userID, movieID, scale, reviewString);
     masterRatings.add(review);
-    for (Movie m : masterMovies) 
+    for (MovieEY m : masterMovies)
     {
       if (m.getMovieID().equals(movieID)) 
       {
@@ -56,10 +56,10 @@ public class ReviewManager implements Manager{
     }
   }
 
-  public ArrayList<ViewerRatings> getListByMovieID(String movieId) {
-    ArrayList<ViewerRatings> reviewList = new ArrayList<ViewerRatings>();
+  public ArrayList<ReviewE> getListByMovieID(String movieId) {
+    ArrayList<ReviewE> reviewList = new ArrayList<ReviewE>();
 
-    for (ViewerRatings temp : masterRatings) 
+    for (ReviewE temp : masterRatings)
     {
       if (temp.getMovieId().equals(movieId)) 
       {
@@ -70,10 +70,10 @@ public class ReviewManager implements Manager{
     return reviewList;
   }
  
-  public ArrayList<ViewerRatings> getListByUserID(String userId) {
-    ArrayList<ViewerRatings> reviewByUser = new ArrayList<ViewerRatings>();
+  public ArrayList<ReviewE> getListByUserID(String userId) {
+    ArrayList<ReviewE> reviewByUser = new ArrayList<ReviewE>();
 
-    for (ViewerRatings temp : masterRatings) 
+    for (ReviewE temp : masterRatings)
     {
       if (temp.getUserId().equals(userId)) 
       {
@@ -88,7 +88,7 @@ public class ReviewManager implements Manager{
   public void getAvgRating(String movieId) {
     double sum = 0;
     int i = 0;
-    ArrayList<ViewerRatings> temp = getListByMovieID(movieId);
+    ArrayList<ReviewE> temp = getListByMovieID(movieId);
     if(temp.size()>1)
     {
       for (i = 0; i < temp.size(); i++) {
@@ -110,7 +110,7 @@ public class ReviewManager implements Manager{
 
   public void top5masterMovies() // prints the movie name
   { 
-    HashMap<String,ArrayList< ViewerRatings>>reviewMap=buildHashMap(masterRatings);// build hashmap of master reviews based on movieID as key
+    HashMap<String,ArrayList<ReviewE>>reviewMap=buildHashMap(masterRatings);// build hashmap of master reviews based on movieID as key
     HashMap <String,Double>avgRatingOfmasterMovies=new HashMap<String,Double>();        
     ArrayList<String> top5mv=new ArrayList<String>();        
     double max=0.00;    
@@ -147,7 +147,7 @@ public class ReviewManager implements Manager{
         { 
           avgRatingOfmasterMovies.put(key,-1.0);
           
-          for (Movie m : masterMovies) 
+          for (MovieEY m : masterMovies)
           {
             if(m.getMovieID().equals(key))
             {
@@ -161,9 +161,9 @@ public class ReviewManager implements Manager{
     reviewIO.Top5MovPrint(top5mv);
   }      
 
-  private  HashMap<String,ArrayList< ViewerRatings>>  buildHashMap(ArrayList<ViewerRatings> pass) 
+  private  HashMap<String,ArrayList<ReviewE>>  buildHashMap(ArrayList<ReviewE> pass)
   {
-    HashMap<String,ArrayList< ViewerRatings>>reviewMap=new HashMap<String,ArrayList< ViewerRatings>>();
+    HashMap<String,ArrayList<ReviewE>>reviewMap=new HashMap<String,ArrayList<ReviewE>>();
     for(int i=0;i<pass.size();i++)
     {
       if (reviewMap.containsKey(pass.get(i).getMovieId())) 
@@ -171,7 +171,7 @@ public class ReviewManager implements Manager{
         reviewMap.get(pass.get(i).getMovieId()).add(pass.get(i));
       } else 
       {
-        reviewMap.put(pass.get(i).getMovieId(), new ArrayList<ViewerRatings>());
+        reviewMap.put(pass.get(i).getMovieId(), new ArrayList<ReviewE>());
         reviewMap.get(pass.get(i).getMovieId()).add(pass.get(i));
       }
     }

@@ -8,13 +8,13 @@ import java.io.FileNotFoundException;
 
 public class MoblimaApp {
     ArrayList<User> masterUserList;
-    ArrayList<Cineplex> masterCineplexes;
-    ArrayList<Screen> masterScreens;
-    ArrayList<Booking> masterBookings;
-    ArrayList<Show> masterShows;
-    ArrayList<Movie> masterMovies;
+    ArrayList<CineplexEY> masterCineplexes;
+    ArrayList<ScreenEY> masterScreens;
+    ArrayList<BookingEY> masterBookings;
+    ArrayList<ShowEY> masterShows;
+    ArrayList<MovieEY> masterMovies;
     ArrayList<String> masterHolidaysList;
-    ArrayList<ViewerRatings> masterRatings;
+    ArrayList<ReviewE> masterRatings;
     //ArrayList<Ticket> tickets;
 
     // Managers
@@ -40,13 +40,13 @@ public class MoblimaApp {
     public MoblimaApp() {
         // attributes
         this.masterUserList = new ArrayList<User>();
-        this.masterCineplexes = new ArrayList<Cineplex>();
-        this.masterScreens = new ArrayList<Screen>();
-        this.masterBookings = new ArrayList<Booking>();
-        this.masterShows = new ArrayList<Show>();
-        this.masterMovies = new ArrayList<Movie>();
+        this.masterCineplexes = new ArrayList<CineplexEY>();
+        this.masterScreens = new ArrayList<ScreenEY>();
+        this.masterBookings = new ArrayList<BookingEY>();
+        this.masterShows = new ArrayList<ShowEY>();
+        this.masterMovies = new ArrayList<MovieEY>();
         this.masterHolidaysList = new ArrayList<String>();
-        this.masterRatings = new ArrayList<ViewerRatings>();
+        this.masterRatings = new ArrayList<ReviewE>();
         //this.tickets = new ArrayList<Ticket>();
 
      }
@@ -95,7 +95,7 @@ public class MoblimaApp {
             this.cineplexMgr = new CineplexManager();
             this.cineplexMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
-            this.holidayMgr = new HolidayManager(); 
+            this.holidayMgr = new HolidayManager();
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
             
             this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr, this.seatMgr);
@@ -151,7 +151,7 @@ public class MoblimaApp {
         String ratingsEPARATOR = " | ";
         String filename = this.dataFolder.concat("Ratings.txt");
         List alw = new ArrayList();
-        ViewerRatings rating;
+        ReviewE rating;
         for (int i = 0; i < this.masterRatings.size(); i++) {
             rating = this.masterRatings.get(i);
             StringBuilder st = new StringBuilder();
@@ -175,8 +175,8 @@ public class MoblimaApp {
         String ShowSeatSEPARATOR = " ~ ";
         String filename = this.dataFolder.concat("Shows.txt");
         List alw = new ArrayList();
-        ArrayList<ShowSeat> ShowSeats;
-        Show show;
+        ArrayList<ShowSeatEY> ShowSeats;
+        ShowEY show;
         for (int i = 0; i < this.masterShows.size(); i++) {
             show = this.masterShows.get(i);
             StringBuilder st = new StringBuilder();
@@ -199,7 +199,7 @@ public class MoblimaApp {
 
             ShowSeats = show.getSeatLayout();
             for (int j = 0; j < ShowSeats.size(); j++) {
-                ShowSeat ShowSeat = ShowSeats.get(j);
+                ShowSeatEY ShowSeat = ShowSeats.get(j);
                 st.append(ShowSeat.getSeatID().trim());
                 st.append(ShowSeatSEPARATOR);
                 st.append(ShowSeat.getSeatRow().trim());
@@ -281,7 +281,7 @@ public class MoblimaApp {
                 Staff staff = (Staff) user;
                 st.append(staff.getPassword().trim());
             } else {
-                MovieGoer movieGoer = (MovieGoer) user;
+                MovieGoerEY movieGoer = (MovieGoerEY) user;
                 st.append(movieGoer.getEmailID().trim());
                 st.append(userSEPARATOR);
                 st.append(Integer.toString(movieGoer.getMobileNumber()));
@@ -308,7 +308,7 @@ public class MoblimaApp {
         String seatSEPARATOR = " ~ ";
         String filename = this.dataFolder.concat("Bookings.txt");
         List alw = new ArrayList();
-        Booking booking;
+        BookingEY booking;
         for (int i = 0; i < this.masterBookings.size(); i++) {
             booking = this.masterBookings.get(i);
             StringBuilder st = new StringBuilder();
@@ -328,7 +328,7 @@ public class MoblimaApp {
             st.append(bookingSEPARATOR);
             st.append(booking.getBookingAmount());
             st.append(bookingSEPARATOR);
-            for (Ticket ticket : booking.getTickets()) {
+            for (TicketEY ticket : booking.getTickets()) {
                 st.append(ticket.getSeatId());
                 st.append(seatSEPARATOR);
             }
@@ -349,7 +349,7 @@ public class MoblimaApp {
         ArrayList<String> castList;
         ArrayList<String> ratingList;
 
-        Movie movie;
+        MovieEY movie;
         for (int i = 0; i < this.masterMovies.size(); i++) {
             movie = this.masterMovies.get(i);
             StringBuilder st = new StringBuilder();
@@ -395,8 +395,8 @@ public class MoblimaApp {
         String seatSEPARATOR = "~";
         String filename = this.dataFolder.concat("Screens.txt");
         List alw = new ArrayList();
-        ArrayList<Seat> seats;
-        Screen screen;
+        ArrayList<SeatEY> seats;
+        ScreenEY screen;
         for (int i = 0; i < this.masterScreens.size(); i++) {
             screen = this.masterScreens.get(i);
             StringBuilder st = new StringBuilder();
@@ -416,7 +416,7 @@ public class MoblimaApp {
 
             seats = screen.getSeatLayout();
             for (int j = 0; j < seats.size(); j++) {
-                Seat seat = seats.get(j);
+                SeatEY seat = seats.get(j);
                 st.append(seat.getSeatID().trim());
                 st.append(seatSEPARATOR);
                 st.append(seat.getSeatRow().trim());
@@ -438,7 +438,7 @@ public class MoblimaApp {
         String filename = this.dataFolder.concat("Cineplex.txt");
         List alw = new ArrayList();
         ArrayList<String> screenIDs;
-        Cineplex cineplex;
+        CineplexEY cineplex;
         for (int i = 0; i < this.masterCineplexes.size(); i++) {
             cineplex = this.masterCineplexes.get(i);
             StringBuilder st = new StringBuilder();
@@ -565,7 +565,7 @@ public class MoblimaApp {
             int numberOfRows = Integer.parseInt(star.nextToken().trim()); // fourth token
             int seatsPerRow = Integer.parseInt(star.nextToken().trim()); // fifth token
             int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
-            ArrayList<Seat> seatLayout = new ArrayList<Seat>();
+            ArrayList<SeatEY> seatLayout = new ArrayList<SeatEY>();
             String seatsString, seatID, seatRow, seatType;
             seatsString = star.nextToken().trim();
             StringTokenizer SeatsToken = new StringTokenizer(seatsString, SeatSEPARATOR);
@@ -575,11 +575,11 @@ public class MoblimaApp {
                 seatRow = SeatsToken.nextToken().trim();
                 int seatNumber = Integer.parseInt(SeatsToken.nextToken().trim());
                 seatType = SeatsToken.nextToken().trim();
-                Seat Seat = new Seat(seatID, seatRow, seatNumber, seatType);
+                SeatEY Seat = new SeatEY(seatID, seatRow, seatNumber, seatType);
                 seatLayout.add(Seat);
 
             }
-            Screen screen = new Screen(screenID, screenName, screenClass, numberOfRows, seatsPerRow, seatLayout);
+            ScreenEY screen = new ScreenEY(screenID, screenName, screenClass, numberOfRows, seatsPerRow, seatLayout);
             this.masterScreens.add(screen);
         }
     }
@@ -605,7 +605,7 @@ public class MoblimaApp {
             Double scale = Double.parseDouble(star.nextToken().trim());
             String userID = star.nextToken().trim();
             String movieID = star.nextToken().trim();
-            ViewerRatings rating = new ViewerRatings(viewerRatingID, userID, movieID, scale, review);
+            ReviewE rating = new ReviewE(viewerRatingID, userID, movieID, scale, review);
             this.masterRatings.add(rating);
         }
     }
@@ -644,7 +644,7 @@ public class MoblimaApp {
                 seatID = SeatsToken.nextToken().trim();
                 seatIds.add(seatID);
             }            
-            Booking booking = new Booking(bookingID, userID, movieID, screenID, cineplexID, date, time, seatIds, price, this.holidayMgr, this.movieMgr);
+            BookingEY booking = new BookingEY(bookingID, userID, movieID, screenID, cineplexID, date, time, seatIds, price, this.holidayMgr, this.movieMgr);
             this.masterBookings.add(booking);
         }
 
@@ -684,7 +684,7 @@ public class MoblimaApp {
                 while (bookingToken.hasMoreTokens()) {
                     bookings.add(bookingToken.nextToken().trim());
                 }
-                MovieGoer movieGoer = new MovieGoer(userID, userName, emailID, mobileNumber, movieGoerAge,
+                MovieGoerEY movieGoer = new MovieGoerEY(userID, userName, emailID, mobileNumber, movieGoerAge,
                 bookings);
                 this.masterUserList.add(movieGoer);
 
@@ -730,8 +730,8 @@ public class MoblimaApp {
             while (ratingToken.hasMoreTokens()) {
                 ratings.add(ratingToken.nextToken().trim());
             }
-            Movie movie = new Movie(movieID, movieName, movieLanguage, movieType,
-                    MovieRating.valueOf(movieRating), ShowStatus.valueOf(showstatus), synopsis, director, castList,
+            MovieEY movie = new MovieEY(movieID, movieName, movieLanguage, movieType,
+                    MovieRatingEN.valueOf(movieRating), ShowStatus.valueOf(showstatus), synopsis, director, castList,
                     ratings);
             this.masterMovies.add(movie);
 
@@ -778,7 +778,7 @@ public class MoblimaApp {
             int numberOfRows = Integer.parseInt(star.nextToken().trim());
             int seatsPerRow = Integer.parseInt(star.nextToken().trim());
             int emptySeats = Integer.parseInt(star.nextToken().trim());// sixth token
-            ArrayList<ShowSeat> ShowSeats = new ArrayList<ShowSeat>();
+            ArrayList<ShowSeatEY> ShowSeats = new ArrayList<ShowSeatEY>();
             String ShowSeatsString, ShowSeatID, ShowSeatRow, ShowSeatType, occupiedString;
             boolean isOccupied;
             ShowSeatsString = star.nextToken().trim();
@@ -795,11 +795,11 @@ public class MoblimaApp {
                 } else {
                     isOccupied = false;
                 }
-                ShowSeat ShowSeat = new ShowSeat(ShowSeatID, ShowSeatRow, ShowSeatNumber, ShowSeatType, isOccupied);
+                ShowSeatEY ShowSeat = new ShowSeatEY(ShowSeatID, ShowSeatRow, ShowSeatNumber, ShowSeatType, isOccupied);
                 ShowSeats.add(ShowSeat);
 
             }
-            Show show = new Show(showID, movieID, screenID, showDate, showTime, emptySeats,numberOfRows, seatsPerRow, this.movieMgr , this.screenMgr);
+            ShowEY show = new ShowEY(showID, movieID, screenID, showDate, showTime, emptySeats,numberOfRows, seatsPerRow, this.movieMgr , this.screenMgr);
             this.masterShows.add(show);
         }
 
@@ -833,7 +833,7 @@ public class MoblimaApp {
                 String screenID = screenToken.nextToken().trim(); // first token
                 screenIDs.add(screenID);
             }
-            Cineplex cineplex = new Cineplex(cineplexID, cineplexName, location, screenIDs);
+            CineplexEY cineplex = new CineplexEY(cineplexID, cineplexName, location, screenIDs);
             cineplex.setMasterScreens(masterScreens);
             this.masterCineplexes.add(cineplex);
         }

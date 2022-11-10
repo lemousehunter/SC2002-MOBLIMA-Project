@@ -1,4 +1,3 @@
-import java.util.*;
 import java.util.Arrays;
 
 public class CineplexBoundary extends Boundary {
@@ -16,7 +15,7 @@ public class CineplexBoundary extends Boundary {
      *
      **/
     public void viewDetails(String cineplexID) {
-        Cineplex cineplex = cineplexMgr.getCineplexByID(cineplexID);
+        CineplexEY cineplex = cineplexMgr.getCineplexByID(cineplexID);
         println("Cineplex cineplexID = " + cineplexID + " , name = " + cineplex.getName() + " , location = " + cineplex.getLocation() + " , screens = "
                 + Arrays.toString(cineplex.getScreenNames().toArray()));
     }
@@ -43,7 +42,7 @@ public class CineplexBoundary extends Boundary {
     }
 
 
-    public void printCineplexFoundMessaage(Cineplex cineplex) {
+    public void printCineplexFoundMessaage(CineplexEY cineplex) {
         this.println("Found Cineplex  : " + cineplex.getName() + " at location " + cineplex.getLocation());
     }
 
@@ -57,7 +56,7 @@ public class CineplexBoundary extends Boundary {
         int idx = 1;
         this.println("\n---------------------------X---------------------------\n");
         this.println("\nCineplex List : \n ");
-        for (Cineplex c : this.cineplexMgr.getMasterCineplexes()) {
+        for (CineplexEY c : this.cineplexMgr.getMasterCineplexes()) {
             this.println(idx + ": " + c.viewDetails());
             idx++;
         }
