@@ -34,17 +34,19 @@ public void printAddCineplexSuccessMessaage() {
 }
 
 
-public void printineplexFoundMessaage(Cineplex cineplex) {
+public void printCineplexFoundMessaage(Cineplex cineplex) {
   System.out.println("\n Found Cineplex  : " + cineplex.getName() + " at location " + cineplex.getLocation() + "\n");
 }
 
 
-public void printineplexNotFoundMessaage() {
+public void printCineplexNotFoundMessaage() {
   System.out.println("\nCineplex " + cineplexName + " not found! \n");
 }
 
 
 public void printAllCineplexes(ArrayList<Cineplex> masterCineplexes) {
+
+  System.out.println("\n---------------------------X---------------------------\n");
   System.out.println("\nCineplex List : \n ");
   for(Cineplex c: masterCineplexes) {
         System.out.println(c.viewDetails());

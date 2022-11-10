@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Screen {
 
@@ -19,7 +20,12 @@ public class Screen {
 	 * @param seatsPerRow
 	 */
 	public Screen(String screenID, String screenName, String screenClass, int numberOfRows, int seatsPerRow) {
-		this.screenID = screenID;
+		if (screenID.isEmpty()) {
+			this.screenID = UUID.randomUUID().toString();
+		}
+		else {
+			this.screenID = screenID;
+		}
 		this.screenName=screenName;
 		this.screenClass= ScreenClass.valueOf(screenClass);
 		this.numberOfRows=numberOfRows;
@@ -139,7 +145,10 @@ public class Screen {
 	}
 
 	public String viewDetails() {
-		return "ScreenID: " + this.screenID + ", Screen Name: " + this.screenName + ", ScreenClass: " +this.screenClass;
+		return  String.format("| %-20s",this.screenName) + 
+				" " + 
+				String.format("| %-22s |", this.screenClass.toString()) + 
+				" #Rows = " + Integer.toString(this.numberOfRows) + " ; #Seats per Row = " + Integer.toString(this.seatsPerRow) ; 
 	}
 	
 	

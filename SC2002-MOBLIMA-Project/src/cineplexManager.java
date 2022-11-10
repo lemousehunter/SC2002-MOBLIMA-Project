@@ -85,10 +85,10 @@ public class CineplexManager implements Manager{
             }
         }
         if (cineplexFound) {
-            cineplexIO.printineplexFoundMessaage(matchingCineplex);
+            cineplexIO.printCineplexFoundMessaage(matchingCineplex);
         }
         else {
-            cineplexIO.printineplexNotFoundMessaage();
+            cineplexIO.printCineplexNotFoundMessaage();
         }
     }
 

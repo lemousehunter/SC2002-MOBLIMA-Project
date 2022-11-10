@@ -20,7 +20,7 @@ public class MoblimaApp {
     // Managers
     MovieManager movieMgr;
     MovieGoerManager movieGoerMgr;
-    screenManager screenMgr;
+    ScreenManager screenMgr;
     CineplexManager cineplexMgr;
     HolidayManager holidayMgr;
     BookingManager bookingMgr;
@@ -84,7 +84,7 @@ public class MoblimaApp {
             this.movieGoerMgr = new MovieGoerManager(movieMgr, showManager, bookingMgr, reviewManager);
             this.movieGoerMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
-            this.screenMgr = new screenManager();
+            this.screenMgr = new ScreenManager();
             this.screenMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
             this.cineplexMgr = new CineplexManager();

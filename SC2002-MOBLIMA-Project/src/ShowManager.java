@@ -13,9 +13,9 @@ public class ShowManager implements Manager {
     private ArrayList<String> masterHolidaysList;
     private ArrayList<ViewerRatings> masterRatings;
         
-    screenManager screenMgr;
+    ScreenManager screenMgr;
     MovieManager movieMgr;
-    public ShowManager(screenManager screenMgr, MovieManager movieMgr) {
+    public ShowManager(ScreenManager screenMgr, MovieManager movieMgr) {
         this.screenMgr = screenMgr;
         this.movieMgr = movieMgr;
     }

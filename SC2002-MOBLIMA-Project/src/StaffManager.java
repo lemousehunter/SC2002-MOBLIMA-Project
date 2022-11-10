@@ -13,7 +13,7 @@ public class StaffManager implements Manager {
   private ArrayList<ViewerRatings> masterRatings;
 
   private CineplexManager cineplexManager;
-  private screenManager screenManager;
+  private ScreenManager screenManager;
   private ShowManager showManager;
   private MovieManager movieManager;
   private StaffBoundary staffIO;
@@ -22,7 +22,7 @@ public class StaffManager implements Manager {
 
   public StaffManager(
     CineplexManager cineplexMgr,
-    screenManager screenMgr,
+    ScreenManager screenMgr,
     ShowManager showManager,
     MovieManager movieMgr
   ) {
@@ -54,66 +54,6 @@ public class StaffManager implements Manager {
     this.masterRatings = masterRatings;
   }
 
-  /**
-   *
-   * @param ticket
-   */
-  public void setTicketPrices(Ticket ticket) {
-    // TODO - implement Staff.setTicketPrices
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   *
-   * @param name
-   * @param type
-   * @param movieRating
-   * @param showStatus
-   * @param synopsis
-   * @param director
-   * @param cast
-   */
-  public void addMovies(
-    int name,
-    int type,
-    int movieRating,
-    int showStatus,
-    int synopsis,
-    int director,
-    int cast
-  ) {
-    // TODO - implement Staff.addMovies
-
-    throw new UnsupportedOperationException();
-  }
-
-  public void getTop5RankingMoviesByTicketSales() {
-    // TODO - implement Staff.getTop5RankingMoviesByTicketSales
-    throw new UnsupportedOperationException();
-  }
-
-  public void getTop5RakingMoviesByOverallReviews() {
-    // TODO - implement Staff.getTop5RakingMoviesByOverallReviews
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   *
-   * @param movie
-   */
-  public void updateMovie(Movie movie) {
-    // TODO - implement Staff.updateMovie
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   *
-   * @param cineplex
-   */
-  public void addCinePlex(Cineplex cineplex) {
-    // TODO - implement Staff.addCinePlex
-    throw new UnsupportedOperationException();
-  }
 
   public void staffOperations() {
     int choice = 0;
@@ -126,7 +66,9 @@ public class StaffManager implements Manager {
       switch (choice) {
         case 1:
           cineplexOperations();
+          break;
         case 2:
+          screenOperations();
           break;
         case 3:
           break;
@@ -161,6 +103,30 @@ public class StaffManager implements Manager {
           break;
         case 3:
           cineplexManager.listAllCineplexes();
+          break;
+        case 4:
+          break;
+      }
+    }
+  }
+
+  private void screenOperations() {
+    int screenChoice = 0;
+    while (screenChoice != 4) {
+      screenChoice = staffIO.getScreenMenuChoice();
+      if (screenChoice < 0 | screenChoice > 4) {
+        staffIO.printScreenMenuChoiceError();
+        continue;
+      }
+      switch (screenChoice) {
+        case 1:
+          screenManager.addScreen();;
+          break;
+        case 2:
+          screenManager.searchScreen();
+          break;
+        case 3:
+          screenManager.listAllScreens();
           break;
         case 4:
           break;

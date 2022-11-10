@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class reviewManager implements Manager{
+public class ReviewManager implements Manager{
 
   private ReviewBoundary reviewIO;    
   private ArrayList<User> masterUserList;
@@ -12,7 +12,7 @@ public class reviewManager implements Manager{
   private ArrayList<String> masterHolidaysList;
   private ArrayList<ViewerRatings> masterRatings;
   
-  public reviewManager()
+  public ReviewManager()
       {          
         reviewIO=new ReviewBoundary();
       }

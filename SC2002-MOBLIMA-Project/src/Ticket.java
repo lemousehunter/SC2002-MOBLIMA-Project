@@ -6,7 +6,7 @@ public class Ticket {
     private String movieID;
     private MovieGoerManager movieGoerMgr;
     private String userID;
-    private screenManager screenMgr;
+    private ScreenManager screenMgr;
     private String screenID;
     private String date;
     private String seatId;
@@ -26,7 +26,7 @@ public class Ticket {
         // Passing in controller instances from MainApp
         this.movieMgr = movieMgr;
         this.movieGoerMgr = new MovieGoerManager();
-        this.screenMgr = new screenManager();
+        this.screenMgr = new ScreenManager();
         this.holidayManager = holidayManager;
 
         // Class attributes

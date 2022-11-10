@@ -16,14 +16,14 @@ public class Show {
 	private ArrayList<ShowSeat> showSeats;
 
 	private MovieManager movieMgr;
-	private screenManager screenMgr;
+	private ScreenManager screenMgr;
 
 	/**
 	 *
 	 * @param showDate
 	 * @param showTime
 	 */
-	public Show(String showID, String movieID, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, screenManager screenMgr) {
+	public Show(String showID, String movieID, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, ScreenManager screenMgr) {
 		// TODO - implement Show.Show
 		// Managers
 		this.movieMgr = movieMgr;

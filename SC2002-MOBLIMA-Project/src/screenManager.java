@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class screenManager implements Manager {
+public class ScreenManager implements Manager {
 	private ArrayList<User> masterUserList;
     private ArrayList<Cineplex> masterCineplexes;
     private ArrayList<Screen> masterScreens;
@@ -11,8 +11,12 @@ public class screenManager implements Manager {
     private ArrayList<Movie> masterMovies;
     private ArrayList<String> masterHolidaysList;
     private ArrayList<ViewerRatings> masterRatings;
-		static Scanner sc = new Scanner(System.in);
-	       
+    private ScreenBoundary screenIO;
+
+	public ScreenManager() {
+        screenIO = new ScreenBoundary();
+    }
+
 	@Override
     public void setMasterLists(
     ArrayList<User> masterUserList,
@@ -44,55 +48,76 @@ public class screenManager implements Manager {
 	    }
 	    
 	    public void addScreen() {
-	    	
-			String screenID = UUID.randomUUID().toString();
-	        System.out.println("Enter Screen Name: ");
-	        String name = sc.nextLine();
-	        System.out.println("Enter Number of Rows: ");
-	        int numRows = sc.nextInt();
-	        System.out.println("Enter Seats Per Row: ");
-	        int seatsRow = sc.nextInt();
-	        ScreenClass screenClass = null;
-	      
-	        System.out.println("Enter Screen Class: 1 - PLATINUM_MOVIE_SUITES, 2 - REGULAR_SCREEN");
-	        int ch1 = sc.nextInt();
-	        switch(ch1)
-	        {
-	            case 1: screenClass = ScreenClass.PLATINUM_MOVIE_SUITES;
-	            break;
-	            case 2: screenClass = ScreenClass.REGULAR_SCREEN;
-	            break;
-	        }
+			String cineplex=screenIO.setCineplex();
+			String name=screenIO.setScreen();
+			String screenClass = screenIO.setScreenClass();
+			int numRows=screenIO.setNumberOfRows();
+			int seatsPerRow = screenIO.setSeatPerRow();
+			String cineplexID = "";
+			
+			boolean cineplexFound = false;
+			for(Cineplex c: masterCineplexes) {
+				if(c.getName().equals(cineplex))
+				{
+					cineplexFound = true;
+					break;
+				}
+			}
+			if (!cineplexFound){
+				screenIO.printCineplexNotFound();
+				return;
+			}
+	
+			for(Screen s: masterScreens) {
+				if(s.getScreenName().equalsIgnoreCase(name))
+				{
+					screenIO.printScreenDuplicateError();
+					return;
+				}
+			}
+			 
+			Screen s=new Screen(cineplexID,name,screenClass,numRows,seatsPerRow);
+			masterScreens.add(s);
+			screenIO.printAddScreenSuccessMessaage();
 
-			assert screenClass != null;
-			Screen screen=new Screen(screenID, name,screenClass.name(),numRows,seatsRow);
-	        masterScreens.add(screen);
 	    }
 	    
-	    public void viewScreens() {
-	        for(Screen s: masterScreens) {
-	            s.viewDetails();
-	            System.out.println("---------------------------X---------------------------");
-	        }
-	    }
+	    // public void viewScreens() {
+	    //     for(Screen s: masterScreens) {
+	    //         s.viewDetails();
+	    //         System.out.println("---------------------------X---------------------------");
+	    //     }
+	    // }
 
-	    public void screenListing() {
-	        System.out.println("List of Screens:");
-	        for(Screen s:masterScreens) {
-	            System.out.println(s.getScreenName());
-	        }
-	    }
+	    // public void screenListing() {
+	    //     System.out.println("List of Screens:");
+	    //     for(Screen s:masterScreens) {
+	    //         System.out.println(s.getScreenName());
+	    //     }
+	    //}
+		public void listAllScreens() {
+			screenIO.printAllScreens(masterScreens);
+		}
 
-	    public void searchScreen() {
-	        System.out.println("Enter the screen name you want to search for: ");
-	        String user_input = sc.nextLine();
-	        for(Screen s:masterScreens) {
-	            if(s.getScreenName().equalsIgnoreCase(user_input)) {
-	                System.out.println("Screen Found!");
-	                System.out.println(s.getScreenName());
-	            }
-	            else
-	                System.out.println("Screen not Found!");    
-	        }
-	    }
+		public void searchScreen() {
+			String name=screenIO.setScreen();
+	
+			boolean screenFound = false;
+			Screen matchingScreen=null;
+			for(Screen s: masterScreens) {
+				if(s.getScreenName().equalsIgnoreCase(name))
+				{
+					screenFound=true;
+					matchingScreen = s;
+					break;
+				}
+			}
+			if (screenFound) {
+				screenIO.printScreenFoundMessaage(matchingScreen);
+			}
+			else {
+				screenIO.printCinemaNotFoundMessaage();
+			}
+		}
+	   
 	}
