@@ -55,7 +55,6 @@ public class Movie {
 		this.director = director;
 		this.cast = cast;
 		this.ratingsID = ratingsID;
-		
 	}
 
 	
@@ -64,38 +63,7 @@ public class Movie {
 	 * 
 	 * @param reviews The array of all the ratings given to all the movies
 	 */
-	public void viewMovieDetails() {
-		System.out.println("Movie Name: " + this.name);
-		System.out.println("Movie Status: " + this.showStatus);
-		System.out.println("Movie Type: " + this.movieType);
-		System.out.println("Movie Rating: " + this.movieRating);
-		System.out.println("Movie Language: " + this.movieLanguage);
-		System.out.println("Synopsis: " + this.synopsis);
-		System.out.println("Director: " + this.director);
-		System.out.println("Cast: " + this.cast);
 
-		int count=0; //this variable counts the total number of reviews for a particular movie and helps us do the count for overall ratings
-		double sum_for_overall_rating = 0;
-		for(ViewerRatings vr: reviews)
-		{
-			if(vr.getMovieId().equals(this.movieID))
-			{
-				System.out.println("Review: " + vr.getReview());
-				System.out.println("Rating: " + vr.getRating());
-				count++;
-				sum_for_overall_rating+=vr.getRating();
-			}
-		}
-
-		if(count>1)
-		{
-			System.out.printf("Overall Ratings: %.1f / 5\n", sum_for_overall_rating/count);
-		}
-		else
-		{
-			System.out.println("Overall Ratings: NA");
-		}
-	}
 
 	
 	// /** 
@@ -293,10 +261,10 @@ public class Movie {
 		this.cast = cast;
 	}
 
-	
-	/** 
+
+	/**
 	 * Get method for the ratingsID of the movie
-	 * 
+	 *
 	 * @return The ratings IDs
 	 */
 	public ArrayList<String> getViewerRatingsID() {
@@ -305,10 +273,14 @@ public class Movie {
 
 	/**
 	 * Set method for the ratingsID of the movie
-	 * 
+	 *
 	 * @param ratingsID The ratings IDs of the movie
 	 */
 	public void addViewerRatingsID(String ratingsID) {
 		this.ratingsID.add(ratingsID);
+	}
+
+	public MovieType getMovieType() {
+		return movieType;
 	}
 }

@@ -111,6 +111,10 @@ public class MovieManager implements Manager{
         masterMovies.add(movie);
     }
 
+    public ArrayList<Movie> getMasterList() {
+        return masterMovies;
+    }
+
     public void updateMovie(Movie movie) {
         System.out.println("The current status of the Movie is " + movie.getShowStatus());
         System.out.println("Enter 1 for Coming Soon, 2 for Preview, 3 for Showing, 4 for End of Showing");
@@ -133,20 +137,6 @@ public class MovieManager implements Manager{
     {
         movie.setShowStatus(ShowStatus.ENDOFSHOWING);
     }
-    
-    public void viewMovies() {
-        for(Movie m: masterMovies) {
-            m.viewMovieDetails();
-            System.out.println("---------------------------X---------------------------");
-        }
-    }
-
-    public void movieListing() {
-        System.out.println("List of Movies:");
-        for(Movie m: masterMovies) {
-            System.out.println(m.getName() + " - " + m.getShowStatus());
-        }
-    }
 
     public void searchMovie() {
         System.out.println("Enter the movie name you want to search for: ");
@@ -160,6 +150,21 @@ public class MovieManager implements Manager{
                 System.out.println("Movie not Found!");
                 
         }
+    }
+
+    public ArrayList<Movie> getCurrentMovies() {
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        for (Movie movie: masterMovies) {
+            if (movie.getShowStatus() == ShowStatus.SHOWING) {
+                movies.add(movie);
+            }
+        }
+
+        return movies;
+    }
+
+    public String getMovieIDFromCurrentShowingIDX(Integer idx) {
+        return this.getCurrentMovies().get(idx-1).getMovieID();
     }
 }
 

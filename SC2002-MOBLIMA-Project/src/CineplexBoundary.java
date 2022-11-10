@@ -1,58 +1,66 @@
 import java.util.*;
+import java.util.Arrays;
 
-public class CineplexBoundary {
+public class CineplexBoundary extends Boundary {
+    private String cineplexName;
+    private String cineplexLocation;
 
-  private Scanner s;
-  private Scanner q;
-  private String cineplexName;
-  private String cineplexLocation;
+    CineplexManager cineplexMgr;
 
-  public CineplexBoundary() {
-    s = new Scanner(System.in);
-    q = new Scanner(System.in);
-  }
+    public CineplexBoundary(CineplexManager cineplexMgr) {
+        this.cineplexMgr = cineplexMgr;
+    }
 
- 
-  public void printCineplexDuplicateError() {
-    System.out.println("\n" + cineplexName + " already exits  \n");
-  }
+    /**
+     * Method for printing the details of the cineplex for printing on the screen
+     *
+     **/
+    public void viewDetails(String cineplexID) {
+        Cineplex cineplex = cineplexMgr.getCineplexByID(cineplexID);
+        println("Cineplex cineplexID = " + cineplexID + " , name = " + cineplex.getName() + " , location = " + cineplex.getLocation() + " , screens = "
+                + Arrays.toString(cineplex.getScreenNames().toArray()));
+    }
 
-  public String setName() {
-    System.out.print("Please enter Cineplex Name: ");
-    cineplexName=s.nextLine();
-    return cineplexName;
-  }
+    public void printCineplexDuplicateError() {
+        this.println("Error. " + cineplexName + " already exists");
+    }
 
-public String setLocation() {
-  System.out.print("Please enter " + cineplexName + "  Location: ");
-  cineplexLocation=s.nextLine();
-  return cineplexLocation;}
+    public String setName() {
+        System.out.print("Please enter Cineplex Name: ");
+        cineplexName = this.sc.nextLine();
+        return cineplexName;
+    }
 
-
-public void printAddCineplexSuccessMessaage() {
-  System.out.println("\nCineplex " + cineplexName + " has been added !\n");
-}
-
-
-public void printCineplexFoundMessaage(Cineplex cineplex) {
-  System.out.println("\n Found Cineplex  : " + cineplex.getName() + " at location " + cineplex.getLocation() + "\n");
-}
-
-
-public void printCineplexNotFoundMessaage() {
-  System.out.println("\nCineplex " + cineplexName + " not found! \n");
-}
+    public String setLocation() {
+        System.out.print("Please enter " + cineplexName + "  Location: ");
+        cineplexLocation = this.sc.nextLine();
+        return cineplexLocation;
+    }
 
 
-public void printAllCineplexes(ArrayList<Cineplex> masterCineplexes) {
+    public void printAddCineplexSuccessMessaage() {
+        this.println("Cineplex " + cineplexName + " has been added !");
+    }
 
-  System.out.println("\n---------------------------X---------------------------\n");
-  System.out.println("\nCineplex List : \n ");
-  for(Cineplex c: masterCineplexes) {
-        System.out.println(c.viewDetails());
-  }
-  System.out.println("\n---------------------------X---------------------------\n");
 
-}
+    public void printCineplexFoundMessaage(Cineplex cineplex) {
+        this.println("Found Cineplex  : " + cineplex.getName() + " at location " + cineplex.getLocation());
+    }
 
+
+    public void printCineplexNotFoundMessaage() {
+        this.println("Cineplex " + cineplexName + " not found!");
+    }
+
+
+    public void printAllCineplexes() {
+        int idx = 1;
+        this.println("\n---------------------------X---------------------------\n");
+        this.println("\nCineplex List : \n ");
+        for (Cineplex c : this.cineplexMgr.getMasterCineplexes()) {
+            this.println(idx + ": " + c.viewDetails());
+            idx++;
+        }
+        this.println("\n---------------------------X---------------------------\n");
+    }
 }

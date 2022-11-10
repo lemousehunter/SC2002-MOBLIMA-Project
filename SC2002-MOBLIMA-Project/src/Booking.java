@@ -48,10 +48,10 @@ public class Booking {
         int numTickets = seatIds.size();
         for (int i=0; i<numTickets; i++)
         {
-            this.tickets.add(new Ticket(movieID, userID, screenID, date, seatIds.get(i) , -1, bookingID , holidayManager, movieMgr));
+            this.tickets.add(new Ticket(movieID, userID, screenID, date, time, seatIds.get(i), -1, bookingID, holidayManager, movieMgr));
         }
         if (this.bookingAmount == -1) {         // prime methods would always have bookingAmount
-            this.bookingAmount = this.computeBookingAmout();
+            this.bookingAmount = this.computeBookingAmount();
         }
     }
 
@@ -140,11 +140,11 @@ public class Booking {
     public double getBookingAmount() {
         return bookingAmount;
     }
-    public double computeBookingAmout() {
-        double bookingAmout=0;
+    public double computeBookingAmount() {
+        double bookingAmount=0;
         for (Ticket ticket : this.tickets) {  
-            bookingAmout += ticket.getPrice();   
+            bookingAmount += ticket.getPrice();
         }
-        return bookingAmout;
+        return bookingAmount;
     }
 }

@@ -11,6 +11,7 @@ public class ReviewManager implements Manager{
   private ArrayList<Movie> masterMovies;
   private ArrayList<String> masterHolidaysList;
   private ArrayList<ViewerRatings> masterRatings;
+  private ArrayList<ShowSeat> masterShowSeats;
   
   public ReviewManager()
       {          
@@ -26,7 +27,8 @@ public class ReviewManager implements Manager{
     ArrayList<Show> masterShows,
     ArrayList<Movie> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ViewerRatings> masterRatings) {
+    ArrayList<ViewerRatings> masterRatings,
+    ArrayList<ShowSeat> masterShowSeats) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;
@@ -35,6 +37,7 @@ public class ReviewManager implements Manager{
     this.masterMovies = masterMovies;
     this.masterHolidaysList = masterHolidaysList;
     this.masterRatings = masterRatings;
+    this.masterShowSeats = masterShowSeats;
   }
 
   public void addReview(String userID, String movieID) {

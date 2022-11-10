@@ -1,9 +1,6 @@
 import java.util.*;
 
 public class ReviewBoundary{
-
-    
-
     private Scanner s;
     private Scanner q;
     private double scale;
@@ -34,11 +31,9 @@ public class ReviewBoundary{
     
     public String addReview()
     {
-    
       System.out.println("Please enter review");
       review=s.nextLine();
       return review;
-      
     }
 
     public void AvgRatingPrint(double sum)

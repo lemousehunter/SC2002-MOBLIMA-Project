@@ -1,10 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
 
 public class CineplexManager implements Manager{
-
-
     private ArrayList<User> masterUserList;
     private ArrayList<Cineplex> masterCineplexes;
     private ArrayList<Screen> masterScreens;
@@ -17,8 +13,8 @@ public class CineplexManager implements Manager{
     private CineplexBoundary cineplexIO;
 
    
-    public CineplexManager() {
-        cineplexIO = new CineplexBoundary();
+    public CineplexManager(CineplexBoundary cineplexB) {
+        cineplexIO = cineplexB;
     }
 
     @Override
@@ -92,8 +88,12 @@ public class CineplexManager implements Manager{
         }
     }
 
-	public void listAllCineplexes() {
-        cineplexIO.printAllCineplexes(masterCineplexes);
-	}
+    public ArrayList<Cineplex> getMasterCineplexes() {
+        return masterCineplexes;
+    }
+
+    public String convertIDX2CineplexID(int idx) {
+        return masterCineplexes.get(idx).getCineplexID();
+    }
 	
 }

@@ -29,6 +29,8 @@ public class MoblimaApp {
     MovieGoerManager movieGoerManager;
     ReviewManager reviewManager;
 
+    SeatManager seatMgr;
+
 
 
     Scanner sc = new Scanner(System.in);
@@ -86,18 +88,21 @@ public class MoblimaApp {
        
             this.screenMgr = new ScreenManager();
             this.screenMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
-       
+
+            this.seatMgr = new SeatManager();
+            this.seatMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings, masterShowSeats);
+
             this.cineplexMgr = new CineplexManager();
             this.cineplexMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
             this.holidayMgr = new HolidayManager(); 
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
             
-            this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr);
+            this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr, this.seatMgr);
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
             this.reviewManager = new ReviewManager();
-            this.reviewManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+            this.reviewManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings, masterShowSeats);
 
             this.staffManager = new StaffManager(this.cineplexMgr, this.screenMgr, this.showManager, this.movieMgr);
             this.staffManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
