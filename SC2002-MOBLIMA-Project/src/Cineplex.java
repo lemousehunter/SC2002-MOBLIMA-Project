@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * A Cineplex Object
@@ -26,23 +27,19 @@ public class Cineplex {
 	 * @param location The location of the cineplex
 	 */
 	public Cineplex(String cineplexID, String name, String location, ArrayList<String>  screenID) {
-		
-		this.cineplexID=cineplexID;
+		// Attributes
+		if (cineplexID.isEmpty()) {
+			this.cineplexID = UUID.randomUUID().toString();
+		}
+		else {
+			this.cineplexID = cineplexID;
+		}
 		this.name=name;
 		this.location=location;
 		this.screenID = screenID;
 	}
 
 	
-	public Cineplex(String cineplexID, String name, String loc) {
-		this.cineplexID=cineplexID;
-		this.name=name;
-		this.location=loc;
-		this.screenID = new ArrayList<String>();
-	}
-
-
-
 	/** 
 	 * Set method for storing a reference to the master arraylist of Screens
 	 * 
@@ -169,7 +166,21 @@ public class Cineplex {
 	 * @return All the attributes of the cineplex class in a string format
 	 */
 	public String viewDetails() {
-		return "Cineplex cineplexID = " + cineplexID + " , name = " + name + " , location = " + location + " , screens = "
-				+ getScreenNames().toArray().toString();
+		String cineplexDetails = "";
+
+		cineplexDetails =   name + " at " + location + ", Screens [ ";
+
+		ArrayList<String> screenNames = getScreenNames();
+		for (int i=0 ; i < screenNames.size(); i++){
+			if ((i+1) == screenNames.size()) {
+				cineplexDetails = cineplexDetails +  screenNames.get(i) + "  ";// last item
+			}
+			else{
+				cineplexDetails = cineplexDetails +  screenNames.get(i)  + ", ";
+			}
+		}
+		cineplexDetails = cineplexDetails+"]";
+
+		return cineplexDetails;				
 	}
 }

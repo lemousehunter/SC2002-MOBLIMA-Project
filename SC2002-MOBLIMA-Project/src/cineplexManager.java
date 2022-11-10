@@ -2,10 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class cineplexManager implements Manager{
+public class CineplexManager implements Manager{
 
 
-    static Scanner sc = new Scanner(System.in);
     private ArrayList<User> masterUserList;
     private ArrayList<Cineplex> masterCineplexes;
     private ArrayList<Screen> masterScreens;
@@ -14,7 +13,14 @@ public class cineplexManager implements Manager{
     private ArrayList<Movie> masterMovies;
     private ArrayList<String> masterHolidaysList;
     private ArrayList<ViewerRatings> masterRatings;
+    
+    private CineplexBoundary cineplexIO;
+
    
+    public CineplexManager() {
+        cineplexIO = new CineplexBoundary();
+    }
+
     @Override
     public void setMasterLists(
     ArrayList<User> masterUserList,
@@ -46,44 +52,48 @@ public class cineplexManager implements Manager{
     }
     
     public void addCineplex() {
-    	String cineplexID = UUID.randomUUID().toString();
-        System.out.println("Enter Cineplex Name: ");
-        String name = sc.nextLine();
-        System.out.println("Enter Location: ");
-        String loc = sc.next();
+        String name=cineplexIO.setName();
+        String location=cineplexIO.setLocation();
+        String cineplexID = "";
+        ArrayList<String> screenID = new ArrayList<String>();
+
+        for(Cineplex c: masterCineplexes) {
+            if(c.getName().equals(name))
+            {
+                cineplexIO.printCineplexDuplicateError();
+                return;
+            }
+        }
          
-        Cineplex c=new Cineplex(cineplexID, name,loc);
+        Cineplex c=new Cineplex(cineplexID, name,location,screenID);
         masterCineplexes.add(c);
+        cineplexIO.printAddCineplexSuccessMessaage();
+
     }
     
-    public void viewCineplex() {
-        for(Cineplex c: masterCineplexes) {
-            System.out.println(c.viewDetails());
-            System.out.println("---------------------------X---------------------------");
-        }
-    }
-
-    public void cineplexListing() {
-        System.out.println("List of Cineplex:");
-        for(Cineplex c: masterCineplexes) {
-            System.out.println(c.getName());
-        }
-    }
-
     public void searchCineplex() {
-        System.out.println("Enter the cineplex name you want to search for: ");
-        String user_input = sc.nextLine();
-        boolean flag = false;
-        for(Cineplex c:masterCineplexes) {
-            if(c.getName().equalsIgnoreCase(user_input)) {
-                flag = true;
+        String name=cineplexIO.setName();
+
+        boolean cineplexFound = false;
+        Cineplex matchingCineplex=null;
+        for(Cineplex c: masterCineplexes) {
+            if(c.getName().startsWith(name))
+            {
+                cineplexFound=true;
+                matchingCineplex = c;
                 break;
             }
         }
-        if(flag)
-            System.out.println("Cineplex Found!");
-        else
-            System.out.println("Cineplex not found!");
+        if (cineplexFound) {
+            cineplexIO.printineplexFoundMessaage(matchingCineplex);
+        }
+        else {
+            cineplexIO.printineplexNotFoundMessaage();
+        }
     }
+
+	public void listAllCineplexes() {
+        cineplexIO.printAllCineplexes(masterCineplexes);
+	}
 	
 }

@@ -21,9 +21,14 @@ public class MoblimaApp {
     MovieManager movieMgr;
     MovieGoerManager movieGoerMgr;
     screenManager screenMgr;
-    cineplexManager cineplexMgr;
+    CineplexManager cineplexMgr;
     HolidayManager holidayMgr;
     BookingManager bookingMgr;
+    StaffManager staffManager;
+    ShowManager showManager;
+    MovieGoerManager movieGoerManager;
+    ReviewManager reviewManager;
+
 
 
     Scanner sc = new Scanner(System.in);
@@ -45,27 +50,45 @@ public class MoblimaApp {
      }
 
     public static void main(String[] args) throws IOException{
+
         MoblimaApp moblimaApp = new MoblimaApp();
         moblimaApp.process(args);
-    
+        System.out.println("Moblima Application is Terminating ...");
+
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            public void run()
+            {
+                try {
+                    System.out.println("Writing all  Master files");
+                    moblimaApp.writeDataFiles();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+           
     }
     public void process(String[] args) throws IOException {
         try {
             this.dataFolder = System.getProperty("dataFolder");
             if (this.dataFolder == null){
-                this.dataFolder = "";
+                this.dataFolder = "C:\\Users\\swami\\Downloads\\Varsha\\SC2002-MOBLIMA-Project\\database\\";
             }
             // prime the array lists from files
             primeAllObjects();
             // managers
             this.movieMgr = new MovieManager();
+            this.movieMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
         
-            this.movieGoerMgr = new MovieGoerManager();
+            this.movieGoerMgr = new MovieGoerManager(movieMgr, showManager, bookingMgr, reviewManager);
             this.movieGoerMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
             this.screenMgr = new screenManager();
+            this.screenMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
-            this.cineplexMgr = new cineplexManager();
+            this.cineplexMgr = new CineplexManager();
+            this.cineplexMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
             this.holidayMgr = new HolidayManager(); 
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
@@ -73,27 +96,37 @@ public class MoblimaApp {
             this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr);
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
+            this.reviewManager = new ReviewManager();
+            this.reviewManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
-            System.out.println("==================== Welcome to Moblima Application ====================\n" +
-                    " 1. Staff  Application                                             \n" +
-                    " 2. User   Application                         \n" +
-                    " 3. Exit                                     \n" +
-                    "===========================================================");
-            System.out.println("Enter choice: ");
+            this.staffManager = new StaffManager(this.cineplexMgr, this.screenMgr, this.showManager, this.movieMgr);
+            this.staffManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+
+            this.movieGoerManager = new MovieGoerManager(this.movieMgr, this.showManager, this.bookingMgr, this.reviewManager);
+            this.movieGoerManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+
+            System.out.println("\n==================== Welcome to Moblima Application ====================\n" +
+                               " 1. Staff  Application                                             \n" +
+                               " 2. User   Application                         \n" +
+                               " 3. Exit                                     \n" +
+                               "========================================================================");
+            System.out.print("Enter choice: ");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    // instantiating Staff object
                     ManageStaffApp();
+                    break;
 
                 case 2:
-                    ManageUserApp();
+                    ManageMovieGoerApp();
+                    break;
+                
+                case 3:
+                    break;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            writeDataFiles();
-        }
+        } 
 
     }
 
@@ -106,7 +139,7 @@ public class MoblimaApp {
         this.writeViewerRatings();
         this.writeUser();
         this.writeHolidays();
-        //this.writeTicket();
+        //this.writeTicketPrice();
     }
 
     private void writeViewerRatings() throws IOException {
@@ -183,7 +216,7 @@ public class MoblimaApp {
 
     }
 
-    // private void writeTicket() throws IOException {
+    // private void writeTicketPrice() throws IOException {
     //     String filename = this.dataFolder.concat("TicketPrices.txt");
     //     String SEPARATOR = "|";
     //     List alw = new ArrayList();
@@ -459,7 +492,7 @@ public class MoblimaApp {
         primeViewerRatings();
         primeUser();
         primeHolidays();
-        //primeTickets();
+        //primeTicketPrice();
 
     }
 
@@ -796,19 +829,21 @@ public class MoblimaApp {
                 screenIDs.add(screenID);
             }
             Cineplex cineplex = new Cineplex(cineplexID, cineplexName, location, screenIDs);
+            cineplex.setMasterScreens(masterScreens);
             this.masterCineplexes.add(cineplex);
         }
     }
 
     private void ManageStaffApp() {
         int subchoice;
+        boolean userLoggedin=false;
         do {
-            System.out.println("==================== Welcome to STAFF APP ====================\n" +
-                    " 1. Register                                               \n" +
-                    " 2. Login                                                 \n" +
-                    " 3. Go Back to Main Menu                                 \n" +
-                    "===========================================================");
-            System.out.println("Enter choice: ");
+            System.out.println("\n========================= Welcome to Staff App =========================\n" +
+                               "1. Register                                               \n" +
+                               "2. Login                                                 \n" +
+                               "3. Go Back to Main Menu                                 \n" +
+                               "========================================================================");
+            System.out.print("Enter choice: ");
             while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer value.");
                 sc.next();
@@ -817,9 +852,9 @@ public class MoblimaApp {
             sc.nextLine();
             switch (subchoice) {
                 case 1:
-                    System.out.println("Enter UserName: ");
+                    System.out.print("Enter UserName: ");
                     String userName = sc.nextLine();
-                    System.out.println("Enter Password: ");
+                    System.out.print("Enter Password: ");
                     String password = sc.nextLine();
                     int masterUserListSize;
                     if (this.masterUserList.isEmpty()) {
@@ -830,21 +865,23 @@ public class MoblimaApp {
                     boolean userFound = false;
                     for (int i = 0; i < masterUserListSize; i++) {
                         if (this.masterUserList.get(i).getUserName().equals(userName)) {
-                            System.out.println("User Already Registered");
+                            System.out.println("\n"+userName+ "  Already Registered");
                             userFound = true;
                         }
                     }
                     if (!userFound) {
                         Staff staff = new Staff(userName, password);
                         masterUserList.add(staff);
-                        System.out.println("Successfully Registered");
+                        System.out.println("\n"+userName+" Successfully Registered");
 
                     }
+                    break;
 
                 case 2:
-                    System.out.println("Enter UserName: ");
+                    userLoggedin=false;
+                    System.out.print("Enter UserName: ");
                     userName = sc.nextLine();
-                    System.out.println("Enter Password: ");
+                    System.out.print("Enter Password: ");
                     password = sc.nextLine();
                     userFound = false;
                     for (int i = 0; i < this.masterUserList.size(); i++) {
@@ -854,29 +891,37 @@ public class MoblimaApp {
                             if (staffUser.getUserName().equals(userName)) {
                                 userFound = true;
                                 if (staffUser.getPassword().equals(password)) {
-                                    System.out.println("Succesfully Logged in");
+                                    System.out.println("\n"+userName+" Succesfully Logged in");
+                                    userLoggedin=true;
                                     this.sessionUser = this.masterUserList.get(i);
                                     break;
                                 } else {
-                                    System.out.println("Wrong Password");
+                                    System.out.println("Invalid Password. Try Loggin in again \n");
                                 }
                             }
                         }
                     }
                     if (!userFound) {
-                        System.out.println("Please Enter (1) to Register");
+                        System.out.println("\nUser "+ userName + " not registered \n");
+                        System.out.println("Please Enter (1) to Register \n \n3");
                         break;
                     }
+                    if (userLoggedin){
+                        staffManager.staffOperations();
+                        // force user app to terminate by setting subchoice to 3
+                        subchoice=3;    
+                    }
+
+                    break;
 
                 case 3: // return to mainMenu
                     this.sessionUser = null;
             }
-        } while (subchoice <= 3);
+        } while (subchoice < 3);
     }
 
-    private void ManageUserApp() {
-        UserApp userapp = new UserApp();
-        userapp.Process();
+    private void ManageMovieGoerApp() {
+         movieGoerMgr.process();
     }
 
 }

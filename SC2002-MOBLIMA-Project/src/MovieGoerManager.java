@@ -9,7 +9,19 @@ public class MovieGoerManager implements Manager {
     private ArrayList<Movie> masterMovies;
     private ArrayList<String> masterHolidaysList;
     private ArrayList<ViewerRatings> masterRatings;
+    private MovieManager movieManager;
+    private ShowManager showManager;
+    private BookingManager bookingManager;
   
+    public MovieGoerManager(){}
+    public MovieGoerManager(MovieManager movieMgr, ShowManager showManager, BookingManager bookingMgr,
+        ReviewManager reviewManager) {
+          this.movieManager = movieMgr;
+          this.showManager = showManager;
+          this.bookingManager=bookingMgr;
+          //movieGoerIO=new mov
+    }
+    
     @Override
   public void setMasterLists(
     ArrayList<User> masterUserList,
@@ -39,5 +51,8 @@ public class MovieGoerManager implements Manager {
             }
         }
         return null;      
+    }
+
+    public void process() {
     }
 }

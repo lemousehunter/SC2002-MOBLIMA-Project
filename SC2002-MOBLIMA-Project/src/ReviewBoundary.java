@@ -6,45 +6,33 @@ public class ReviewBoundary{
 
     private Scanner s;
     private Scanner q;
-    private RatingScale rate;
+    private double scale;
     private String review;
     public ReviewBoundary()
     {
       s=new Scanner(System.in);
       q=new Scanner(System.in);
-      rate=RatingScale.ONE;//dummy value
+      scale=1;   //dummy value
       review="";
     }
 
-    public RatingScale setScale() 
-    {
-      int scale=0;      
-      
-      while(scale>5||scale<1)
-      {
-
+    public double setScale() {
+      double scale = 0;
+  
+      while (scale > 5 || scale < 1) {
         System.out.println("Set rating scale (1-5)");
-        try {scale=q.nextInt();} 
-        catch (Exception e) 
-        {System.out.println("Enter Integer Value only");q.nextLine();}
-        
-        switch(scale)
-        {
-          case 1: rate=RatingScale.ONE;break;
-          case 2: rate=RatingScale.TWO;break;
-          case 3:rate=RatingScale.THREE;break;
-          case 4:rate= RatingScale.FOUR;break;
-          case 5:rate= RatingScale.FIVE;break;
-          default: break;
+        try {
+          scale = q.nextDouble();
+        } catch (Exception e) {
+          System.out.println("Enter Ratings betwen 1-5 Value only");
+          q.nextLine();
         }
-        
       }
-      
-      return rate;
-    
+  
+      return scale;
     }
     
-    String addReview()
+    public String addReview()
     {
     
       System.out.println("Please enter review");
