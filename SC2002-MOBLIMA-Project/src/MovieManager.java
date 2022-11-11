@@ -5,7 +5,7 @@ import java.util.UUID;
 import javafx.scene.shape.MoveTo;
 
 
-public class MovieManager implements BaseManager {
+public class MovieManager extends Manager implements BaseManager {
 
     private MovieTypeEN movieType;
     private MovieRatingEN movieRating;
@@ -56,7 +56,7 @@ public class MovieManager implements BaseManager {
         }
         return null;
     }
-    
+
     public void addMovie() {
         char insertUpdateFlag = 'I';
         String movieName = movieIO.setMovieName();
@@ -142,7 +142,7 @@ public class MovieManager implements BaseManager {
             movieIO.printMissingMovie();
             return;
         }
-        searchMovie.setShowStatus(ShowStatusEN.valueOf(showStatus)); 
+        searchMovie.setShowStatus(ShowStatusEN.valueOf(showStatus));
         movieIO.printUpdateMovieSuccessMsg();
 
     }
@@ -184,12 +184,10 @@ public class MovieManager implements BaseManager {
         return this.getCurrentMovies().get(idx-1).getMovieID();
     }
 
-    @Override
     public void setCentralManager(CentralManagerEY CentralManager) {
 
     }
 
-    @Override
     public void getManager(BaseManager manager) {
 
     }

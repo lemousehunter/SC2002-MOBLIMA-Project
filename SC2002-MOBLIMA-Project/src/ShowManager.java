@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ShowManager implements BaseManager {
+public class ShowManager extends Manager implements BaseManager {
 
     static Scanner sc = new Scanner(System.in);
     private ArrayList<User> masterUserList;

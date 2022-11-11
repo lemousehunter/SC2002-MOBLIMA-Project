@@ -3,50 +3,46 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class BookingManager implements BaseManager {
+public class BookingManager extends Manager implements BaseManager {
 
   private Integer count;
-
-  private MovieManager movieMgr;
 
   private HashMap<String, ArrayList<String>> bookingUserDict; // {User: [BookingID1, BookingID2]}
   private Hashtable<String, BookingEY> bookingIDDict; // {bookingID: Booking}
   private TicketEY ticket;
+
+  // Managers
   private HolidayManager holidayManager;
-  private CentralManagerEY centralManager;
-  private Hashtable<String, BaseManager> managerDict;
-  private Hashtable<String, ArrayList> arrayDict;
+  private MovieManager movieManager;
+
+  private MovieGoerManager movieGoerManager;
+
+  // MasterLists
+  private ArrayList<MovieGoerEY> masterMovieGoers;
+  private ArrayList<BookingEY> masterBookings;
+  private ArrayList<MovieEY> masterMovies;
 
 
   public BookingManager() {
     this.count = 0; // to ensure that all booking IDs are unique
     this.bookingUserDict = new HashMap<String, ArrayList<String>>();
     this.bookingIDDict = new Hashtable<String, BookingEY>();
-    this.managerDict = new Hashtable<String, BaseManager>();
     this.initializeHashMaps();
   }
 
   @Override
-  public void setCentralManager(CentralManagerEY CentralManager) {
-    this.centralManager = centralManager;
-    this.setManagers();
-  }
-
-  @Override
   public void setManagers() {
-    this.holidayManager = this.centralManager.getHolidayMgr();
-    this.movieMgr = this.centralManager.getMovieMgr();
-
+    this.holidayManager = this.getCentralManager().getHolidayMgr();
+    this.movieManager = this.getCentralManager().getMovieMgr();
+    this.movieGoerManager = this.getCentralManager().getMovieGoerMgr();
   }
 
   @Override
-  public BaseManager getManager(String managerName) {
-    return this.managerDict.get(managerName);
-  }
-
-  @Override
-  public ArrayList getMasterList(String arrayName) {
-    return this.arrayDict.get(arrayName);
+  public void setMasterLists() {
+    CentralManagerEY centralMgr = this.getCentralManager();
+    this.masterBookings = centralMgr.getMasterBookings();
+    this.masterMovies = centralMgr.getMasterMovies();
+    this.masterMovieGoers = centralMgr.getMasterMovieGoers();
   }
 
   public BookingEY getBookingByID(String bookingID) {
@@ -54,9 +50,10 @@ public class BookingManager implements BaseManager {
   }
 
   private void initializeHashMaps() {
-    if (this.masterUserList != null) {
-      for (User user : this.masterUserList) {
-        this.bookingUserDict.put(user.getUserID(), new ArrayList<String>());
+    ArrayList<MovieGoerEY> movieGoerList = this.movieGoerManager.getAllMovieGoers();
+    if (movieGoerList != null) {
+      for (MovieGoerEY movieGoer : movieGoerList) {
+        this.bookingUserDict.put(movieGoer.getUserID(), new ArrayList<String>());
       }
     }
     ArrayList<String> user_booking_lst;
@@ -78,7 +75,7 @@ public class BookingManager implements BaseManager {
 
   public String BookTicket( String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
     String BookingID = genBookingID(userID);
-    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayManager, this.movieMgr);
+    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayManager, this.movieManager);
     ArrayList<String> bookingList = this.bookingUserDict.get(userID);
     if (bookingList == null) { // initializes user list if not exist in hashmap
       bookingList = new ArrayList<String>();
@@ -88,16 +85,10 @@ public class BookingManager implements BaseManager {
     this.bookingIDDict.put(BookingID, booking); // map booking to BookingID
 
     // Add BookingID to corresponding user
-
-    for (User user : masterUserList){
-        if (user.getUserID().equals(userID)){
-            MovieGoerEY movieGoer = (MovieGoerEY) user;
-            movieGoer.addBookingID(BookingID);
-        }
-    }
+    this.movieGoerManager.getUserByID(userID).addBookingID(BookingID);
 
     // Add Bookings to Masterlist
-    masterBookings.add(booking);
+    this.masterBookings.add(booking);
 
     return BookingID;
   }
@@ -121,7 +112,7 @@ public class BookingManager implements BaseManager {
 
   public ArrayList<String> getTop5Movies() {
     Hashtable<String, Double> costDict = new Hashtable<String, Double>(); // costDict[MovieID]
-    masterMovies.forEach((movie) -> costDict.put(movie.getMovieID(), 0.0)); // initialize costDict with all movieIDs,0.0 in masterMovies
+    this.masterMovies.forEach((movie) -> costDict.put(movie.getMovieID(), 0.0)); // initialize costDict with all movieIDs,0.0 in masterMovies
     for (String bookingID : bookingIDDict.keySet()) { // for all bookings
       BookingEY booking = this.getBookingByID(bookingID);
       Double cost = booking.getBookingAmount(); // get cost of booking

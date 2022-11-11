@@ -5,16 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class HolidayManager implements BaseManager {
+public class HolidayManager extends Manager implements BaseManager {
 
-  private ArrayList<User> masterUserList;
-  private ArrayList<CineplexEY> masterCineplexes;
-  private ArrayList<ScreenEY> masterScreens;
-  private ArrayList<BookingEY> masterBookings;
-  private ArrayList<ShowEY> masterShows;
-  private ArrayList<MovieEY> masterMovies;
+
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ReviewEY> masterRatings;
 
   private HolidayBoundary holidayIO;
 
@@ -23,24 +17,14 @@ public class HolidayManager implements BaseManager {
   }
 
   @Override
-  public void setMasterLists(
-    ArrayList<User> masterUserList,
-    ArrayList<CineplexEY> masterCineplexes,
-    ArrayList<ScreenEY> masterScreens,
-    ArrayList<BookingEY> masterBookings,
-    ArrayList<ShowEY> masterShows,
-    ArrayList<MovieEY> masterMovies,
-    ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewEY> masterRatings
-  ) {
-    this.masterUserList = masterUserList;
-    this.masterCineplexes = masterCineplexes;
-    this.masterScreens = masterScreens;
-    this.masterBookings = masterBookings;
-    this.masterShows = masterShows;
-    this.masterMovies = masterMovies;
-    this.masterHolidaysList = masterHolidaysList;
-    this.masterRatings = masterRatings;
+  public void setManagers() {
+    CentralManagerEY centralMgr = this.getCentralManager();
+  }
+
+  @Override
+  public void setMasterLists() {
+    CentralManagerEY centralMgr = this.getCentralManager();
+    this.masterHolidaysList = centralMgr.getMasterHolidaysList();
   }
 
   public boolean isHoliday(String date) {
@@ -87,6 +71,7 @@ public class HolidayManager implements BaseManager {
   public void listAllHolidays() {
     holidayIO.printAllHolidays(masterHolidaysList);
   }
+
   /*  public static void main(String[] args) testing purposes
     {
         Ratings r=new Ratings();

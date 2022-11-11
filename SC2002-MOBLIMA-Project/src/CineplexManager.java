@@ -1,16 +1,7 @@
 import java.util.ArrayList;
 
-public class CineplexManager implements BaseManager {
-
-
-    private ArrayList<User> masterUserList;
+public class CineplexManager extends Manager implements BaseManager {
     private ArrayList<CineplexEY> masterCineplexes;
-    private ArrayList<ScreenEY> masterScreens;
-    private ArrayList<BookingEY> masterBookings;
-    private ArrayList<ShowEY> masterShows;
-    private ArrayList<MovieEY> masterMovies;
-    private ArrayList<String> masterHolidaysList;
-    private ArrayList<ReviewEY> masterRatings;
     
     private CineplexBoundary cineplexIO;
 
@@ -20,86 +11,63 @@ public class CineplexManager implements BaseManager {
     }
 
     @Override
-    public void setMasterLists(
-    ArrayList<User> masterUserList,
-    ArrayList<CineplexEY> masterCineplexes,
-    ArrayList<ScreenEY> masterScreens,
-    ArrayList<BookingEY> masterBookings,
-    ArrayList<ShowEY> masterShows,
-    ArrayList<MovieEY> masterMovies,
-    ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewEY> masterRatings) {
-    this.masterUserList = masterUserList;
-    this.masterCineplexes = masterCineplexes;
-    this.masterScreens = masterScreens;
-    this.masterBookings = masterBookings;
-    this.masterShows = masterShows;
-    this.masterMovies = masterMovies;
-    this.masterHolidaysList = masterHolidaysList;
-    this.masterRatings = masterRatings;
-  }
+    public void setManagers() {
 
-    public CineplexEY getCineplexByID(String cineplexID) {
-        for(CineplexEY c: masterCineplexes) {
+    }
+
+    @Override
+    public void setMasterLists() {
+        this.masterCineplexes = this.getCentralManager().getMasterCineplexes();
+    }
+
+    public CineplexEY getCineplexByID(String cineplexID) { // returns cineplex if found, else returns null
+        for(CineplexEY c: this.masterCineplexes) {
             if(cineplexID.equals(c.getCineplexID()))
                 return c;
-            else
-                System.out.println("No cineplex exists with this ID!");
         }
         return null;
     }
     
-    public void addCineplex() {
-        String name=cineplexIO.setName();
-        String location=cineplexIO.setLocation();
+    public Boolean addCineplex(String cinemaName, String location
+    ) { //
         String cineplexID = "";
         ArrayList<String> screenID = new ArrayList<String>();
 
-        for(CineplexEY c: masterCineplexes) {
-            if(c.getName().equals(name))
+        for(CineplexEY c: this.masterCineplexes) {
+            if(c.getName().equals(cinemaName))
             {
-                cineplexIO.printCineplexDuplicateError();
-                return;
+                return false;
             }
         }
          
-        CineplexEY c=new CineplexEY(cineplexID, name,location,screenID);
-        masterCineplexes.add(c);
-        cineplexIO.printAddCineplexSuccessMessaage();
+        CineplexEY c = new CineplexEY(cineplexID, cinemaName,location,screenID);
+        this.masterCineplexes.add(c);
+        return true;
 
     }
     
-    public void searchCineplex() {
-        String name=cineplexIO.setName();
-
-        boolean cineplexFound = false;
-        CineplexEY matchingCineplex=null;
-        for(CineplexEY c: masterCineplexes) {
+    public CineplexEY searchCineplexByName(String name) { // returns cineplex object which matches the provided name, else returns null
+        for(CineplexEY c: this.masterCineplexes) {
             if(c.getName().startsWith(name))
             {
-                cineplexFound=true;
-                matchingCineplex = c;
-                break;
+                return c;
             }
         }
-        if (cineplexFound) {
-            cineplexIO.printCineplexFoundMessaage(matchingCineplex);
-        }
-        else {
-            cineplexIO.printCineplexNotFoundMessaage();
-        }
-    }
-
-    public ArrayList<CineplexEY> getMasterCineplexes() {
-        return masterCineplexes;
+        return null;
     }
 
     public String convertIDX2CineplexID(int idx) {
-        return masterCineplexes.get(idx).getCineplexID();
+        return this.masterCineplexes.get(idx).getCineplexID();
     }
 	
-	public void listAllCineplexes() {
-        cineplexIO.printAllCineplexes();
+	public ArrayList<String> listAllCineplexes() {
+        int idx = 1;
+        ArrayList<String> stringList = new ArrayList<String>();
+        for (CineplexEY c: this.masterCineplexes) {
+            stringList.add(idx + ": " + c.viewDetails());
+            idx++;
+        }
+
+        return stringList;
 	}
-	
 }

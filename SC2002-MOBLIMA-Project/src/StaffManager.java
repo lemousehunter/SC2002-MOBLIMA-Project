@@ -182,30 +182,6 @@ public class StaffManager implements BaseManager {
     }
   }
 
-  private void cineplexOperations() {
-    int cineplexChoice = 0;
-    while (cineplexChoice != 4) {
-      cineplexChoice = staffIO.getCineplexMenuChoice();
-      if (cineplexChoice < 0 | cineplexChoice > 4) {
-        staffIO.printCineplexMenuChoiceError();
-        continue;
-      }
-      switch (cineplexChoice) {
-        case 1:
-          cineplexManager.addCineplex();
-          break;
-        case 2:
-          cineplexManager.searchCineplex();
-          break;
-        case 3:
-          cineplexManager.listAllCineplexes();
-          break;
-        case 4:
-          break;
-      }
-    }
-  }
-
   private void screenOperations() {
     int screenChoice = 0;
     while (screenChoice != 4) {

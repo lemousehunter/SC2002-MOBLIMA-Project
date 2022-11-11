@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class CentralManagerEY {
     // Master Lists
-    private ArrayList<User> masterUserList;
+    private ArrayList<User> masterUsers;
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterScreens;
     private ArrayList<BookingEY> masterBookings;
@@ -10,6 +10,7 @@ public class CentralManagerEY {
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<String> masterHolidaysList;
     private ArrayList<ReviewEY> masterRatings;
+    private ArrayList<MovieGoerEY> masterMovieGoers;
 
     // Managers
     private BookingManager bookingMgr;
@@ -21,11 +22,24 @@ public class CentralManagerEY {
     private SeatManager seatMgr;
     private ShowManager showMgr;
     private TicketPriceManager ticketPriceMgr;
+    private MovieGoerManager movieGoerMgr;
+
+    // Boundaries
+    private BookingBoundary bookingBoundary;
+    private CineplexBoundary cineplexBoundary;
+    private HolidayBoundary holidayBoundary;
+    private MovieBoundary movieBoundary;
+    private ReviewBoundary reviewBoundary;
+    private ScreenBoundary screenBoundary;
+    private TicketPriceBoundary ticketPriceBoundary;
+    private ShowBoundary showBoundary;
+
 
     public CentralManagerEY() {
 
     }
 
+    // MasterArrays
     public void setMasterBookings(ArrayList<BookingEY> masterBookings) {
         this.masterBookings = masterBookings;
     }
@@ -82,14 +96,23 @@ public class CentralManagerEY {
         return masterShows;
     }
 
-    public void setMasterUserList(ArrayList<User> masterUserList) {
-        this.masterUserList = masterUserList;
+    public void setMasterUsers(ArrayList<User> masterUsers) {
+        this.masterUsers = masterUsers;
     }
 
-    public ArrayList<User> getMasterUserList() {
-        return masterUserList;
+    public ArrayList<User> getMasterUsers() {
+        return masterUsers;
     }
 
+    public void setMasterMovieGoers(ArrayList<MovieGoerEY> masterMovieGoers) {
+        this.masterMovieGoers = masterMovieGoers;
+    }
+
+    public ArrayList<MovieGoerEY> getMasterMovieGoers() {
+        return masterMovieGoers;
+    }
+
+    // Managers
     public void setBookingMgr(BookingManager bookingMgr) {
         this.bookingMgr = bookingMgr;
     }
@@ -160,5 +183,78 @@ public class CentralManagerEY {
 
     public TicketPriceManager getTicketPriceMgr() {
         return ticketPriceMgr;
+    }
+
+    public void setMovieGoerMgr(MovieGoerManager movieGoerMgr) {
+        this.movieGoerMgr = movieGoerMgr;
+    }
+
+    public MovieGoerManager getMovieGoerMgr() {
+        return this.movieGoerMgr;
+    }
+
+    // Boundaries
+    public void setBookingBoundary(BookingBoundary bookingBoundary) {
+        this.bookingBoundary = bookingBoundary;
+    }
+
+    public BookingBoundary getBookingBoundary() {
+        return bookingBoundary;
+    }
+
+    public void setCineplexBoundary(CineplexBoundary cineplexBoundary) {
+        this.cineplexBoundary = cineplexBoundary;
+    }
+
+    public CineplexBoundary getCineplexBoundary() {
+        return cineplexBoundary;
+    }
+
+    public void setHolidayBoundary(HolidayBoundary holidayBoundary) {
+        this.holidayBoundary = holidayBoundary;
+    }
+
+    public HolidayBoundary getHolidayBoundary() {
+        return holidayBoundary;
+    }
+
+    public void setMovieBoundary(MovieBoundary movieBoundary) {
+        this.movieBoundary = movieBoundary;
+    }
+
+    public MovieBoundary getMovieBoundary() {
+        return movieBoundary;
+    }
+
+    public void setReviewBoundary(ReviewBoundary reviewBoundary) {
+        this.reviewBoundary = reviewBoundary;
+    }
+
+    public ReviewBoundary getReviewBoundary() {
+        return reviewBoundary;
+    }
+
+    public void setScreenBoundary(ScreenBoundary screenBoundary) {
+        this.screenBoundary = screenBoundary;
+    }
+
+    public ScreenBoundary getScreenBoundary() {
+        return screenBoundary;
+    }
+
+    public void setTicketPriceBoundary(TicketPriceBoundary ticketPriceBoundary) {
+        this.ticketPriceBoundary = ticketPriceBoundary;
+    }
+
+    public TicketPriceBoundary getTicketPriceBoundary() {
+        return ticketPriceBoundary;
+    }
+
+    public void setShowBoundary(ShowBoundary showBoundary) {
+        this.showBoundary = showBoundary;
+    }
+
+    public ShowBoundary getShowBoundary() {
+        return showBoundary;
     }
 }
