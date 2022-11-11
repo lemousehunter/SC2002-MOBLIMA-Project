@@ -222,7 +222,7 @@ public class ShowManager implements Manager {
         return movieScreens;
         
     }
-    public ArrayList<MovieEY> viewMovieListing(ShowStatus showStatus){
+    public ArrayList<MovieEY> viewMovieListing(ShowStatusEN showStatus){
         ArrayList<MovieEY> movieList= new ArrayList<MovieEY>();
         for (MovieEY movie : masterMovies){
             if (movie.getShowStatus().equals(showStatus)){

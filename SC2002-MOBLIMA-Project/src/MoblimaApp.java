@@ -78,8 +78,6 @@ public class MoblimaApp {
             // prime the array lists from files
             primeAllObjects();
             // managers
-            this.movieMgr = new MovieManager();
-            this.movieMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
         
             this.movieGoerMgr = new MovieGoerManager(movieMgr, showManager, bookingMgr, reviewManager);
             this.movieGoerMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
@@ -100,6 +98,9 @@ public class MoblimaApp {
 
             this.reviewManager = new ReviewManager();
             this.reviewManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+
+            this.movieMgr = new MovieManager(this.reviewManager);
+            this.movieMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
             this.ticketPriceManager = new TicketPriceManager(); 
             this.ticketPriceManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
@@ -731,8 +732,8 @@ public class MoblimaApp {
             while (ratingToken.hasMoreTokens()) {
                 ratings.add(ratingToken.nextToken().trim());
             }
-            MovieEY movie = new MovieEY(movieID, movieName, movieLanguage, movieType,
-                    MovieRatingEN.valueOf(movieRating), ShowStatus.valueOf(showstatus), synopsis, director, castList,
+            MovieEY movie = new MovieEY(movieID, movieName, movieLanguage, MovieTypeEN.valueOf(movieType),
+                    MovieRatingEN.valueOf(movieRating), ShowStatusEN.valueOf(showstatus), synopsis, director, castList,
                     ratings);
             this.masterMovies.add(movie);
 

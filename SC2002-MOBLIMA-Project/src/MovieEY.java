@@ -17,7 +17,7 @@ public class MovieEY {
 	private String movieLanguage;
 	private MovieTypeEN movieType;
 	private MovieRatingEN movieRating;
-	private ShowStatus showStatus;
+	private ShowStatusEN showStatus;
 	private String synopsis;
 	private String director;
 	private ArrayList<String> cast;
@@ -44,11 +44,16 @@ public class MovieEY {
 	 * @param cast The cast of the movie
 	 * @param ratingsID The ratings given by users to the movie
 	 */
-	public MovieEY(String movieID, String name, String movieLanguage, String movieType, MovieRatingEN movieRating, ShowStatus showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
-		this.movieID = movieID;
+	public MovieEY(String movieID, String name, String movieLanguage, MovieTypeEN movieType, MovieRatingEN movieRating, ShowStatusEN showStatus, String synopsis, String director, ArrayList<String> cast, ArrayList<String> ratingsID) {
+		if (movieID.isEmpty()) {
+			this.movieID = UUID.randomUUID().toString();
+		}
+		else {
+			this.movieID = movieID;
+		}
 		this.name = name;
 		this.movieLanguage = movieLanguage;
-		this.movieType = MovieTypeEN.valueOf(movieType);
+		this.movieType = movieType;
 		this.movieRating = movieRating;
 		this.showStatus = showStatus;
 		this.synopsis = synopsis;
@@ -188,7 +193,7 @@ public class MovieEY {
 	 * 
 	 * @return the current show status
 	 */
-	public ShowStatus getShowStatus() {
+	public ShowStatusEN getShowStatus() {
 		return this.showStatus;
 	}
 
@@ -197,7 +202,7 @@ public class MovieEY {
 	 *
 	 * @param showStatus The new show status of the movie
 	 */
-	public void setShowStatus(ShowStatus showStatus) {
+	public void setShowStatus(ShowStatusEN showStatus) {
 		this.showStatus = showStatus;
 	}
 
@@ -283,4 +288,16 @@ public class MovieEY {
 	public MovieTypeEN getMovieType() {
 		return movieType;
 	}
+
+	public String toString() {
+		return  this.name + "\n" + 
+				"Language     : " + this.movieLanguage + "\n" + 
+				"Type         : " + this.movieType.toString() + "\n" + 
+				"Rating       : " + this.movieRating.toString() + "\n" + 
+				"Status       : " + this.showStatus.toString() + "\n" + 
+				"Synopsis     : " + this.synopsis + "\n" + 
+				"Director     : " + this.director + "\n" + 
+				"cast         : " + this.cast.toString() + "\n";
+	}
+				
 }

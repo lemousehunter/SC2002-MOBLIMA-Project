@@ -1,4 +1,4 @@
-public enum ShowStatus {
+public enum ShowStatusEN {
 	COMINGSOON,
 	PREVIEW,
 	SHOWING,
