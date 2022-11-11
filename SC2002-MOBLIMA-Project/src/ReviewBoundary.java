@@ -53,7 +53,12 @@ public class ReviewBoundary{
     {
       if(top5movies!=null&&top5movies.size()==5)
       {
-        System.out.print(top5movies);
+        System.out.println("\nTop 5 movies by Average Viewer Ratings");
+        System.out.println("--------------------------------------");
+        for (int i=1; i<=top5movies.size();i++){
+          System.out.println(i + ". " + top5movies.get(i-1));
+        }
+        
 
       }else
       {

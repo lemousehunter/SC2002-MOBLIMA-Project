@@ -117,7 +117,8 @@ public class ReviewManager implements Manager{
 
     
     for (String key: reviewMap.keySet()) 
-    {               
+    {             
+      avgRating=0;  
       if(reviewMap.get(key).size()>1)
       {
         for (int i=0; i<reviewMap.get(key).size();i++) 
@@ -151,8 +152,10 @@ public class ReviewManager implements Manager{
             if(m.getMovieID().equals(key))
             {
                 top5mv.add(m.getName());// adds the movie name 
+                break;
             }
           }
+          break;
           
         }
       }
