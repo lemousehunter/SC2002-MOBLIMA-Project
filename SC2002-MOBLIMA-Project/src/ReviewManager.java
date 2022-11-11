@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ReviewManager implements Manager{
+public class ReviewManager implements BaseManager {
 
   private ReviewBoundary reviewIO;    
   private ArrayList<User> masterUserList;

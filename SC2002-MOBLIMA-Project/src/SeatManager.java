@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class SeatManager implements Manager{
+public class SeatManager implements BaseManager {
     private ArrayList<User> masterUserList;
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterScreens;

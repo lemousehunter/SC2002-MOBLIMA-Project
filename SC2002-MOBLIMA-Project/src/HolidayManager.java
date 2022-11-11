@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class HolidayManager implements Manager {
+public class HolidayManager implements BaseManager {
 
   private ArrayList<User> masterUserList;
   private ArrayList<CineplexEY> masterCineplexes;

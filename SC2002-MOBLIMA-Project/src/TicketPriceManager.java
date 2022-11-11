@@ -1,11 +1,6 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class TicketPriceManager implements Manager {
+public class TicketPriceManager implements BaseManager {
 
   private ArrayList<User> masterUserList;
   private ArrayList<CineplexEY> masterCineplexes;

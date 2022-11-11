@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class StaffManager implements Manager {
+public class StaffManager implements BaseManager {
 
   private ArrayList<User> masterUserList;
   private ArrayList<CineplexEY> masterCineplexes;

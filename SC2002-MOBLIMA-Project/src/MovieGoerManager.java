@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class MovieGoerManager implements Manager {
+public class MovieGoerManager implements BaseManager {
     private ArrayList<User> masterUserList;
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterScreens;

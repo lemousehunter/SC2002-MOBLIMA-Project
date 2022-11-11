@@ -3,53 +3,50 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class BookingManager implements Manager {
+public class BookingManager implements BaseManager {
 
-  private final Integer count;
+  private Integer count;
 
-  private final MovieManager movieMgr;
+  private MovieManager movieMgr;
 
-  private final HashMap<String, ArrayList<String>> bookingUserDict; // {User: [BookingID1, BookingID2]}
-  private final Hashtable<String, BookingEY> bookingIDDict; // {bookingID: Booking}
+  private HashMap<String, ArrayList<String>> bookingUserDict; // {User: [BookingID1, BookingID2]}
+  private Hashtable<String, BookingEY> bookingIDDict; // {bookingID: Booking}
   private TicketEY ticket;
-  private final HolidayManager holidayManager;
-  private ArrayList<User> masterUserList;
-  private ArrayList<CineplexEY> masterCineplexes;
-  private ArrayList<ScreenEY> masterScreens;
-  private ArrayList<BookingEY> masterBookings;
-  private ArrayList<ShowEY> masterShows;
-  private ArrayList<MovieEY> masterMovies;
-  private ArrayList<String> masterHolidaysList;
-  private ArrayList<ReviewEY> masterRatings;
+  private HolidayManager holidayManager;
+  private CentralManagerEY centralManager;
+  private Hashtable<String, BaseManager> managerDict;
+  private Hashtable<String, ArrayList> arrayDict;
 
-  @Override
-  public void setMasterLists(
-    ArrayList<User> masterUserList,
-    ArrayList<CineplexEY> masterCineplexes,
-    ArrayList<ScreenEY> masterScreens,
-    ArrayList<BookingEY> masterBookings,
-    ArrayList<ShowEY> masterShows,
-    ArrayList<MovieEY> masterMovies,
-    ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewEY> masterRatings
-  ) {
-    this.masterUserList = masterUserList;
-    this.masterCineplexes = masterCineplexes;
-    this.masterScreens = masterScreens;
-    this.masterBookings = masterBookings;
-    this.masterShows = masterShows;
-    this.masterMovies = masterMovies;
-    this.masterHolidaysList = masterHolidaysList;
-    this.masterRatings = masterRatings;
-  }
 
-  public BookingManager(MovieManager movieMgr, HolidayManager holidayManager) {
+  public BookingManager() {
     this.count = 0; // to ensure that all booking IDs are unique
     this.bookingUserDict = new HashMap<String, ArrayList<String>>();
     this.bookingIDDict = new Hashtable<String, BookingEY>();
-    this.movieMgr = movieMgr;
-    this.holidayManager = holidayManager;
+    this.managerDict = new Hashtable<String, BaseManager>();
     this.initializeHashMaps();
+  }
+
+  @Override
+  public void setCentralManager(CentralManagerEY CentralManager) {
+    this.centralManager = centralManager;
+    this.setManagers();
+  }
+
+  @Override
+  public void setManagers() {
+    this.holidayManager = this.centralManager.getHolidayMgr();
+    this.movieMgr = this.centralManager.getMovieMgr();
+
+  }
+
+  @Override
+  public BaseManager getManager(String managerName) {
+    return this.managerDict.get(managerName);
+  }
+
+  @Override
+  public ArrayList getMasterList(String arrayName) {
+    return this.arrayDict.get(arrayName);
   }
 
   public BookingEY getBookingByID(String bookingID) {

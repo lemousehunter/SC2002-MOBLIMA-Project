@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
 
-public class CineplexManager implements Manager{
+public class CineplexManager implements BaseManager {
 
 
     private ArrayList<User> masterUserList;

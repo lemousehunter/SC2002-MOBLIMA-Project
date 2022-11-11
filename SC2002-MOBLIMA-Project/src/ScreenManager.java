@@ -1,8 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
 
-public class ScreenManager implements Manager {
+public class ScreenManager implements BaseManager {
 	private ArrayList<User> masterUserList;
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterScreens;

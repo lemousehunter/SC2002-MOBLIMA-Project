@@ -4,7 +4,8 @@ import java.util.UUID;
 
 import javafx.scene.shape.MoveTo;
 
-public class MovieManager implements Manager{
+
+public class MovieManager implements BaseManager {
 
     private MovieTypeEN movieType;
     private MovieRatingEN movieRating;
@@ -181,6 +182,36 @@ public class MovieManager implements Manager{
 
     public String getMovieIDFromCurrentShowingIDX(Integer idx) {
         return this.getCurrentMovies().get(idx-1).getMovieID();
+    }
+
+    @Override
+    public void setCentralManager(CentralManagerEY CentralManager) {
+
+    }
+
+    @Override
+    public void getManager(BaseManager manager) {
+
+    }
+
+    @Override
+    public BaseManager getManager(String managerName) {
+        return null;
+    }
+
+    @Override
+    public void getMasterList(ArrayList list) {
+
+    }
+
+    @Override
+    public void setManagers() {
+
+    }
+
+    @Override
+    public ArrayList getMasterList(String arrayName) {
+        return null;
     }
 }
 
