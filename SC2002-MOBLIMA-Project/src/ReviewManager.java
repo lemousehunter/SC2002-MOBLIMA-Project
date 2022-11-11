@@ -132,6 +132,7 @@ public class ReviewManager implements BaseManager {
       }
         
         avgRatingOfmasterMovies.put(key,avgRating); 
+        avgRating=0.0;
     }
         
 
