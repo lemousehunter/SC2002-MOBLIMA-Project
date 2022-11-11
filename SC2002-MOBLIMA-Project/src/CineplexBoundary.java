@@ -6,7 +6,11 @@ public class CineplexBoundary extends Boundary {
 
     CineplexManager cineplexMgr;
 
-    public CineplexBoundary(CineplexManager cineplexMgr) {
+    public CineplexBoundary() {
+        
+    }
+
+    public void setCineplexMgr(CineplexManager cineplexMgr) {
         this.cineplexMgr = cineplexMgr;
     }
 
@@ -21,7 +25,7 @@ public class CineplexBoundary extends Boundary {
     }
 
     public void printCineplexDuplicateError() {
-        this.println("Error. " + cineplexName + " already exists");
+        this.println("\nError. " + cineplexName + " already exists");
     }
 
     public String setName() {
@@ -38,17 +42,17 @@ public class CineplexBoundary extends Boundary {
 
 
     public void printAddCineplexSuccessMessaage() {
-        this.println("Cineplex " + cineplexName + " has been added !");
+        this.println("\nCineplex " + cineplexName + " has been added !");
     }
 
 
     public void printCineplexFoundMessaage(CineplexEY cineplex) {
-        this.println("Found Cineplex  : " + cineplex.getName() + " at location " + cineplex.getLocation());
+        this.println("\nFound Cineplex  : " + cineplex.getName() + " at location " + cineplex.getLocation());
     }
 
 
     public void printCineplexNotFoundMessaage() {
-        this.println("Cineplex " + cineplexName + " not found!");
+        this.println("\nCineplex " + cineplexName + " not found!");
     }
 
 

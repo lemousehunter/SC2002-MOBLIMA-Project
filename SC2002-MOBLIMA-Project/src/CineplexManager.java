@@ -1,6 +1,10 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
 
 public class CineplexManager implements Manager{
+
+
     private ArrayList<User> masterUserList;
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterScreens;
@@ -8,8 +12,7 @@ public class CineplexManager implements Manager{
     private ArrayList<ShowEY> masterShows;
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<String> masterHolidaysList;
-    private ArrayList<ReviewE> masterRatings;
-    private ArrayList<ShowSeatEY> masterShowSeats;
+    private ArrayList<ReviewEY> masterRatings;
     
     private CineplexBoundary cineplexIO;
 
@@ -27,9 +30,7 @@ public class CineplexManager implements Manager{
     ArrayList<ShowEY> masterShows,
     ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewE> masterRatings,
-    ArrayList<ShowSeatEY> masterShowSeats
-    ) {
+    ArrayList<ReviewEY> masterRatings) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;
@@ -38,7 +39,6 @@ public class CineplexManager implements Manager{
     this.masterMovies = masterMovies;
     this.masterHolidaysList = masterHolidaysList;
     this.masterRatings = masterRatings;
-    this.masterShowSeats = masterShowSeats;
   }
 
     public CineplexEY getCineplexByID(String cineplexID) {
@@ -99,5 +99,9 @@ public class CineplexManager implements Manager{
     public String convertIDX2CineplexID(int idx) {
         return masterCineplexes.get(idx).getCineplexID();
     }
+	
+	public void listAllCineplexes() {
+        cineplexIO.printAllCineplexes();
+	}
 	
 }

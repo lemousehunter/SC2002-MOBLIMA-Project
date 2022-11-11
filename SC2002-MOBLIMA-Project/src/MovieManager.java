@@ -15,7 +15,7 @@ public class MovieManager implements Manager{
     private ArrayList<ShowEY> masterShows;
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<String> masterHolidaysList;
-    private ArrayList<ReviewE> masterRatings;
+    private ArrayList<ReviewEY> masterRatings;
 
     
     @Override
@@ -27,7 +27,7 @@ public class MovieManager implements Manager{
     ArrayList<ShowEY> masterShows,
     ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewE> masterRatings) {
+    ArrayList<ReviewEY> masterRatings) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StaffManager implements Manager {
 
@@ -9,12 +10,16 @@ public class StaffManager implements Manager {
   private ArrayList<ShowEY> masterShows;
   private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ReviewE> masterRatings;
+  private ArrayList<ReviewEY> masterRatings;
 
   private CineplexManager cineplexManager;
   private ScreenManager screenManager;
   private ShowManager showManager;
   private MovieManager movieManager;
+  private HolidayManager holidayManager;
+  private TicketPriceManager ticketPriceManager;
+  private ReviewManager reviewManager;
+  private BookingManager bookingManager;
   private StaffBoundary staffIO;
 
   private static StaffManager currentInstance;
@@ -23,12 +28,20 @@ public class StaffManager implements Manager {
     CineplexManager cineplexMgr,
     ScreenManager screenMgr,
     ShowManager showManager,
-    MovieManager movieMgr
+    MovieManager movieMgr,
+    HolidayManager holidayManager,
+    TicketPriceManager ticketPriceManager,
+    ReviewManager reviewManager,
+    BookingManager bookingManager
   ) {
     this.cineplexManager = cineplexMgr;
     this.screenManager = screenMgr;
     this.showManager = showManager;
     this.movieManager = movieMgr;
+    this.holidayManager = holidayManager;
+    this.ticketPriceManager = ticketPriceManager;
+    this.reviewManager = reviewManager;
+    this.bookingManager=bookingManager;
     staffIO = new StaffBoundary();
   }
 
@@ -41,7 +54,7 @@ public class StaffManager implements Manager {
     ArrayList<ShowEY> masterShows,
     ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewE> masterRatings
+    ArrayList<ReviewEY> masterRatings
   ) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
@@ -70,16 +83,77 @@ public class StaffManager implements Manager {
           screenOperations();
           break;
         case 3:
+          movieOperations();
           break;
         case 4:
+          showOperations();
           break;
         case 5:
+          ticketPriceOperations();
+          break;
+        case 6:
+          holidayOperations();
           break;
         case 7:
+          ArrayList<String> top5Movies = bookingManager.getTop5Movies();
+          System.out.println("Top 5 movies by booings:");
+          for (String moviename : top5Movies){
+            System.out.println(moviename);
+          }
           break;
         case 8:
+          reviewManager.top5MoviesByViewerRatings();
           break;
         case 9:
+          break;
+      }
+    }
+  }
+
+  private void showOperations() {
+  }
+
+  private void movieOperations() {
+  }
+
+  
+  private void ticketPriceOperations() {
+    int ticketPriceChoice = 0;
+    while (ticketPriceChoice != 3) {
+      ticketPriceChoice = staffIO.getTicketPriceMenuChoice();
+      if (ticketPriceChoice < 0 | ticketPriceChoice > 3) {
+        staffIO.printHolidayMenuChoiceError();
+        continue;
+      }
+      switch (ticketPriceChoice) {
+        case 1:
+          ticketPriceManager.addTicketPrice();
+          break;
+        case 2:
+          ticketPriceManager.listAllTicketPrices();
+          break;
+        case 3:
+          break;
+      }
+    }
+  }
+
+  private void holidayOperations() {
+    int holidayChoice = 0;
+    while (holidayChoice != 3) {
+      holidayChoice = staffIO.getHolidayMenuChoice();
+      if (holidayChoice < 0 | holidayChoice > 3) {
+        staffIO.printHolidayMenuChoiceError();
+        continue;
+      }
+      switch (holidayChoice) {
+        case 1:
+          holidayManager.addHoliday();
+          break;
+        case 2:
+          holidayManager.listAllHolidays();
+          break;
+        case 3:
           break;
       }
     }

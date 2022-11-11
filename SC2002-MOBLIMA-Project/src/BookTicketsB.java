@@ -4,6 +4,7 @@ public class BookTicketsB implements GetIntegerInputB {
     }
     @Override
     public Integer get() {
+        return 0;
 
     }
 }

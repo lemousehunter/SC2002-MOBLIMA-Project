@@ -20,10 +20,7 @@ public class BookingManager implements Manager {
   private ArrayList<ShowEY> masterShows;
   private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ReviewE> masterRatings;
-  private ArrayList<ShowSeatEY> masterShowSeats;
-  private SeatManager seatMgr;
-
+  private ArrayList<ReviewEY> masterRatings;
 
   @Override
   public void setMasterLists(
@@ -34,8 +31,7 @@ public class BookingManager implements Manager {
     ArrayList<ShowEY> masterShows,
     ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewE> masterRatings,
-    ArrayList<ShowSeatEY> masterShowSeats
+    ArrayList<ReviewEY> masterRatings
   ) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
@@ -45,16 +41,14 @@ public class BookingManager implements Manager {
     this.masterMovies = masterMovies;
     this.masterHolidaysList = masterHolidaysList;
     this.masterRatings = masterRatings;
-    this.masterShowSeats = masterShowSeats;
   }
 
-  public BookingManager(MovieManager movieMgr, HolidayManager holidayManager, SeatManager seatMgr) {
+  public BookingManager(MovieManager movieMgr, HolidayManager holidayManager) {
     this.count = 0; // to ensure that all booking IDs are unique
     this.bookingUserDict = new HashMap<String, ArrayList<String>>();
     this.bookingIDDict = new Hashtable<String, BookingEY>();
     this.movieMgr = movieMgr;
     this.holidayManager = holidayManager;
-    this.seatMgr = seatMgr;
     this.initializeHashMaps();
   }
 
@@ -170,17 +164,13 @@ public class BookingManager implements Manager {
     return top5List;
   }
 
-  public ArrayList<String> getListOfSeats (String bookingID){
-    ArrayList<TicketEY> tickets = getBookingByID(bookingID).getTickets();
+  public ArrayList<String> getListOfSeats (BookingEY booking){
+    ArrayList<TicketEY> tickets = booking.getTickets();
     ArrayList<String> seats = new ArrayList<String>();
     for (TicketEY ticket: tickets) {
       String seatID = ticket.getSeatId();
-      SeatEY seat = this.seatMgr.getSeatByID(seatID);
-      String seatNumber = String.valueOf(seat.getSeatNumber());
-      String rowNumber = seat.getSeatRow();
-      seats.add("R" + rowNumber + "S" + seatNumber);
+      seats.add(ticket.getSeatId());
     }
-
     return seats;
   }
 }

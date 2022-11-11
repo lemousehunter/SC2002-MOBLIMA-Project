@@ -29,7 +29,7 @@ public class BDisplayBookingB extends Boundary implements DisplayItemB {
         this.println("--------------------------------");
         this.println("Seats");
         this.println("--------------------------------");
-        ArrayList<String> seats = this.bookingMgr.getListOfSeats(bookingID);
+        ArrayList<String> seats = this.bookingMgr.getListOfSeats(booking);
         for (String seat: seats) {
             this.println(seat);
         }

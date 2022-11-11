@@ -8,8 +8,17 @@ public interface Manager {
   ArrayList<ShowEY> masterShows = null;
   ArrayList<MovieEY> masterMovies = null;
   ArrayList<String> masterHolidaysList = null;
-  ArrayList<ReviewE> masterRatings = null;
-  ArrayList<ShowSeatEY> masterShowSeats = null;
+  ArrayList<ReviewEY> masterRatings = null;
 
-  void setMasterLists(ArrayList<User> masterUserList, ArrayList<CineplexEY> masterCineplexes, ArrayList<ScreenEY> masterScreens, ArrayList<BookingEY> masterBookings, ArrayList<ShowEY> masterShows, ArrayList<MovieEY> masterMovies, ArrayList<String> masterHolidaysList, ArrayList<ReviewE> masterRatings, ArrayList<ShowSeatEY> masterShowSeats);
+  public void setMasterLists(
+    ArrayList<User> masterUserList,
+    ArrayList<CineplexEY> masterCineplexes,
+    ArrayList<ScreenEY> masterScreens,
+    ArrayList<BookingEY> masterBookings,
+    ArrayList<ShowEY> masterShows,
+    ArrayList<MovieEY> masterMovies,
+    ArrayList<String> masterHolidaysList,
+    ArrayList<ReviewEY> masterRatings
+  );
+  
 }

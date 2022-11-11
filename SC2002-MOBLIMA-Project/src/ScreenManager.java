@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
 
 public class ScreenManager implements Manager {
 	private ArrayList<User> masterUserList;
@@ -8,7 +10,7 @@ public class ScreenManager implements Manager {
     private ArrayList<ShowEY> masterShows;
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<String> masterHolidaysList;
-    private ArrayList<ReviewE> masterRatings;
+    private ArrayList<ReviewEY> masterRatings;
     private ScreenBoundary screenIO;
 
 	public ScreenManager() {
@@ -24,7 +26,7 @@ public class ScreenManager implements Manager {
     ArrayList<ShowEY> masterShows,
     ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewE> masterRatings) {
+    ArrayList<ReviewEY> masterRatings) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
     this.masterScreens = masterScreens;

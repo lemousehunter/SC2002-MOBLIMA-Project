@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,10 +14,12 @@ public class HolidayManager implements Manager {
   private ArrayList<ShowEY> masterShows;
   private ArrayList<MovieEY> masterMovies;
   private ArrayList<String> masterHolidaysList;
-  private ArrayList<ReviewE> masterRatings;
-  private ArrayList<ShowSeatEY> masterShowSeats;
+  private ArrayList<ReviewEY> masterRatings;
+
+  private HolidayBoundary holidayIO;
 
   public HolidayManager() {
+    holidayIO = new HolidayBoundary();
   }
 
   @Override
@@ -28,8 +31,7 @@ public class HolidayManager implements Manager {
     ArrayList<ShowEY> masterShows,
     ArrayList<MovieEY> masterMovies,
     ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewE> masterRatings,
-    ArrayList<ShowSeatEY> masterShowSeats
+    ArrayList<ReviewEY> masterRatings
   ) {
     this.masterUserList = masterUserList;
     this.masterCineplexes = masterCineplexes;
@@ -39,10 +41,7 @@ public class HolidayManager implements Manager {
     this.masterMovies = masterMovies;
     this.masterHolidaysList = masterHolidaysList;
     this.masterRatings = masterRatings;
-    this.masterShowSeats = masterShowSeats;
-
   }
- 
 
   public boolean isHoliday(String date) {
     return this.masterHolidaysList.contains(date);
@@ -53,6 +52,40 @@ public class HolidayManager implements Manager {
     LocalDate date_dt = LocalDate.parse(date, dtFormatter);
     DayOfWeek day = date_dt.getDayOfWeek();
     return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
+  }
+
+  public void addHoliday() {
+    String holidayDate = holidayIO.setHolidayDate();
+    for (String holiday : masterHolidaysList) {
+      if (holiday.equals(holidayDate)) {
+        holidayIO.printHolidayDuplicateError();
+        return;
+      }
+    }
+
+    String holiday = holidayDate;
+    // Validate DD-MM-YYYY
+    SimpleDateFormat format = new SimpleDateFormat(" DD-MM-YYY");
+    // With lenient parsing, the parser may use heuristics to interpret
+    // inputs that do not precisely match this object's format.
+    Boolean validDate = true;
+    try {
+      format.parse(holiday);
+    } catch (ParseException e) {
+      validDate = false;
+    }
+
+    if (!validDate){
+      holidayIO.printInvalidDate();
+      return;
+    }
+
+    masterHolidaysList.add(holiday);
+    holidayIO.printAddHolidaySuccessMessaage();
+  }
+
+  public void listAllHolidays() {
+    holidayIO.printAllHolidays(masterHolidaysList);
   }
   /*  public static void main(String[] args) testing purposes
     {

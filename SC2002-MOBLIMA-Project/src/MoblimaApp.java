@@ -14,8 +14,8 @@ public class MoblimaApp {
     ArrayList<ShowEY> masterShows;
     ArrayList<MovieEY> masterMovies;
     ArrayList<String> masterHolidaysList;
-    ArrayList<ReviewE> masterRatings;
-    //ArrayList<Ticket> tickets;
+    ArrayList<ReviewEY> masterRatings;
+    ArrayList<TicketPrice> masterTicketPrices;
 
     // Managers
     MovieManager movieMgr;
@@ -28,10 +28,8 @@ public class MoblimaApp {
     ShowManager showManager;
     MovieGoerManager movieGoerManager;
     ReviewManager reviewManager;
-
-    SeatManager seatMgr;
-
-
+    TicketPriceManager ticketPriceManager;
+    CineplexBoundary cineplexB;
 
     Scanner sc = new Scanner(System.in);
     private User sessionUser = null;
@@ -46,8 +44,8 @@ public class MoblimaApp {
         this.masterShows = new ArrayList<ShowEY>();
         this.masterMovies = new ArrayList<MovieEY>();
         this.masterHolidaysList = new ArrayList<String>();
-        this.masterRatings = new ArrayList<ReviewE>();
-        //this.tickets = new ArrayList<Ticket>();
+        this.masterRatings = new ArrayList<ReviewEY>();
+        this.masterTicketPrices = new ArrayList<TicketPrice>();
 
      }
 
@@ -88,23 +86,26 @@ public class MoblimaApp {
        
             this.screenMgr = new ScreenManager();
             this.screenMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
-
-            this.seatMgr = new SeatManager();
-            this.seatMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings, masterShowSeats);
-
-            this.cineplexMgr = new CineplexManager();
+       
+            this.cineplexB = new CineplexBoundary();
+            this.cineplexMgr = new CineplexManager(cineplexB);
+            this.cineplexB.setCineplexMgr(this.cineplexMgr);
             this.cineplexMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
        
-            this.holidayMgr = new HolidayManager();
+            this.holidayMgr = new HolidayManager(); 
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
             
-            this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr, this.seatMgr);
+            this.bookingMgr = new BookingManager(this.movieMgr, this.holidayMgr);
             this.holidayMgr.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
             this.reviewManager = new ReviewManager();
-            this.reviewManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings, masterShowSeats);
+            this.reviewManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
-            this.staffManager = new StaffManager(this.cineplexMgr, this.screenMgr, this.showManager, this.movieMgr);
+            this.ticketPriceManager = new TicketPriceManager(); 
+            this.ticketPriceManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
+            this.ticketPriceManager.setMasterTicketPrices(masterTicketPrices);
+
+            this.staffManager = new StaffManager(this.cineplexMgr, this.screenMgr, this.showManager, this.movieMgr,this.holidayMgr,this.ticketPriceManager,this.reviewManager,this.bookingMgr);
             this.staffManager.setMasterLists(masterUserList, masterCineplexes, masterScreens, masterBookings, masterShows, masterMovies, masterHolidaysList, masterRatings);
 
             this.movieGoerManager = new MovieGoerManager(this.movieMgr, this.showManager, this.bookingMgr, this.reviewManager);
@@ -144,14 +145,14 @@ public class MoblimaApp {
         this.writeViewerRatings();
         this.writeUser();
         this.writeHolidays();
-        //this.writeTicketPrice();
+        this.writeTicketPrice();
     }
 
     private void writeViewerRatings() throws IOException {
         String ratingsEPARATOR = " | ";
         String filename = this.dataFolder.concat("Ratings.txt");
         List alw = new ArrayList();
-        ReviewE rating;
+        ReviewEY rating;
         for (int i = 0; i < this.masterRatings.size(); i++) {
             rating = this.masterRatings.get(i);
             StringBuilder st = new StringBuilder();
@@ -221,30 +222,30 @@ public class MoblimaApp {
 
     }
 
-    // private void writeTicketPrice() throws IOException {
-    //     String filename = this.dataFolder.concat("TicketPrices.txt");
-    //     String SEPARATOR = "|";
-    //     List alw = new ArrayList();
-    //     Ticket ticket;
-    //     for (int i = 0; i < this.tickets.size(); i++) {
-    //         ticket = this.tickets.get(i);
-    //         StringBuilder st = new StringBuilder();
-    //         st.append(ticket.getMovieID());
-    //         st.append(SEPARATOR);
-    //         st.append(ticket.getUserID());
-    //         st.append(SEPARATOR);
-    //         st.append(ticket.getScreenID());
-    //         st.append(SEPARATOR);
-    //         st.append(ticket.getDate());
-    //         st.append(SEPARATOR);
-    //         st.append(ticket.getPrice());
-    //         st.append(SEPARATOR);
-    //         alw.add(st.toString());
+    private void writeTicketPrice() throws IOException {
+        String filename = this.dataFolder.concat("TicketPrices.txt");
+        String SEPARATOR = "|";
+        List alw = new ArrayList();
+        TicketPrice ticketPrice;
+        for (int i = 0; i < this.masterTicketPrices.size(); i++) {
+            ticketPrice = this.masterTicketPrices.get(i);
+            StringBuilder st = new StringBuilder();
+            st.append(ticketPrice.getDayType().toString());
+            st.append(SEPARATOR);
+            st.append(ticketPrice.getScreenClass().toString());
+            st.append(SEPARATOR);
+            st.append(ticketPrice.getMovieGoerAge().toString());
+            st.append(SEPARATOR);
+            st.append(ticketPrice.getMovieType().toString());
+            st.append(SEPARATOR);
+            st.append(ticketPrice.getPrice());
+            st.append(SEPARATOR);
+            alw.add(st.toString());
 
-    //     }
-    //     write(filename, alw);
+        }
+        write(filename, alw);
 
-    // }
+    }
 
     private void writeHolidays() throws IOException {
         String filename = this.dataFolder.concat("Holidays.txt");
@@ -497,28 +498,28 @@ public class MoblimaApp {
         primeViewerRatings();
         primeUser();
         primeHolidays();
-        //primeTicketPrice();
+        primeTicketPrice();
 
     }
 
-    // private void primeTickets() throws IOException {
-    //     String SEPARATOR = "|";
-    //     String filename = this.dataFolder.concat("TicketPrices.txt");
-    //     ArrayList stringArray = (ArrayList) read(filename);
-    //     for (int i = 0; i < stringArray.size(); i++) {
-    //         String st = (String) stringArray.get(i);
-    //         // get individual 'fields' of the string separated by SEPARATOR
-    //         StringTokenizer star = new StringTokenizer(st, SEPARATOR);// pass in the string to the string tokenizer
-    //                                                                        // using delimiter "|"
-    //         String movieID = star.nextToken().trim(); // first token
-    //         String userID = star.nextToken().trim();
-    //         String screenID = star.nextToken().trim();
-    //         String date = star.nextToken().trim();
-    //         double price = Double.parseDouble(star.nextToken().trim());
-    //         Ticket ticketPrice = new Ticket(movieID, userID, screenID, date, price, this.holidays, this.movieMgr);
-    //         this.tickets.add(ticketPrice);
-    //     }
-    // }
+    private void primeTicketPrice() throws IOException {
+        String SEPARATOR = "|";
+        String filename = this.dataFolder.concat("TicketPrices.txt");
+        ArrayList stringArray = (ArrayList) read(filename);
+        for (int i = 0; i < stringArray.size(); i++) {
+            String st = (String) stringArray.get(i);
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, SEPARATOR);// pass in the string to the string tokenizer
+                                                                           // using delimiter "|"
+            String dayType = star.nextToken().trim(); // first token
+            String screenClass = star.nextToken().trim();
+            String movieGoerAge = star.nextToken().trim();
+            String movieType = star.nextToken().trim();
+            double price = Double.parseDouble(star.nextToken().trim());
+            TicketPrice ticketPrice = new TicketPrice(DayTypeEN.valueOf(dayType), ScreenClassEN.valueOf(screenClass), MovieGoerAgeEN.valueOf(movieGoerAge), MovieTypeEN.valueOf(movieType), price);
+            this.masterTicketPrices.add(ticketPrice);
+        }
+    }
 
     private void primeHolidays() throws IOException {
         String filename = this.dataFolder.concat("Holidays.txt");
@@ -605,7 +606,7 @@ public class MoblimaApp {
             Double scale = Double.parseDouble(star.nextToken().trim());
             String userID = star.nextToken().trim();
             String movieID = star.nextToken().trim();
-            ReviewE rating = new ReviewE(viewerRatingID, userID, movieID, scale, review);
+            ReviewEY rating = new ReviewEY(viewerRatingID, userID, movieID, scale, review);
             this.masterRatings.add(rating);
         }
     }

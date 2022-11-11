@@ -22,10 +22,10 @@ public class MovieEY {
 	private String director;
 	private ArrayList<String> cast;
 	private ArrayList<String> ratingsID;
-	private ArrayList<ReviewE> reviews;
+	private ArrayList<ReviewEY> reviews;
 	
 
-	public void setReviews(ArrayList<ReviewE> reviews) {
+	public void setReviews(ArrayList<ReviewEY> reviews) {
 		this.reviews = reviews;
 	}
 

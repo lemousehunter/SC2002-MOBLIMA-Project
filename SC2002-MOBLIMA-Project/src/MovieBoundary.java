@@ -1,8 +1,8 @@
 public class MovieBoundary {
     private MovieManager movieMgr;
-    private reviewManager reviewMgr;
+    private ReviewManager reviewMgr;
 
-    public MovieBoundary(MovieManager movieMgr, reviewManager reviewMgr) {
+    public MovieBoundary(MovieManager movieMgr, ReviewManager reviewMgr) {
         this.movieMgr = movieMgr;
         this.reviewMgr = reviewMgr;
     }
@@ -17,27 +17,18 @@ public class MovieBoundary {
         System.out.println("Synopsis: " + movie.getSynopsis());
         System.out.println("Director: " + movie.getDirector());
         System.out.println("Cast: " + movie.getCast());
+        System.out.println("Viewer Review and Ratings:");
 
-        for(ReviewE vr: this.reviewMgr.getMasterRatings())
+        for(ReviewEY vr: this.reviewMgr.getMovieRatings(movie))
         {
             if(vr.getMovieId().equals(movieID))
             {
-                System.out.println("Review: " + vr.getReview());
+                System.out.println("\nReview: " + vr.getReview());
                 System.out.println("Rating: " + vr.getRating());
             }
         }
 
-        double avgRating = this.reviewMgr.getAvgRating(movieID);
-
-        if(avgRating != -1.0)
-        {
-            System.out.printf("Overall Ratings: %.1f / 5\n", avgRating);
-        }
-        else
-        {
-            System.out.println("Overall Ratings: NA");
-        }
-        System.out.println("---------------------------X---------------------------");
+        this.reviewMgr.getAvgRating(movieID);
     }
 
     public void PrintMovieList(boolean currentlyShowing) {

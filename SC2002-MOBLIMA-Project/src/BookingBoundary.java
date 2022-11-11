@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import Boundary.*;
 
 public class BookingBoundary extends Boundary{
     MovieManager movieMgr;

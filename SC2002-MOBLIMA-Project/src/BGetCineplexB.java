@@ -1,7 +1,7 @@
 public class BGetCineplexB extends CineplexBoundary implements GetStringInputB {
     CineplexBoundary cineplexB;
     public BGetCineplexB(CineplexManager cineplexMgr, CineplexBoundary cineplexB) {
-        super(cineplexMgr);
+        super();
         this.cineplexB = cineplexB;
     }
 
