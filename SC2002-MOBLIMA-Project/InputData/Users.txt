@@ -1,0 +1,9 @@
+19d81224-5f5c-11ed-9b6a-0242ac120002 | Varsha     | STAFF     | passwd123 |
+19d8135a-5f5c-11ed-9b6a-0242ac120002 | Aryan      | STAFF     | passwd345 |
+19d81490-5f5c-11ed-9b6a-0242ac120002 | Wei Lun    | STAFF     | passwd678 |
+19d815b2-5f5c-11ed-9b6a-0242ac120002 | Harvin     | STAFF     | passwd901 |
+19d815b3-5f5c-11ed-9b6a-0242ac120002 | Jerome     | STAFF     | passwd012 |
+19d816d4-5f5c-11ed-9b6a-0242ac120002 | Valerie	  | MOVIEGOER | Valerie@gmail.com | 3524395 | 27 | 19d8264c-5f5c-11ed-9b6a-0242ac120002~19d82778-5f5c-11ed-9b6a-0242ac120002~19d828ae-5f5c-11ed-9b6a-0242ac120002~19d829d0-5f5c-11ed-9b6a-0242ac120002                                      |
+19d817ec-5f5c-11ed-9b6a-0242ac120002 | Javier     | MOVIEGOER | Javier@yahoo.com  | 1235363 | 62 | 19d82e08-5f5c-11ed-9b6a-0242ac120002~19d83100-5f5c-11ed-9b6a-0242ac120002~19d8343e-5f5c-11ed-9b6a-0242ac120002~19d83588-5f5c-11ed-9b6a-0242ac120002~19d836e6-5f5c-11ed-9b6a-0242ac120002 |
+19d81918-5f5c-11ed-9b6a-0242ac120002 | Hannah     | MOVIEGOER | Hannah@icloud.com | 9379743 | 18 | 19d83a06-5f5c-11ed-9b6a-0242ac120002~19d83b50-5f5c-11ed-9b6a-0242ac120002                                                                                                                |
+19d81a44-5f5c-11ed-9b6a-0242ac120002 | Charmaine  | MOVIEGOER | Charmaine@msn.com | 7825292 | 21 | 19d83eac-5f5c-11ed-9b6a-0242ac120002~19d83fe2-5f5c-11ed-9b6a-0242ac120002                                                                                                                |
