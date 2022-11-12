@@ -40,7 +40,8 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         this.println("Average Rating:" + avgRating);
     }
 
-    public void printMovieList(boolean currentlyShowing) {
+    public void printMovieList() {
+        boolean currentlyShowing = this.getCurrentlyShowing();
         int count = 1;
         this.println("\nList of Movies:\n");
         ArrayList<String> lines = new ArrayList<String>();
@@ -48,8 +49,10 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
 
         if (currentlyShowing) {
             lines = this.movieManager.getCurrentMoviesLines();
+            this.println("Showing Currently Showing movies");
         } else {
             lines = this.movieManager.getAllMovies();
+            this.println("Showing ALL movies in movie list.");
         }
 
         for (String line: this.movieManager.getAllMovies()) {
@@ -277,7 +280,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
                     }
                     break;
                 case 4:
-                    this.printMovieList(true);
+                    this.printMovieList();
                     break;
                 case 5:
                     break;

@@ -24,7 +24,7 @@ public class MovieManager extends Manager implements BaseManager {
     }
 
     public MovieEY getMovieByID(String movieID) { // returns movie object associated with specified movieID, else return null
-        for(MovieEY m: masterMovies) {
+        for(MovieEY m: this.masterMovies) {
             if(movieID.equals(m.getMovieID()))
                 return m;
         }
@@ -74,7 +74,7 @@ public class MovieManager extends Manager implements BaseManager {
     public boolean updateMovieStatus(String movieName, String showStatus) { // returns false if no movie found, else returns true after updating
         // Check if movie already exits
         MovieEY searchMovie = null;
-        for (MovieEY movie : masterMovies)
+        for (MovieEY movie : this.masterMovies)
         {
             if (movie.getName().equalsIgnoreCase(movieName)) {
                 searchMovie = movie;
@@ -89,7 +89,7 @@ public class MovieManager extends Manager implements BaseManager {
 
     public String searchMovie(String movieName) {
         MovieEY searchMovie = null;
-        for (MovieEY movie : masterMovies)
+        for (MovieEY movie : this.masterMovies)
         {
             if (movie.getName().equalsIgnoreCase(movieName)) {
                 searchMovie = movie;
