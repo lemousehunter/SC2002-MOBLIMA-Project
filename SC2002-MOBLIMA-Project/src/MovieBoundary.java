@@ -191,7 +191,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return new ArrayList<String>(Arrays.asList(castString.split(",")));
     }
 
-    public Boolean setCurrentlyShowing() {
+    public Boolean getCurrentlyShowing() {
         String currentlyShowing = this.getInputLine("Do you want to see Current Showing Movies ONLY : (Y | N)  : ");
         return currentlyShowing.equalsIgnoreCase("Y");
     }
@@ -225,7 +225,13 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         String movieRating = this.getMovieRating(insertUpdateFlag);
         String director = this.getDirector(insertUpdateFlag);
         ArrayList<String> cast = this.getCast(insertUpdateFlag);
-        boolean success = this.movieManager.addMovie(movieName, language, movieType, showStatus, synopsis, movieRating, director, cast);
+        boolean success;
+        if (insertUpdateFlag == 'I') {
+            success = this.movieManager.addMovie(movieName, language, movieType, showStatus, synopsis, movieRating, director, cast);
+        }
+        else {
+            success = this.movieManager.updateMovie(movieName, language, movieType, movieRating, showStatus, synopsis, director, cast);
+        }
         if (success) {
             if (insertUpdateFlag == 'U') {
                 this.println("Successfully updated " + movieName);

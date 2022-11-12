@@ -7,17 +7,14 @@ public class MovieManager extends Manager implements BaseManager {
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<ReviewEY> masterRatings;
 
-    // managers
-    private ReviewManager reviewMgr;
 
-
-    public MovieManager (ReviewManager reviewMgr) {
+    public MovieManager () {
 
     }
 
     @Override
     public void setManagers() {
-        this.reviewMgr = this.getCentralManager().getReviewMgr();
+
     }
 
     @Override
