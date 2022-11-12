@@ -112,33 +112,6 @@ public class StaffManager implements BaseManager {
   private void showOperations() {
   }
 
-  private void movieOperations() {
-    int movieChoice = 0;
-    while (movieChoice != 5) {
-      movieChoice = staffIO.getMovieMenuChoice();
-      if (movieChoice < 0 | movieChoice > 6) {
-        staffIO.printMovieMenuChoiceError();
-        continue;
-      }
-      switch (movieChoice) {
-        case 1:
-          movieManager.addMovie();
-          break;
-        case 2:
-          movieManager.updateMovie();
-          break;
-        case 3:
-          movieManager.updateMovieStatus();
-          break;
-        case 4:
-          movieManager.listMovies();
-          break;
-        case 5:
-          break;
-      }
-    }
-  }
-
   
   private void ticketPriceOperations() {
     int ticketPriceChoice = 0;

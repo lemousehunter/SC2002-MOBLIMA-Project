@@ -84,30 +84,4 @@ public int getTicketPriceMenuChoice() {
   return choice;  
 }
 
-public int getMovieMenuChoice() {
-  int choice;
-  System.out.println(
-    "\n========================= Welcome to Staff App =========================\n" +
-    "1.  Add Movie                                              \n" +
-    "2.  Update Movie Details                                              \n" +
-    "3.  Update Movie Show Status                                             \n" +
-    "4.  List all Movies                                              \n" +
-    "5.  Return to Staff Menu                                              \n" +
-    "========================================================================"
-  );
-  System.out.print("\nEnter choice: ");
-  while (!s.hasNextInt()) {
-    System.out.println("Please enter an integer value. \n");
-    s.next();
-  }
-
-  choice = s.nextInt();
-  return choice;  
-}
-
-public void printMovieMenuChoiceError() {
-  System.out.println("Enter choice betwen 1-6 values only \n");
-
-}
-
 }
