@@ -44,6 +44,7 @@ public class ShowEY {
 		this.movieID = movieID;
 		this.showDate = showDate;
 		this.showTime = showTime;
+		this.cineplexID = cineplexId;
 		this.screenID = screenID;
 		this.emptySeats = emptySeats;
 		this.numberOfRows = numberOfRows;
@@ -51,6 +52,7 @@ public class ShowEY {
 		this.movie = this.movieMgr.getMovieByID(movieID);
 		this.screenID=screenID;
 		this.screen = this.screenMgr.getScreenByID(screenID);
+		this.showSeats = new ArrayList<ShowSeatEY>();
 		ArrayList<SeatEY> seats= screen.getSeatLayout();
 		for (int i=0;i<seats.size();i++){
 			SeatEY seat=seats.get(i);

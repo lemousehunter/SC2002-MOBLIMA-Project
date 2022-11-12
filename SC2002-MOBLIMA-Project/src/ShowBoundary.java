@@ -57,16 +57,16 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
     }
 
     public String setNewMovieName() {
-        String choice = this.getInputLine("Do you want to change the Show Time  ?  (Y | N) :  ");
+        String choice = this.getInputLine("Do you want to change the Movie  ?  (Y | N) :  ");
         if (!choice.equals("Y")) {
-            return this.getInputLine("\nPlease enter Movie Name                    : ");
+            return this.getInputLine("\nPlease enter Movie Name  : ");
         }
         return "";
       }
       public String setNewShowTime() {
-        String choice = this.getInputLine("Do you want to change the Movie  ?  (Y | N) :  ");
+        String choice = this.getInputLine("Do you want to change the Show Time  ?  (Y | N) :  ");
         if (choice.equals("Y")) {
-            return this.getInputLine("\nPlease enter Show Time    : ");
+            return this.getInputLine("\nPlease enter Show Time  : ");
         }
         return "";  
       }
@@ -78,7 +78,7 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
               return "";
             }
         }
-        return this.getInputLine("\nPlease enter Show Time    : ");
+        return this.getInputLine("\nPlease enter Show Time : ");
     }
 
     private String getShowDate(Boolean filter) {
@@ -88,7 +88,7 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
               return "";
             }
         }
-        return this.getInputLine("\nPlease enter Show Date                     : ");
+        return this.getInputLine("\nPlease enter Show Date : ");
 
     }
 
@@ -99,7 +99,7 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
               return "";
             }
         }
-        return this.getInputLine("\nPlease enter Movie Name                    : ");
+        return this.getInputLine("\nPlease enter Movie Name  : ");
 
     }
 
@@ -117,6 +117,7 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
     private String getCineplexName(Boolean filter) {
         if (filter) {
             String choice = this.getInputLine("Do you want to filter by Cineplex  ?  (Y | N) :  ");
+            choice = this.getScanner().nextLine();
             if (!choice.toUpperCase().equals("Y")) {
               return "";
             }
@@ -152,7 +153,9 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         boolean filter = true;
         String cineplexName ="", screenName ="", movieName ="", showDate ="",showTime =""; 
         cineplexName = this.getCineplexName(filter);
-        cineplexName = this.getScanner().nextLine();
+        if (!filter){
+            cineplexName = this.getScanner().nextLine();
+        }
         screenName   = this.getScreenName(filter);
         movieName    = this.getMovieName(filter);
         showDate     = this.getShowDate(filter);
@@ -237,7 +240,7 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         String newMovieName = this.setNewMovieName();
         String newShowTime  = this.setNewShowTime();
         
-        int retCode         = this.showManager.updateShow(cineplexName, screenName, movieName, showDate, showTime, newMovieName, newShowTime);
+        int retCode         = this.showManager.updateShow(cineplexName, screenName, movieName, showDate, showTime, newShowTime, newMovieName);
         switch (retCode) {
             case 0:
                 this.println(

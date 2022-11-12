@@ -102,7 +102,7 @@ public class ScreenManager extends Manager implements BaseManager {
     public ScreenEY getCineplexScreenByName(CineplexEY cineplex, String screenName) {
         if (screenName.isEmpty()) { return null;}
         for(ScreenEY s: this.masterScreens) {
-            if (s.getScreenName().equalsIgnoreCase(screenName) && cineplex.getScreenID().contains(s.getScreenID())){
+            if (s.getScreenName().equalsIgnoreCase(screenName) && ( cineplex != null && cineplex.getScreenID().contains(s.getScreenID()))){
                 return s;
             }
 

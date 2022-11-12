@@ -4,6 +4,7 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
     // Managers
     BookingManager bookingManager;
     ReviewManager reviewManager;
+    MovieManager movieManager;
 
     // Boundaries
     CineplexBoundary cineplexBoundary;
@@ -17,6 +18,8 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
     public void setManagers() {
         this.bookingManager = this.getCentralManager().getBookingMgr();
         this.reviewManager = this.getCentralManager().getReviewMgr();
+        this.movieManager = this.getCentralManager().getMovieMgr();
+
     }
 
     @Override
@@ -80,16 +83,33 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
                 case 7:
                     ArrayList<String> top5Movies = this.bookingManager.getTop5Movies();
                     System.out.println("Top 5 movies by bookings:");
-                    for (String moviename : top5Movies) {
-                        System.out.println(moviename);
+                    for (String movieId : top5Movies) {
+                        System.out.println(this.movieManager.getMovieByID(movieId));
                     }
                     break;
                 case 8:
-                    this.reviewManager.top5MoviesByViewerRatings();
+                    Top5MovPrint(this.reviewManager.top5MoviesByViewerRatings());
                     break;
                 case 9:
                     break;
             }
         }
+    }
+
+    public void Top5MovPrint(ArrayList<String> top5movies)
+    {
+      if(top5movies!=null&&top5movies.size()==5)
+      {
+        System.out.println("\nTop 5 movies by Average Viewer Ratings");
+        System.out.println("--------------------------------------");
+        for (int i=1; i<=top5movies.size();i++){
+          System.out.println(i + ". " + top5movies.get(i-1));
+        }
+        
+
+      }else
+      {
+        System.out.println("NA");
+      }
     }
 }
