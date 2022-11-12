@@ -40,6 +40,7 @@ public class CentralManagerEY {
     private ScreenBoundary screenBoundary;
     private TicketPriceBoundary ticketPriceBoundary;
     private ShowBoundary showBoundary;
+    private MovieGoerBoundary movieGoerBoundary;
     private StaffBoundary staffBoundary;
 
     public CentralManagerEY() {
@@ -154,6 +155,9 @@ public class CentralManagerEY {
         this.showBoundary = new ShowBoundary();
         this.showBoundary.setCentralManager(this);
 
+        this.movieGoerBoundary = new MovieGoerBoundary();
+        this.movieGoerBoundary.setCentralManager(this);
+
         this.staffBoundary = new StaffBoundary();
         this.staffBoundary.setCentralManager(this);
 
@@ -168,7 +172,7 @@ public class CentralManagerEY {
         this.showBoundary.setBoundaries();          this.showBoundary.setManagers();
         this.ticketPriceBoundary.setBoundaries();   this.ticketPriceBoundary.setManagers();
         this.staffBoundary.setBoundaries();         this.staffBoundary.setManagers();
- 
+        this.movieGoerBoundary.setBoundaries();     this.movieGoerBoundary.setManagers();
     }
 
     // MasterArrays
