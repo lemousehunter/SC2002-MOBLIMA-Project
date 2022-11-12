@@ -79,8 +79,10 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         return this.getInputInt("How many tickets would you like to book?");
     }
 
-    public String getShowSeat(int i) {
+    public String getShowSeat(int i) { // prints out Avail seat layout and gets seat based on seatNumber
+        // TODO: 13/11/22 Print Avail Seat Layout
         return this.getInputLine("Please choose a seat for ticket " + (i+1));
+
     }
 
     public void showBooking(String bookingID) {

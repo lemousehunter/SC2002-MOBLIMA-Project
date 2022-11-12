@@ -291,9 +291,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
                     this.printMovieList();
                     break;
                 case 5:
-                     movieName = this.getMoviePartName();
-                     movieName = this.getScanner().nextLine();
-                     this.searchMovie(movieName);
+                     this.searchMovie();
 
                     break;
                 case 6:
@@ -302,8 +300,15 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         }
     }
 
-    private void searchMovie(String movieName) {
-        String printString = this.movieManager.searchMovie(movieName);
+    public void listAllShows() {
+        String movieName = this.getMovieName();
+        MovieEY movie = this.movieManager.searchMovie(movieName);
+        // TODO: 13/11/22 Call relevant showBoundary method to list all shows of movie
+    }
+
+    public void searchMovie() {
+        String movieName = this.getMoviePartName();
+        String printString = this.movieManager.searchMovie(movieName).toString();
         if (printString == null) {
             this.println("\n No movies found with  name matching " + movieName);
             return;

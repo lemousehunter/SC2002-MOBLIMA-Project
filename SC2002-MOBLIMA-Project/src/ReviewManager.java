@@ -5,6 +5,7 @@ import java.util.*;
 public class ReviewManager extends Manager implements BaseManager {
     // managers
     private IoManager ioManager;
+    private MovieManager movieManager;
 
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<ReviewEY> masterRatings;
@@ -12,6 +13,7 @@ public class ReviewManager extends Manager implements BaseManager {
     @Override
     public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
+        this.movieManager = this.getCentralManager().getMovieMgr();
     }
 
     @Override
@@ -47,7 +49,7 @@ public class ReviewManager extends Manager implements BaseManager {
     public ArrayList<ReviewEY> getListByUserID(String userId) {
         ArrayList<ReviewEY> reviewByUser = new ArrayList<ReviewEY>();
 
-        for (ReviewEY temp : masterRatings) {
+        for (ReviewEY temp : this.masterRatings) {
             if (temp.getUserId().equals(userId)) {
                 reviewByUser.add(temp);
             }
@@ -78,9 +80,9 @@ public class ReviewManager extends Manager implements BaseManager {
         return sum;
     }
 
-    public ArrayList<String> top5MoviesByViewerRatings() // prints the movie name
+    public ArrayList<String> top5MoviesByViewerRatings() // returns list of movieNames
     {
-        HashMap<String, ArrayList<ReviewEY>> reviewMap = buildHashMap(masterRatings);// build hashmap of master reviews based on movieID as key
+        HashMap<String, ArrayList<ReviewEY>> reviewMap = buildHashMap(this.masterRatings);// build hashmap of master reviews based on movieID as key
         HashMap<String, Double> avgRatingOfmasterMovies = new HashMap<String, Double>();
         ArrayList<String> top5mv = new ArrayList<String>();
         double max = 0.00;
@@ -114,13 +116,7 @@ public class ReviewManager extends Manager implements BaseManager {
             for (String key : avgRatingOfmasterMovies.keySet()) {
                 if (avgRatingOfmasterMovies.get(key) == max) {
                     avgRatingOfmasterMovies.put(key, -1.0);
-
-                    for (MovieEY m : masterMovies) {
-                        if (m.getMovieID().equals(key)) {
-                            top5mv.add(m.getName());// adds the movie name
-                            break;
-                        }
-                    }
+                    top5mv.add(this.movieManager.ID2Name(key));
                     break;
 
                 }
@@ -146,7 +142,7 @@ public class ReviewManager extends Manager implements BaseManager {
     public ArrayList<ReviewEY> getMovieRatings(MovieEY movie) {
         ArrayList<ReviewEY> movieViewerRatings = new ArrayList<ReviewEY>();
         for (String ratingID : movie.getViewerRatingsID()) {
-            for (ReviewEY rating : masterRatings) {
+            for (ReviewEY rating : this.masterRatings) {
                 if (rating.getViewerRatingId().equals(ratingID)) {
                     movieViewerRatings.add(rating);
                     break;
@@ -185,21 +181,20 @@ public class ReviewManager extends Manager implements BaseManager {
     public void writeViewerRatings() throws IOException {
         String ratingsEPARATOR = " | ";
         String filename = this.getCentralManager().getDataFolder().concat("Ratings.txt");
-        List alw = new ArrayList();
+        ArrayList<String> alw = new ArrayList<String>();
         ReviewEY rating;
-        for (int i = 0; i < this.masterRatings.size(); i++) {
-            rating = this.masterRatings.get(i);
-            StringBuilder st = new StringBuilder();
-            st.append(rating.getViewerRatingId().trim());
-            st.append(ratingsEPARATOR);
-            st.append(rating.getReview().trim());
-            st.append(ratingsEPARATOR);
-            st.append(String.valueOf(rating.getRating()));
-            st.append(ratingsEPARATOR);
-            st.append(rating.getUserId().trim());
-            st.append(ratingsEPARATOR);
-            st.append(rating.getMovieId().trim());
-            alw.add(st.toString());
+        for (ReviewEY masterRating : this.masterRatings) {
+            rating = masterRating;
+            String st = rating.getViewerRatingId().trim() +
+                    ratingsEPARATOR +
+                    rating.getReview().trim() +
+                    ratingsEPARATOR +
+                    rating.getRating() +
+                    ratingsEPARATOR +
+                    rating.getUserId().trim() +
+                    ratingsEPARATOR +
+                    rating.getMovieId().trim();
+            alw.add(st);
 
         }
          ioManager.write(filename, alw);;

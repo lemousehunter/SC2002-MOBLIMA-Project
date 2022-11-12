@@ -9,17 +9,18 @@ public class UserApp{
              }while (choice <=10);
          }
          public void DisplayUserMenu(){
-             System.out.println("==================== Welcome to User  APP ====================\n" +
-                      " 1. View Movie Details                                              \\n\" +\n" +
-                     "                     \" 2. Moving Listing                                            \\n\" +\n" +
-                     "                     \" 3. Search Movie                                \\n\" +\n" +
-                     "                     \" 4. Check Seat Availability                                \\n\" +\n" +
-                     "                     \"5. Make a Booking                                           \\n\"+\n" +
-                     "                     \"6. View Booking History                              \\n\" +\n" +
-                     "                     \"7. List Top 5 Movies by Sales                             \\n\" +\n" +
-                     "                     \" 8. List Top 5 Movies by Ratings                               \\n\" +\n" +
-                     "                     \" 9. Review and Rate a Movie                             \n" +
-                     "===========================================================");
+             System.out.println("""
+                     ==================== Welcome to User  APP ====================
+                                            1. View Movie Details                       
+                                            2. Moving Listing                            
+                                            3. Search Movie                              
+                                            4. Check Seat Availability                   
+                                            5. Make a Booking                            
+                                            6. View Booking History                      
+                                            7. List Top 5 Movies by Sales                
+                                            8. List Top 5 Movies by Ratings              
+                                            9. Review and Rate a Movie                   
+                     ==============================================================""");
              System.out.println("Enter choice: ");
              while (!sc.hasNextInt()) {
                  System.out.println("Please enter an integer value.");

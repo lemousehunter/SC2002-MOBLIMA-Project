@@ -51,17 +51,21 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
         }
     }
 
-    public void Top5MovPrint(ArrayList<String> top5movies) {
+    public void Top5MovPrint() {
+        ArrayList<String> top5movies = this.reviewManager.top5MoviesByViewerRatings();
+        this.println("=========================================");
+        this.println("----------Top 5 Movies By Rating---------");
         if (top5movies != null && top5movies.size() == 5) {
-            System.out.println("\nTop 5 movies by Average Viewer Ratings");
-            System.out.println("--------------------------------------");
             for (int i = 1; i <= top5movies.size(); i++) {
-                System.out.println(i + ". " + top5movies.get(i - 1));
+                String movieName = top5movies.get(i - 1);
+                String movieID = this.movieManager.Name2ID(movieName);
+                String rating  = String.valueOf(this.reviewManager.getAvgRating(movieID));
+                this.println(i + ". " + movieName + " - Rating: " + rating + "/5");
             }
 
         } else {
-            System.out.println("NA");
+            this.println("NA");
         }
-
+        this.println("=========================================");
     }
 }

@@ -94,7 +94,7 @@ public class MovieManager extends Manager implements BaseManager {
         return true;
     }
 
-    public String searchMovie(String movieName) {
+    public MovieEY searchMovie(String movieName) {
         MovieEY searchMovie = null;
         for (MovieEY movie : this.masterMovies)
         {
@@ -105,7 +105,7 @@ public class MovieManager extends Manager implements BaseManager {
         if (searchMovie == null){
             return null;
         }
-        return searchMovie.toString();
+        return searchMovie;
     }
 
     public ArrayList<String> getCurrentMoviesLines() {
@@ -147,12 +147,20 @@ public class MovieManager extends Manager implements BaseManager {
 
     public MovieEY getMovieByName(String movieName) {
         if (movieName.isEmpty()) { return null;}
-        for (MovieEY movie: masterMovies) {
+        for (MovieEY movie: this.masterMovies) {
             if (movie.getName().equalsIgnoreCase(movieName)) {
                 return movie;
             }
         }
         return null;    
+    }
+
+    public String ID2Name(String movieID) {
+        return this.getMovieByID(movieID).getName();
+    }
+
+    public String Name2ID(String movieName) {
+        return this.getMovieByName(movieName).getMovieID();
     }
 
     public void primeMovie() throws IOException {
