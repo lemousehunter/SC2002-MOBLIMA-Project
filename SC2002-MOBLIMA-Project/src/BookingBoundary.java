@@ -45,10 +45,25 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     public String getMovieChoice() { // converts idx from user input to movieID
-        this.print("Which movie would you like to book for? Please enter the corresponding integer.");
-        this.movieBoundary.printMovieList(true);
-        int idx = this.getScanner().nextInt();
-        return this.movieManager.getMovieIDFromCurrentShowingIDX(idx);
+        int choice = this.getInputInt("""
+                Would you like to:
+                1) View Movie Details
+                2) Book Movie?
+                """);
+        if (choice == 1) {
+            this.println("Which movie would you like to view details for? Please enter the corresponding integer.");
+            this.movieBoundary.printMovieList();
+            int viewMovie = this.getScanner().nextInt();
+            String movieID = this.movieManager.getMovieIDFromCurrentShowingIDX(viewMovie);
+            this.movieBoundary.viewMovieDetails(movieID);
+            this.getMovieChoice(); // calls itself again to emulate jumping back to prev menu
+        }
+        else {
+            this.print("Which movie would you like to book for? Please enter the corresponding integer.");
+            this.movieBoundary.printMovieList();
+            int idx = this.getScanner().nextInt();
+            return this.movieManager.getMovieIDFromCurrentShowingIDX(idx);
+        }
     }
 
     public String getShowDate() { // prints out available show dates, gets show date from user

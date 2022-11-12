@@ -95,7 +95,7 @@ public class StaffManager implements BaseManager {
           break;
         case 7:
           ArrayList<String> top5Movies = bookingManager.getTop5Movies();
-          System.out.println("Top 5 movies by booings:");
+          System.out.println("Top 5 movies by bookings:");
           for (String moviename : top5Movies){
             System.out.println(moviename);
           }

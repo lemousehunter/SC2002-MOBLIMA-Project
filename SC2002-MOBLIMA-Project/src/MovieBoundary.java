@@ -2,9 +2,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MovieBoundary extends Boundary implements BaseBoundary {
-
+    // managers
     private MovieManager movieManager;
     private ReviewManager reviewManager;
+
+    // boundaries
+    private ReviewBoundary reviewBoundary;
 
     @Override
     public void setManagers() {
@@ -14,7 +17,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
 
     @Override
     public void setBoundaries() {
-
+        this.reviewBoundary = this.getCentralManager().getReviewBoundary();
     }
 
     public void viewMovieDetails(String movieID) {
@@ -36,8 +39,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
             }
         }
 
-        double avgRating = this.reviewManager.getAvgRating(movieID);
-        this.println("Average Rating:" + avgRating);
+        this.reviewBoundary.AvgRatingPrint(movieID);
     }
 
     public void printMovieList() {
