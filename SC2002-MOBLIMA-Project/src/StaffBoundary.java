@@ -65,30 +65,6 @@ public void printScreenMenuChoiceError() {
   System.out.println("Enter choice betwen 1-4 values only \n");
 }
 
-public int getHolidayMenuChoice() {
-  int choice;
-  System.out.println(
-    "\n========================= Welcome to Staff App =========================\n" +
-    "1.  Add Holiday                                              \n" +
-    "2.  List Holidays                                              \n" +
-    "3.  Return to Staff Menu                                              \n" +
-    "========================================================================"
-    );
-    System.out.print("\nEnter choice: ");
-    while (!s.hasNextInt()) {
-      System.out.println("Please enter an integer value. \n");
-      s.next();
-  }
-
-  choice = s.nextInt();
-  return choice;  
-}
-
-public void printHolidayMenuChoiceError() {
-  System.out.println("Enter choice betwen 1-3 values only \n");
-
-}
-
 public int getTicketPriceMenuChoice() {
   int choice;
   System.out.println(

@@ -2,12 +2,10 @@ import java.util.ArrayList;
 
 public class CineplexManager extends Manager implements BaseManager {
     private ArrayList<CineplexEY> masterCineplexes;
-    
-    private CineplexBoundary cineplexIO;
 
    
-    public CineplexManager(CineplexBoundary cineplexB) {
-        cineplexIO = cineplexB;
+    public CineplexManager() {
+
     }
 
     @Override

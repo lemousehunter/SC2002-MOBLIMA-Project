@@ -10,10 +10,7 @@ public class HolidayManager extends Manager implements BaseManager {
 
   private ArrayList<String> masterHolidaysList;
 
-  private HolidayBoundary holidayIO;
-
   public HolidayManager() {
-    holidayIO = new HolidayBoundary();
   }
 
   @Override
@@ -38,38 +35,26 @@ public class HolidayManager extends Manager implements BaseManager {
     return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
   }
 
-  public void addHoliday() {
-    String holidayDate = holidayIO.setHolidayDate();
-    for (String holiday : masterHolidaysList) {
-      if (holiday.equals(holidayDate)) {
-        holidayIO.printHolidayDuplicateError();
-        return;
-      }
+  public Integer addHoliday(String holidayDate) {
+    if (this.masterHolidaysList.contains(holidayDate)) {
+      return -1; // duplicateError
     }
 
-    String holiday = holidayDate;
     // Validate DD-MM-YYYY
     SimpleDateFormat format = new SimpleDateFormat(" DD-MM-YYY");
     // With lenient parsing, the parser may use heuristics to interpret
     // inputs that do not precisely match this object's format.
-    Boolean validDate = true;
     try {
-      format.parse(holiday);
+      format.parse(holidayDate);
     } catch (ParseException e) {
-      validDate = false;
+      return 0; // ParseError
     }
-
-    if (!validDate){
-      holidayIO.printInvalidDate();
-      return;
-    }
-
-    masterHolidaysList.add(holiday);
-    holidayIO.printAddHolidaySuccessMessaage();
+    this.masterHolidaysList.add(holidayDate);
+    return 1; // success
   }
 
-  public void listAllHolidays() {
-    holidayIO.printAllHolidays(masterHolidaysList);
+  public ArrayList<String> listAllHolidays() {
+    return this.masterHolidaysList;
   }
 
   /*  public static void main(String[] args) testing purposes

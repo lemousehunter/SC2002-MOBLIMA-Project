@@ -76,7 +76,7 @@ public class StaffManager implements BaseManager {
       }
       switch (choice) {
         case 1:
-          cineplexOperations();
+          this.cineplexBoundary.cineplexOperations();
           break;
         case 2:
           screenOperations();
@@ -91,7 +91,7 @@ public class StaffManager implements BaseManager {
           ticketPriceOperations();
           break;
         case 6:
-          holidayOperations();
+          this.holidayBoundary.holidayOperations();
           break;
         case 7:
           ArrayList<String> top5Movies = bookingManager.getTop5Movies();
@@ -145,7 +145,7 @@ public class StaffManager implements BaseManager {
     while (ticketPriceChoice != 3) {
       ticketPriceChoice = staffIO.getTicketPriceMenuChoice();
       if (ticketPriceChoice < 0 | ticketPriceChoice > 3) {
-        staffIO.printHolidayMenuChoiceError();
+        this.holidayBoundary.printHolidayMenuChoiceError();
         continue;
       }
       switch (ticketPriceChoice) {
@@ -154,27 +154,6 @@ public class StaffManager implements BaseManager {
           break;
         case 2:
           ticketPriceManager.listAllTicketPrices();
-          break;
-        case 3:
-          break;
-      }
-    }
-  }
-
-  private void holidayOperations() {
-    int holidayChoice = 0;
-    while (holidayChoice != 3) {
-      holidayChoice = staffIO.getHolidayMenuChoice();
-      if (holidayChoice < 0 | holidayChoice > 3) {
-        staffIO.printHolidayMenuChoiceError();
-        continue;
-      }
-      switch (holidayChoice) {
-        case 1:
-          holidayManager.addHoliday();
-          break;
-        case 2:
-          holidayManager.listAllHolidays();
           break;
         case 3:
           break;
