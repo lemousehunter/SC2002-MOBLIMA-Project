@@ -72,11 +72,7 @@ public class ScreenEY {
 
 	public Boolean getBooleanScreenType() {
 		ScreenClassEN sc = this.getScreenType();
-		if (this.screenClass.equals(sc))
-		{
-			return true;
-		}
-		else return false;
+		return this.screenClass.equals(sc);
 	}
 	public String getScreenID() {
 		return screenID;

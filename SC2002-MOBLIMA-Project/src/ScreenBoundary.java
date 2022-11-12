@@ -78,7 +78,7 @@ public class ScreenBoundary extends Boundary implements BaseBoundary {
         return choice;
     }
 
-    private void screenOperations () {
+    public void screenOperations () {
         int screenChoice = 0;
         while (screenChoice != 4) {
             screenChoice = this.getScreenMenuChoice();

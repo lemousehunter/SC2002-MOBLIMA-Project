@@ -51,7 +51,7 @@ public class HolidayBoundary extends Boundary implements BaseBoundary {
         System.out.println("Enter choice betwen 1-3 values only \n");
     }
 
-    private void holidayOperations() {
+    public void holidayOperations() {
         int holidayChoice = 0;
         while (holidayChoice != 3) {
             holidayChoice = this.getHolidayMenuChoice();

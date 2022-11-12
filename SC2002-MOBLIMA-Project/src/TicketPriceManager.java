@@ -1,81 +1,39 @@
 import java.util.*;
 
-public class TicketPriceManager implements BaseManager {
+public class TicketPriceManager extends Manager implements BaseManager {
+    private ArrayList<TicketPrice> masterTicketPrices;
 
-  private ArrayList<User> masterUserList;
-  private ArrayList<CineplexEY> masterCineplexes;
-  private ArrayList<ScreenEY> masterScreens;
-  private ArrayList<BookingEY> masterBookings;
-  private ArrayList<ShowEY> masterShows;
-  private ArrayList<MovieEY> masterMovies;
-  private ArrayList<String> masterHolidaysList;
-  private ArrayList<ReviewEY> masterRatings;
-  private ArrayList<TicketPrice> masterTicketPrices;
+    public TicketPriceManager() {
 
-
-  private TicketPriceBoundary ticketPriceIO;
-
-  public TicketPriceManager () {
-    ticketPriceIO = new TicketPriceBoundary();
-  }
-
-  @Override
-  public void setMasterLists(
-    ArrayList<User> masterUserList,
-    ArrayList<CineplexEY> masterCineplexes,
-    ArrayList<ScreenEY> masterScreens,
-    ArrayList<BookingEY> masterBookings,
-    ArrayList<ShowEY> masterShows,
-    ArrayList<MovieEY> masterMovies,
-    ArrayList<String> masterHolidaysList,
-    ArrayList<ReviewEY> masterRatings
-  ) {
-    this.masterUserList = masterUserList;
-    this.masterCineplexes = masterCineplexes;
-    this.masterScreens = masterScreens;
-    this.masterBookings = masterBookings;
-    this.masterShows = masterShows;
-    this.masterMovies = masterMovies;
-    this.masterHolidaysList = masterHolidaysList;
-    this.masterRatings = masterRatings;
-  }
-
-  public void setMasterTicketPrices(ArrayList<TicketPrice> masterTicketPrices){
-    this.masterTicketPrices = masterTicketPrices;
-  }
-
-  public void addTicketPrice() {
-    String dateType = ticketPriceIO.setDayType();
-    String screenClass = ticketPriceIO.setScreenClass();
-    String movieGoerAge= ticketPriceIO.setMovieGoerAge();
-    String movieType = ticketPriceIO.setMovieType();
-    double price=ticketPriceIO.setPrice();
-
-    TicketPrice saveTicketPrice = null;
-
-    for (TicketPrice ticketPrice : masterTicketPrices) {
-      if (ticketPrice.getDayType().toString().equals(dateType) &&
-          ticketPrice.getScreenClass().toString().equals(screenClass) &&
-          ticketPrice.getMovieGoerAge().toString().equals(movieGoerAge) &&
-          ticketPrice.getMovieType().toString().equals(movieType)) {
-            saveTicketPrice = ticketPrice; 
-            break;
-          }
-    }
-    if (saveTicketPrice == null){
-      TicketPrice t = new TicketPrice(DayTypeEN.valueOf(dateType), ScreenClassEN.valueOf(screenClass) ,MovieGoerAgeEN.valueOf(movieGoerAge), MovieTypeEN.valueOf(movieType), price);
-      masterTicketPrices.add(t);
-      ticketPriceIO.printAddTicketPriceSuccessMessaage();  
-    }
-    else {
-      saveTicketPrice.setPrice(price);
-      ticketPriceIO.printUpdateTicketPriceSuccessMessaage();
     }
 
-  }
+    @Override
+    public void setManagers() {
 
-  public void listAllTicketPrices() {
-    ticketPriceIO.printAllTicketPrices(masterTicketPrices);
-  }
-  
+    }
+
+    @Override
+    public void setMasterLists() {
+        this.masterTicketPrices = this.getCentralManager().getMasterTicketPrices();
+    }
+
+    public char addTicketPrice(String dateType, String screenClass, String movieGoerAge, String movieType, double price) {
+        for (TicketPrice ticketPrice : this.masterTicketPrices) {
+            if (ticketPrice.getDayType().toString().equals(dateType) &&
+                    ticketPrice.getScreenClass().toString().equals(screenClass) &&
+                    ticketPrice.getMovieGoerAge().toString().equals(movieGoerAge) &&
+                    ticketPrice.getMovieType().toString().equals(movieType)) {
+                ticketPrice.setPrice(price);
+                return 'U';
+            }
+        }
+
+        TicketPrice t = new TicketPrice(DayTypeEN.valueOf(dateType), ScreenClassEN.valueOf(screenClass), MovieGoerAgeEN.valueOf(movieGoerAge), MovieTypeEN.valueOf(movieType), price);
+        this.masterTicketPrices.add(t);
+        return 'I';
+    }
+
+    public ArrayList<TicketPrice> listAllTicketPrices() {
+        return this.masterTicketPrices;
+    }
 }

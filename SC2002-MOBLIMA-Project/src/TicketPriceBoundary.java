@@ -1,141 +1,165 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TicketPriceBoundary {
+public class TicketPriceBoundary extends Boundary implements BaseManager {
+    TicketPriceManager ticketPriceManager;
 
-  private Scanner s;
-  private Scanner q;
-
-  private String dayType;
-  private String screenClass;
-  private String movieGoerAge;
-  private String movieType;
-  private double price;
-
-  public TicketPriceBoundary() {
-    s = new Scanner(System.in);
-    q = new Scanner(System.in);
-    int choice = 0;
-  }
-
-  public String setDayType() {
-    System.out.print(
-      "Please enter Day Type (H for Holiday or W for weekday) : "
-    );
-    dayType = s.nextLine().toUpperCase();
-    if (dayType.startsWith("H")) {
-      dayType = "HOLIDAY";
-    }
-    if (dayType.startsWith("W")) {
-      dayType = "WEEKEND";
-    }
-    return dayType;
-  }
-
-  public String setScreenClass() {
-    System.out.print(
-      "Please enter ScreenClass (R for REGULAR_SCREEN, P for PLATINUM_MOVIE_SUITES): "
-    );
-    screenClass = s.nextLine().toUpperCase();
-    if (screenClass.startsWith("R")) {
-      screenClass = "REGULAR_SCREEN";
-    }
-    if (screenClass.startsWith("W")) {
-      screenClass = "WEEKEND";
-    }
-    return screenClass;
-  }
-
-  public String setMovieGoerAge() {
-    System.out.print(
-      "Please enter MovieGoer Age Classification (A for ADULT, S FOR SENIOR, T FOR STUDENT): "
-    );
-    movieGoerAge = s.nextLine().toUpperCase();
-    if (movieGoerAge.startsWith("A")) {
-      movieGoerAge = "ADULT";
-    }
-    if (movieGoerAge.startsWith("S")) {
-      movieGoerAge = "SENIOR";
-    }
-    if (movieGoerAge.startsWith("T")) {
-      movieGoerAge = "STUDENT";
+    public TicketPriceBoundary() {
     }
 
-    return movieGoerAge;
-  }
-
-  public String setMovieType() {
-    System.out.print(
-      "Please enter Movie Type Classification (B for BLOCKBUSTER, 3D FOR THREEDIMENSION, D FOR DOCUMENTARY): "
-    );
-    movieType = s.nextLine().toUpperCase();
-    if (movieType.startsWith("B")) {
-      movieType = "BLOCKBUSTER";
-    }
-    if (movieType.startsWith("3D")) {
-      movieType = "THREEDIMENSION";
-    }
-    if (movieType.startsWith("D")) {
-      movieType = "DOCUMENTARY";
+    @Override
+    public void setManagers() {
+      this.ticketPriceManager = this.getCentralManager().getTicketPriceMgr();
     }
 
-    return movieType;
-  }
+    @Override
+    public void setMasterLists() {
 
-  public double setPrice() {
-    System.out.print("Please enter Ticket Price : ");
-
-    while (!s.hasNextDouble()) {
-      System.out.println("Please enter a numeric value. \n");
-      s.next();
     }
-    price = s.nextDouble();
-    return price;
-  }
 
-  public void printAddTicketPriceSuccessMessaage() {
-    System.out.println(" TicketPrice has been added \n");
-  }
+    public String getDayType() {
+        String dayType = this.getInputLine("Please enter Day Type (H for Holiday or W for weekday) : ");
+        String type = null;
 
-  public void printUpdateTicketPriceSuccessMessaage() {
-    System.out.println("TicketPrice has been updated \n");
-  }
+        if (dayType.startsWith("H")) {
+            type = "HOLIDAY";
+        }
+        if (dayType.startsWith("W")) {
+            type = "WEEKEND";
+        }
 
-  public void printAllTicketPrices(ArrayList<TicketPrice> masterTicketPrices) {
-    if (masterTicketPrices.size() > 0) {
-      System.out.println("List of TicketPrices configured !");
-      for (TicketPrice ticketPrice : masterTicketPrices) {
-        System.out.println(
-          String.format("| %-15s", ticketPrice.getDayType().toString()) +
-          String.format("| %-22s", ticketPrice.getScreenClass().toString()) +
-          String.format("| %-15s", ticketPrice.getMovieGoerAge().toString()) +
-          String.format("| %-15s| ", ticketPrice.getMovieType().toString()) +
-          ticketPrice.getPrice()
+        while (type == null) {
+            type = this.getInputLine("Day Type " + dayType + " is invalid. \n");
+        }
+
+        return type;
+    }
+
+    public String getScreenClass() {
+        String type = null;
+        String screenClass = this.getInputLine("Please enter ScreenClass (R for REGULAR_SCREEN, P for PLATINUM_MOVIE_SUITES): ");
+        if (screenClass.startsWith("R")) {
+            type = "REGULAR_SCREEN";
+        }
+        if (screenClass.startsWith("P")) {
+            type = "PLATINUM_MOVIE_SUITES";
+        }
+
+        while (type == null) {
+          type = this.getInputLine("Screen Class " + screenClass + " is invalid.");
+        }
+        return type;
+    }
+
+    public String getMovieGoerAge() {
+        String movieGoerAge = null;
+        movieGoerAge = this.getInputLine("Please enter MovieGoer Age Classification (A for ADULT, S FOR SENIOR, T FOR STUDENT): ").toUpperCase();
+        String age = null;
+        if (movieGoerAge.startsWith("A")) {
+            age = "ADULT";
+        }
+        if (movieGoerAge.startsWith("S")) {
+            age = "SENIOR";
+        }
+        if (movieGoerAge.startsWith("T")) {
+            age = "STUDENT";
+        }
+
+        while (age == null) {
+            age = this.getInputLine("Movie Goer age classification " + movieGoerAge + " is invalid. ");
+        }
+
+        return age;
+    }
+
+    public String getMovieType() {
+        String movieType = this.getInputLine("Please enter Movie Type Classification (B for BLOCKBUSTER, 3D FOR THREEDIMENSION, D FOR DOCUMENTARY): ").toUpperCase();
+        String type = null;
+        if (movieType.startsWith("B")) {
+          type = "BLOCKBUSTER";
+        }
+        if (movieType.startsWith("3D")) {
+          type = "THREEDIMENSION";
+        }
+        if (movieType.startsWith("D")) {
+            type = "DOCUMENTARY";
+        }
+
+        while (type == null) {
+            type = this.getInputLine("Movie Type classification " + movieType + " is invalid.");
+        }
+
+        return type;
+    }
+
+    public double getPrice() {
+        return getInputDouble("Please enter Ticket Price : ");
+    }
+
+    public void printAllTicketPrices(ArrayList<TicketPrice> masterTicketPrices) {
+        if (masterTicketPrices.size() > 0) {
+            this.println("List of TicketPrices configured !");
+            for (TicketPrice ticketPrice : masterTicketPrices) {
+                this.println(
+                        String.format("| %-15s", ticketPrice.getDayType().toString()) +
+                                String.format("| %-22s", ticketPrice.getScreenClass().toString()) +
+                                String.format("| %-15s", ticketPrice.getMovieGoerAge().toString()) +
+                                String.format("| %-15s| ", ticketPrice.getMovieType().toString()) +
+                                ticketPrice.getPrice()
+                );
+            }
+        } else {
+            this.println("No Ticket Prices configured !");
+        }
+    }
+
+    public int getTicketPriceMenuChoice() {
+        int choice = -1;
+        choice = this.getInputInt(
+                """
+
+                        ========================= Welcome to Staff App =========================
+                        1.  Add Ticket Price                                             \s
+                        2.  List Ticket Prices                                             \s
+                        3.  Return to Staff Menu                                             \s
+                        ========================================================================
+                        Enter choice:"""
         );
-      }
+
+        return choice;
     }
-    else {
-      System.out.println("No Ticket Prices configured !");
+
+    public void ticketPriceOperations() {
+        int ticketPriceChoice = 0;
+        while (ticketPriceChoice != 3) {
+            ticketPriceChoice = this.getTicketPriceMenuChoice();
+            if (ticketPriceChoice < 0 | ticketPriceChoice > 3) {
+                this.println("Please only input integers between numbers 1 and 3 (inclusive)");
+                continue;
+            }
+            switch (ticketPriceChoice) {
+                case 1:
+                    String dateType = this.getDayType();
+                    String screenClass = this.getScreenClass();
+                    String movieGoerAge = this.getMovieGoerAge();
+                    String movieType = this.getMovieType();
+                    double price = this.getPrice();
+
+                    char type = this.ticketPriceManager.addTicketPrice(dateType, screenClass, movieGoerAge, movieType, price);
+                    if (type == 'U') {
+                      this.println("TicketPrice successfully updated.");
+                    }
+                    else {
+                      this.println("TicketPrice successfully created");
+                    }
+
+                    break;
+                case 2:
+                    this.printAllTicketPrices(this.ticketPriceManager.listAllTicketPrices());
+                    break;
+                case 3:
+                    break;
+            }
+        }
     }
-  }
-
-  public void printInvalidDayType() {
-    System.out.println("Day Type " + dayType + " is invalid. \n");
-  }
-
-  public void printInvalidScreenClass() {
-    System.out.println("Screem Class " + screenClass + " is invalid. \n");
-  }
-
-  public void printInvalidMovieGoerAge() {
-    System.out.println(
-      "Movie Goer age classification " + movieGoerAge + " is invalid. \n"
-    );
-  }
-
-  public void printInvalidMovieType() {
-    System.out.println(
-      "Movie Type classification " + movieType + " is invalid. \n"
-    );
-  }
 }

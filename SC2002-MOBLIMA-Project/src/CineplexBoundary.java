@@ -73,7 +73,7 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
         return choice;
     }
 
-    private void cineplexOperations() {
+    public void cineplexOperations() {
         int cineplexChoice = 0;
         while (cineplexChoice != 4) {
             cineplexChoice = this.getCineplexMenuChoice();

@@ -255,7 +255,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         }
     }
 
-    private void movieOperations() {
+    public void movieOperations() {
         int movieChoice = 0;
         while (movieChoice != 5) {
             movieChoice = this.getMovieMenuChoice();

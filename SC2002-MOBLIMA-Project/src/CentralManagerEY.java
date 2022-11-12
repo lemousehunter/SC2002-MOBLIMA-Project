@@ -11,6 +11,7 @@ public class CentralManagerEY {
     private ArrayList<String> masterHolidaysList;
     private ArrayList<ReviewEY> masterRatings;
     private ArrayList<MovieGoerEY> masterMovieGoers;
+    private ArrayList<TicketPrice> masterTicketPrices;
 
     // Managers
     private BookingManager bookingMgr;
@@ -110,6 +111,15 @@ public class CentralManagerEY {
 
     public ArrayList<MovieGoerEY> getMasterMovieGoers() {
         return masterMovieGoers;
+    }
+
+
+    public void setMasterTicketPrices(ArrayList<TicketPrice> masterTicketPrices) {
+        this.masterTicketPrices = masterTicketPrices;
+    }
+
+    public ArrayList<TicketPrice> getMasterTicketPrices() {
+        return this.masterTicketPrices;
     }
 
     // Managers
