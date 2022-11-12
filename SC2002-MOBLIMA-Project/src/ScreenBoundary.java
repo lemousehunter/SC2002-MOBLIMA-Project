@@ -1,102 +1,125 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ScreenBoundary {
-    private Scanner s;
-    private Scanner q;
-    private String cineplexName;
-    private String screenName;
-    private String screenClass;
-    private int numberOfRows;
-	private int seatsPerRow;
+public class ScreenBoundary extends Boundary implements BaseBoundary {
+    ScreenManager screenManager;
+
+    ArrayList<ScreenEY> masterScreens;
 
     public ScreenBoundary() {
-        s = new Scanner(System.in);
-        q = new Scanner(System.in);
-      }
-    
 
-    public String setCineplex() {
-        System.out.print("Please enter Cineplex Name: ");
-        cineplexName=s.nextLine();
-        return cineplexName;
-      }
-    
-
-    public String setScreen() {
-        System.out.print("Please enter Screen Name: ");
-        screenName=s.nextLine();
-        return screenName;    
     }
 
-    public String setScreenClass() {
-        System.out.print("Please enter ScreenClass (R for REGULAR_SCREEN, P for PLATINUM_MOVIE_SUITES): ");
-        screenClass=s.nextLine();
-        if (screenClass.equals("R")) {
-            screenClass = "REGULAR_SCREEN";
+    public void setMasterArrays() {
+        this.masterScreens = this.getCentralManager().getMasterScreens();
+    }
+
+    public String getCineplex() {
+        return this.getInputLine("Please enter Cineplex Name: ");
+    }
+
+
+    public String getScreen() {
+        return this.getInputLine("Please enter Screen Name: ");
+    }
+
+    public String getScreenClass() {
+        String screenClass;
+        while (true) {
+            screenClass = this.getInputLine("Please enter ScreenClass (R for REGULAR_SCREEN, P for PLATINUM_MOVIE_SUITES): ");
+            if (screenClass.equals("R")) {
+                screenClass = "REGULAR_SCREEN";
+                break;
+            } else if (screenClass.equals("P")) {
+                screenClass = "PLATINUM_MOVIE_SUITES";
+                break;
+            } else {
+                this.println("Invalid input. Please enter only 'R' or 'P'.");
+            }
         }
-        else  if (screenClass.equals("P")) {
-            screenClass = "PLATINUM_MOVIE_SUITES";
+        return screenClass;
+    }
+
+    public int getNumberOfRows() {
+        return this.getInputInt("Please enter Number of Rows: ");
+    }
+
+    public int getSeatPerRow() {
+        return this.getInputInt("Please enter Seats Per Row: ");
+    }
+
+    public void printAllScreens() {
+        this.println("\n---------------------------X---------------------------\n");
+        this.println("\nScreen List :  \n ");
+        for (String line : this.screenManager.listAllScreens()) {
+           this.println(line);
         }
-        return screenClass;   
-     }
-    
-    public int setNumberOfRows() {
-        System.out.print("Please enter Number of Rows: ");
-        while (!s.hasNextInt()) {
-            System.out.println("Please enter an integer value. ");
-            s.next();
-          }
-        numberOfRows=s.nextInt();
-        return numberOfRows;    
-    }    
+        this.println("\n---------------------------X---------------------------\n");
 
-    public int setSeatPerRow() {
-        System.out.print("Please enter Seats Per Row: ");
-        while (!s.hasNextInt()) {
-            System.out.println("Please enter an integer value. ");
-            s.next();
-          }
-        seatsPerRow=s.nextInt();
-        return seatsPerRow;    
     }
 
-    public void printAllScreens(ArrayList<ScreenEY> masterScreens) {
-        System.out.println("\n---------------------------X---------------------------\n");
-        System.out.println("\nScreen List :  \n ");
-        for(ScreenEY s: masterScreens) {
-              System.out.println(s.viewDetails());
+    public int getScreenMenuChoice() {
+        int choice = -1;
+        choice = this.getInputInt(
+        """
+
+                ========================= Welcome to Staff App =========================
+                1.  Add Screen                                             \s
+                2.  Search Screen                                             \s
+                3.  List all Screens                                             \s
+                4.  Return to Staff Menu                                             \s
+                ========================================================================
+                Enter choice:
+                """
+        );
+        while (!(choice >= 1 && choice <= 4)) {
+            choice = this.getInputInt("Please only enter integers between 1 to 4 (inclusive).");
         }
-        System.out.println("\n---------------------------X---------------------------\n");
-      
+        return choice;
     }
 
-     public void printAddScreenSuccessMessaage() {
-        System.out.println("\nScreen " + screenName + " has been added to " + cineplexName+ "!\n");
-
+    private void screenOperations () {
+        int screenChoice = 0;
+        while (screenChoice != 4) {
+            screenChoice = this.getScreenMenuChoice();
+            switch (screenChoice) {
+                case 1:
+                    String cineplexName = this.getCineplex();
+                    String screenName = this.getScreen();
+                    String screenClass = this.getScreenClass();
+                    int numRows = this.getNumberOfRows();
+                    int SeatPerRow = this.getSeatPerRow();
+                    int success = this.screenManager.addScreen(cineplexName, screenName, screenClass, numRows, SeatPerRow);
+                    if (success == -1) {
+                        this.println("Screen cannot be added as Cineplex " + cineplexName + "is not found.");
+                    }
+                    else if (success == 0) {
+                        this.println("Screen " + screenName + " cannot be added as it already exists.");
+                    }
+                    else {
+                        this.println("Screen " + screenName + " has been added to Cineplex " + cineplexName + " successfully");
+                    }
+                    break;
+                case 2:
+                    ScreenEY screen = this.screenManager.searchScreen(this.getScreen());
+                    this.println(screen.viewDetails());
+                    break;
+                case 3:
+                    this.printAllScreens();
+                    break;
+                case 4:
+                    break;
+            }
+        }
     }
 
-
-    public void printScreenDuplicateError() {
-        System.out.println("\n" + screenName + " already exits  \n");
-
+    @Override
+    public void setManagers() {
+        this.screenManager = this.getCentralManager().getScreenMgr();
     }
 
-
-    public void printCinemaNotFoundMessaage() {
-        System.out.println("\nScreen " + screenName + " not found! in Cineplex " + cineplexName+"\n");
-
-    }
-
-
-    public void printCineplexNotFound() {
-        System.out.println("\nCineplex " + cineplexName + " is invalid \n");
-    }
-
-
-    public void printScreenFoundMessaage(ScreenEY matchingScreen) {
-        System.out.println("\nScreen " + String.format("| %-20s",matchingScreen.getScreenName())  + String.format("| %-22s |",matchingScreen.getScreenClass().toString()) + " #Rows = " + Integer.toString(matchingScreen.getNumberOfRows()) + " ; #Seats per Row = " + Integer.toString(matchingScreen.getSeatsPerRow()) );
+    @Override
+    public void setBoundaries() {
 
     }
-
 }

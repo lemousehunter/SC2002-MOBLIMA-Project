@@ -40,29 +40,6 @@ public class StaffBoundary {
   public void printMainMenuChoiceError() {
     System.out.println("Enter choice betwen 1-9 values only \n");
   }
-
-  public int getScreenMenuChoice() {
-    int choice;
-    System.out.println(
-      "\n========================= Welcome to Staff App =========================\n" +
-      "1.  Add Screen                                              \n" +
-      "2.  Search Screen                                              \n" +
-      "3.  List all Screens                                              \n" +
-      "4.  Return to Staff Menu                                              \n" +
-      "========================================================================"
-    );
-    System.out.print("\nEnter choice: ");
-    while (!s.hasNextInt()) {
-      System.out.println("Please enter an integer value. \n");
-      s.next();
-    }
-
-    choice = s.nextInt();
-    return choice;  
-  }
-
-public void printScreenMenuChoiceError() {
-  System.out.println("Enter choice betwen 1-4 values only \n");
 }
 
 public int getTicketPriceMenuChoice() {

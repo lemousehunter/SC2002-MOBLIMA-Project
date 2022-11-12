@@ -133,28 +133,4 @@ public class StaffManager implements BaseManager {
       }
     }
   }
-
-  private void screenOperations() {
-    int screenChoice = 0;
-    while (screenChoice != 4) {
-      screenChoice = staffIO.getScreenMenuChoice();
-      if (screenChoice < 0 | screenChoice > 4) {
-        staffIO.printScreenMenuChoiceError();
-        continue;
-      }
-      switch (screenChoice) {
-        case 1:
-          screenManager.addScreen();;
-          break;
-        case 2:
-          screenManager.searchScreen();
-          break;
-        case 3:
-          screenManager.listAllScreens();
-          break;
-        case 4:
-          break;
-      }
-    }
-  }
 }
