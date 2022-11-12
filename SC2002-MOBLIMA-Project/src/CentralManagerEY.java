@@ -8,10 +8,13 @@ public class CentralManagerEY {
     private ArrayList<BookingEY> masterBookings;
     private ArrayList<ShowEY> masterShows;
     private ArrayList<MovieEY> masterMovies;
-    private ArrayList<String> masterHolidaysList;
+    private ArrayList<String> masterHolidays;
     private ArrayList<ReviewEY> masterRatings;
     private ArrayList<MovieGoerEY> masterMovieGoers;
     private ArrayList<TicketPrice> masterTicketPrices;
+
+    // Master Data folder obtained from JVM -Ddatafolder argument
+    private String dataFolder;
 
     // Managers
     private BookingManager bookingMgr;
@@ -20,10 +23,13 @@ public class CentralManagerEY {
     private MovieManager movieMgr;
     private ReviewManager reviewMgr;
     private ScreenManager screenMgr;
-    private SeatManager seatMgr;
     private ShowManager showMgr;
     private TicketPriceManager ticketPriceMgr;
     private MovieGoerManager movieGoerMgr;
+    private UserManager userMgr;
+
+    private IoManager ioManager;
+
 
     // Boundaries
     private BookingBoundary bookingBoundary;
@@ -34,10 +40,135 @@ public class CentralManagerEY {
     private ScreenBoundary screenBoundary;
     private TicketPriceBoundary ticketPriceBoundary;
     private ShowBoundary showBoundary;
-
+    private StaffBoundary staffBoundary;
 
     public CentralManagerEY() {
 
+        // Create Master lists
+
+        this.masterUsers = new ArrayList<User>();
+        this.masterCineplexes = new ArrayList<CineplexEY>();
+        this.masterScreens = new ArrayList<ScreenEY>();
+        this.masterBookings = new ArrayList<BookingEY>();
+        this.masterShows = new ArrayList<ShowEY>();
+        this.masterMovies = new ArrayList<MovieEY>();
+        this.masterHolidays = new ArrayList<String>();
+        this.masterRatings = new ArrayList<ReviewEY>();
+        this.masterTicketPrices = new ArrayList<TicketPrice>();
+
+        // Master data folder derived from datafolder property
+        this.dataFolder= System.getProperty("dataFolder");
+        if (this.dataFolder== null) {
+            this.dataFolder = "";
+            // remove below line as the folder is harcoded for testing
+            this.dataFolder = "C:\\Users\\swami\\Downloads\\Varsha\\SC2002-MOBLIMA-Project\\database\\";
+        }
+
+        // instantiate all managers
+        this.movieGoerMgr = new MovieGoerManager();
+        this.movieGoerMgr.setCentralManager(this);
+        
+        this.cineplexMgr = new CineplexManager();
+        this.cineplexMgr.setCentralManager(this);
+        
+        this.holidayMgr = new HolidayManager();
+        this.holidayMgr.setCentralManager(this);
+        
+        this.movieMgr = new MovieManager();
+        this.movieMgr.setCentralManager(this);
+        
+        this.reviewMgr = new ReviewManager();
+        this.reviewMgr.setCentralManager(this);
+
+        this.screenMgr = new ScreenManager();
+        this.screenMgr.setCentralManager(this);
+
+        this.showMgr = new ShowManager();
+        this.showMgr.setCentralManager(this);
+
+        this.ticketPriceMgr = new TicketPriceManager();
+        this.ticketPriceMgr.setCentralManager(this);
+
+        this.movieGoerMgr = new MovieGoerManager();
+        this.movieGoerMgr.setCentralManager(this);
+
+        this.userMgr = new UserManager();
+        this.userMgr.setCentralManager(this);
+
+        this.ioManager = new IoManager();
+        this.ioManager.setCentralManager(this);
+
+        this.bookingMgr = new BookingManager();
+        this.bookingMgr.setCentralManager(this);
+
+        // set all master listts
+
+        this.bookingMgr.setMasterLists();
+        this.cineplexMgr.setMasterLists();
+        this.holidayMgr.setMasterLists();
+        this.movieMgr.setMasterLists();
+        this.reviewMgr.setMasterLists();
+        this.screenMgr.setMasterLists();
+        this.showMgr.setMasterLists();
+        this.ticketPriceMgr.setMasterLists();
+        this.movieGoerMgr.setMasterLists();
+        this.ioManager.setMasterLists();
+        this.userMgr.setMasterLists();
+
+        // invoke setManager() to get the other manager instances required
+        
+        this.bookingMgr.setManagers();
+        this.cineplexMgr.setManagers();
+        this.holidayMgr.setManagers();
+        this.movieMgr.setManagers();
+        this.reviewMgr.setManagers();
+        this.screenMgr.setManagers();
+        this.showMgr.setManagers();
+        this.ticketPriceMgr.setManagers();
+        this.movieGoerMgr.setManagers();
+        this.ioManager.setManagers();
+        this.userMgr.setManagers();
+
+        // instantiate all boundary classes
+        this.bookingBoundary = new BookingBoundary();
+        this.bookingBoundary.setCentralManager(this);
+
+        this.cineplexBoundary = new CineplexBoundary();
+        this.cineplexBoundary.setCentralManager(this);
+
+        this.holidayBoundary = new HolidayBoundary();
+        this.holidayBoundary.setCentralManager(this);
+
+        this.movieBoundary = new MovieBoundary();
+        this.movieBoundary.setCentralManager(this);
+
+        this.reviewBoundary = new ReviewBoundary();
+        this.reviewBoundary.setCentralManager(this);
+
+        this.screenBoundary = new ScreenBoundary();
+        this.screenBoundary.setCentralManager(this);
+
+        this.ticketPriceBoundary = new TicketPriceBoundary();
+        this.ticketPriceBoundary.setCentralManager(this);
+
+        this.showBoundary = new ShowBoundary();
+        this.showBoundary.setCentralManager(this);
+
+        this.staffBoundary = new StaffBoundary();
+        this.staffBoundary.setCentralManager(this);
+
+        // invoke setManagers()  & setBundaries to get the other manager instances required
+        
+        this.bookingBoundary.setBoundaries();       this.bookingBoundary.setManagers();
+        this.cineplexBoundary.setBoundaries();      this.cineplexBoundary.setManagers();
+        this.holidayBoundary.setBoundaries();       this.holidayBoundary.setManagers();
+        this.movieBoundary.setBoundaries();         this.movieBoundary.setManagers();
+        this.reviewBoundary.setBoundaries();        this.reviewBoundary.setManagers();
+        this.screenBoundary.setBoundaries();        this.screenBoundary.setManagers();
+        this.showBoundary.setBoundaries();          this.showBoundary.setManagers();
+        this.ticketPriceBoundary.setBoundaries();   this.ticketPriceBoundary.setManagers();
+        this.staffBoundary.setBoundaries();         this.staffBoundary.setManagers();
+ 
     }
 
     // MasterArrays
@@ -57,12 +188,12 @@ public class CentralManagerEY {
         return masterCineplexes;
     }
 
-    public void setMasterHolidaysList(ArrayList<String> masterHolidaysList) {
-        this.masterHolidaysList = masterHolidaysList;
+    public void setMasterHolidays(ArrayList<String> masterHolidays) {
+        this.masterHolidays = masterHolidays;
     }
 
-    public ArrayList<String> getMasterHolidaysList() {
-        return masterHolidaysList;
+    public ArrayList<String> getMasterHolidays() {
+        return masterHolidays;
     }
 
     public void setMasterMovies(ArrayList<MovieEY> masterMovies) {
@@ -112,7 +243,6 @@ public class CentralManagerEY {
     public ArrayList<MovieGoerEY> getMasterMovieGoers() {
         return masterMovieGoers;
     }
-
 
     public void setMasterTicketPrices(ArrayList<TicketPrice> masterTicketPrices) {
         this.masterTicketPrices = masterTicketPrices;
@@ -171,14 +301,6 @@ public class CentralManagerEY {
         return screenMgr;
     }
 
-    public void setSeatMgr(SeatManager seatMgr) {
-        this.seatMgr = seatMgr;
-    }
-
-    public SeatManager getSeatMgr() {
-        return seatMgr;
-    }
-
     public void setShowMgr(ShowManager showMgr) {
         this.showMgr = showMgr;
     }
@@ -202,6 +324,23 @@ public class CentralManagerEY {
     public MovieGoerManager getMovieGoerMgr() {
         return this.movieGoerMgr;
     }
+
+    public UserManager getUserMgr() {
+        return userMgr;
+    }
+
+    public void setUserMgr(UserManager userMgr) {
+        this.userMgr = userMgr;
+    }
+
+    public IoManager getIoManager() {
+        return ioManager;
+    }
+
+    public void setIoManager(IoManager ioManager) {
+        this.ioManager = ioManager;
+    }
+
 
     // Boundaries
     public void setBookingBoundary(BookingBoundary bookingBoundary) {
@@ -267,4 +406,20 @@ public class CentralManagerEY {
     public ShowBoundary getShowBoundary() {
         return showBoundary;
     }
+
+    public StaffBoundary getStaffBoundary() {
+        return staffBoundary;
+    }
+
+    public void setStaffBoundary(StaffBoundary staffBoundary) {
+        this.staffBoundary = staffBoundary;
+    }
+    public String getDataFolder() {
+        return dataFolder;
+    }
+
+    public void setDataFolder(String dataFolder) {
+        this.dataFolder = dataFolder;
+    }
+
 }

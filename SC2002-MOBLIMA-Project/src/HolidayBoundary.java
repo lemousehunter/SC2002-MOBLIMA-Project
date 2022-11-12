@@ -31,20 +31,15 @@ public class HolidayBoundary extends Boundary implements BaseBoundary {
     }
 
     public int getHolidayMenuChoice() {
-        int choice = -1;
-        choice = this.getInputInt("""
+        return this.getInputInt(
 
-                        ========================= Welcome to Staff App =========================
-                        1.  Add Holiday                                             \s
-                        2.  List Holidays                                             \s
-                        3.  Return to Staff Menu                                             \s
-                        ========================================================================
-                        Enter choice:\s""");
-        while (choice == -1) {
-            choice = this.getInputInt("Please enter an integer value. \n");
-        }
-
-        return choice;
+            "\n========================= Welcome to Staff App =========================\n" +
+            "1.  Add Holiday                                              \n" +
+            "2.  List Holidays                                              \n" +
+            "3.  Return to Staff Menu                                              \n" +
+            "========================================================================\n" +
+            "Enter choice: "
+            );
     }
 
     public void printHolidayMenuChoiceError() {
@@ -62,23 +57,34 @@ public class HolidayBoundary extends Boundary implements BaseBoundary {
             switch (holidayChoice) {
                 case 1:
                     String date = this.getHolidayDate();
-                    int success = this.holidayManager.addHoliday(date);
-                    if (success == -1) { // duplicate error
-                        this.println(date + " already exits !! \n");
+                    date = this.getScanner().nextLine();
+                    int retCode = this.holidayManager.addHoliday(date);
+                    if (retCode == 1 ) { // duplicate error
+                        this.println("\n"+date + " already exits !!");
                     }
-                    else if (success == 0) { // parse error
+                    else if (retCode == 2) { // parse error
                         this.println(date + " is invalid. Specify in DD-MM-YYYY format \n");
                     }
                     else { // success
-                        this.println(date + " has been added \n");
+                        this.println("\n"+date + " has been added");
                     }
                     break;
                 case 2:
-                    this.holidayManager.listAllHolidays();
+                    this.printAllTicketPrices(this.holidayManager.listAllHolidays());
                     break;
                 case 3:
                     break;
             }
+        }
+    }
+
+    private void printAllTicketPrices(ArrayList<String> listAllHolidays) {
+        if (listAllHolidays.size() > 0) {
+            for (String printline : listAllHolidays) {
+                this.println(printline);
+            }
+        } else {
+            this.println("\nNo Holidays configured !");
         }
     }
 }

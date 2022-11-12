@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,10 +14,10 @@ public class BookingManager extends Manager implements BaseManager {
   private TicketEY ticket;
 
   // Managers
-  private HolidayManager holidayManager;
-  private MovieManager movieManager;
-
-  private MovieGoerManager movieGoerManager;
+  private HolidayManager holidayMgr;
+  private MovieManager movieMgr;
+  private MovieGoerManager movieGoerMgr;
+  private IoManager ioManager;
 
   // MasterLists
   private ArrayList<MovieGoerEY> masterMovieGoers;
@@ -27,14 +29,15 @@ public class BookingManager extends Manager implements BaseManager {
     this.count = 0; // to ensure that all booking IDs are unique
     this.bookingUserDict = new HashMap<String, ArrayList<String>>();
     this.bookingIDDict = new Hashtable<String, BookingEY>();
-    this.initializeHashMaps();
   }
 
   @Override
   public void setManagers() {
-    this.holidayManager = this.getCentralManager().getHolidayMgr();
-    this.movieManager = this.getCentralManager().getMovieMgr();
-    this.movieGoerManager = this.getCentralManager().getMovieGoerMgr();
+    this.holidayMgr = this.getCentralManager().getHolidayMgr();
+    this.movieMgr = this.getCentralManager().getMovieMgr();
+    this.movieGoerMgr = this.getCentralManager().getMovieGoerMgr();
+    this.ioManager = this.getCentralManager().getIoManager();
+    this.initializeHashMaps();
   }
 
   @Override
@@ -50,7 +53,7 @@ public class BookingManager extends Manager implements BaseManager {
   }
 
   private void initializeHashMaps() {
-    ArrayList<MovieGoerEY> movieGoerList = this.movieGoerManager.getAllMovieGoers();
+    ArrayList<MovieGoerEY> movieGoerList = this.movieGoerMgr.getAllMovieGoers();
     if (movieGoerList != null) {
       for (MovieGoerEY movieGoer : movieGoerList) {
         this.bookingUserDict.put(movieGoer.getUserID(), new ArrayList<String>());
@@ -75,7 +78,7 @@ public class BookingManager extends Manager implements BaseManager {
 
   public String BookTicket( String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
     String BookingID = genBookingID(userID);
-    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayManager, this.movieManager);
+    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayMgr, this.movieMgr);
     ArrayList<String> bookingList = this.bookingUserDict.get(userID);
     if (bookingList == null) { // initializes user list if not exist in hashmap
       bookingList = new ArrayList<String>();
@@ -85,7 +88,7 @@ public class BookingManager extends Manager implements BaseManager {
     this.bookingIDDict.put(BookingID, booking); // map booking to BookingID
 
     // Add BookingID to corresponding user
-    this.movieGoerManager.getUserByID(userID).addBookingID(BookingID);
+    this.movieGoerMgr.getUserByID(userID).addBookingID(BookingID);
 
     // Add Bookings to Masterlist
     this.masterBookings.add(booking);
@@ -161,4 +164,82 @@ public class BookingManager extends Manager implements BaseManager {
     }
     return seats;
   }
+
+  public void primeBookings() throws IOException, ParseException {
+    String bookingSEPARATOR = "|";
+    String SeatSEPARATOR = "~";
+    ArrayList stringArray = null;
+    String filename = this.getCentralManager().getDataFolder().concat("Bookings.txt");
+    try {
+        stringArray = (ArrayList) ioManager.read(filename);
+    } catch (FileNotFoundException e) {
+        System.out.println("Priming of Booking objects is skipped as there is no master data");
+        return;
+    }
+
+    for (int i = 0; i < stringArray.size(); i++) {
+        String st = (String) stringArray.get(i);
+        // get individual 'fields' of the string separated by SEPARATOR
+        StringTokenizer star = new StringTokenizer(st, bookingSEPARATOR);// pass in the string to the string
+                                                                         // tokenizer using delimiter ","
+        String bookingID = star.nextToken().trim(); // first token
+        String userID = star.nextToken().trim();
+        String movieID = star.nextToken().trim();
+        String screenID = star.nextToken().trim();
+        String cineplexID = star.nextToken().trim();
+        String date = star.nextToken().trim();
+        String time = star.nextToken().trim();
+        Double price = Double.valueOf(star.nextToken().trim());
+        ArrayList<String> seatIds = new ArrayList<String>();
+        String seatID = null;
+        String seatIdString = star.nextToken().trim();
+        StringTokenizer SeatsToken = new StringTokenizer(seatIdString, SeatSEPARATOR);
+        while (SeatsToken.hasMoreTokens()) {
+            seatID = SeatsToken.nextToken().trim();
+            seatIds.add(seatID);
+        }
+        BookingEY booking = new BookingEY(bookingID, userID, movieID, screenID, cineplexID, date, time, seatIds,
+                price, holidayMgr, this.movieMgr);
+        this.masterBookings.add(booking);
+    }
+
+}
+
+  public void writeBookings() throws IOException {
+    String bookingSEPARATOR = " | ";
+    String seatSEPARATOR = " ~ ";
+    String filename = this.getCentralManager().getDataFolder().concat("Bookings.txt");
+    List alw = new ArrayList();
+    BookingEY booking;
+    for (int i = 0; i < this.masterBookings.size(); i++) {
+        booking = this.masterBookings.get(i);
+        StringBuilder st = new StringBuilder();
+        st.append(booking.getBookingID().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getUserID().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getMovieID().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getScreenID().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getCinemaID().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getDate().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getTime().trim());
+        st.append(bookingSEPARATOR);
+        st.append(booking.getBookingAmount());
+        st.append(bookingSEPARATOR);
+        for (TicketEY ticket : booking.getTickets()) {
+            st.append(ticket.getSeatId());
+            st.append(seatSEPARATOR);
+        }
+        st.append(bookingSEPARATOR);
+        alw.add(st.toString());
+
+    }
+    ioManager.write(filename, alw);
+
+}
+
 }

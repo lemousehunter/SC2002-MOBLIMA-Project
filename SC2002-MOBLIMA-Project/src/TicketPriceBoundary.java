@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class TicketPriceBoundary extends Boundary implements BaseManager {
+public class TicketPriceBoundary extends Boundary implements BaseBoundary {
     TicketPriceManager ticketPriceManager;
 
     public TicketPriceBoundary() {
@@ -9,104 +8,114 @@ public class TicketPriceBoundary extends Boundary implements BaseManager {
 
     @Override
     public void setManagers() {
-      this.ticketPriceManager = this.getCentralManager().getTicketPriceMgr();
+        this.ticketPriceManager = this.getCentralManager().getTicketPriceMgr();
     }
 
     @Override
-    public void setMasterLists() {
+    public void setBoundaries() {
 
     }
 
     public String getDayType() {
-        String dayType = this.getInputLine("Please enter Day Type (H for Holiday or W for weekday) : ");
-        String type = null;
 
-        if (dayType.startsWith("H")) {
-            type = "HOLIDAY";
-        }
-        if (dayType.startsWith("W")) {
-            type = "WEEKEND";
+        boolean firsttime = true;
+        String dayType = "";
+        while (true) {
+            dayType = this.getInputLine("\nPlease enter Day Type (H for Holiday or W for weekday) : ");
+            if (firsttime) {
+                dayType = this.getScanner().nextLine();
+                firsttime = false;
+            }
+            if (dayType.toUpperCase().startsWith("H")) {
+                dayType = "HOLIDAY";
+                break;
+            }
+            if (dayType.toUpperCase().startsWith("W")) {
+                dayType = "WEEKEND";
+                break;
+            }
+            this.println("Day Type " + dayType + " is invalid. \n");
         }
 
-        while (type == null) {
-            type = this.getInputLine("Day Type " + dayType + " is invalid. \n");
-        }
-
-        return type;
+        return dayType;
     }
 
     public String getScreenClass() {
-        String type = null;
-        String screenClass = this.getInputLine("Please enter ScreenClass (R for REGULAR_SCREEN, P for PLATINUM_MOVIE_SUITES): ");
-        if (screenClass.startsWith("R")) {
-            type = "REGULAR_SCREEN";
-        }
-        if (screenClass.startsWith("P")) {
-            type = "PLATINUM_MOVIE_SUITES";
-        }
+        String screenClass = "";
+        while (true) {
+            screenClass = this
+                    .getInputLine("Please enter ScreenClass (R for REGULAR_SCREEN, P for PLATINUM_MOVIE_SUITES): ");
+            if (screenClass.toUpperCase().startsWith("R")) {
+                screenClass = "REGULAR_SCREEN";
+                break;
+            }
+            if (screenClass.toUpperCase().startsWith("P")) {
+                screenClass = "PLATINUM_MOVIE_SUITES";
+                break;
+            }
+            this.println("Screen Class " + screenClass + " is invalid. \n");
 
-        while (type == null) {
-          type = this.getInputLine("Screen Class " + screenClass + " is invalid.");
+
         }
-        return type;
+        return screenClass;
     }
 
     public String getMovieGoerAge() {
-        String movieGoerAge = null;
-        movieGoerAge = this.getInputLine("Please enter MovieGoer Age Classification (A for ADULT, S FOR SENIOR, T FOR STUDENT): ").toUpperCase();
-        String age = null;
-        if (movieGoerAge.startsWith("A")) {
-            age = "ADULT";
-        }
-        if (movieGoerAge.startsWith("S")) {
-            age = "SENIOR";
-        }
-        if (movieGoerAge.startsWith("T")) {
-            age = "STUDENT";
-        }
+        String movieGoerAge = "";
+        while (true) {
 
-        while (age == null) {
-            age = this.getInputLine("Movie Goer age classification " + movieGoerAge + " is invalid. ");
-        }
+            movieGoerAge = this.getInputLine("Please enter MovieGoer Age Classification (A for ADULT, S FOR SENIOR, T FOR STUDENT): ").toUpperCase();
 
-        return age;
+            if (movieGoerAge.startsWith("A")) {
+                movieGoerAge = "ADULT";
+                break;
+            }
+            if (movieGoerAge.startsWith("S")) {
+                movieGoerAge = "SENIOR";
+                break;
+            }
+            if (movieGoerAge.startsWith("T")) {
+                movieGoerAge = "STUDENT";
+                break;
+            }
+
+            this.println("Movie Goer age classification " + movieGoerAge + " is invalid. ");
+        }
+        return movieGoerAge;
     }
 
     public String getMovieType() {
-        String movieType = this.getInputLine("Please enter Movie Type Classification (B for BLOCKBUSTER, 3D FOR THREEDIMENSION, D FOR DOCUMENTARY): ").toUpperCase();
-        String type = null;
-        if (movieType.startsWith("B")) {
-          type = "BLOCKBUSTER";
-        }
-        if (movieType.startsWith("3D")) {
-          type = "THREEDIMENSION";
-        }
-        if (movieType.startsWith("D")) {
-            type = "DOCUMENTARY";
+        String movieType = "";
+        while (true) {
+        movieType = this.getInputLine(
+                "Please enter Movie Type Classification (B for BLOCKBUSTER, 3D FOR THREEDIMENSION, D FOR DOCUMENTARY): ")
+                        .toUpperCase();
+            if (movieType.startsWith("B")) {
+                movieType = "BLOCKBUSTER";
+                break;
+            }
+            if (movieType.startsWith("3D")) {
+                movieType = "THREEDIMENSION";
+                break;
+            }
+            if (movieType.startsWith("D")) {
+                movieType = "DOCUMENTARY";
+                break;
+            }
+            movieType = this.getInputLine("Movie Type classification " + movieType + " is invalid.");
         }
 
-        while (type == null) {
-            type = this.getInputLine("Movie Type classification " + movieType + " is invalid.");
-        }
-
-        return type;
+        return movieType;
     }
 
     public double getPrice() {
         return getInputDouble("Please enter Ticket Price : ");
     }
 
-    public void printAllTicketPrices(ArrayList<TicketPrice> masterTicketPrices) {
-        if (masterTicketPrices.size() > 0) {
-            this.println("List of TicketPrices configured !");
-            for (TicketPrice ticketPrice : masterTicketPrices) {
-                this.println(
-                        String.format("| %-15s", ticketPrice.getDayType().toString()) +
-                                String.format("| %-22s", ticketPrice.getScreenClass().toString()) +
-                                String.format("| %-15s", ticketPrice.getMovieGoerAge().toString()) +
-                                String.format("| %-15s| ", ticketPrice.getMovieType().toString()) +
-                                ticketPrice.getPrice()
-                );
+    public void printAllTicketPrices(ArrayList<String> printPrices) {
+        if (printPrices.size() > 0) {
+            for (String printline : printPrices) {
+                this.println(printline);
             }
         } else {
             this.println("No Ticket Prices configured !");
@@ -116,15 +125,12 @@ public class TicketPriceBoundary extends Boundary implements BaseManager {
     public int getTicketPriceMenuChoice() {
         int choice = -1;
         choice = this.getInputInt(
-                """
-
-                        ========================= Welcome to Staff App =========================
-                        1.  Add Ticket Price                                             \s
-                        2.  List Ticket Prices                                             \s
-                        3.  Return to Staff Menu                                             \s
-                        ========================================================================
-                        Enter choice:"""
-        );
+                "\n========================= Welcome to Staff App =========================\n" +
+                        "1.  Add Ticket Price                                              \n" +
+                        "2.  List Ticket Prices                                              \n" +
+                        "3.  Return to Staff Menu                                              \n" +
+                        "========================================================================\n" +
+                        "Enter choice: ");
 
         return choice;
     }
@@ -145,12 +151,12 @@ public class TicketPriceBoundary extends Boundary implements BaseManager {
                     String movieType = this.getMovieType();
                     double price = this.getPrice();
 
-                    char type = this.ticketPriceManager.addTicketPrice(dateType, screenClass, movieGoerAge, movieType, price);
+                    char type = this.ticketPriceManager.addTicketPrice(dateType, screenClass, movieGoerAge, movieType,
+                            price);
                     if (type == 'U') {
-                      this.println("TicketPrice successfully updated.");
-                    }
-                    else {
-                      this.println("TicketPrice successfully created");
+                        this.println("\nTicketPrice successfully updated.");
+                    } else {
+                        this.println("\nTicketPrice successfully created");
                     }
 
                     break;

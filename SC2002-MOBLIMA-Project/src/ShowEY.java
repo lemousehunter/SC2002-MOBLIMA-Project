@@ -6,8 +6,12 @@ public class ShowEY {
 	private String showID;
 	private String showDate;
 	private String showTime;
+	private String cineplexID;
+
+
 	private String screenID;
 	private String movieID;
+
 	private ScreenEY screen;
 	private MovieEY movie;
 	private int emptySeats;
@@ -23,7 +27,7 @@ public class ShowEY {
 	 * @param showDate
 	 * @param showTime
 	 */
-	public ShowEY(String showID, String movieID, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, ScreenManager screenMgr) {
+	public ShowEY(String showID, String movieID, String cineplexId, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, ScreenManager screenMgr) {
 		// TODO - implement Show.Show
 		// Managers
 		this.movieMgr = movieMgr;
@@ -72,7 +76,7 @@ public class ShowEY {
 		return this.showTime;
 	}
 	
-	public String getScreenID() {
+		public String getScreenID() {
 		return screenID;
 	}
 	public ScreenEY getScreen() {
@@ -87,6 +91,13 @@ public class ShowEY {
 	}
 	public int getSeatsPerRow() {
 		return this.seatsPerRow;
+	}
+	public String getCineplexID() {
+		return cineplexID;
+	}
+
+	public void setMovieID(String movieID) {
+		this.movieID = movieID;
 	}
 
 	public int getEmptySeats() {

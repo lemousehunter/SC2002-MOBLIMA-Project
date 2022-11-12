@@ -35,20 +35,18 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
     public int getMainMenuChoice() {
 
       return this.getInputInt(
-              """
-
-                      ========================= Welcome to Staff App =========================
-                      1.  Manage Cineplex                                             \s
-                      2.  Manage Screen                                             \s
-                      3.  Manage Movies                                           \s
-                      4.  Manage Shows                                \s
-                      5.  Manage Ticket Prices                               \s
-                      6.  Manage Holidays                               \s
-                      7.  List Top 5 Movies by Sales                            \s
-                      8.  List Top 5 Movies by Ratings                              \s
-                      9.  Exit application                                  \s
-                      ========================================================================
-                      Enter choice:"""
+        "\n========================= Welcome to Staff App =========================\n" +
+        "1.  Manage Cineplex                                              \n" +
+        "2.  Manage Screen                                              \n" +
+        "3.  Manage Movies                                            \n" +
+        "4.  Manage Shows                                 \n" +
+        "5.  Manage Ticket Prices                                \n" +
+        "6.  Manage Holidays                                \n" +
+        "7.  List Top 5 Movies by Sales                             \n" +
+        "8.  List Top 5 Movies by Ratings                               \n" +
+        "9.  Exit application                                   \n" +
+        "========================================================================\n" +
+        "Enter choice: "
       );
     }
 

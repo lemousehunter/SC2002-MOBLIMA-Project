@@ -1,12 +1,17 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class ReviewManager extends Manager implements BaseManager {
+    // managers
+    private IoManager ioManager;
+
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<ReviewEY> masterRatings;
 
     @Override
     public void setManagers() {
-
+        this.ioManager = this.getCentralManager().getIoManager();
     }
 
     @Override
@@ -150,4 +155,53 @@ public class ReviewManager extends Manager implements BaseManager {
 
         return movieViewerRatings;
     }
+
+    public void primeViewerRatings() throws IOException {
+        String bookingSEPARATOR = "|";
+        String filename = this.getCentralManager().getDataFolder().concat("Ratings.txt");
+        ArrayList stringArray = null;
+        try {
+            stringArray = (ArrayList) ioManager.read(filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("Priming of ViewerRatings objects is skipped as there is no master data");
+            return;
+        }
+        for (int i = 0; i < stringArray.size(); i++) {
+            String st = (String) stringArray.get(i);
+            // get individual 'fields' of the string separated by SEPARATOR
+            StringTokenizer star = new StringTokenizer(st, bookingSEPARATOR);// pass in the string to the string
+                                                                             // tokenizer using delimiter ","
+            String viewerRatingID = star.nextToken().trim(); // first token
+            String review = star.nextToken().trim();
+            Double scale = Double.parseDouble(star.nextToken().trim());
+            String userID = star.nextToken().trim();
+            String movieID = star.nextToken().trim();
+            ReviewEY rating = new ReviewEY(viewerRatingID, userID, movieID, scale, review);
+            this.masterRatings.add(rating);
+        }
+    }
+
+    public void writeViewerRatings() throws IOException {
+        String ratingsEPARATOR = " | ";
+        String filename = this.getCentralManager().getDataFolder().concat("Ratings.txt");
+        List alw = new ArrayList();
+        ReviewEY rating;
+        for (int i = 0; i < this.masterRatings.size(); i++) {
+            rating = this.masterRatings.get(i);
+            StringBuilder st = new StringBuilder();
+            st.append(rating.getViewerRatingId().trim());
+            st.append(ratingsEPARATOR);
+            st.append(rating.getReview().trim());
+            st.append(ratingsEPARATOR);
+            st.append(String.valueOf(rating.getRating()));
+            st.append(ratingsEPARATOR);
+            st.append(rating.getUserId().trim());
+            st.append(ratingsEPARATOR);
+            st.append(rating.getMovieId().trim());
+            alw.add(st.toString());
+
+        }
+         ioManager.write(filename, alw);;
+    }
+
 }

@@ -61,16 +61,14 @@ public class ScreenBoundary extends Boundary implements BaseBoundary {
     public int getScreenMenuChoice() {
         int choice = -1;
         choice = this.getInputInt(
-        """
+            "\n========================= Welcome to Staff App =========================\n" +
+            "1.  Add Screen                                              \n" +
+            "2.  Search Screen                                              \n" +
+            "3.  List all Screens                                              \n" +
+            "4.  Return to Staff Menu                                              \n" +
+            "========================================================================\n" +
+            "Enter choice: "
 
-                ========================= Welcome to Staff App =========================
-                1.  Add Screen                                             \s
-                2.  Search Screen                                             \s
-                3.  List all Screens                                             \s
-                4.  Return to Staff Menu                                             \s
-                ========================================================================
-                Enter choice:
-                """
         );
         while (!(choice >= 1 && choice <= 4)) {
             choice = this.getInputInt("Please only enter integers between 1 to 4 (inclusive).");
@@ -85,23 +83,26 @@ public class ScreenBoundary extends Boundary implements BaseBoundary {
             switch (screenChoice) {
                 case 1:
                     String cineplexName = this.getCineplex();
+                    cineplexName=this.getScanner().nextLine();
                     String screenName = this.getScreen();
                     String screenClass = this.getScreenClass();
                     int numRows = this.getNumberOfRows();
                     int SeatPerRow = this.getSeatPerRow();
                     int success = this.screenManager.addScreen(cineplexName, screenName, screenClass, numRows, SeatPerRow);
                     if (success == -1) {
-                        this.println("Screen cannot be added as Cineplex " + cineplexName + "is not found.");
+                        this.println("\nError : Screen cannot be added as Cineplex " + cineplexName + " is not found.");
                     }
                     else if (success == 0) {
-                        this.println("Screen " + screenName + " cannot be added as it already exists.");
+                        this.println("\nError : Screen " + screenName + " cannot be added as it already exists.");
                     }
                     else {
-                        this.println("Screen " + screenName + " has been added to Cineplex " + cineplexName + " successfully");
+                        this.println("\nScreen " + screenName + " has been added to Cineplex " + cineplexName + " successfully");
                     }
                     break;
                 case 2:
-                    ScreenEY screen = this.screenManager.searchScreen(this.getScreen());
+                    screenName = this.getScreen();
+                    screenName=this.getScanner().nextLine();
+                    ScreenEY screen = this.screenManager.searchScreen(screenName);
                     this.println(screen.viewDetails());
                     break;
                 case 3:

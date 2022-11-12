@@ -45,11 +45,11 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     public String getMovieChoice() { // converts idx from user input to movieID
-        int choice = this.getInputInt("""
-                Would you like to:
-                1) View Movie Details
-                2) Book Movie?
-                """);
+        int choice = this.getInputInt(
+                "\n Would you like to: \n" +
+                "1) View Movie Details\n" +
+                "2) Book Movie?\n"
+                );
         if (choice == 1) {
             this.println("Which movie would you like to view details for? Please enter the corresponding integer.");
             this.movieBoundary.printMovieList();
@@ -64,22 +64,23 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
             int idx = this.getScanner().nextInt();
             return this.movieManager.getMovieIDFromCurrentShowingIDX(idx);
         }
+        return "";
     }
 
     public String getShowDate() { // prints out available show dates, gets show date from user
-
+        return "";
     }
 
     public ArrayList<String> getShowTime() { // prints out available show timings, returns showTime, screenID
-
+        return null;
     }
 
     public Integer getNumTickets() {
         return this.getInputInt("How many tickets would you like to book?");
     }
 
-    public String getShowSeat(Integer numTickets) {
-        this.println("Please choose a seat for ticket" + (numTickets+1));
+    public String getShowSeat(int i) {
+        return this.getInputLine("Please choose a seat for ticket " + (i+1));
     }
 
     public void showBooking(String bookingID) {
@@ -114,7 +115,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         Integer numTickets = this.getNumTickets();
         ArrayList<String> seatIDs = new ArrayList<String>();
         for (int i=0; i<numTickets; i++) {
-            seatIDs.add(this.getShowSeat(numTickets));
+            seatIDs.add(this.getShowSeat(i));
         }
         this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cinemaID, screenID, seatIDs);
     }

@@ -66,6 +66,10 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return this.getInputLine("Enter Movie Name: ");
     }
 
+    public String getMoviePartName() {
+        return this.getInputLine("Enter Movie Name (Partial starting with or Full Name) : ");
+    }
+
     public String getLanguage(char insertUpdateFlag) { // returns language if insert or if update and y else return null
         if (insertUpdateFlag == 'U') {
             String choice = this.getInputLine("Do you want to update Movie Language ?  (Y | N) ").toUpperCase();
@@ -203,17 +207,17 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
 
     public int getMovieMenuChoice() {
         int choice = -1;
-        choice = this.getInputInt("""
-
-                        ========================= Welcome to Staff App =========================
-                        1.  Add Movie                                             \s
-                        2.  Update Movie Details                                             \s
-                        3.  Update Movie Show Status                                            \s
-                        4.  List all Movies                                             \s
-                        5.  Return to Staff Menu                                             \s
-                        ========================================================================
-                        Enter choice:
-                        """);
+        choice = this.getInputInt(
+            "\n========================= Welcome to Staff App =========================\n" +
+            "1.  Add Movie                                              \n" +
+            "2.  Update Movie Details                                              \n" +
+            "3.  Update Movie Show Status                                             \n" +
+            "4.  List all Movies                                              \n" +
+            "5.  Search Movies                                              \n" +
+            "6.  Return to Staff Menu                                              \n" +
+            "========================================================================\n" +
+            "Enter choice: "
+        );
         while (choice == -1) {
             choice = this.getInputInt("Please enter an integer value. \n");
         }
@@ -223,6 +227,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
 
     public void getDetails(char insertUpdateFlag) {
         String movieName = this.getMovieName();
+        movieName = this.getScanner().nextLine();
         String language = this.getLanguage(insertUpdateFlag);
         String movieType = this.getMovieType(insertUpdateFlag);
         String showStatus = this.getShowStatus(insertUpdateFlag);
@@ -239,25 +244,25 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         }
         if (success) {
             if (insertUpdateFlag == 'U') {
-                this.println("Successfully updated " + movieName);
+                this.println("\nSuccessfully updated " + movieName);
             }
             else {
-                this.println("Successfully insert " + movieName);
+                this.println("\nSuccessfully insert " + movieName);
             }
         }
         else {
             if (insertUpdateFlag == 'U') {
-                this.println("Failed to update " + movieName + " as it does not exist in movie list.");
+                this.println("\nError : Failed to update " + movieName + " as it does not exist");
             }
             else {
-                this.println("Failed to insert " + movieName + " as it already exist in movie list.");
+                this.println("\nError : Failed to insert " + movieName + " as it already exists.");
             }
         }
     }
 
     public void movieOperations() {
         int movieChoice = 0;
-        while (movieChoice != 5) {
+        while (movieChoice != 6) {
             movieChoice = this.getMovieMenuChoice();
             if (movieChoice < 0 | movieChoice > 6) {
                 this.println("Enter choice betwen 1-6 values only \n");
@@ -272,22 +277,38 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
                     break;
                 case 3:
                     String movieName = this.getMovieName();
+                    movieName = this.getScanner().nextLine();
                     String showStatus = this.getShowStatus('U');
                     boolean success = this.movieManager.updateMovieStatus(movieName, showStatus);
                     if (success) {
-                        this.println("Successfully updated " + movieName + "showing status to " + showStatus);
+                        this.println("\nSuccessfully updated " + movieName + "showing status to " + showStatus);
                     }
                     else {
-                        this.println("Failed to update " + movieName + " as it was not found in movie list.");
+                        this.println("\nError : Failed to update " + movieName + " as it was not found in movie list.");
                     }
                     break;
-                case 4:
+                case 4: 
                     this.printMovieList();
                     break;
                 case 5:
+                     movieName = this.getMoviePartName();
+                     movieName = this.getScanner().nextLine();
+                     this.searchMovie(movieName);
+
+                    break;
+                case 6:
                     break;
             }
         }
+    }
+
+    private void searchMovie(String movieName) {
+        String printString = this.movieManager.searchMovie(movieName);
+        if (printString == null) {
+            this.println("\n No movies found with  name matching " + movieName);
+            return;
+        }
+        this.println(printString);
     }
 
 }

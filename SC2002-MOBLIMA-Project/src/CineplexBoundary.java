@@ -36,7 +36,9 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
     }
 
     public void searchCineplex() {
-        String cineplexName = this.getInputLine("Please enter the name of the cineplex you would like to search for.");
+        String cineplexName = this.getInputLine("Please enter the name of the cineplex you would like to search: ");
+        cineplexName = this.getScanner().nextLine();
+
         CineplexEY cineplex = this.cineplexMgr.searchCineplexByName(cineplexName);
         if (cineplex == null) {
             this.println("\nCineplex " + cineplexName + " not found!");
@@ -57,15 +59,15 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
 
     public int getCineplexMenuChoice() {
         int choice = -1;
-        choice = this.getInputInt("""
-                        ========================= Welcome to Staff App =========================
-                        1.  Add Cineplex                                             \s
-                        2.  Search Cineplex                                             \s
-                        3.  List all Cineplexes                                             \s
-                        4.  Return to Staff Menu                                             \s
-                        ========================================================================
-                        Enter Choice:
-                        """);
+        choice = this.getInputInt(
+            "\n========================= Welcome to Staff App =========================\n" +
+            "1.  Add Cineplex                                              \n" +
+            "2.  Search Cineplex                                              \n" +
+            "3.  List all Cineplexes                                              \n" +
+            "4.  Return to Staff Menu                                              \n" +
+            "========================================================================\n" +
+            "Enter Choice : "
+            );
         while (choice < 1) {
             choice = this.getInputInt("Please enter an integer value. \n");
         }
@@ -84,13 +86,15 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
             switch (cineplexChoice) {
                 case 1:
                     String cineplexName = this.getName();
+                    cineplexName = this.getScanner().nextLine();
                     String location = this.getLocation(cineplexName);
+                    
                     Boolean success = this.cineplexMgr.addCineplex(cineplexName, location);
                     if (success) {
                         this.println("\nCineplex " + cineplexName + " has been added !");
                     }
                     else {
-                        this.println("\nError. " + cineplexName + " already exists");
+                        this.println("\nError: " + cineplexName + " already exists");
                     }
                     break;
                 case 2:

@@ -290,7 +290,7 @@ public class MovieEY {
 	}
 
 	public String toString() {
-		return  this.name + "\n" + 
+		return   "\n" + this.name + "\n\n" + 
 				"Language     : " + this.movieLanguage + "\n" + 
 				"Type         : " + this.movieType.toString() + "\n" + 
 				"Rating       : " + this.movieRating.toString() + "\n" + 

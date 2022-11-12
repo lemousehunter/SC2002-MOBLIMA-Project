@@ -1,6 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class MovieGoerManager extends Manager implements BaseManager {
+    // managers
+
     private ArrayList<User> masterUserList;
 
     public MovieGoerManager() {
@@ -10,7 +16,6 @@ public class MovieGoerManager extends Manager implements BaseManager {
 
     @Override
     public void setManagers() {
-
     }
 
     @Override
@@ -40,4 +45,5 @@ public class MovieGoerManager extends Manager implements BaseManager {
 
     public void process() {
     }
+
 }
