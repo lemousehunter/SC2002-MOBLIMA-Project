@@ -92,6 +92,7 @@ public class MoblimaApp {
         this.centralManager.getReviewMgr().primeViewerRatings();
         this.centralManager.getTicketPriceMgr().primeTicketPrice();
 
+ 
     }
 
     private void ManageStaffApp() {

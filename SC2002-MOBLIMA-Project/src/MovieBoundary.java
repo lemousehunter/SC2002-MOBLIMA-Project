@@ -5,6 +5,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
     // managers
     private MovieManager movieManager;
     private ReviewManager reviewManager;
+    private ShowManager showMgr;
 
     // boundaries
     private ReviewBoundary reviewBoundary;
@@ -13,6 +14,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
     public void setManagers() {
         this.reviewManager = this.getCentralManager().getReviewMgr();
         this.movieManager = this.getCentralManager().getMovieMgr();
+        this.showMgr = this. getCentralManager().getShowMgr();
     }
 
     @Override
@@ -303,8 +305,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
     public void listAllShows() {
         String movieName = this.getMovieName();
         MovieEY movie = this.movieManager.searchMovie(movieName);
-        
-        // TODO: 13/11/22 Call relevant showBoundary method to list all shows of movie
+        for ( String printLine : this.showMgr.getShowsByMovie(movie) )
+        {
+            this.println(printLine);
+
+        }
     }
 
     public void searchMovie() {

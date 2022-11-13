@@ -55,7 +55,8 @@ public class MovieGoerBoundary extends Boundary implements BaseBoundary {
                 4. Write Review
                 5. List Top 5 Movies by Sales
                 6. List Top 5 Movies by Review
-                7. Exit Moblima App
+                7. View my Bookings
+                8. Exit Moblima App
                 
                 Enter choice : 
                  """
@@ -69,7 +70,7 @@ public class MovieGoerBoundary extends Boundary implements BaseBoundary {
 
     public void MovieGoerOperations(String userID) throws ParseException {
         int moviGoerChoice = 0;
-        while (moviGoerChoice != 7) {
+        while (moviGoerChoice != 8) {
             moviGoerChoice = this.getMovieGoerMenuChoice();
             switch (moviGoerChoice) {
                 case 1:
@@ -91,6 +92,10 @@ public class MovieGoerBoundary extends Boundary implements BaseBoundary {
                     this.reviewBoundary.Top5MovPrint();
                     break;
                 case 7:
+                    this.bookingBoundary.viewMyBookings(userID);
+                    break;
+
+                case 8:
                     break;
             }
          }
