@@ -139,11 +139,11 @@ public class BookingManager extends Manager implements BaseManager {
      * @param userID The user ID
      * @return The booking ID
      */
-    private String genBookingID(String userID) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+    private String genBookingID(String cineplexID) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
         String currentDateTime = dtf.format(now);
-        return userID + currentDateTime + this.count.toString(); // bookingID
+        return cineplexID + currentDateTime; // bookingID aka transaction ID
     }
 
 
@@ -161,7 +161,7 @@ public class BookingManager extends Manager implements BaseManager {
      * @throws ParseException
      */
     public String BookTicket(String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
-        String BookingID = genBookingID(userID);
+        String BookingID = genBookingID(cineplexID);
         BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1,
                 this.holidayMgr, this.movieMgr, this.screenManager, this.movieGoerMgr, this.ticketPriceManager);
         ArrayList<String> bookingList = this.bookingUserDict.get(userID);
