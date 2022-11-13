@@ -173,6 +173,11 @@ public class BookingEY {
     public double getBookingAmount() {
         return bookingAmount;
     }
+    
+    /** 
+     * The method returns the total booking amount
+     * @return total booking amount
+     */
     public double computeBookingAmount() {
         double bookingAmount=0;
         for (TicketEY ticket : this.tickets) {

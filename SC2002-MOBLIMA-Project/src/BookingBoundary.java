@@ -216,6 +216,13 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         
     }
 
+
+    /**
+     * Method to return the array of all seat IDs selected to buy
+     * @param showID The show selected
+     * @param numTickets The total number of tickets needed to be bought
+     * @return List of all seat IDs selected to buy
+     */
     private ArrayList<String> getShowSeat(String showID, Integer numTickets) {
         this.showBoundary.ShowSeatLayout(showID);
 
