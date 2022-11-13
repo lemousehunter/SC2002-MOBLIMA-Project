@@ -39,7 +39,9 @@ public class Boundary {
      * @return asks for integer input from the user
      */
     public Integer getInputInt(String msgToPrint) {
-        return this.input.getInt(msgToPrint);
+        int x = this.input.getInt(msgToPrint);
+        this.getScanner().nextLine();
+        return x;
     }
 
     
@@ -49,7 +51,9 @@ public class Boundary {
      * @return asks for input needed from the user in Double
      */
     public double getInputDouble(String msgToPrint) {
-        return this.input.getDouble(msgToPrint);
+        double x = this.input.getDouble(msgToPrint);
+        this.getScanner().nextLine();
+        return x;
     }
 
     

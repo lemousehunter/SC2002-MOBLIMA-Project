@@ -16,6 +16,7 @@ public class ScreenManager extends Manager implements BaseManager {
 
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterScreens;
+    private CineplexManager cineplexManager;
 
 	public ScreenManager() {
 
@@ -24,6 +25,7 @@ public class ScreenManager extends Manager implements BaseManager {
 	@Override
 	public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
+        this.cineplexManager = this.getCentralManager().getCineplexMgr();
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class ScreenManager extends Manager implements BaseManager {
 		}
 
 		ScreenEY s = new ScreenEY(cineplexID,screenName,screenClass,numRows,seatsPerRow);
-		this.masterScreens.add(s);
+        this.cineplexManager.getCineplexByID(cineplexID).addScreen(s);
 		return 1;
 
 	}

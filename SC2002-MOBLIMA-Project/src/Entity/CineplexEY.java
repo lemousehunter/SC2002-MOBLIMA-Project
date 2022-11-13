@@ -72,9 +72,9 @@ public class CineplexEY {
 	 * 
 	 * @param screen An object of class Screen
 	 */
-	public void addScreenID(ScreenEY screen) {
+	public void addScreen(ScreenEY screen) {
 		this.screenID.add(screen.getScreenID());
-		masterScreens.add(screen);
+		this.masterScreens.add(screen);
 	}
 
 	
@@ -84,7 +84,7 @@ public class CineplexEY {
 	 * @return The Cineplex ID
 	 */
 	public String getCineplexID() {
-		return cineplexID;
+		return this.cineplexID;
 	}
 
 	
@@ -104,7 +104,7 @@ public class CineplexEY {
 	 * @return The name of the Cineplex
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	
@@ -124,7 +124,7 @@ public class CineplexEY {
 	 * @return the location of the cineplex
 	 */
 	public String getLocation() {
-		return location;
+		return this.location;
 	}
 
 	
@@ -144,7 +144,7 @@ public class CineplexEY {
 	 * @return ArrayList<String>
 	 */
 	public ArrayList<String> getScreenID() {
-		return screenID;
+		return this.screenID;
 	}
 
 	
@@ -165,8 +165,8 @@ public class CineplexEY {
 	 */
 	public ArrayList<String> getScreenNames() {
 		ArrayList<String> screenNames = new ArrayList<String>();
-		for(String screenid: screenID) {
-			for(ScreenEY screen: masterScreens) {
+		for(String screenid: this.screenID) {
+			for(ScreenEY screen: this.masterScreens) {
 				if(screenid.equals(screen.getScreenID())) {
 					screenNames.add(screen.getScreenName());
 					break;
@@ -185,9 +185,9 @@ public class CineplexEY {
 	public String viewDetails() {
 		String cineplexDetails = "";
 
-		cineplexDetails =   name + " at " + location + ", Screens [ ";
+		cineplexDetails =   this.name + " at " + this.location + ", Screens [ ";
 
-		ArrayList<String> screenNames = getScreenNames();
+		ArrayList<String> screenNames = this.getScreenNames();
 		for (int i=0 ; i < screenNames.size(); i++){
 			if ((i+1) == screenNames.size()) {
 				cineplexDetails = cineplexDetails +  screenNames.get(i) + "  ";// last item

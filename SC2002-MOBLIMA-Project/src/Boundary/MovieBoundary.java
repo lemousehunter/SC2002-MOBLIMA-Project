@@ -275,6 +275,26 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         }
     }
 
+    public void listAllShows() {
+        String movieName = this.getMovieName();
+        MovieEY movie = this.movieManager.searchMovie(movieName);
+        for ( String printLine : this.showMgr.getShowsByMovie(movie) )
+        {
+            this.println(printLine);
+
+        }
+    }
+
+    public void searchMovie() {
+        String movieName = this.getMoviePartName();
+        MovieEY movie = this.movieManager.searchMovie(movieName);
+        if (movie == null) {
+            this.println("\n No movies found with name matching '" + movieName + "'");
+            return;
+        }
+        this.println(movie.toString());
+    }
+
     public void movieOperations() {
         int movieChoice = 0;
         while (movieChoice != 6) {
@@ -302,37 +322,19 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
                         this.println("\nError : Failed to update " + movieName + " as it was not found in movie list.");
                     }
                     break;
-                case 4: 
+                case 4:
                     this.printMovieList(true);
                     break;
                 case 5:
-                     this.searchMovie();
+                    this.searchMovie();
 
                     break;
                 case 6:
                     break;
+                case 7:
+                    break;
             }
         }
-    }
-
-    public void listAllShows() {
-        String movieName = this.getMovieName();
-        MovieEY movie = this.movieManager.searchMovie(movieName);
-        for ( String printLine : this.showMgr.getShowsByMovie(movie) )
-        {
-            this.println(printLine);
-
-        }
-    }
-
-    public void searchMovie() {
-        String movieName = this.getMoviePartName();
-        MovieEY movie = this.movieManager.searchMovie(movieName);
-        if (movie == null) {
-            this.println("\n No movies found with name matching '" + movieName + "'");
-            return;
-        }
-        this.println(movie.toString());
     }
 
 }
