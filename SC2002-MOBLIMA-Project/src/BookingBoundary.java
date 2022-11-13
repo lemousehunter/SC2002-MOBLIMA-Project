@@ -99,9 +99,8 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     public String getMovieChoice() { // converts idx from user input to movieID
         int choice = this.getInputInt(
                 "\n Would you like to: \n" +
-                "1) View Movie Details\n" +
-                "2) Book Movie?\n"
-                );
+                        "1) View Movie Details\n" +
+                        "2) Book Movie?\n");
         if (choice == 1) {
             this.println("Which movie would you like to view details for? Please enter the corresponding integer.");
             this.movieBoundary.printMovieList();
@@ -109,8 +108,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
             String movieID = this.movieManager.getMovieIDFromCurrentShowingIDX(viewMovie);
             this.movieBoundary.viewMovieDetails(movieID);
             this.getMovieChoice(); // calls itself again to emulate jumping back to prev menu
-        }
-        else {
+        } else {
             this.print("Which movie would you like to book for? Please enter the corresponding integer.");
             this.movieBoundary.printMovieList();
             int idx = this.getScanner().nextInt();
@@ -243,5 +241,12 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         return new ArrayList<String>(seatIDs);
     }
 
-}
+    public void viewMyBookings(String userID) {
+        for (String line : this.bookingManager.getAllBookingsList(userID)) {
+            this.println(line);
+        }
 
+    }
+    
+
+}

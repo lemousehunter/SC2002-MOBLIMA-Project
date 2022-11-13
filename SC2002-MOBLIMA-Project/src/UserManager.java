@@ -16,6 +16,7 @@ public class UserManager extends Manager implements BaseManager {
 
   private CentralManagerEY centralManager;
   private ArrayList<User> masterUsers;
+  private ArrayList<MovieGoerEY> masterMovieGoers;
 
   private IoManager ioManager;
 /**
@@ -41,6 +42,7 @@ public class UserManager extends Manager implements BaseManager {
   public void setMasterLists() {
     CentralManagerEY centralMgr = this.getCentralManager();
     this.masterUsers = centralMgr.getMasterUsers();
+    this.masterMovieGoers = centralMgr.getMasterMovieGoers();
   }
   
   /** 
@@ -84,6 +86,7 @@ public class UserManager extends Manager implements BaseManager {
             }
             MovieGoerEY movieGoer = new MovieGoerEY(userID, userName, emailID, mobileNumber, movieGoerAge,
                     bookings);
+            this.masterMovieGoers.add(movieGoer);
             this.masterUsers.add((User) movieGoer);
 
         }

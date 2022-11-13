@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -113,10 +114,7 @@ public class BookingManager extends Manager implements BaseManager {
     return this.bookingIDDict.get(bookingID);
   }
 
-  /**
-   * Method to initialise hash maps
-   */
-  private void initializeHashMaps() {
+  void initializeHashMaps() {
     ArrayList<MovieGoerEY> movieGoerList = this.movieGoerMgr.getAllMovieGoers();
     if (movieGoerList != null) {
       for (MovieGoerEY movieGoer : movieGoerList) {
@@ -161,7 +159,8 @@ public class BookingManager extends Manager implements BaseManager {
    */
   public String BookTicket( String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
     String BookingID = genBookingID(userID);
-    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayMgr, this.movieMgr, this.screenManager, this.movieGoerMgr, this. ticketPriceManager);
+    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1,
+        this.holidayMgr, this.movieMgr, this.screenManager, this.movieGoerMgr, this.ticketPriceManager);
     ArrayList<String> bookingList = this.bookingUserDict.get(userID);
     if (bookingList == null) { // initializes user list if not exist in hashmap
       bookingList = new ArrayList<String>();
@@ -353,5 +352,31 @@ public class BookingManager extends Manager implements BaseManager {
 
 }
 
+ 
+  public ArrayList<String> getAllBookingsList(String userID) {
+    ArrayList<String> userBookings = new ArrayList<String>();
+
+    userBookings.add("\nYour Booking LIst:\n");
+    for ( MovieGoerEY moviegoer : this.masterMovieGoers)
+    {
+      if (moviegoer.getUserID().equals(userID)) {
+        for (String bookingID : moviegoer.getBookings()){
+           bookLoop: for (BookingEY booking : this. masterBookings){
+               for (MovieEY movie : this.masterMovies) {
+                  if (booking.getMovieID().equals(movie.getMovieID())){
+                    userBookings.add("Booking ID : " + bookingID + " Amount  = " + booking.getBookingAmount()
+                   + "    Movie : " + movie.getName());
+                   break bookLoop;
+                  }
+              }
+            }
+        }
+        break;
+      }
+    }
+    userBookings.add("\n");
+
+    return userBookings;
+  }
 
 }

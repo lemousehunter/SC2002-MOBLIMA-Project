@@ -559,5 +559,26 @@ public class ShowManager extends Manager implements BaseManager {
         return null;
 
     }
+
+    public ArrayList<String> getShowsByMovie(MovieEY movie) {
+
+
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add("\nFollowing are the Shows for the Movie : " + movie.getName() + "\n");
+        for (ShowEY show : this.masterShows){
+            if (show.getMovieID().equals(movie.getMovieID())){
+                String screenName = this.screenMgr.getScreenNameByID(show.getScreenID());
+                String ShowDate = show.getShowDate();
+                String ShowTime = show.getShowTime();
+
+                lines.add(
+                    String.format("| %-20s | ",screenName) +
+                    ShowDate + "  @  " + ShowTime + " | "
+                );
+            }
+        }
+        return lines;
+    }
+
  
 }

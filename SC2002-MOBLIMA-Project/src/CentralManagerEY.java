@@ -67,6 +67,7 @@ public class CentralManagerEY {
         this.masterHolidays = new ArrayList<String>();
         this.masterRatings = new ArrayList<ReviewEY>();
         this.masterTicketPrices = new ArrayList<TicketPrice>();
+        this.masterMovieGoers = new ArrayList<MovieGoerEY>();
 
         // Master data folder derived from datafolder property
         this.dataFolder= System.getProperty("dataFolder");
