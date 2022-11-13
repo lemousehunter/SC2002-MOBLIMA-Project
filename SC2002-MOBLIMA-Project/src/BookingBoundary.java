@@ -211,9 +211,8 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         String bookingID = this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cineplex, screenID, seatIDs);
         this.showManager.setSeatOccupied(showID, seatIDs);
         
-
-        this.println("\nBooking ID : " + bookingID + " : Your Tickets have been booked successfully!!  Amount Charged : " + this.bookingManager.getBookingByID(bookingID).getBookingAmount() + "\n");
-        
+        this.println("Your Tickets have been booked successfully!!");
+        this.showBooking(bookingID);
     }
 
 
