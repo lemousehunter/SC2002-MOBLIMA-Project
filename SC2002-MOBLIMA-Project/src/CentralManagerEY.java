@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +56,7 @@ public class CentralManagerEY {
     /**
      * Method to create an object of CentralManagerEY
      */
-    public CentralManagerEY() {
+    public CentralManagerEY() throws IOException, ParseException {
 
         // Create Master lists
 
@@ -185,9 +187,23 @@ public class CentralManagerEY {
         this.ticketPriceBoundary.setBoundaries();   this.ticketPriceBoundary.setManagers();
         this.staffBoundary.setBoundaries();         this.staffBoundary.setManagers();
         this.movieGoerBoundary.setBoundaries();     this.movieGoerBoundary.setManagers();
+
+        // call all entity managers prime method to prime the array lists from files
+        this.primeAllObjectsFromDataFiles();
     }
 
-    
+    private void primeAllObjectsFromDataFiles() throws IOException, ParseException {
+        this.holidayMgr.primeHolidays();
+        this.cineplexMgr.primeCineplex();
+        this.screenMgr.primeScreen();
+        this.movieMgr.primeMovie();
+        this.showMgr.primeShow();
+        this.userMgr.primeUser();
+        this.bookingMgr.primeBookings();
+        this.reviewMgr.primeViewerRatings();
+        this.ticketPriceMgr.primeTicketPrice();
+    }
+
     /** 
      * Method to set master array of bookings
      * @param masterBookings New master array of all bookings
