@@ -45,13 +45,13 @@ public class BookingManager extends Manager implements BaseManager {
    * Controller Class of MovieGoers
    */
   private MovieGoerManager movieGoerMgr;
-<<<<<<< Updated upstream
+
   private ScreenManager screenManager;
-=======
+
   /**
    * Object of Class IoManager to manage File I/O functions
    */
->>>>>>> Stashed changes
+
   private IoManager ioManager;
   private TicketPriceManager ticketPriceManager;
 

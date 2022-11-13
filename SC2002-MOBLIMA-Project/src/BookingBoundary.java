@@ -126,7 +126,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
      * @return the show dates
      */
     public String getShowDate(String cineplex, String movieID) { // prints out available show dates, gets show date from user
-        this.print("Please enter the correspon ing index of the date you would like to book");
+        this.print("Please enter the corresponding index of the date you would like to book");
         this.showBoundary.printShowDates(cineplex,movieID);
         int viewShow = this.getScanner().nextInt();
         return this.showManager.getShowIDFromShowDateIDX(cineplex,movieID,viewShow);

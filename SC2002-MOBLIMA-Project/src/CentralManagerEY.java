@@ -729,18 +729,17 @@ public class CentralManagerEY {
     public void setStaffBoundary(StaffBoundary staffBoundary) {
         this.staffBoundary = staffBoundary;
     }
-<<<<<<< Updated upstream
+
 
     public MovieGoerBoundary getMovieGoerBoundary() {
         return movieGoerBoundary;
     }
 
-=======
     
     /** Method to get new data folder
      * @return the data folder
      */
->>>>>>> Stashed changes
+
     public String getDataFolder() {
         return dataFolder;
     }
