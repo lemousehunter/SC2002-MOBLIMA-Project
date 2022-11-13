@@ -150,12 +150,16 @@ public class BookingManager extends Manager implements BaseManager {
     }
 
 
-    /**
-     * Method to return all the bookings made by a particular user
-     *
-     * @param userID The user ID
-     * @return The bookings made from the user ID given
-     */
+    public double getTotalSales(String movieID) {
+        double sales = 0;
+        for (BookingEY booking: this.masterBookings) {
+            if (booking.getMovieID().equals(movieID)) {
+                sales += booking.getBookingAmount();
+            }
+        }
+
+        return sales;
+    }
 
 
     /**

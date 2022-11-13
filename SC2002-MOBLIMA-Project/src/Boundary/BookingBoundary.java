@@ -113,29 +113,21 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
      * 
      * @return The movie ID
      */
-    public String getMovieChoice() { // converts idx from user input to movieID
-        int choice = this.getInputInt(
+
+    public int getBookingChoice() {
+        return this.getInputInt(
                 """
-                         Would you like to:
+                        Would you like to:
                         1) View Movie Details
                         2) Book Movie?
                         """);
-        if (choice == 1) {
-            this.println("Which movie would you like to view details for? Please enter the corresponding integer.");
-            this.movieBoundary.printMovieList();
-            int viewMovie = this.getScanner().nextInt();
-            String movieID = this.movieManager.getMovieIDFromCurrentShowingIDX(viewMovie);
-            this.movieBoundary.viewMovieDetails(movieID);
-            this.getMovieChoice(); // calls itself again to emulate jumping back to prev menu
-        } else {
-            this.print("Which movie would you like to book for? Please enter the corresponding integer.");
-            this.movieBoundary.printMovieList();
-            int idx = this.getScanner().nextInt();
-            String selectedMovieId =this.movieManager.getMovieIDFromAllShowingIDX(idx);
-            return selectedMovieId;
-            
-        }
-        return "";
+    }
+    public String getMovieChoice(boolean askCurrent) { // converts idx from user input to movieID
+        this.print("Which movie would you like to book for? Please enter the corresponding integer.");
+        this.movieBoundary.printMovieList(askCurrent);
+        int idx = this.getScanner().nextInt();
+        String selectedMovieId =this.movieManager.getMovieIDFromAllShowingIDX(idx);
+        return selectedMovieId;
     }
 
     
@@ -199,38 +191,6 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         }
     }
 
-    
-    /** 
-     * Method to create a ticket
-     * @param userID The unique ID of the user
-     * @throws ParseException
-     */
-    public void BookingOperations(String userID) throws ParseException {
-        String cineplex = this.getCineplexChoice();
-        String movieID = this.getMovieChoice();
-
-        if (movieID.equals("N/A")){
-            this.println("\nError : You have selected a movie that is not in SHOWING | PREVIEW Status for booking.\n");
-            return; 
-        }
-        String showDate = this.getShowDate(cineplex, movieID);
-        ArrayList<String> container = this.getShowTime(cineplex, movieID,showDate);
-        String showTime = container.get(0);
-        String screenID = container.get(1);
-        String showID   = container.get(2);
-        Integer numTickets = this.getNumTickets();
-
-        
-        ArrayList<String> seatIDs = this.getShowSeat(showID,numTickets);
-        
-
-        String bookingID = this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cineplex, screenID, seatIDs);
-        this.showManager.setSeatOccupied(showID, seatIDs);
-        
-        this.println("Your Tickets have been booked successfully!!");
-        this.showBooking(bookingID);
-    }
-
 
     /**
      * Method to return the array of all seat IDs selected to buy
@@ -265,6 +225,45 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         }
         this.println("===================================");
     }
-    
+
+    /**
+     * Method to create a ticket
+     * @param userID The unique ID of the user
+     * @throws ParseException
+     */
+    public void BookingOperations(String userID) throws ParseException {
+        int bookingChoice = this.getBookingChoice();
+        while (bookingChoice != 2) {
+            this.println("Which movie would you like to view details for? Please enter the corresponding integer.");
+            this.movieBoundary.printMovieList(false);
+            int viewMovie = this.getScanner().nextInt();
+            String movieID = this.movieManager.getMovieIDFromCurrentShowingIDX(viewMovie);
+            this.movieBoundary.viewMovieDetails(movieID);
+            bookingChoice = this.getBookingChoice();
+        }
+        String cineplex = this.getCineplexChoice();
+        String movieID = this.getMovieChoice(false);
+
+        if (movieID.equals("N/A")){
+            this.println("\nError : You have selected a movie that is not in SHOWING | PREVIEW Status for booking.\n");
+            return;
+        }
+        String showDate = this.getShowDate(cineplex, movieID);
+        ArrayList<String> container = this.getShowTime(cineplex, movieID,showDate);
+        String showTime = container.get(0);
+        String screenID = container.get(1);
+        String showID   = container.get(2);
+        Integer numTickets = this.getNumTickets();
+
+
+        ArrayList<String> seatIDs = this.getShowSeat(showID,numTickets);
+
+
+        String bookingID = this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cineplex, screenID, seatIDs);
+        this.showManager.setSeatOccupied(showID, seatIDs);
+
+        this.println("Your Tickets have been booked successfully!!");
+        this.showBooking(bookingID);
+    }
 
 }

@@ -115,9 +115,10 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
                     break;
                 case 7:
                     ArrayList<String> top5Movies = this.bookingManager.getTop5Movies();
-                    System.out.println("Top 5 movies by bookings:");
+                    this.println("Top 5 movies by bookings:");
                     for (String movieId : top5Movies) {
                         System.out.println(this.movieManager.getMovieByID(movieId));
+                        this.println("Total Revenue: SGD$" + this.bookingManager.getTotalSales(movieId));
                     }
                     break;
                 case 8:
