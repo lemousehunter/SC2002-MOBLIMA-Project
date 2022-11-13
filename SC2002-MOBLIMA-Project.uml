@@ -1,0 +1,1950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/mouse/Documents/GitHub/SC2002-MOBLIMA-Project/SC2002-MOBLIMA-Project</OriginalElement>
+  <nodes>
+    <node x="4056.79566725696" y="4845.176015705043">ScreenClassEN</node>
+    <node x="3413.8672980239335" y="4592.60754475007">MovieTypeEN</node>
+    <node x="4456.13617511552" y="3948.723722842152">Controller.MovieManager</node>
+    <node x="5941.677302297564" y="3562.7009856082955">App.Base</node>
+    <node x="4094.1738934506557" y="1925.6745665383487">Entity.CentralManagerEY</node>
+    <node x="2542.277238903048" y="5056.543219448753">TicketEY</node>
+    <node x="3933.8523729863527" y="5330.252181521846">Enum.ScreenClassEN</node>
+    <node x="8830.344956578552" y="4563.383099262905">BaseBoundary</node>
+    <node x="1815.5175423418932" y="4800.999445688278">MovieGoerEY</node>
+    <node x="3768.3617322342448" y="5522.719347506399">showException</node>
+    <node x="8720.164569201186" y="3719.954728097435">Controller.TicketPriceManager</node>
+    <node x="583.8817705551805" y="3950.164400930292">HolidayManager</node>
+    <node x="3725.9625905380763" y="5928.995087317668">Entity.MovieEY</node>
+    <node x="8320.858456270305" y="4146.815436208693">BookingManager</node>
+    <node x="6871.281976725681" y="4151.030135752791">TicketPrice</node>
+    <node x="3761.3051492285495" y="4782.475004991042">cineplexType</node>
+    <node x="949.6570700108866" y="4630.227737848637">BaseManager</node>
+    <node x="1887.7608763708604" y="3813.752824269911">Boundary.Boundary</node>
+    <node x="8807.14856519389" y="4226.301795032699">ReviewBoundary</node>
+    <node x="7867.104536370865" y="5252.058836949553">Entity.BookingEY</node>
+    <node x="9002.264768527262" y="5186.092233422769">Entity.ReviewEY</node>
+    <node x="1492.6461147447312" y="4163.5661866971395">Entity.SeatEY</node>
+    <node x="7951.0662931277075" y="4613.248014379706">Controller.MovieGoerManager</node>
+    <node x="8322.75449124984" y="5044.079946129888">Enum.RatingScaleEN</node>
+    <node x="2282.782564605607" y="3973.6172182519886">TicketPriceBoundary</node>
+    <node x="3081.9940250945997" y="4454.319047744606">UserApp</node>
+    <node x="3056.893419561416" y="4719.515546673195">Manager</node>
+    <node x="89.00391174494416" y="4148.513964551348">Entity.StaffEY</node>
+    <node x="6251.831596164798" y="3842.5574101347665">Enum.ShowStatusEN</node>
+    <node x="5125.251947410033" y="5302.699598122192">Enum.UserTypeEN</node>
+    <node x="6108.502501469747" y="4346.926827604746">Input</node>
+    <node x="8547.374465424993" y="5272.827142375556">BookingEY</node>
+    <node x="2683.568880112211" y="4327.989991287146">Enum.cineplexTypeEN</node>
+    <node x="6851.438236613317" y="4551.270214821343">Staff</node>
+    <node x="6005.817310758134" y="4094.6549437698895">Enum.DayTypeEN</node>
+    <node x="6410.4480847331215" y="4557.211987690347">Base</node>
+    <node x="4791.904036596292" y="3342.419217672966">Controller.ReviewManager</node>
+    <node x="2701.243623575711" y="3606.433350862716">Boundary.ScreenBoundary</node>
+    <node x="5912.690074717219" y="3852.191007037275">Enum.MovieGoerAgeEN</node>
+    <node x="7820.327398474821" y="3988.0395006531735">Controller.BookingManager</node>
+    <node x="3000.959377649457" y="4007.2356885681775">MovieGoerBoundary</node>
+    <node x="4674.788565995645" y="2565.765937356976">Boundary.BookingBoundary</node>
+    <node x="4381.81477424936" y="5685.5773879505105">MoblimaApp</node>
+    <node x="4757.447258197228" y="5048.716588978958">MovieRatingEN</node>
+    <node x="5097.070883415637" y="3133.0088868430244">Controller.Manager</node>
+    <node x="4093.828523048186" y="4486.261921127499">Boundary.StaffBoundary</node>
+    <node x="-101.54480749978643" y="4608.12286032393">Entity.ScreenEY</node>
+    <node x="9086.503836045962" y="4551.864095733985">Controller.BaseManager</node>
+    <node x="2283.5624999247875" y="4782.5090338080245">UserType</node>
+    <node x="7427.944434773173" y="4472.6010038878285">Entity.TicketPrice</node>
+    <node x="2187.3671714251577" y="4362.910209039996">ScreenManager</node>
+    <node x="3304.154173030068" y="4989.2123629442685">TicketPriceManager</node>
+    <node x="7018.408939316622" y="3768.4764509304314">Controller.UserManager</node>
+    <node x="4913.03441027324" y="5755.269035457673">MovieEY</node>
+    <node x="4183.323435628536" y="5102.845656537937">Boundary.BaseBoundary</node>
+    <node x="1191.7979333351168" y="4564.783921661667">ReviewManager</node>
+    <node x="9440.309288855138" y="3820.4324740330485">Controller.ShowManager</node>
+    <node x="5427.378197740066" y="5048.514340099104">Entity.CineplexEY</node>
+    <node x="9143.580757509544" y="4041.0251783562335">ScreenBoundary</node>
+    <node x="1812.028617537454" y="4202.749058179341">Boundary.HolidayBoundary</node>
+    <node x="3803.7857166755475" y="5041.648889995914">MovieGoerManager</node>
+    <node x="3323.767932270902" y="4027.708662591185">StaffApp</node>
+    <node x="4725.075970450198" y="5328.2168243539745">ReviewE</node>
+    <node x="5426.092022701083" y="3422.730930642933">Controller.ScreenManager</node>
+    <node x="6560.544665700942" y="4102.7225571248555">ShowStatusEN</node>
+    <node x="9757.767295107644" y="4515.980601353923">ReviewEY</node>
+    <node x="3714.191245535899" y="4218.758716895529">Boundary.ShowBoundary</node>
+    <node x="5183.101477277686" y="3928.525887802355">BookingBoundary</node>
+    <node x="9410.880831754856" y="4934.4411341458745">StaffBoundary</node>
+    <node x="7385.50752267847" y="4890.655678664358">MovieManager</node>
+    <node x="6565.179681663973" y="4345.634096194892">DayTypeEN</node>
+    <node x="5065.8514664608" y="5043.953655006539">Enum.MovieRatingEN</node>
+    <node x="4965.810320564032" y="4524.816050036472">CineplexBoundary</node>
+    <node x="4390.559106038083" y="5270.258524654">Boundary.MovieGoerBoundary</node>
+    <node x="9063.314559246488" y="4720.112613432839">IoManager</node>
+    <node x="2718.2412156196706" y="4660.882985871146">UserManager</node>
+    <node x="6295.337077415544" y="4117.31100668655">App.Input</node>
+    <node x="7131.490423720125" y="4543.814520334207">User</node>
+    <node x="8325.07789618045" y="4678.35037165934">HolidayBoundary</node>
+    <node x="7973.752887489229" y="4910.866285131517">Controller.IoManager</node>
+    <node x="4372.941280303675" y="6011.1117633088">ShowEY</node>
+    <node x="3441.2235613302905" y="3597.318180534404">Boundary.CineplexBoundary</node>
+    <node x="1197.4903848400686" y="3857.3929503548843">Boundary.ReviewBoundary</node>
+    <node x="3247.838356128602" y="5574.949646486413">Entity.TicketEY</node>
+    <node x="3006.8722782230093" y="5036.940123981374">Enum.MovieTypeEN</node>
+    <node x="4611.772122467997" y="-13.044539360652834">CentralManagerEY</node>
+    <node x="1783.0485908678593" y="4541.231767939333">Entity.ShowSeatEY</node>
+    <node x="6570.494755044601" y="3846.6201810214443">MovieGoerAgeEN</node>
+    <node x="839.178705155698" y="5009.288216633232">Boundary</node>
+    <node x="5857.655126603038" y="4827.629827645612">SeatEY</node>
+    <node x="1262.0490395830238" y="5023.311013448938">ScreenEY</node>
+    <node x="866.3055077781046" y="3606.7645882795814">Entity.UserEY</node>
+    <node x="5308.2054804749005" y="4423.924399823161">ShowBoundary</node>
+    <node x="381.4689426063892" y="4348.309409950783">ShowManager</node>
+    <node x="7378.077606736521" y="3975.735246447063">CineplexManager</node>
+    <node x="8704.24070933575" y="4921.599653201465">RatingScaleEN</node>
+    <node x="4054.986867386454" y="5559.8321660592155">App.MoblimaApp</node>
+    <node x="198.85725594182827" y="3785.150892479074">Boundary.TicketPriceBoundary</node>
+    <node x="5677.606602495964" y="4337.066751406065">CineplexEY</node>
+    <node x="3758.0674781648645" y="3624.0959059227444">MovieBoundary</node>
+    <node x="3376.5150569434036" y="5302.292182185603">ShowSeatEY</node>
+    <node x="4447.842139537194" y="4592.162208639251">Boundary.MovieBoundary</node>
+    <node x="5662.497667633712" y="4110.822669909291">App.showException</node>
+    <node x="9358.482205184162" y="4463.32706489768">Controller.CineplexManager</node>
+    <node x="5489.738632731423" y="5572.463788460039">Entity.ShowEY</node>
+    <node x="940.6706287456493" y="4155.443277784143">Entity.MovieGoerEY</node>
+    <node x="6321.236771789626" y="3445.083853365617">Controller.HolidayManager</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Boundary.MovieBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-123.0" y="-2.086392505589174E-4" />
+      <point x="4432.0" y="4832.662" />
+      <point x="4432.0" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Boundary.TicketPriceBoundary" target="Controller.TicketPriceManager" relationship="TO_ONE">
+      <point x="-15.000255941828243" y="-142.49989247907433" />
+      <point x="341.357" y="1893.175" />
+      <point x="8918.165" y="1893.175" />
+      <point x="8918.165" y="3398.0" />
+      <point x="8933.165" y="3398.0" />
+      <point x="15.000430798814705" y="-106.49972809743485" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.MovieBoundary" relationship="TO_ONE">
+      <point x="83.32610654934433" y="750.5" />
+      <point x="4338.0" y="3462.919" />
+      <point x="4312.0" y="3462.919" />
+      <point x="4312.0" y="3956.5" />
+      <point x="4353.0" y="3956.5" />
+      <point x="4353.0" y="4450.224" />
+      <point x="4555.842" y="4450.224" />
+      <point x="4555.842" y="4544.0" />
+      <point x="4670.0" y="4544.0" />
+      <point x="99.15786046280573" y="-241.5" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="-3.9847482094046427E-4" y="-153.49950065317353" />
+      <point x="8028.827" y="3299.0" />
+      <point x="5408.592" y="3299.0" />
+      <point x="5408.592" y="3716.231" />
+      <point x="4922.0" y="3716.231" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Entity.MovieEY" target="Entity.ReviewEY" relationship="TO_MANY">
+      <point x="198.5" y="-249.88308731766756" />
+      <point x="4831.441" y="5978.612" />
+      <point x="4831.441" y="6371.769" />
+      <point x="6361.003" y="6371.769" />
+      <point x="6361.003" y="4274.811" />
+      <point x="5093.31" y="4274.811" />
+      <point x="5093.31" y="3931.224" />
+      <point x="4384.0" y="3931.224" />
+      <point x="4384.0" y="3825.057" />
+      <point x="6543.045" y="3825.057" />
+      <point x="6543.045" y="4399.427" />
+      <point x="6392.948" y="4399.427" />
+      <point x="6392.948" y="5930.964" />
+      <point x="9170.765" y="5930.964" />
+      <point x="2.314727371413028E-4" y="109.49976657723073" />
+    </edge>
+    <edge source="Boundary.ScreenBoundary" target="Entity.ScreenEY" relationship="TO_MANY">
+      <point x="-29.999623575710757" y="-153.5" />
+      <point x="2769.744" y="3577.0" />
+      <point x="71.504" y="3577.0" />
+      <point x="-28.951192500213565" y="-255.49986032393008" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.ReviewManager" relationship="TO_ONE">
+      <point x="30.82610654934433" y="750.5" />
+      <point x="4285.5" y="3477.919" />
+      <point x="4338.0" y="3477.919" />
+      <point x="4338.0" y="3492.919" />
+      <point x="-265.0" y="-2.1767296630059718E-4" />
+    </edge>
+    <edge source="Entity.CineplexEY" target="Entity.ScreenEY" relationship="TO_MANY">
+      <point x="-2.673197740065916" y="-178.5" />
+      <point x="5609.705" y="4932.424" />
+      <point x="5242.0" y="4932.424" />
+      <point x="5242.0" y="4420.224" />
+      <point x="5003.31" y="4420.224" />
+      <point x="5003.31" y="3889.691" />
+      <point x="4463.636" y="3889.691" />
+      <point x="4463.636" y="3577.0" />
+      <point x="71.504" y="3577.0" />
+      <point x="-28.951192500213565" y="-255.49986032393008" />
+    </edge>
+    <edge source="Boundary.BaseBoundary" target="App.Base" relationship="INTERFACE_GENERALIZATION">
+      <point x="28.163564371464417" y="26.5" />
+      <point x="4299.487" y="6712.612" />
+      <point x="6971.5" y="6712.612" />
+      <point x="6971.5" y="4807.0" />
+      <point x="5644.998" y="4807.0" />
+      <point x="5644.998" y="3805.9759999999997" />
+      <point x="6071.677" y="3805.9759999999997" />
+      <point x="-3.0229756430344423E-4" y="40.00001439170455" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.ShowBoundary" relationship="TO_ONE">
+      <point x="-28.32852304818607" y="-87.49992112749896" />
+      <point x="4206.0" y="3971.5" />
+      <point x="4023.0" y="3971.5" />
+      <point x="4023.0" y="4124.596" />
+      <point x="3868.691" y="4124.596" />
+      <point x="-2.455358990118839E-4" y="-230.49971689552876" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.ScreenBoundary" relationship="TO_ONE">
+      <point x="-43.32852304818607" y="-87.49992112749896" />
+      <point x="4191.0" y="4420.224" />
+      <point x="4164.0" y="4420.224" />
+      <point x="4164.0" y="3529.5" />
+      <point x="2825.244" y="3529.5" />
+      <point x="25.500376424289243" y="-153.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.TicketPriceBoundary" relationship="TO_ONE">
+      <point x="-160.4998934506557" y="716.3254334616513" />
+      <point x="4040.0" y="3392.5" />
+      <point x="4040.0" y="3413.0" />
+      <point x="326.357" y="3413.0" />
+      <point x="-30.000255941828243" y="-142.49989247907433" />
+    </edge>
+    <edge source="Boundary.Boundary" target="Controller.Manager" relationship="TO_MANY">
+      <point x="130.0" y="20.000175730089268" />
+      <point x="2970.5" y="3954.253" />
+      <point x="2970.5" y="4960.176015705043" />
+      <point x="4245.323435628536" y="4960.176015705043" />
+      <point x="4245.323435628536" y="5087.162208639251" />
+      <point x="4742.5" y="5087.162208639251" />
+      <point x="4742.5" y="4937.424" />
+      <point x="4953.5" y="4937.424" />
+      <point x="4953.5" y="3904.691" />
+      <point x="5333.904036596292" y="3904.691" />
+      <point x="106.83315318065524" y="40.5" />
+    </edge>
+    <edge source="Boundary.ShowBoundary" target="Controller.ShowManager" relationship="TO_ONE">
+      <point x="154.499754464101" y="2.831044712365838E-4" />
+      <point x="4137.0" y="4449.259" />
+      <point x="4137.0" y="3462.919" />
+      <point x="3996.567" y="3462.919" />
+      <point x="3996.567" y="1878.175" />
+      <point x="9778.809" y="1878.175" />
+      <point x="89.99971114486107" y="-216.5" />
+    </edge>
+    <edge source="Controller.CineplexManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="-156.0" y="-67.96306489768085" />
+      <point x="8282.0" y="4534.364" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Entity.ShowEY" target="Entity.ShowSeatEY" relationship="TO_MANY">
+      <point x="-195.5" y="-178.19475300236536" />
+      <point x="4747.575970450198" y="5737.769035457673" />
+      <point x="4747.575970450198" y="5951.495087317668" />
+      <point x="4344.487" y="5951.495087317668" />
+      <point x="4344.487" y="6564.495087317668" />
+      <point x="2514.0624999247875" y="6564.495087317668" />
+      <point x="2514.0624999247875" y="4757.232" />
+      <point x="1953.5485908678593" y="4757.232" />
+      <point x="0.0" y="65.5" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.HolidayBoundary" relationship="TO_ONE">
+      <point x="-97.32852304818607" y="-87.49992112749896" />
+      <point x="4137.0" y="4468.762" />
+      <point x="4098.0" y="4468.762" />
+      <point x="4098.0" y="4139.596" />
+      <point x="3736.691" y="4139.596" />
+      <point x="3736.691" y="3905.933" />
+      <point x="2952.069" y="3905.933" />
+      <point x="2952.069" y="4295.49" />
+      <point x="157.5" y="-27.759058179341082" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.ReviewBoundary" relationship="CREATE">
+      <point x="-160.5" y="15.000433461651483" />
+      <point x="1284.99" y="2691.175" />
+      <point x="-30.00038484006859" y="-95.5" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="44.99971114486107" y="-216.5" />
+      <point x="9733.809" y="3372.0" />
+      <point x="7756.0" y="3372.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Entity.ShowEY" target="Entity.ShowSeatEY" relationship="CREATE">
+      <point x="3.672685761557659E-4" y="343.5" />
+      <point x="5685.239" y="6282.0" />
+      <point x="5347.752" y="6282.0" />
+      <point x="5347.752" y="5659.332" />
+      <point x="4314.487" y="5659.332" />
+      <point x="4314.487" y="5806.332" />
+      <point x="3690.338" y="5806.332" />
+      <point x="3690.338" y="5993.45" />
+      <point x="1798.018" y="5993.45" />
+      <point x="-155.53059086785925" y="65.5" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="4.3400435515650315E-4" y="164.5" />
+      <point x="4862.789" y="3299.0" />
+      <point x="5408.592" y="3299.0" />
+      <point x="5408.592" y="3716.231" />
+      <point x="4922.0" y="3716.231" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Controller.BookingManager" relationship="TO_ONE">
+      <point x="129.17147695181393" y="-87.49992112749896" />
+      <point x="4363.5" y="3527.5" />
+      <point x="4583.772" y="3527.5" />
+      <point x="4583.772" y="3014.0" />
+      <point x="7998.827" y="3014.0" />
+      <point x="-30.00039847482094" y="-153.49950065317353" />
+    </edge>
+    <edge source="Controller.IoManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="92.0" y="14.999714868483352" />
+      <point x="8263.0" y="4998.866" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="208.49960152517815" y="4.993468264729017E-4" />
+      <point x="8282.0" y="4140.54" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.MovieEY" relationship="TO_MANY">
+      <point x="15.826106549344331" y="750.5" />
+      <point x="4270.5" y="4468.762" />
+      <point x="4733.0" y="4468.762" />
+      <point x="4733.0" y="5300.2" />
+      <point x="4686.315" y="5300.2" />
+      <point x="4686.315" y="5993.612" />
+      <point x="198.5" y="-234.88308731766756" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Entity.MovieGoerEY" relationship="TO_MANY">
+      <point x="-45.00039847482094" y="-153.49950065317353" />
+      <point x="7983.827" y="3398.0" />
+      <point x="5398.092" y="3398.0" />
+      <point x="5398.092" y="3705.731" />
+      <point x="4480.136" y="3705.731" />
+      <point x="4480.136" y="3566.5" />
+      <point x="1147.306" y="3566.5" />
+      <point x="5.13537125435073" y="-145.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.MovieGoerManager" relationship="CREATE">
+      <point x="160.5" y="-232.90856653834862" />
+      <point x="9969.809" y="2443.266" />
+      <point x="9969.809" y="4380.5251783562335" />
+      <point x="9312.003836045962" y="4380.5251783562335" />
+      <point x="9312.003836045962" y="5051.579946129888" />
+      <point x="8615.25449124984" y="5051.579946129888" />
+      <point x="8615.25449124984" y="4981.85037165934" />
+      <point x="8175.252887489229" y="4981.85037165934" />
+      <point x="78.1865943615212" y="87.5" />
+    </edge>
+    <edge source="Controller.MovieManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="-30.000175115519596" y="-219.49972284215164" />
+      <point x="4636.636" y="3247.0" />
+      <point x="7756.0" y="3247.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Controller.HolidayManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="2.2821037418907508E-4" y="-117.49985336561713" />
+      <point x="6449.737" y="3372.0" />
+      <point x="7756.0" y="3372.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Entity.TicketPrice" target="Enum.MovieGoerAgeEN" relationship="TO_ONE">
+      <point x="-222.5" y="-3.887828825099859E-6" />
+      <point x="7383.99" y="4615.101" />
+      <point x="7383.99" y="4477.0" />
+      <point x="6853.782" y="4477.0" />
+      <point x="6853.782" y="4047.691" />
+      <point x="6044.19" y="4047.691" />
+      <point x="-7.47172198316548E-5" y="51.49999296272472" />
+    </edge>
+    <edge source="Controller.UserManager" target="Entity.CentralManagerEY" relationship="TO_ONE">
+      <point x="-29.99993931662266" y="-73.5" />
+      <point x="7077.409" y="3231.0" />
+      <point x="7199.5" y="3231.0" />
+      <point x="7199.5" y="2548.266" />
+      <point x="160.5" y="-127.90856653834862" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.UserManager" relationship="TO_ONE">
+      <point x="160.5" y="293.8254334616513" />
+      <point x="7032.409" y="2970.0" />
+      <point x="-74.99993931662266" y="-73.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.ShowEY" relationship="TO_MANY">
+      <point x="160.5" y="69.09143346165138" />
+      <point x="4478.636" y="2745.266" />
+      <point x="4478.636" y="2955.0" />
+      <point x="9954.809" y="2955.0" />
+      <point x="9954.809" y="2989.5" />
+      <point x="9985.5" y="2989.5" />
+      <point x="9985.5" y="4300.932" />
+      <point x="9724.381" y="4300.932" />
+      <point x="9724.381" y="5945.964" />
+      <point x="195.5" y="30.00021153996113" />
+    </edge>
+    <edge source="Controller.TicketPriceManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="-197.9995692011853" y="2.719025651458651E-4" />
+      <point x="8282.0" y="3825.955" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Boundary.HolidayBoundary" target="Controller.HolidayManager" relationship="TO_ONE">
+      <point x="157.5" y="-12.759058179341082" />
+      <point x="2961.0" y="4310.49" />
+      <point x="2961.0" y="3540.0" />
+      <point x="4206.0" y="3540.0" />
+      <point x="4206.0" y="3776.0" />
+      <point x="6419.737" y="3776.0" />
+      <point x="-29.99977178962581" y="117.5" />
+    </edge>
+    <edge source="Controller.MovieManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="-15.000175115519596" y="-218.49972284215164" />
+      <point x="4651.636" y="3320.0" />
+      <point x="8263.0" y="3320.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="-140.4995230481859" y="7.887250103522092E-5" />
+      <point x="4067.0" y="4573.762" />
+      <point x="4067.0" y="4405.224" />
+      <point x="4922.0" y="4405.224" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Entity.MovieEY" target="Enum.ShowStatusEN" relationship="TO_ONE">
+      <point x="198.5" y="-298.0" />
+      <point x="4786.441280303675" y="5930.495087317668" />
+      <point x="4786.441280303675" y="6437.769" />
+      <point x="6376.003" y="6437.769" />
+      <point x="6376.003" y="4274.811" />
+      <point x="6517.837077415544" y="4274.811" />
+      <point x="6517.837077415544" y="3894.0574101347665" />
+      <point x="123.0" y="0.0" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Boundary.ReviewBoundary" relationship="TO_ONE">
+      <point x="-1.0603808277664939E-4" y="98.5" />
+      <point x="4519.559" y="5490.0" />
+      <point x="1765.549" y="5490.0" />
+      <point x="1765.549" y="3952.893" />
+      <point x="117.49961515993141" y="4.9645115723251365E-5" />
+    </edge>
+    <edge source="Boundary.MovieBoundary" target="Boundary.ReviewBoundary" relationship="TO_ONE">
+      <point x="95.21686046280593" y="241.49979136074944" />
+      <point x="4666.059" y="5490.0" />
+      <point x="1765.549" y="5490.0" />
+      <point x="1765.549" y="3952.893" />
+      <point x="117.49961515993141" y="4.9645115723251365E-5" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Controller.BookingManager" relationship="TO_ONE">
+      <point x="-14.999565995644843" y="164.5" />
+      <point x="4847.789" y="3014.0" />
+      <point x="7998.827" y="3014.0" />
+      <point x="-30.00039847482094" y="-153.49950065317353" />
+    </edge>
+    <edge source="Controller.TicketPriceManager" target="Entity.TicketPrice" relationship="CREATE">
+      <point x="-128.51600400729694" y="106.5" />
+      <point x="8789.64856519389" y="4493.315436208693" />
+      <point x="222.5" y="-121.78556767913506" />
+    </edge>
+    <edge source="Entity.ShowEY" target="Entity.ScreenEY" relationship="TO_ONE">
+      <point x="195.5" y="2.1153996112843743E-4" />
+      <point x="6346.003" y="5915.964" />
+      <point x="6346.003" y="4304.567" />
+      <point x="5242.0" y="4304.567" />
+      <point x="5242.0" y="4420.224" />
+      <point x="5003.31" y="4420.224" />
+      <point x="5003.31" y="3889.691" />
+      <point x="4463.636" y="3889.691" />
+      <point x="4463.636" y="3577.0" />
+      <point x="71.504" y="3577.0" />
+      <point x="-28.951192500213565" y="-255.49986032393008" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.MovieGoerBoundary" relationship="CREATE">
+      <point x="-160.5" y="-48.99956653834852" />
+      <point x="-153.04500000000002" y="2627.175" />
+      <point x="-153.04500000000002" y="6008.45" />
+      <point x="3185.372" y="6008.45" />
+      <point x="3185.372" y="5465.043219448753" />
+      <point x="-129.0" y="96.2846947947528" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Entity.BookingEY" relationship="CREATE">
+      <point x="83.23860152517864" y="153.5" />
+      <point x="8112.066" y="4508.315436208693" />
+      <point x="9282.003836045962" y="4508.315436208693" />
+      <point x="9282.003836045962" y="5164.579946129888" />
+      <point x="8064.104536370865" y="5164.579946129888" />
+      <point x="0.0" y="-244.5" />
+    </edge>
+    <edge source="Boundary.ReviewBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="14.999615159931409" y="-94.99995035488428" />
+      <point x="1329.99" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="-2.8885513893328607E-4" y="-216.0004740330487" />
+      <point x="9688.809" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="-2.2701083253195975E-5" y="150.00006935706733" />
+      <point x="5625.592" y="3746.0" />
+      <point x="8282.0" y="3746.0" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-140.4995230481859" y="7.887250103522092E-5" />
+      <point x="4040.0" y="4572.762" />
+      <point x="4040.0" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Boundary.MovieBoundary" target="Controller.ShowManager" relationship="TO_ONE">
+      <point x="-123.0" y="-1.4862086392504352" />
+      <point x="4053.796" y="4832.176" />
+      <point x="4053.796" y="4449.259" />
+      <point x="4137.0" y="4449.259" />
+      <point x="4137.0" y="3462.919" />
+      <point x="3996.567" y="3462.919" />
+      <point x="3996.567" y="1878.175" />
+      <point x="9778.809" y="1878.175" />
+      <point x="89.99971114486107" y="-216.5" />
+    </edge>
+    <edge source="Boundary.Boundary" target="App.Input" relationship="TO_ONE">
+      <point x="130.0" y="7.536449153266858" />
+      <point x="6510.337077415544" y="3941.7892734231777" />
+      <point x="6510.337077415544" y="4174.81100668655" />
+      <point x="102.5" y="-5.0" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.HolidayBoundary" relationship="TO_ONE">
+      <point x="-137.9998934506557" y="750.5" />
+      <point x="4116.674" y="3592.0" />
+      <point x="4098.0" y="3592.0" />
+      <point x="4098.0" y="4139.596" />
+      <point x="3736.691" y="4139.596" />
+      <point x="3736.691" y="3905.933" />
+      <point x="2952.069" y="3905.933" />
+      <point x="2952.069" y="4295.49" />
+      <point x="157.5" y="-27.759058179341082" />
+    </edge>
+    <edge source="Entity.ScreenEY" target="Entity.SeatEY" relationship="CREATE">
+      <point x="-43.95119250021357" y="-255.49986032393008" />
+      <point x="56.504" y="3431.0" />
+      <point x="1618.646" y="3431.0" />
+      <point x="-1.1474473126327212E-4" y="-131.5" />
+    </edge>
+    <edge source="Entity.TicketEY" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="197.49964387139835" y="114.12735351358697" />
+      <point x="4706.842" y="5889.577" />
+      <point x="4706.842" y="4912.924" />
+      <point x="4944.0" y="4912.924" />
+      <point x="4944.0" y="4420.224" />
+      <point x="4236.0" y="4420.224" />
+      <point x="4236.0" y="3540.0" />
+      <point x="4621.636" y="3540.0" />
+      <point x="4621.636" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Controller.TicketPriceManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="-14.999569201185295" y="-106.49972809743485" />
+      <point x="8903.165" y="3372.0" />
+      <point x="7756.0" y="3372.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Controller.CineplexManager" relationship="TO_ONE">
+      <point x="104.99971114486107" y="-216.5" />
+      <point x="9793.809" y="3104.0" />
+      <point x="9954.809" y="3104.0" />
+      <point x="9954.809" y="4508.481" />
+      <point x="155.99979481583796" y="-94.34606489768066" />
+    </edge>
+    <edge source="Controller.UserManager" target="Entity.MovieGoerEY" relationship="TO_MANY">
+      <point x="30.00006068337734" y="-73.5" />
+      <point x="7137.409" y="3398.0" />
+      <point x="5398.092" y="3398.0" />
+      <point x="5398.092" y="3705.731" />
+      <point x="4480.136" y="3705.731" />
+      <point x="4480.136" y="3566.5" />
+      <point x="1147.306" y="3566.5" />
+      <point x="5.13537125435073" y="-145.5" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="14.999977298916747" y="-150.49993064293267" />
+      <point x="5640.592" y="3372.0" />
+      <point x="7756.0" y="3372.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.CineplexManager" relationship="CREATE">
+      <point x="160.5" y="-273.4085665383486" />
+      <point x="4610.772" y="2402.766" />
+      <point x="4610.772" y="1857.175" />
+      <point x="9996.0" y="1857.175" />
+      <point x="9996.0" y="4497.981" />
+      <point x="156.0" y="-104.84606489768066" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.MovieGoerEY" relationship="TO_MANY">
+      <point x="160.5" y="554.8254334616513" />
+      <point x="4538.636" y="3231.0" />
+      <point x="4538.636" y="3675.919" />
+      <point x="5393.592" y="3675.919" />
+      <point x="5393.592" y="3398.0" />
+      <point x="5398.092" y="3398.0" />
+      <point x="5398.092" y="3705.731" />
+      <point x="4480.136" y="3705.731" />
+      <point x="4480.136" y="3566.5" />
+      <point x="1147.306" y="3566.5" />
+      <point x="5.13537125435073" y="-145.5" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="-209.11503659629216" y="-150.5" />
+      <point x="4847.789" y="3247.0" />
+      <point x="7756.0" y="3247.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Controller.UserManager" target="Entity.MovieGoerEY" relationship="CREATE">
+      <point x="-10.499939316622658" y="73.49954906956873" />
+      <point x="7096.909" y="3986.191" />
+      <point x="5630.205" y="3986.191" />
+      <point x="5630.205" y="4959.424" />
+      <point x="5419.252" y="4959.424" />
+      <point x="5419.252" y="5590.464" />
+      <point x="4309.987" y="5590.464" />
+      <point x="4309.987" y="5474.0" />
+      <point x="1714.298" y="5474.0" />
+      <point x="1714.298" y="4913.284" />
+      <point x="1145.157" y="4913.284" />
+      <point x="2.9863712543506153" y="145.49972221585722" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.ScreenManager" relationship="CREATE">
+      <point x="160.5" y="442.8254334616513" />
+      <point x="5580.592" y="3119.0" />
+      <point x="-45.00002270108325" y="-150.5" />
+    </edge>
+    <edge source="Controller.UserManager" target="Entity.UserEY" relationship="TO_MANY">
+      <point x="-44.99993931662266" y="-73.5" />
+      <point x="7062.409" y="3052.0" />
+      <point x="4513.136" y="3052.0" />
+      <point x="4513.136" y="3906.191" />
+      <point x="4443.5" y="3906.191" />
+      <point x="4443.5" y="4722.516" />
+      <point x="3700.5" y="4722.516" />
+      <point x="3700.5" y="3944.753" />
+      <point x="2232.367" y="3944.753" />
+      <point x="2232.367" y="4067.753" />
+      <point x="1000.306" y="4067.753" />
+      <point x="4.922218954561686E-4" y="109.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.TicketPrice" relationship="TO_MANY">
+      <point x="160.5" y="308.8254334616513" />
+      <point x="8358.358" y="2985.0" />
+      <point x="8358.358" y="4093.525" />
+      <point x="9094.004" y="4093.525" />
+      <point x="9094.004" y="4534.364" />
+      <point x="222.49956522682714" y="-80.7370038878289" />
+    </edge>
+    <edge source="Boundary.ShowBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="154.499754464101" y="2.831044712365838E-4" />
+      <point x="4040.0" y="4448.259" />
+      <point x="4040.0" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.TicketPriceManager" relationship="TO_ONE">
+      <point x="29.99960152517906" y="-153.49950065317353" />
+      <point x="8058.827" y="3398.0" />
+      <point x="8297.0" y="3398.0" />
+      <point x="8297.0" y="1893.175" />
+      <point x="8918.165" y="1893.175" />
+      <point x="8918.165" y="3398.0" />
+      <point x="8933.165" y="3398.0" />
+      <point x="15.000430798814705" y="-106.49972809743485" />
+    </edge>
+    <edge source="Entity.TicketPrice" target="Enum.ScreenClassEN" relationship="TO_ONE">
+      <point x="173.56356522682654" y="142.49999611217117" />
+      <point x="7824.008" y="5442.0" />
+      <point x="5107.752" y="5442.0" />
+      <point x="5107.752" y="5231.149" />
+      <point x="4113.286" y="5231.149" />
+      <point x="54.93362701364731" y="-51.5" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.MovieBoundary" relationship="TO_ONE">
+      <point x="103.67147695181393" y="-87.49992112749896" />
+      <point x="4338.0" y="4450.224" />
+      <point x="4312.0" y="4450.224" />
+      <point x="4312.0" y="3956.5" />
+      <point x="4353.0" y="3956.5" />
+      <point x="4353.0" y="4450.224" />
+      <point x="4555.842" y="4450.224" />
+      <point x="4555.842" y="4544.0" />
+      <point x="4670.0" y="4544.0" />
+      <point x="99.15786046280573" y="-241.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="160.5" y="4.3346165148250293E-4" />
+      <point x="4594.272" y="2676.175" />
+      <point x="4594.272" y="3247.0" />
+      <point x="7756.0" y="3247.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Boundary.CineplexBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="4.3866970963790664E-4" y="-130.50018053440363" />
+      <point x="3545.224" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.ScreenEY" relationship="TO_MANY">
+      <point x="160.5" y="570.8254334616513" />
+      <point x="4523.636" y="3247.0" />
+      <point x="4523.636" y="3577.0" />
+      <point x="71.504" y="3577.0" />
+      <point x="-28.951192500213565" y="-255.49986032393008" />
+    </edge>
+    <edge source="Boundary.MovieBoundary" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="122.99986046280537" y="-2.086392505589174E-4" />
+      <point x="4922.0" y="4833.662" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Boundary.CineplexBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="104.0" y="-1.8053440362564288E-4" />
+      <point x="3684.0" y="3727.818" />
+      <point x="3684.0" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="140.5" y="7.887250103522092E-5" />
+      <point x="4404.0" y="4572.762" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Controller.TicketPriceManager" target="Entity.TicketPrice" relationship="TO_MANY">
+      <point x="-29.999569201185295" y="-106.49972809743485" />
+      <point x="8888.165" y="2985.0" />
+      <point x="8358.358" y="2985.0" />
+      <point x="8358.358" y="4093.525" />
+      <point x="9094.004" y="4093.525" />
+      <point x="9094.004" y="4534.364" />
+      <point x="222.49956522682714" y="-80.7370038878289" />
+    </edge>
+    <edge source="Entity.MovieGoerEY" target="Enum.MovieGoerAgeEN" relationship="TO_ONE">
+      <point x="201.5" y="138.6227222158568" />
+      <point x="1740.798" y="4439.566" />
+      <point x="1740.798" y="4727.232" />
+      <point x="2545.562" y="4727.232" />
+      <point x="2545.562" y="4820.883" />
+      <point x="3530.867" y="4820.883" />
+      <point x="3530.867" y="4751.016" />
+      <point x="4385.5" y="4751.016" />
+      <point x="4385.5" y="4479.262" />
+      <point x="5276.5" y="4479.262" />
+      <point x="5276.5" y="4324.067" />
+      <point x="6329.0" y="4324.067" />
+      <point x="6329.0" y="4477.0" />
+      <point x="6853.782" y="4477.0" />
+      <point x="6853.782" y="4047.691" />
+      <point x="6044.19" y="4047.691" />
+      <point x="-7.47172198316548E-5" y="51.49999296272472" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.CineplexBoundary" relationship="TO_ONE">
+      <point x="21.17147695181393" y="-87.49992112749896" />
+      <point x="4255.5" y="3840.057" />
+      <point x="4448.0" y="3840.057" />
+      <point x="4448.0" y="2533.266" />
+      <point x="4478.636" y="2533.266" />
+      <point x="4478.636" y="1852.675" />
+      <point x="3515.224" y="1852.675" />
+      <point x="-29.999561330290362" y="-131.5" />
+    </edge>
+    <edge source="Boundary.ReviewBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-3.8484006859107467E-4" y="-94.99995035488428" />
+      <point x="1314.99" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Boundary.ShowBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="-154.5" y="2.831044712365838E-4" />
+      <point x="3684.0" y="4448.259" />
+      <point x="3684.0" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Boundary.BookingBoundary" relationship="TO_ONE">
+      <point x="29.999893961917223" y="-98.4995246540002" />
+      <point x="4549.559" y="5246.149" />
+      <point x="5037.947" y="5246.149" />
+      <point x="5037.947" y="4957.924" />
+      <point x="4779.947" y="4957.924" />
+      <point x="4779.947" y="4493.762" />
+      <point x="5018.31" y="4493.762" />
+      <point x="5018.31" y="3840.057" />
+      <point x="4497.0" y="3840.057" />
+      <point x="4497.0" y="2646.175" />
+      <point x="-187.99956599564484" y="-84.0909373569757" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="29.999711144861067" y="-216.5" />
+      <point x="9718.809" y="3299.0" />
+      <point x="5408.592" y="3299.0" />
+      <point x="5408.592" y="3716.231" />
+      <point x="4922.0" y="3716.231" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.BookingBoundary" relationship="TO_ONE">
+      <point x="160.5" y="-172.90856653834862" />
+      <point x="4497.0" y="2503.266" />
+      <point x="4497.0" y="2646.175" />
+      <point x="-187.99956599564484" y="-84.0909373569757" />
+    </edge>
+    <edge source="Controller.UserManager" target="Entity.StaffEY" relationship="CREATE">
+      <point x="6.068337734177476E-5" y="73.49954906956873" />
+      <point x="7107.409" y="4017.691" />
+      <point x="6824.045" y="4017.691" />
+      <point x="6824.045" y="4259.0" />
+      <point x="6331.003" y="4259.0" />
+      <point x="6331.003" y="5483.2" />
+      <point x="5449.878" y="5483.2" />
+      <point x="5449.878" y="5579.964" />
+      <point x="4519.559" y="5579.964" />
+      <point x="4519.559" y="5505.0" />
+      <point x="1698.549" y="5505.0" />
+      <point x="1698.549" y="4943.284" />
+      <point x="319.955" y="4943.284" />
+      <point x="114.95108825505582" y="65.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.ScreenBoundary" relationship="TO_ONE">
+      <point x="-90.67389345065567" y="750.5" />
+      <point x="4164.0" y="3529.5" />
+      <point x="2825.244" y="3529.5" />
+      <point x="25.500376424289243" y="-153.5" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Entity.ReviewEY" relationship="CREATE">
+      <point x="119.90628396773991" y="150.5" />
+      <point x="5176.810320564032" y="4262.5" />
+      <point x="6072.606602495964" y="4262.5" />
+      <point x="6072.606602495964" y="4791.248014379706" />
+      <point x="7891.944434773173" y="4791.248014379706" />
+      <point x="7891.944434773173" y="5239.058836949553" />
+      <point x="-168.5" y="-56.53339647321627" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.HolidayManager" relationship="TO_ONE">
+      <point x="-33.67389345065567" y="750.5" />
+      <point x="4221.0" y="3776.0" />
+      <point x="6419.737" y="3776.0" />
+      <point x="-29.99977178962581" y="117.5" />
+    </edge>
+    <edge source="Controller.HolidayManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="2.2821037418907508E-4" y="117.00014663438287" />
+      <point x="6449.737" y="3746.0" />
+      <point x="8282.0" y="3746.0" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Controller.CineplexManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="-91.67320518416273" y="-139.0000648976802" />
+      <point x="9422.809" y="3700.0" />
+      <point x="8263.0" y="3700.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.ShowSeatEY" target="Entity.SeatEY" relationship="GENERALIZATION">
+      <point x="-159.01997333040572" y="-64.5" />
+      <point x="1794.5286175374538" y="4294.0661866971395" />
+      <point x="126.0" y="0.0" />
+    </edge>
+    <edge source="Boundary.Boundary" target="App.Input" relationship="CREATE">
+      <point x="130.0" y="3.768312441678063" />
+      <point x="6520.337077415544" y="3938.021136711589" />
+      <point x="6520.337077415544" y="4184.81100668655" />
+      <point x="102.5" y="5.0" />
+    </edge>
+    <edge source="Controller.IoManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="92.0" y="-2.851315166481072E-4" />
+      <point x="8282.0" y="4983.866" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="14.999963403708534" y="-150.0002176729663" />
+      <point x="5071.904" y="3320.0" />
+      <point x="8263.0" y="3320.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.TicketPriceManager" relationship="CREATE">
+      <point x="160.5" y="-217.90856653834862" />
+      <point x="9823.809" y="2458.266" />
+      <point x="9823.809" y="3802.9324740330485" />
+      <point x="198.0" y="-23.52225406438629" />
+    </edge>
+    <edge source="Controller.MovieManager" target="Entity.MovieEY" relationship="TO_MANY">
+      <point x="-1.7511551959614735E-4" y="219.5" />
+      <point x="4666.636" y="4468.762" />
+      <point x="4733.0" y="4468.762" />
+      <point x="4733.0" y="5300.2" />
+      <point x="4686.315" y="5300.2" />
+      <point x="4686.315" y="5993.612" />
+      <point x="198.5" y="-234.88308731766756" />
+    </edge>
+    <edge source="Entity.TicketEY" target="Controller.TicketPriceManager" relationship="TO_ONE">
+      <point x="-197.5" y="15.00035351358656" />
+      <point x="353.504" y="5790.45" />
+      <point x="353.504" y="4117.651" />
+      <point x="181.357" y="4117.651" />
+      <point x="181.357" y="1893.175" />
+      <point x="8918.165" y="1893.175" />
+      <point x="8918.165" y="3398.0" />
+      <point x="8933.165" y="3398.0" />
+      <point x="15.000430798814705" y="-106.49972809743485" />
+    </edge>
+    <edge source="Controller.TicketPriceManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="4.307988147047581E-4" y="-105.99972809743485" />
+      <point x="8918.165" y="3700.0" />
+      <point x="8263.0" y="3700.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.ReviewManager" relationship="CREATE">
+      <point x="160.5" y="743.0" />
+      <point x="-265.0" y="-73.74465113461747" />
+    </edge>
+    <edge source="Controller.CineplexManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="-106.67320518416273" y="-139.5" />
+      <point x="9407.809" y="3372.0" />
+      <point x="7756.0" y="3372.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Boundary.ScreenBoundary" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="15.000376424289243" y="-153.5" />
+      <point x="2814.744" y="3496.0" />
+      <point x="4236.0" y="3496.0" />
+      <point x="4236.0" y="3540.0" />
+      <point x="4621.636" y="3540.0" />
+      <point x="4621.636" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Controller.Manager" target="Entity.CentralManagerEY" relationship="TO_ONE">
+      <point x="-14.99988341563676" y="40.5" />
+      <point x="5212.071" y="3231.0" />
+      <point x="7199.5" y="3231.0" />
+      <point x="7199.5" y="2548.266" />
+      <point x="160.5" y="-127.90856653834862" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.MovieGoerBoundary" relationship="TO_ONE">
+      <point x="148.19260629371365" y="750.5" />
+      <point x="-116.69260629371365" y="-98.5" />
+    </edge>
+    <edge source="App.MoblimaApp" target="Entity.CentralManagerEY" relationship="CREATE">
+      <point x="0.0" y="84.5" />
+      <point x="4168.486867386454" y="6554.995087317668" />
+      <point x="-162.54500000000002" y="6554.995087317668" />
+      <point x="-162.54500000000002" y="2617.675" />
+      <point x="-160.5" y="-58.49956653834852" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Entity.TicketEY" relationship="TO_ONE">
+      <point x="-208.5" y="130.69549934682618" />
+      <point x="7398.99" y="4272.235" />
+      <point x="7398.99" y="4780.315" />
+      <point x="7083.938" y="4780.315" />
+      <point x="7083.938" y="5528.0" />
+      <point x="5347.752" y="5528.0" />
+      <point x="5347.752" y="5620.464" />
+      <point x="4344.487" y="5620.464" />
+      <point x="4344.487" y="5775.45" />
+      <point x="197.49964387139835" y="3.5351358656043885E-4" />
+    </edge>
+    <edge source="Entity.BookingEY" target="Entity.TicketEY" relationship="CREATE">
+      <point x="0.0" y="244.5" />
+      <point x="8064.104536370865" y="6448.269" />
+      <point x="4772.941280303675" y="6448.269" />
+      <point x="4772.941280303675" y="5961.995087317668" />
+      <point x="4362.323435628536" y="5961.995087317668" />
+      <point x="4362.323435628536" y="6574.995087317668" />
+      <point x="3455.838" y="6574.995087317668" />
+      <point x="10.499643871398348" y="200.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="0.8261065493443311" y="750.5" />
+      <point x="4255.5" y="3496.0" />
+      <point x="4236.0" y="3496.0" />
+      <point x="4236.0" y="3540.0" />
+      <point x="4621.636" y="3540.0" />
+      <point x="4621.636" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Entity.CineplexEY" relationship="TO_MANY">
+      <point x="-30.000022701083253" y="-150.49993064293267" />
+      <point x="5595.592" y="3346.0" />
+      <point x="5895.19" y="3346.0" />
+      <point x="5895.19" y="4181.323" />
+      <point x="5659.998" y="4181.323" />
+      <point x="47.61980225993375" y="-178.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.ShowBoundary" relationship="CREATE">
+      <point x="-101.17389345065567" y="750.5" />
+      <point x="4153.5" y="4384.723722842152" />
+      <point x="154.5" y="-64.53499405337698" />
+    </edge>
+    <edge source="Controller.UserManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="6.068337734177476E-5" y="-73.00045093043173" />
+      <point x="7107.409" y="3746.0" />
+      <point x="8282.0" y="3746.0" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.IoManager" relationship="CREATE">
+      <point x="160.5" y="-247.90856653834862" />
+      <point x="9838.809" y="2428.266" />
+      <point x="9838.809" y="3757.454728097435" />
+      <point x="9365.982205184162" y="3757.454728097435" />
+      <point x="9365.982205184162" y="4365.5251783562335" />
+      <point x="9327.003836045962" y="4365.5251783562335" />
+      <point x="9327.003836045962" y="5066.579946129888" />
+      <point x="8585.25449124984" y="5066.579946129888" />
+      <point x="8585.25449124984" y="4996.85037165934" />
+      <point x="92.0" y="12.48408652782382" />
+    </edge>
+    <edge source="Controller.MovieGoerManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="145.99970687229143" y="14.999985620293955" />
+      <point x="8263.0" y="4714.748" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Controller.MovieGoerManager" relationship="TO_ONE">
+      <point x="15.000434004355157" y="164.5" />
+      <point x="4877.789" y="3074.0" />
+      <point x="7333.782" y="3074.0" />
+      <point x="7333.782" y="4372.54" />
+      <point x="8097.066" y="4372.54" />
+      <point x="-2.931277076640981E-4" y="-87.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.TicketPriceManager" relationship="TO_ONE">
+      <point x="1.0654934430931462E-4" y="-750.4995665383487" />
+      <point x="4254.674" y="1893.175" />
+      <point x="8918.165" y="1893.175" />
+      <point x="8918.165" y="3398.0" />
+      <point x="8933.165" y="3398.0" />
+      <point x="15.000430798814705" y="-106.49972809743485" />
+    </edge>
+    <edge source="Controller.CineplexManager" target="Entity.CineplexEY" relationship="TO_MANY">
+      <point x="-121.67320518416273" y="-139.5" />
+      <point x="9392.809" y="3346.0" />
+      <point x="5895.19" y="3346.0" />
+      <point x="5895.19" y="4181.323" />
+      <point x="5659.998" y="4181.323" />
+      <point x="47.61980225993375" y="-178.5" />
+    </edge>
+    <edge source="Controller.MovieManager" target="Entity.MovieEY" relationship="CREATE">
+      <point x="51.43979533467791" y="219.5" />
+      <point x="4718.075970450198" y="5310.7" />
+      <point x="5068.8514664608" y="5310.7" />
+      <point x="5068.8514664608" y="5706.5773879505105" />
+      <point x="4734.075970450198" y="5706.5773879505105" />
+      <point x="4734.075970450198" y="5940.995087317668" />
+      <point x="198.5" y="-287.5" />
+    </edge>
+    <edge source="Entity.TicketPrice" target="Enum.DayTypeEN" relationship="TO_ONE">
+      <point x="-222.5" y="-88.78648355362111" />
+      <point x="6091.002501469747" y="4526.314520334207" />
+      <point x="-26.81480928838755" y="51.5" />
+    </edge>
+    <edge source="Boundary.MovieBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="-123.0" y="14.999791360749441" />
+      <point x="4404.0" y="4847.662" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.ShowManager" relationship="CREATE">
+      <point x="160.5" y="-262.9085665383486" />
+      <point x="9853.809" y="2413.266" />
+      <point x="164.99971114486107" y="-216.5" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Entity.MovieEY" relationship="TO_MANY">
+      <point x="-149.90403659629192" y="150.4997823270337" />
+      <point x="4907.0" y="4780.316" />
+      <point x="4733.0" y="4780.316" />
+      <point x="4733.0" y="5300.2" />
+      <point x="4686.315" y="5300.2" />
+      <point x="4686.315" y="5993.612" />
+      <point x="198.5" y="-234.88308731766756" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="-2.2701083253195975E-5" y="-149.99993064293267" />
+      <point x="5625.592" y="3320.0" />
+      <point x="8263.0" y="3320.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.TicketPrice" target="Enum.MovieTypeEN" relationship="TO_ONE">
+      <point x="188.56356522682654" y="142.49999611217117" />
+      <point x="7839.008" y="6386.769" />
+      <point x="4876.441" y="6386.769" />
+      <point x="4876.441" y="5904.577" />
+      <point x="3740.0" y="5904.577" />
+      <point x="3740.0" y="5284.792" />
+      <point x="3125.372" y="5284.792" />
+      <point x="-2.782230094453553E-4" y="51.4998760186254" />
+    </edge>
+    <edge source="Boundary.TicketPriceBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="14.999744058171757" y="-141.49989247907433" />
+      <point x="371.357" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Controller.BookingManager" relationship="TO_ONE">
+      <point x="-98.05910603808297" y="-98.4995246540002" />
+      <point x="4421.5" y="3527.5" />
+      <point x="4583.772" y="3527.5" />
+      <point x="4583.772" y="3014.0" />
+      <point x="7998.827" y="3014.0" />
+      <point x="-30.00039847482094" y="-153.49950065317353" />
+    </edge>
+    <edge source="Controller.MovieManager" target="Entity.ReviewEY" relationship="TO_MANY">
+      <point x="-210.5" y="2.77157848358911E-4" />
+      <point x="4384.0" y="4168.224" />
+      <point x="4384.0" y="3825.057" />
+      <point x="6543.045" y="3825.057" />
+      <point x="6543.045" y="4399.427" />
+      <point x="6392.948" y="4399.427" />
+      <point x="6392.948" y="5930.964" />
+      <point x="9170.765" y="5930.964" />
+      <point x="2.314727371413028E-4" y="109.49976657723073" />
+    </edge>
+    <edge source="Boundary.MovieBoundary" target="Controller.ReviewManager" relationship="TO_ONE">
+      <point x="-1.3953719462733716E-4" y="-241.5" />
+      <point x="4570.842" y="4435.224" />
+      <point x="4338.0" y="4435.224" />
+      <point x="4338.0" y="3492.919" />
+      <point x="-265.0" y="-2.1767296630059718E-4" />
+    </edge>
+    <edge source="App.MoblimaApp" target="Entity.StaffEY" relationship="CREATE">
+      <point x="113.5" y="-1.66059215189307E-4" />
+      <point x="5449.878" y="5644.332" />
+      <point x="5449.878" y="5579.964" />
+      <point x="4519.559" y="5579.964" />
+      <point x="4519.559" y="5505.0" />
+      <point x="1698.549" y="5505.0" />
+      <point x="1698.549" y="4943.284" />
+      <point x="319.955" y="4943.284" />
+      <point x="114.95108825505582" y="65.5" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Entity.ScreenEY" relationship="TO_MANY">
+      <point x="-199.5" y="87.68806935706698" />
+      <point x="4666.636" y="3660.919" />
+      <point x="4666.636" y="3577.0" />
+      <point x="71.504" y="3577.0" />
+      <point x="-28.951192500213565" y="-255.49986032393008" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="-109.2885659956446" y="164.5" />
+      <point x="4753.5" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Entity.ReviewEY" relationship="TO_MANY">
+      <point x="-265.0" y="99.08078232703383" />
+      <point x="4384.0" y="3592.0" />
+      <point x="4384.0" y="3825.057" />
+      <point x="6543.045" y="3825.057" />
+      <point x="6543.045" y="4399.427" />
+      <point x="6392.948" y="4399.427" />
+      <point x="6392.948" y="5930.964" />
+      <point x="9170.765" y="5930.964" />
+      <point x="2.314727371413028E-4" y="109.49976657723073" />
+    </edge>
+    <edge source="Entity.BookingEY" target="Entity.TicketEY" relationship="TO_MANY">
+      <point x="-196.99953637086583" y="1.641163050447176" />
+      <point x="7824.008" y="5498.2" />
+      <point x="7824.008" y="5528.0" />
+      <point x="5347.752" y="5528.0" />
+      <point x="5347.752" y="5620.464" />
+      <point x="4344.487" y="5620.464" />
+      <point x="4344.487" y="5775.45" />
+      <point x="197.49964387139835" y="3.5351358656043885E-4" />
+    </edge>
+    <edge source="App.MoblimaApp" target="Entity.CentralManagerEY" relationship="TO_ONE">
+      <point x="-113.49986738645384" y="-1.66059215189307E-4" />
+      <point x="3690.338" y="5644.332" />
+      <point x="3690.338" y="5551.811" />
+      <point x="-119.045" y="5551.811" />
+      <point x="-119.045" y="1908.175" />
+      <point x="7199.5" y="1908.175" />
+      <point x="7199.5" y="2548.266" />
+      <point x="160.5" y="-127.90856653834862" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.CineplexBoundary" relationship="CREATE">
+      <point x="-160.5" y="60.00043346165148" />
+      <point x="3560.224" y="2736.175" />
+      <point x="15.000438669709638" y="-131.5" />
+    </edge>
+    <edge source="Entity.ShowEY" target="Entity.MovieEY" relationship="TO_ONE">
+      <point x="-195.49963273142384" y="15.000211539961128" />
+      <point x="5387.752" y="5930.964" />
+      <point x="5387.752" y="5169.217" />
+      <point x="4733.0" y="5169.217" />
+      <point x="4733.0" y="5300.2" />
+      <point x="4686.315" y="5300.2" />
+      <point x="4686.315" y="5993.612" />
+      <point x="198.5" y="-234.88308731766756" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Controller.CineplexManager" relationship="TO_ONE">
+      <point x="-29.999565995644843" y="164.5" />
+      <point x="4832.789" y="3104.0" />
+      <point x="9954.809" y="3104.0" />
+      <point x="9954.809" y="4508.481" />
+      <point x="155.99979481583796" y="-94.34606489768066" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.HolidayManager" relationship="CREATE">
+      <point x="160.5" y="653.3254334616513" />
+      <point x="5363.070883415637" y="3329.5" />
+      <point x="5363.070883415637" y="3407.5" />
+      <point x="6440.237" y="3407.5" />
+      <point x="-9.499771789625811" y="-117.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.ReviewBoundary" relationship="TO_ONE">
+      <point x="-160.4998934506557" y="701.3254334616513" />
+      <point x="1765.549" y="3377.5" />
+      <point x="1765.549" y="3952.893" />
+      <point x="117.49961515993141" y="4.9645115723251365E-5" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.MovieGoerManager" relationship="TO_ONE">
+      <point x="44.99960152517906" y="-153.49950065317353" />
+      <point x="8073.827" y="3074.0" />
+      <point x="7333.782" y="3074.0" />
+      <point x="7333.782" y="4372.54" />
+      <point x="8097.066" y="4372.54" />
+      <point x="-2.931277076640981E-4" y="-87.5" />
+    </edge>
+    <edge source="Entity.TicketEY" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="-3.561286016520171E-4" y="200.5" />
+      <point x="3445.338" y="6727.612" />
+      <point x="5372.752" y="6727.612" />
+      <point x="5372.752" y="4902.424" />
+      <point x="4922.0" y="4902.424" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Boundary.CineplexBoundary" target="Controller.CineplexManager" relationship="TO_ONE">
+      <point x="-14.999561330290362" y="-131.5" />
+      <point x="3530.224" y="3447.919" />
+      <point x="4363.5" y="3447.919" />
+      <point x="4363.5" y="3477.919" />
+      <point x="4568.772" y="3477.919" />
+      <point x="4568.772" y="3104.0" />
+      <point x="9954.809" y="3104.0" />
+      <point x="9954.809" y="4508.481" />
+      <point x="155.99979481583796" y="-94.34606489768066" />
+    </edge>
+    <edge source="Entity.MovieEY" target="Enum.MovieTypeEN" relationship="TO_ONE">
+      <point x="4.094619239367603E-4" y="-299.5" />
+      <point x="3924.463" y="5904.577" />
+      <point x="3740.0" y="5904.577" />
+      <point x="3740.0" y="5284.792" />
+      <point x="3125.372" y="5284.792" />
+      <point x="-2.782230094453553E-4" y="51.4998760186254" />
+    </edge>
+    <edge source="Boundary.ScreenBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="-14.999623575710757" y="-152.500350862716" />
+      <point x="2784.744" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.BookingBoundary" relationship="CREATE">
+      <point x="160.5" y="39.09143346165138" />
+      <point x="-188.0" y="-14.999937356975806" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="14.99960152517906" y="-153.49950065317353" />
+      <point x="8043.827" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.CineplexEY" relationship="TO_MANY">
+      <point x="160.5" y="-157.90856653834862" />
+      <point x="8343.358" y="2518.266" />
+      <point x="8343.358" y="3346.0" />
+      <point x="5895.19" y="3346.0" />
+      <point x="5895.19" y="4181.323" />
+      <point x="5659.998" y="4181.323" />
+      <point x="47.61980225993375" y="-178.5" />
+    </edge>
+    <edge source="Controller.BaseManager" target="App.Base" relationship="INTERFACE_GENERALIZATION">
+      <point x="15.000163954038726" y="26.49990426601471" />
+      <point x="9190.504" y="4648.883" />
+      <point x="8297.0" y="4648.883" />
+      <point x="8297.0" y="4807.0" />
+      <point x="5644.998" y="4807.0" />
+      <point x="5644.998" y="3805.9759999999997" />
+      <point x="6071.677" y="3805.9759999999997" />
+      <point x="-3.0229756430344423E-4" y="40.00001439170455" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="-3.659629146568477E-5" y="-150.0002176729663" />
+      <point x="5056.904" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.MovieManager" relationship="CREATE">
+      <point x="67.82610654934433" y="750.5" />
+      <point x="4322.5" y="4380.223722842152" />
+      <point x="-210.5" y="212.0" />
+    </edge>
+    <edge source="Entity.TicketEY" target="Controller.HolidayManager" relationship="TO_ONE">
+      <point x="-197.5" y="3.5351358656043885E-4" />
+      <point x="2961.0" y="5775.45" />
+      <point x="2961.0" y="3540.0" />
+      <point x="4206.0" y="3540.0" />
+      <point x="4206.0" y="3776.0" />
+      <point x="6419.737" y="3776.0" />
+      <point x="-29.99977178962581" y="117.5" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="128.99989396191722" y="-83.5585246540004" />
+      <point x="5331.351" y="5285.2" />
+      <point x="5331.351" y="4902.424" />
+      <point x="4922.0" y="4902.424" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.HolidayBoundary" relationship="CREATE">
+      <point x="-160.5" y="30.000433461651483" />
+      <point x="1840.2610000000002" y="2706.175" />
+      <point x="-129.26761753745382" y="-120.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.ScreenBoundary" relationship="CREATE">
+      <point x="-160.5" y="45.00043346165148" />
+      <point x="2754.744" y="2721.175" />
+      <point x="-44.99962357571076" y="-153.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.BookingEY" relationship="TO_MANY">
+      <point x="160.5" y="-187.90856653834862" />
+      <point x="7789.0" y="2488.266" />
+      <point x="7789.0" y="4387.54" />
+      <point x="7933.566" y="4387.54" />
+      <point x="-130.5385363708656" y="-244.49983694955245" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.StaffBoundary" relationship="CREATE">
+      <point x="-74.17389345065567" y="750.5" />
+      <point x="-53.82852304818607" y="-87.5" />
+    </edge>
+    <edge source="Entity.ShowEY" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="-195.49963273142384" y="2.1153996112843743E-4" />
+      <point x="5402.752" y="5915.964" />
+      <point x="5402.752" y="4917.424" />
+      <point x="4944.0" y="4917.424" />
+      <point x="4944.0" y="4420.224" />
+      <point x="4236.0" y="4420.224" />
+      <point x="4236.0" y="3540.0" />
+      <point x="4621.636" y="3540.0" />
+      <point x="4621.636" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Controller.CineplexManager" target="Entity.ScreenEY" relationship="TO_MANY">
+      <point x="-121.10120518416261" y="139.4999351023198" />
+      <point x="9393.381" y="5779.327" />
+      <point x="6824.045" y="5779.327" />
+      <point x="6824.045" y="4304.567" />
+      <point x="5242.0" y="4304.567" />
+      <point x="5242.0" y="4420.224" />
+      <point x="5003.31" y="4420.224" />
+      <point x="5003.31" y="3889.691" />
+      <point x="4463.636" y="3889.691" />
+      <point x="4463.636" y="3577.0" />
+      <point x="71.504" y="3577.0" />
+      <point x="-28.951192500213565" y="-255.49986032393008" />
+    </edge>
+    <edge source="Controller.MovieGoerManager" target="Entity.UserEY" relationship="TO_MANY">
+      <point x="145.99970687229325" y="-81.86501437970583" />
+      <point x="8297.0" y="4618.883" />
+      <point x="8297.0" y="3746.0" />
+      <point x="8328.358" y="3746.0" />
+      <point x="8328.358" y="3052.0" />
+      <point x="4513.136" y="3052.0" />
+      <point x="4513.136" y="3906.191" />
+      <point x="4443.5" y="3906.191" />
+      <point x="4443.5" y="4722.516" />
+      <point x="3700.5" y="4722.516" />
+      <point x="3700.5" y="3944.753" />
+      <point x="2232.367" y="3944.753" />
+      <point x="2232.367" y="4067.753" />
+      <point x="1000.306" y="4067.753" />
+      <point x="4.922218954561686E-4" y="109.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.CineplexManager" relationship="TO_ONE">
+      <point x="160.5" y="397.8254334616513" />
+      <point x="4523.636" y="3074.0" />
+      <point x="4523.636" y="3104.0" />
+      <point x="9954.809" y="3104.0" />
+      <point x="9954.809" y="4508.481" />
+      <point x="155.99979481583796" y="-94.34606489768066" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.BookingManager" relationship="TO_ONE">
+      <point x="160.5" y="54.09143346165138" />
+      <point x="4538.636" y="2730.266" />
+      <point x="4538.636" y="3014.0" />
+      <point x="7998.827" y="3014.0" />
+      <point x="-30.00039847482094" y="-153.49950065317353" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Entity.ShowEY" relationship="TO_MANY">
+      <point x="119.99971114486107" y="-216.5" />
+      <point x="9808.809" y="2955.0" />
+      <point x="9954.809" y="2955.0" />
+      <point x="9954.809" y="2989.5" />
+      <point x="9985.5" y="2989.5" />
+      <point x="9985.5" y="4300.932" />
+      <point x="9724.381" y="4300.932" />
+      <point x="9724.381" y="5945.964" />
+      <point x="195.5" y="30.00021153996113" />
+    </edge>
+    <edge source="Controller.CineplexManager" target="Entity.CineplexEY" relationship="CREATE">
+      <point x="-136.1012051841626" y="139.5" />
+      <point x="9378.381" y="5794.327" />
+      <point x="6537.9480847331215" y="5794.327" />
+      <point x="6537.9480847331215" y="5227.014340099104" />
+      <point x="185.0" y="0.0" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-1.0603808277664939E-4" y="-97.4995246540002" />
+      <point x="4519.559" y="5168.217" />
+      <point x="4432.0" y="5168.217" />
+      <point x="4432.0" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Entity.StaffEY" target="Entity.UserEY" relationship="GENERALIZATION">
+      <point x="8.825505582876758E-5" y="64.50003544865194" />
+      <point x="205.004" y="4313.0" />
+      <point x="917.5" y="4313.0" />
+      <point x="-82.80550777810447" y="108.50041172041892" />
+    </edge>
+    <edge source="Controller.HolidayManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="-14.999771789625811" y="117.00014663438287" />
+      <point x="6434.737" y="3700.0" />
+      <point x="8263.0" y="3700.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.TicketPriceBoundary" relationship="CREATE">
+      <point x="-160.5" y="-29.999566538348517" />
+      <point x="311.357" y="2646.175" />
+      <point x="-45.00025594182824" y="-142.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.StaffBoundary" relationship="TO_ONE">
+      <point x="-80.17389345065567" y="750.5" />
+      <point x="-59.82852304818607" y="-87.5" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Controller.ReviewManager" relationship="TO_ONE">
+      <point x="51.17147695181393" y="-87.49992112749896" />
+      <point x="4285.5" y="4435.224" />
+      <point x="4338.0" y="4435.224" />
+      <point x="4338.0" y="3492.919" />
+      <point x="-265.0" y="-2.1767296630059718E-4" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Entity.ShowSeatEY" relationship="CREATE">
+      <point x="20.571711144861183" y="216.4995259669513" />
+      <point x="9709.381" y="6282.0" />
+      <point x="5347.752" y="6282.0" />
+      <point x="5347.752" y="5659.332" />
+      <point x="4314.487" y="5659.332" />
+      <point x="4314.487" y="5806.332" />
+      <point x="3690.338" y="5806.332" />
+      <point x="3690.338" y="5993.45" />
+      <point x="1798.018" y="5993.45" />
+      <point x="-155.53059086785925" y="65.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.MovieBoundary" relationship="CREATE">
+      <point x="0.0" y="750.5" />
+      <point x="4254.673893450656" y="4833.662208639251" />
+      <point x="-123.0" y="0.0" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Boundary.CineplexBoundary" relationship="TO_ONE">
+      <point x="-187.99956599564484" y="-69.0909373569757" />
+      <point x="4448.0" y="2661.175" />
+      <point x="4448.0" y="2533.266" />
+      <point x="4478.636" y="2533.266" />
+      <point x="4478.636" y="1852.675" />
+      <point x="3515.224" y="1852.675" />
+      <point x="-29.999561330290362" y="-131.5" />
+    </edge>
+    <edge source="Boundary.StaffBoundary" target="Boundary.TicketPriceBoundary" relationship="TO_ONE">
+      <point x="-140.4995230481859" y="-10.499921127498965" />
+      <point x="4077.5" y="4563.262" />
+      <point x="4077.5" y="3413.0" />
+      <point x="326.357" y="3413.0" />
+      <point x="-30.000255941828243" y="-142.49989247907433" />
+    </edge>
+    <edge source="Boundary.HolidayBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-99.26761753745382" y="-119.50005817934107" />
+      <point x="1870.261" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Entity.TicketEY" target="Controller.MovieGoerManager" relationship="TO_ONE">
+      <point x="-154.18435612860185" y="-200.49964648641344" />
+      <point x="3291.154" y="4849.516" />
+      <point x="3672.768" y="4849.516" />
+      <point x="3672.768" y="1867.675" />
+      <point x="8009.327" y="1867.675" />
+      <point x="8009.327" y="3074.0" />
+      <point x="7333.782" y="3074.0" />
+      <point x="7333.782" y="4372.54" />
+      <point x="8097.066" y="4372.54" />
+      <point x="-2.931277076640981E-4" y="-87.5" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Controller.ScreenManager" relationship="TO_ONE">
+      <point x="59.99971114486107" y="-216.5" />
+      <point x="9748.809" y="3263.0" />
+      <point x="5610.592" y="3263.0" />
+      <point x="-15.000022701083253" y="-150.49993064293267" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Boundary.MovieBoundary" relationship="TO_ONE">
+      <point x="14.999893961917223" y="-98.4995246540002" />
+      <point x="4534.559" y="5213.217" />
+      <point x="5022.947" y="5213.217" />
+      <point x="5022.947" y="4987.924" />
+      <point x="4764.947" y="4987.924" />
+      <point x="4764.947" y="4544.0" />
+      <point x="4670.0" y="4544.0" />
+      <point x="99.15786046280573" y="-241.5" />
+    </edge>
+    <edge source="Entity.UserEY" target="Enum.UserTypeEN" relationship="TO_ONE">
+      <point x="-134.0" y="0.0" />
+      <point x="-134.04500000000002" y="3716.2645882795814" />
+      <point x="-134.04500000000002" y="6545.495087317668" />
+      <point x="4329.487" y="6545.495087317668" />
+      <point x="4329.487" y="5605.464" />
+      <point x="5088.3514664608" y="5605.464" />
+      <point x="5088.3514664608" y="5354.199598122192" />
+      <point x="-115.0" y="0.0" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.ShowManager" relationship="TO_ONE">
+      <point x="-63.67389345065567" y="750.5" />
+      <point x="4191.0" y="3462.919" />
+      <point x="3996.567" y="3462.919" />
+      <point x="3996.567" y="1878.175" />
+      <point x="9778.809" y="1878.175" />
+      <point x="89.99971114486107" y="-216.5" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Entity.CentralManagerEY" relationship="TO_ONE">
+      <point x="74.99971114486107" y="-216.5" />
+      <point x="9763.809" y="3231.0" />
+      <point x="7199.5" y="3231.0" />
+      <point x="7199.5" y="2548.266" />
+      <point x="160.5" y="-127.90856653834862" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.UserEY" relationship="TO_MANY">
+      <point x="160.5" y="337.8254334616513" />
+      <point x="4523.636" y="3014.0" />
+      <point x="4523.636" y="3052.0" />
+      <point x="4513.136" y="3052.0" />
+      <point x="4513.136" y="3906.191" />
+      <point x="4443.5" y="3906.191" />
+      <point x="4443.5" y="4722.516" />
+      <point x="3700.5" y="4722.516" />
+      <point x="3700.5" y="3944.753" />
+      <point x="2232.367" y="3944.753" />
+      <point x="2232.367" y="4067.753" />
+      <point x="1000.306" y="4067.753" />
+      <point x="4.922218954561686E-4" y="109.5" />
+    </edge>
+    <edge source="Boundary.ReviewBoundary" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="-15.000384840068591" y="-95.49995035488428" />
+      <point x="1299.99" y="3362.5" />
+      <point x="4067.0" y="3362.5" />
+      <point x="4067.0" y="4405.224" />
+      <point x="4922.0" y="4405.224" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Boundary.MovieGoerBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="-87.55910603808297" y="-97.4995246540002" />
+      <point x="4432.0" y="5183.217" />
+      <point x="4404.0" y="5183.217" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.HolidayManager" relationship="TO_ONE">
+      <point x="-15.00039847482094" y="-153.49950065317353" />
+      <point x="8013.827" y="3932.976" />
+      <point x="6878.782" y="3932.976" />
+      <point x="6878.782" y="3776.0" />
+      <point x="6419.737" y="3776.0" />
+      <point x="-29.99977178962581" y="117.5" />
+    </edge>
+    <edge source="Controller.UserManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="-14.999939316622658" y="-73.00045093043173" />
+      <point x="7092.409" y="3700.0" />
+      <point x="8263.0" y="3700.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.ScreenEY" target="Enum.ScreenClassEN" relationship="TO_ONE">
+      <point x="201.9998074997864" y="19.66113967606998" />
+      <point x="1739.298" y="4883.284" />
+      <point x="1739.298" y="5109.499" />
+      <point x="2396.062" y="5109.499" />
+      <point x="2396.062" y="4971.712" />
+      <point x="4143.286" y="4971.712" />
+      <point x="4143.286" y="5228.217" />
+      <point x="5107.752" y="5228.217" />
+      <point x="5107.752" y="5231.149" />
+      <point x="4113.286" y="5231.149" />
+      <point x="54.93362701364731" y="-51.5" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.UserManager" relationship="CREATE">
+      <point x="160.5" y="632.3254334616513" />
+      <point x="5345.904036596292" y="3308.5" />
+      <point x="5345.904036596292" y="3796.4759999999997" />
+      <point x="-89.0" y="-45.500450930431725" />
+    </edge>
+    <edge source="Controller.MovieGoerManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="145.99970687229143" y="-1.4379706044564955E-5" />
+      <point x="8282.0" y="4699.748" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-187.99956599564484" y="6.264302419367596E-5" />
+      <point x="4432.0" y="2729.266" />
+      <point x="4432.0" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Entity.MovieEY" target="Enum.MovieRatingEN" relationship="TO_ONE">
+      <point x="198.5" y="-260.38308731766756" />
+      <point x="4832.941" y="5968.112" />
+      <point x="4832.941" y="5718.5773879505105" />
+      <point x="5077.8514664608" y="5718.5773879505105" />
+      <point x="-112.0" y="51.5" />
+    </edge>
+    <edge source="Boundary.HolidayBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="-114.26761753745382" y="-119.50005817934107" />
+      <point x="1855.261" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Entity.MovieEY" relationship="TO_MANY">
+      <point x="-3.9847482094046427E-4" y="153.5" />
+      <point x="8028.827" y="4451.634" />
+      <point x="6836.495" y="4451.634" />
+      <point x="6836.495" y="4294.067" />
+      <point x="5210.81" y="4294.067" />
+      <point x="5210.81" y="4927.924" />
+      <point x="4733.0" y="4927.924" />
+      <point x="4733.0" y="5300.2" />
+      <point x="4686.315" y="5300.2" />
+      <point x="4686.315" y="5993.612" />
+      <point x="198.5" y="-234.88308731766756" />
+    </edge>
+    <edge source="Entity.ScreenEY" target="Entity.SeatEY" relationship="TO_MANY">
+      <point x="202.0" y="-5.33893866226299" />
+      <point x="1160.157" y="4858.283921661667" />
+      <point x="1160.157" y="4493.943277784143" />
+      <point x="1618.6461147447312" y="4493.943277784143" />
+      <point x="0.0" y="131.5" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="14.999711144861067" y="-216.0004740330487" />
+      <point x="9703.809" y="3700.0" />
+      <point x="8263.0" y="3700.0" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="-160.4998934506557" y="4.3346165148250293E-4" />
+      <point x="4067.0" y="2676.175" />
+      <point x="4067.0" y="4405.224" />
+      <point x="4922.0" y="4405.224" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Controller.ShowManager" relationship="TO_ONE">
+      <point x="4.3400435515650315E-4" y="-164.4999373569758" />
+      <point x="4862.789" y="1878.175" />
+      <point x="9778.809" y="1878.175" />
+      <point x="89.99971114486107" y="-216.5" />
+    </edge>
+    <edge source="Boundary.ScreenBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="3.7642428924300475E-4" y="-152.500350862716" />
+      <point x="2799.744" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Entity.MovieGoerEY" target="Entity.UserEY" relationship="GENERALIZATION">
+      <point x="-201.49962874564926" y="56.365722215857204" />
+      <point x="895.969" y="4355.809" />
+      <point x="895.969" y="4313.0" />
+      <point x="917.5" y="4313.0" />
+      <point x="-82.80550777810447" y="108.50041172041892" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Entity.ReviewEY" relationship="TO_MANY">
+      <point x="149.32610654934433" y="750.5" />
+      <point x="4404.0" y="3447.919" />
+      <point x="4384.0" y="3447.919" />
+      <point x="4384.0" y="3825.057" />
+      <point x="6543.045" y="3825.057" />
+      <point x="6543.045" y="4399.427" />
+      <point x="6392.948" y="4399.427" />
+      <point x="6392.948" y="5930.964" />
+      <point x="9170.765" y="5930.964" />
+      <point x="2.314727371413028E-4" y="109.49976657723073" />
+    </edge>
+    <edge source="Boundary.ReviewBoundary" target="Controller.ReviewManager" relationship="TO_ONE">
+      <point x="29.99961515993141" y="-95.49995035488428" />
+      <point x="1344.99" y="3477.919" />
+      <point x="4338.0" y="3477.919" />
+      <point x="4338.0" y="3492.919" />
+      <point x="-265.0" y="-2.1767296630059718E-4" />
+    </edge>
+    <edge source="Controller.ShowManager" target="Entity.ShowEY" relationship="CREATE">
+      <point x="50.57171114486118" y="216.5" />
+      <point x="9739.381" y="6422.769" />
+      <point x="5670.239" y="6422.769" />
+      <point x="-14.999632731423844" y="343.5" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Entity.ScreenEY" relationship="CREATE">
+      <point x="0.0" y="-150.5" />
+      <point x="5625.592022701083" y="3412.730930642933" />
+      <point x="-111.54480749978666" y="3412.730930642933" />
+      <point x="-111.54480749978666" y="4863.62286032393" />
+      <point x="-202.0" y="0.0" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Entity.BookingEY" relationship="TO_MANY">
+      <point x="-208.5" y="-14.999500653173527" />
+      <point x="7789.0" y="4126.54" />
+      <point x="7789.0" y="4387.54" />
+      <point x="7933.566" y="4387.54" />
+      <point x="-130.5385363708656" y="-244.49983694955245" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.ShowBoundary" relationship="TO_ONE">
+      <point x="-160.4998934506557" y="-14.999566538348517" />
+      <point x="4023.0" y="2661.175" />
+      <point x="4023.0" y="4124.596" />
+      <point x="3868.691" y="4124.596" />
+      <point x="-2.455358990118839E-4" y="-230.49971689552876" />
+    </edge>
+    <edge source="Controller.UserManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="15.000060683377342" y="-73.5" />
+      <point x="7122.409" y="3372.0" />
+      <point x="7756.0" y="3372.0" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Boundary.BaseBoundary" relationship="REALIZATION">
+      <point x="-94.2885659956446" y="163.5000626430242" />
+      <point x="4768.5" y="3555.0" />
+      <point x="4404.0" y="3555.0" />
+      <point x="4404.0" y="5129.346" />
+      <point x="87.99956437146466" y="3.4346206211921526E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.BookingManager" relationship="CREATE">
+      <point x="160.5" y="-202.90856653834862" />
+      <point x="8088.827" y="2473.266" />
+      <point x="59.99960152517906" y="-153.5" />
+    </edge>
+    <edge source="App.MoblimaApp" target="Entity.MovieGoerEY" relationship="CREATE">
+      <point x="1.326135461567901E-4" y="-84.5" />
+      <point x="4168.487" y="5474.0" />
+      <point x="1714.298" y="5474.0" />
+      <point x="1714.298" y="4913.284" />
+      <point x="1145.157" y="4913.284" />
+      <point x="2.9863712543506153" y="145.49972221585722" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.BaseManager" relationship="REALIZATION">
+      <point x="208.49960152517815" y="-14.999500653173527" />
+      <point x="8263.0" y="4125.54" />
+      <point x="8263.0" y="4633.883" />
+      <point x="9175.504" y="4633.883" />
+      <point x="1.6395403872593306E-4" y="26.49990426601471" />
+    </edge>
+    <edge source="Boundary.Boundary" target="Entity.CentralManagerEY" relationship="TO_ONE">
+      <point x="130.0" y="1.7573008926774492E-4" />
+      <point x="2983.459" y="3934.253" />
+      <point x="2983.459" y="5551.811" />
+      <point x="-119.045" y="5551.811" />
+      <point x="-119.045" y="1908.175" />
+      <point x="7199.5" y="1908.175" />
+      <point x="7199.5" y="2548.266" />
+      <point x="160.5" y="-127.90856653834862" />
+    </edge>
+    <edge source="Controller.ScreenManager" target="Entity.SeatEY" relationship="CREATE">
+      <point x="-15.88702270108297" y="150.5" />
+      <point x="5609.705" y="3761.0" />
+      <point x="4116.674" y="3761.0" />
+      <point x="4116.674" y="3607.0" />
+      <point x="3765.567" y="3607.0" />
+      <point x="3765.567" y="3431.0" />
+      <point x="1618.646" y="3431.0" />
+      <point x="-1.1474473126327212E-4" y="-131.5" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Boundary.MovieBoundary" relationship="TO_ONE">
+      <point x="-187.99956599564484" y="6.264302419367596E-5" />
+      <point x="4553.636" y="2730.266" />
+      <point x="4553.636" y="3462.919" />
+      <point x="4312.0" y="3462.919" />
+      <point x="4312.0" y="3956.5" />
+      <point x="4353.0" y="3956.5" />
+      <point x="4353.0" y="4450.224" />
+      <point x="4555.842" y="4450.224" />
+      <point x="4555.842" y="4544.0" />
+      <point x="4670.0" y="4544.0" />
+      <point x="99.15786046280573" y="-241.5" />
+    </edge>
+    <edge source="Boundary.TicketPriceBoundary" target="Boundary.Boundary" relationship="GENERALIZATION">
+      <point x="-2.55941828243067E-4" y="-141.49989247907433" />
+      <point x="356.357" y="3511.0" />
+      <point x="2017.761" y="3511.0" />
+      <point x="1.2362913980723533E-4" y="-119.49982426991119" />
+    </edge>
+    <edge source="Boundary.BookingBoundary" target="Boundary.ShowBoundary" relationship="TO_ONE">
+      <point x="188.0" y="6.264302419367596E-5" />
+      <point x="5104.571" y="2730.266" />
+      <point x="5104.571" y="1837.675" />
+      <point x="4040.0" y="1837.675" />
+      <point x="4040.0" y="2661.175" />
+      <point x="4023.0" y="2661.175" />
+      <point x="4023.0" y="4124.596" />
+      <point x="3868.691" y="4124.596" />
+      <point x="-2.455358990118839E-4" y="-230.49971689552876" />
+    </edge>
+    <edge source="Controller.BookingManager" target="Controller.IoManager" relationship="TO_ONE">
+      <point x="-208.5" y="4.993468264729017E-4" />
+      <point x="7756.0" y="4141.54" />
+      <point x="7756.0" y="4312.54" />
+      <point x="7905.444" y="4312.54" />
+      <point x="7905.444" y="4984.366" />
+      <point x="-91.99988748922897" y="-2.851315166481072E-4" />
+    </edge>
+    <edge source="Controller.MovieManager" target="Controller.Manager" relationship="GENERALIZATION">
+      <point x="-1.7511551959614735E-4" y="-218.49972284215164" />
+      <point x="4666.636" y="3746.0" />
+      <point x="8282.0" y="3746.0" />
+      <point x="8282.0" y="3278.0" />
+      <point x="5227.071" y="3278.0" />
+      <point x="1.1658436324069044E-4" y="40.00011315697566" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Controller.MovieGoerManager" relationship="TO_ONE">
+      <point x="160.5" y="352.8254334616513" />
+      <point x="4538.636" y="3029.0" />
+      <point x="4538.636" y="3074.0" />
+      <point x="7333.782" y="3074.0" />
+      <point x="7333.782" y="4372.54" />
+      <point x="8097.066" y="4372.54" />
+      <point x="-2.931277076640981E-4" y="-87.5" />
+    </edge>
+    <edge source="Entity.ShowEY" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="129.63936726857628" y="-343.49978846003887" />
+      <point x="5814.878" y="4902.424" />
+      <point x="4922.0" y="4902.424" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Controller.ReviewManager" target="Controller.MovieManager" relationship="TO_ONE">
+      <point x="-15.000036596291466" y="-150.5" />
+      <point x="5041.904" y="3299.0" />
+      <point x="5408.592" y="3299.0" />
+      <point x="5408.592" y="3716.231" />
+      <point x="4922.0" y="3716.231" />
+      <point x="4922.0" y="4168.224" />
+      <point x="210.4998248844804" y="2.77157848358911E-4" />
+    </edge>
+    <edge source="Entity.CentralManagerEY" target="Boundary.CineplexBoundary" relationship="TO_ONE">
+      <point x="160.5" y="-14.999566538348517" />
+      <point x="4448.0" y="2661.175" />
+      <point x="4448.0" y="2533.266" />
+      <point x="4478.636" y="2533.266" />
+      <point x="4478.636" y="1852.675" />
+      <point x="3515.224" y="1852.675" />
+      <point x="-29.999561330290362" y="-131.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.1948501808044756" showDependencies="true" x="3826.634559721342" y="2642.704990518143" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
