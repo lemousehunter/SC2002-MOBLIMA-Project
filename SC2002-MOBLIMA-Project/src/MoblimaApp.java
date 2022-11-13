@@ -39,7 +39,11 @@ public class MoblimaApp {
         try {
 
             // Instantiate CentralManager
-            this.centralManager = new CentralManagerEY();
+            centralManager = new CentralManagerEY();
+
+            // call all entity managers prime method to prime the array lists from files
+            primeAllObjectsFromDataFiles();
+
             System.out.println("\n==================== Welcome to Moblima Application ====================\n" +
                     " 1. Staff  Application                                             \n" +
                     " 2. User   Application                         \n" +
@@ -75,6 +79,18 @@ public class MoblimaApp {
         this.centralManager.getReviewMgr().writeViewerRatings();
         this.centralManager.getUserMgr().writeUser();
         this.centralManager.getTicketPriceMgr().writeTicketPrice();
+    }
+
+    private void primeAllObjectsFromDataFiles() throws IOException, ParseException {
+        this.centralManager.getHolidayMgr().primeHolidays();
+        this.centralManager.getCineplexMgr().primeCineplex();
+        this.centralManager.getScreenMgr().primeScreen();
+        this.centralManager.getMovieMgr().primeMovie();
+        this.centralManager.getShowMgr().primeShow();
+        this.centralManager.getUserMgr().primeUser();
+        this.centralManager.getBookingMgr().primeBookings();
+        this.centralManager.getReviewMgr().primeViewerRatings();
+        this.centralManager.getTicketPriceMgr().primeTicketPrice();
     }
 
     private void ManageStaffApp() {

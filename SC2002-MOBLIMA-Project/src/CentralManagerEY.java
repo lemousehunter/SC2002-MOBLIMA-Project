@@ -175,9 +175,6 @@ public class CentralManagerEY {
         this.staffBoundary = new StaffBoundary();
         this.staffBoundary.setCentralManager(this);
 
-        // call all entity managers prime method to prime the array lists from files
-        this.primeAllObjectsFromDataFiles();
-
         // invoke setManagers()  & setBundaries to get the other manager instances required
         
         this.bookingBoundary.setBoundaries();       this.bookingBoundary.setManagers();
@@ -190,18 +187,6 @@ public class CentralManagerEY {
         this.ticketPriceBoundary.setBoundaries();   this.ticketPriceBoundary.setManagers();
         this.staffBoundary.setBoundaries();         this.staffBoundary.setManagers();
         this.movieGoerBoundary.setBoundaries();     this.movieGoerBoundary.setManagers();
-    }
-
-    private void primeAllObjectsFromDataFiles() throws IOException, ParseException {
-        this.holidayMgr.primeHolidays();
-        this.cineplexMgr.primeCineplex();
-        this.screenMgr.primeScreen();
-        this.movieMgr.primeMovie();
-        this.showMgr.primeShow();
-        this.userMgr.primeUser();
-        this.bookingMgr.primeBookings();
-        this.reviewMgr.primeViewerRatings();
-        this.ticketPriceMgr.primeTicketPrice();
     }
 
     
