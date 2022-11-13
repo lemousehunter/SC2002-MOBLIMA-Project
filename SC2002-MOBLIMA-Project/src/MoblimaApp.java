@@ -208,12 +208,10 @@ public class MoblimaApp {
                         masterUserListSize = this.centralManager.getMasterUsers().size();
                     }
                     boolean userFound = false;
-                    for (int i = 0; i < masterUserListSize; i++) {
-                        if (this.centralManager.getMasterUsers().get(i).getUserName().equals(userName)) {
-                            System.out.println("\n" + userName + "  Already Registered");
-                            userFound = true;
-                            break;
-                        }
+                    movieGoer = this.centralManager.getMovieGoerMgr().getUserByName(userName);
+                    if (movieGoer != null) {
+                        System.out.println("\n" + userName + "  Already Registered");
+                        this.ManageMovieGoerApp(); // go back to movieGoerMenu
                     }
                     System.out.print("Enter Email ID: ");
                     String emalid = sc.nextLine();
