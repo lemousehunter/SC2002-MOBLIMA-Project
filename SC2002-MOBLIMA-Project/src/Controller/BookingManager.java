@@ -169,12 +169,7 @@ public class BookingManager extends Manager implements BaseManager {
      */
     public ArrayList<String> getTop5Movies() {
         Hashtable<String, Double> costDict = new Hashtable<String, Double>(); // costDict[MovieID]
-        this.masterMovies.forEach((movie) -> costDict.put(movie.getMovieID(), 0.0)); // initialize costDict with all movieIDs,0.0 in masterMovies
-        for (BookingEY booking: this.masterBookings) { // for all bookings
-            Double cost = booking.getBookingAmount(); // get cost of booking
-            cost += costDict.get(booking.getMovieID()); // update cost var with running total
-            costDict.put(booking.getMovieID(), cost); // write cost back to costDict
-        }
+        this.masterMovies.forEach((movie) -> costDict.put(movie.getMovieID(), this.getTotalSales(movie.getMovieID()))); // initialize costDict with all movieIDs and net revenue.
 
         Hashtable<String, Double> top5Dict = new Hashtable<String, Double>();
         double minCost;
@@ -198,11 +193,16 @@ public class BookingManager extends Manager implements BaseManager {
                 }
             }
         }
+
+        SortedSet<Double> sorted =  new TreeSet<>(top5Dict.values()).descendingSet();
         ArrayList<String> top5List = new ArrayList<String>();
         int idx = 0;
-        for (String mID : top5Dict.keySet()) {
-            top5List.add(idx, mID);
-            idx++;
+        for (double revenue : sorted) {
+            for (String movieID :top5Dict.keySet()) {
+                if (top5Dict.get(movieID).equals(revenue)) {
+                    top5List.add(movieID);
+                }
+            }
         }
         return top5List;
     }
