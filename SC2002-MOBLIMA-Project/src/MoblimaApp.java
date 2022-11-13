@@ -231,7 +231,6 @@ public class MoblimaApp {
                     break;
 
                 case 2:
-                    userLoggedin = false;
                     System.out.print("Enter UserName: ");
                     userName = sc.nextLine();
 
@@ -242,7 +241,7 @@ public class MoblimaApp {
                         System.out.println("Please Enter (1) to Register \n \n3");
                         break;
                     }
-                    if (userLoggedin) {
+                    else {
                         this.centralManager.getMovieGoerBoundary().MovieGoerOperations(movieGoer.getUserID());
                         // force user app to terminate by setting subchoice to 3
                         subchoice = 3;
