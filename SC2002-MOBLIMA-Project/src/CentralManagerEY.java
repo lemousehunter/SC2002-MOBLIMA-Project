@@ -193,15 +193,15 @@ public class CentralManagerEY {
     }
 
     private void primeAllObjectsFromDataFiles() throws IOException, ParseException {
-        this.getHolidayMgr().primeHolidays();
-        this.getCineplexMgr().primeCineplex();
-        this.getScreenMgr().primeScreen();
-        this.getMovieMgr().primeMovie();
-        this.getShowMgr().primeShow();
-        this.getUserMgr().primeUser();
-        this.getBookingMgr().primeBookings();
-        this.getReviewMgr().primeViewerRatings();
-        this.getTicketPriceMgr().primeTicketPrice();
+        this.holidayMgr.primeHolidays();
+        this.cineplexMgr.primeCineplex();
+        this.screenMgr.primeScreen();
+        this.movieMgr.primeMovie();
+        this.showMgr.primeShow();
+        this.userMgr.primeUser();
+        this.bookingMgr.primeBookings();
+        this.reviewMgr.primeViewerRatings();
+        this.ticketPriceMgr.primeTicketPrice();
     }
 
     
