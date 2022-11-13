@@ -242,6 +242,7 @@ public class MoblimaApp {
                             if (movieGoer.getUserName().equals(userName)) {
                                 userFound = true;
                                 userLoggedin = true;
+                                break;
                             }
                         }
                     }

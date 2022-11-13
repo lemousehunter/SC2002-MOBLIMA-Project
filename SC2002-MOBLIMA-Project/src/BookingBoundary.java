@@ -181,8 +181,8 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         this.println("UserID: " + booking.getUserID());
         this.println("Name: " + this.movieGoerManager.getUserByID(booking.getUserID()).getUserName());
         this.println("Movie: " + this.movieManager.getMovieByID(booking.getMovieID()).getName());
-        this.println("Screen: " + this.screenManager.getScreenByID(booking.getScreenID()).getScreenName());
         this.println("Cinema: " + this.cineplexManager.getCineplexByID(booking.getCinemaID()).getName());
+        this.println("Screen: " + this.screenManager.getScreenByID(booking.getScreenID()).getScreenName());
         this.println("Show Date: " + booking.getDate());
         this.println("Show Time: " + booking.getTime());
         this.println("Total Paid: " + booking.getBookingAmount());
