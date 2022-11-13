@@ -196,7 +196,7 @@ public class BookingManager extends Manager implements BaseManager {
 
         SortedSet<Double> sorted =  new TreeSet<>(top5Dict.values()).descendingSet();
         ArrayList<String> top5List = new ArrayList<String>();
-        int idx = 0;
+
         for (double revenue : sorted) {
             for (String movieID :top5Dict.keySet()) {
                 if (top5Dict.get(movieID).equals(revenue)) {
