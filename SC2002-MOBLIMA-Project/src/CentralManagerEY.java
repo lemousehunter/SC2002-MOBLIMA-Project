@@ -73,8 +73,8 @@ public class CentralManagerEY {
         this.dataFolder= System.getProperty("dataFolder");
         if (this.dataFolder== null) {
             this.dataFolder = "";
-            // remove below line as the folder is harcoded for testing
-            this.dataFolder = "C:\\Users\\varsh\\OneDrive\\Documents\\NTU Coursework\\Y2S1\\CX2002 Object Oriented Design & Programming\\SC2002-MOBLIMA-Project\\SC2002-MOBLIMA-Project\\InputData\\";
+            // folder is not defined via relative path from cwd
+            this.dataFolder = System.getProperty("user.dir") + "/InputData/";
         }
 
         // instantiate all managers
