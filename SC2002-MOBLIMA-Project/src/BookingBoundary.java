@@ -244,6 +244,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     public void viewMyBookings(String userID) {
+        this.println("==========View My Bookings=========");
         for (String bookingID: this.bookingManager.getAllBookingsList(userID)) {
             this.showBooking(bookingID);
         }
