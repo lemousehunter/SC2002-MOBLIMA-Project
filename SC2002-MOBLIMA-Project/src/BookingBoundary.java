@@ -18,32 +18,42 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
      * The Controller Class of Bookings
      */
     BookingManager bookingManager;
+
     /**
      * The Controller Class of Screens
      */
     ScreenManager screenManager;
+
     /**
      * The Controller Class of Cineplexes
      */
     CineplexManager cineplexManager;
+
     /**
      * The Controller Class of Movies
      */
     MovieManager movieManager;
+
     /**
      * The Controller Class of Shows
      */
     ShowManager showManager;
+
 
     // Boundaries
     /**
      * The Boundary Class of Cineplexes
      */
     CineplexBoundary cineplexBoundary;
+
     /**
      * The Boundary Class of Movies
      */
     MovieBoundary movieBoundary;
+
+    /**
+     * The Boundary Class of Shows
+     */
     ShowBoundary showBoundary;
 
 
@@ -64,7 +74,6 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         this.cineplexManager = centralManager.getCineplexMgr();
         this.movieManager = centralManager.getMovieMgr();
         this.showManager = centralManager.getShowMgr();
-
     }
 
     /**
@@ -98,9 +107,11 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
      */
     public String getMovieChoice() { // converts idx from user input to movieID
         int choice = this.getInputInt(
-                "\n Would you like to: \n" +
-                        "1) View Movie Details\n" +
-                        "2) Book Movie?\n");
+                """
+                         Would you like to:
+                        1) View Movie Details
+                        2) Book Movie?
+                        """);
         if (choice == 1) {
             this.println("Which movie would you like to view details for? Please enter the corresponding integer.");
             this.movieBoundary.printMovieList();
@@ -149,15 +160,6 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     public Integer getNumTickets() {
         return this.getInputInt("How many tickets would you like to book? ");
     }
-
-    
-    
-    // public String getShowSeat(int i) { // prints out Avail seat layout and gets seat based on seatNumber
-    //     // TODO: 13/11/22 Print Avail Seat Layout
-    //     return this.getInputLine("Please choose a seat for ticket " + (i+1));
-
-    // }
-
     
     /** 
      * Method to show all the details of the booking made
@@ -242,10 +244,9 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     public void viewMyBookings(String userID) {
-        for (String line : this.bookingManager.getAllBookingsList(userID)) {
-            this.println(line);
+        for (String bookingID: this.bookingManager.getAllBookingsList(userID)) {
+            this.showBooking(bookingID);
         }
-
     }
     
 
