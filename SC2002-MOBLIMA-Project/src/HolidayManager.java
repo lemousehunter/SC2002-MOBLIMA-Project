@@ -7,16 +7,36 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * A HolidayManager object
+ * <p>
+ * A <code>HolidayManager</code> object contains all the parameters and methods required
+ * to communicate between entity and boundary of Holiday Class
+ * </p>
+ */
+
 public class HolidayManager extends Manager implements BaseManager {
 
   // managers
+  /**
+   * Object of Class IoManager to manage I/O functions of the file
+   */
   private IoManager ioManager;
 
+  /**
+   * Master array list of all holidays
+   */
   private ArrayList<String> masterHolidaysList;
 
+  /**
+   * Default Constructor
+   */
   public HolidayManager() {
   }
 
+  /**
+   * Method to set all controller classes passed as attributes
+   */
   @Override
   public void setManagers() {
     CentralManagerEY centralMgr = this.getCentralManager();
@@ -24,16 +44,31 @@ public class HolidayManager extends Manager implements BaseManager {
 
   }
 
+  /**
+   * Method to set all master lists passed as attributes
+   */
   @Override
   public void setMasterLists() {
     CentralManagerEY centralMgr = this.getCentralManager();
     this.masterHolidaysList = centralMgr.getMasterHolidays();
   }
 
+  /**
+   * Method to check if the date passed is a holiday or not
+   * @param date Date
+   * @return True if the date is a holiday, False otherwise
+   */
   public boolean isHoliday(String date) {
     return this.masterHolidaysList.contains(date);
   }
 
+  
+  /** 
+   * Method to check if the date is a weekend
+   * @param date Date
+   * @return True if the date is a weekend, False otherwise
+   * @throws ParseException
+   */
   public Boolean getWeekend(String date) throws ParseException {
     DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     LocalDate date_dt = LocalDate.parse(date, dtFormatter);
@@ -41,6 +76,12 @@ public class HolidayManager extends Manager implements BaseManager {
     return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
   }
 
+  
+  /** 
+   * Method to add a holiday
+   * @param holidayDate The date to be added as a holiday
+   * @return 1 if date already exists as a holiday, 2 if the date format is wrong, 0 if the addition is a success
+   */
   public int addHoliday(String holidayDate) {
     if (this.masterHolidaysList.contains(holidayDate)) {
       return 1; // duplicateError
@@ -60,6 +101,11 @@ public class HolidayManager extends Manager implements BaseManager {
     return 0; // success
   }
 
+  
+  /** 
+   * Method to return all holidays as an array
+   * @return list of all holidays
+   */
   public ArrayList<String> listAllHolidays() {
     ArrayList<String> printList = new ArrayList<String>();
     if (masterHolidaysList.size() > 0) {
@@ -74,6 +120,11 @@ public class HolidayManager extends Manager implements BaseManager {
     return printList;
   }
 
+  
+  /**
+   * Method to read the input data about holidays 
+   * @throws IOException
+   */
   public void primeHolidays() throws IOException {
     String filename = this.getCentralManager().getDataFolder().concat("Holidays.txt");
 
@@ -95,6 +146,11 @@ public class HolidayManager extends Manager implements BaseManager {
     }
 }
 
+  
+  /** 
+   * Method to write back the data to the files
+   * @throws IOException
+   */
   public void writeHolidays() throws IOException {
     String filename = this.getCentralManager().getDataFolder().concat("Holidays.txt");
     List alw = new ArrayList();

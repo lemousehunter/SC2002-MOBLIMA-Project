@@ -4,37 +4,67 @@ import java.util.ArrayList;
  * A Booking Object
  * 
  * <p>
- * A <code>Booking</code> object contains all the parameters
+ * A <code>Booking</code> object contains all the attributes
  * used to store a booking made by a particular user
  * </p>
  * 
  */
 
 public class BookingEY {
+    /**
+     * The Booking ID
+     */
     private String bookingID;
+    /**
+     * The user ID
+     */
     private String userID;
+    /**
+     * The movie ID
+     */
     private String movieID;
+    /**
+     * The screen ID
+     */
     private String screenID;
+    /**
+     * The cinema ID
+     */
     private String cinemaID;
+    /**
+     * Date of the booking
+     */
     private String date;
+    /**
+     * Time of the show booked
+     */
     private String time;
+    /**
+     * The seat numbers
+     */
     private ArrayList<String> seatIds;
+    /**
+     * The total booking amount
+     */
     private double bookingAmount;
+    /**
+     * Array of all tickets bought
+     */
     private ArrayList<TicketEY> tickets;
 
 
     /**
-     * Booking Constructor
+     * Creates new booking with the given attributes
      * 
-     * @param bookingID The Booking ID
-     * @param userID The User ID
-     * @param movieID The Movie ID
-     * @param screenID The Screen ID
-     * @param cinemaID The Cinema ID
-     * @param date The Date
-     * @param time The Time
-     * @param seatIds The SeatIds
-     * @param bookingAmount The total price
+     * @param bookingID This Booking ID
+     * @param userID This User ID
+     * @param movieID This Movie ID
+     * @param screenID This Screen ID
+     * @param cinemaID This Cinema ID
+     * @param date This Date
+     * @param time This Time
+     * @param seatIds This SeatIds
+     * @param bookingAmount This total price
      */
     public BookingEY(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time, ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr, ScreenManager screenMgr, MovieGoerManager movieGoerMgr, TicketPriceManager ticketPriceManager) throws ParseException {
         this.bookingID = bookingID;
@@ -87,9 +117,9 @@ public class BookingEY {
 
     
     /** 
-     * The method returns the Hall ID
+     * The method returns the Screen ID
      * 
-     * @return Hall ID
+     * @return Screen ID
      */
     public String getScreenID() {
         return screenID;
@@ -127,7 +157,9 @@ public class BookingEY {
 
     
     /**
-     * @return Tickets
+     * The method returns the all the tickets bought
+     * 
+     * @return Tickets bought
      */
     public ArrayList<TicketEY> getTickets() {
         return tickets;
@@ -136,7 +168,7 @@ public class BookingEY {
     /** 
      * The method returns the total price of the tickets
      * 
-     * @return Booking Amount
+     * @return Total Booking Amount
      */
     public double getBookingAmount() {
         return bookingAmount;

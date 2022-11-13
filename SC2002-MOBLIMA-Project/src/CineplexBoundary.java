@@ -1,25 +1,44 @@
 import java.util.Arrays;
-
+/**
+ * A CineplexBoundary Object
+ * 
+ * <p>
+ * A <code>CineplexBoundary</code> object contains all the methods and attributes
+ * required for interfacing of cinplexes
+ * </p>
+ */
 public class CineplexBoundary extends Boundary implements BaseBoundary{
+    /**
+     * Object of CineplexManager
+     */
     CineplexManager cineplexMgr;
 
+    /**
+     * Default Constructor
+     */
     public CineplexBoundary() {
         
     }
 
+    /**
+     * Method to set cineplexMgr
+     */
     @Override
     public void setManagers() {
         this.cineplexMgr = this.getCentralManager().getCineplexMgr();
     }
 
+    /**
+     * Method to set boundaries
+     */
     @Override
     public void setBoundaries() {
 
     }
 
     /**
-     * Method for printing the details of the cineplex for printing on the screen
-     *
+     * Method for printing the details of a particular cineplex
+     * @param cineplexID The ID of the cineplex to print
      **/
     public void viewDetails(String cineplexID) {
         CineplexEY cineplex = this.cineplexMgr.getCineplexByID(cineplexID);
@@ -27,14 +46,28 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
                 + Arrays.toString(cineplex.getScreenNames().toArray()));
     }
 
+    
+    /** 
+     * Method to ask for name of the cineplex
+     * @return Print message asking for input from user
+     */
     public String getName() {
         return this.getInputLine("Please enter Cineplex Name: ");
     }
 
+    
+    /** 
+     * Method to ask for location of a particular cineplex from the user
+     * @param cineplexName Name of the cineplex
+     * @return Print message asking for input from user
+     */
     public String getLocation(String cineplexName) {
         return this.getInputLine("Please enter " + cineplexName + "  Location: ");
     }
 
+    /**
+     * Method to search for a particular cineplex
+     */
     public void searchCineplex() {
         String cineplexName = this.getInputLine("Please enter the name of the cineplex you would like to search: ");
         cineplexName = this.getScanner().nextLine();
@@ -48,6 +81,9 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
         }
     }
 
+    /**
+     * Method to print all cineplexes
+     */
     public void printAllCineplexes() {
         this.println("\n---------------------------X---------------------------\n");
         this.println("\nCineplex List : \n ");
@@ -57,6 +93,11 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
         this.println("\n---------------------------X---------------------------\n");
     }
 
+    
+    /** 
+     * Method to ask for user input for accessing menu of cineplexes
+     * @return choice
+     */
     public int getCineplexMenuChoice() {
         int choice = -1;
         choice = this.getInputInt(
@@ -75,6 +116,9 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
         return choice;
     }
 
+    /**
+     * Method to display cineplex menu and ask for user input
+     */
     public void cineplexOperations() {
         int cineplexChoice = 0;
         while (cineplexChoice != 4) {

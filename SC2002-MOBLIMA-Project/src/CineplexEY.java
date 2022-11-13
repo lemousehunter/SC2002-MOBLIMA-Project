@@ -5,7 +5,7 @@ import java.util.UUID;
  * A Cineplex Object
  * 
  * <p>
- * A <code>Cineplex</code> object used to store all the parameters
+ * A <code>Cineplex</code> object used to store all the information
  * about a cineplex
  * </p>
  * 
@@ -13,10 +13,25 @@ import java.util.UUID;
 
 public class CineplexEY {
 
+	/**
+	 * The unique cineplex ID
+	 */
 	private String cineplexID;
+	/**
+	 * The name of the cineplex
+	 */
 	private String name;
+	/**
+	 * The location of the cineplex
+	 */
 	private String location;
+	/**
+	 * The list of IDs of all the screens in the cineplex 
+	 */
 	private ArrayList<String> screenID;
+	/**
+	 * The list of masterScreens
+	 */
 	private ArrayList<ScreenEY> masterScreens;
 	
 	/**

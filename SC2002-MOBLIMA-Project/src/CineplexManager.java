@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * A CineplexManager object
+ * <p>
+ * A <code>CineplexManager</code> object contains all the parameters and methods required
+ * to communicate between entity and boundary of Cineplex Class
+ * </p>
+ */
+
 public class CineplexManager extends Manager implements BaseManager {
 
     // managers
@@ -12,21 +20,37 @@ public class CineplexManager extends Manager implements BaseManager {
     private ArrayList<CineplexEY> masterCineplexes;
     private ArrayList<ScreenEY> masterSceens;
    
+    /**
+     * Default Constructor
+     */
     public CineplexManager() {
 
     }
 
+    
+    /**
+     * Method to set controller class
+     */
     @Override
     public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
     }
 
+    /**
+     * Method to set Master lists
+     */
     @Override
     public void setMasterLists() {
         this.masterCineplexes = this.getCentralManager().getMasterCineplexes();
         this.masterSceens = this.getCentralManager().getMasterScreens();
     }
 
+    
+    /** 
+     * Method to return cineplex by cineplexID
+     * @param cineplexID The cineplex ID
+     * @return CineplexEY
+     */
     public CineplexEY getCineplexByID(String cineplexID) { // returns cineplex if found, else returns null
         for(CineplexEY c: this.masterCineplexes) {
             if(cineplexID.equals(c.getCineplexID()))
@@ -35,8 +59,14 @@ public class CineplexManager extends Manager implements BaseManager {
         return null;
     }
     
-    public Boolean addCineplex(String cinemaName, String location
-    ) { //
+    
+    /** 
+     * Method to add a new cineplex
+     * @param cinemaName The name of the cineplex
+     * @param location The location of the cineplex
+     * @return True if a cineplex was created, false if the cineplex already existed
+     */
+    public Boolean addCineplex(String cinemaName, String location) {
         String cineplexID = "";
         ArrayList<String> screenID = new ArrayList<String>();
 
@@ -54,6 +84,12 @@ public class CineplexManager extends Manager implements BaseManager {
 
     }
     
+    
+    /** 
+     * Method to search for cineplex by name
+     * @param name
+     * @return cineplex object which matches the provided name, else returns null
+     */
     public CineplexEY searchCineplexByName(String name) { // returns cineplex object which matches the provided name, else returns null
         for(CineplexEY c: this.masterCineplexes) {
             if(c.getName().startsWith(name))
@@ -64,11 +100,22 @@ public class CineplexManager extends Manager implements BaseManager {
         return null;
     }
 
+    
+    /** 
+     * Method to return convert idx to cineplex ID
+     * @param idx Unique ID
+     * @return The cineplex ID
+     */
     public String convertIDX2CineplexID(int idx) {
         return this.masterCineplexes.get(idx).getCineplexID();
     }
 	
-	public ArrayList<String> listAllCineplexes() {
+	
+    /** 
+     * Method to display all cineplexes
+     * @return list of all the cineplexes
+     */
+    public ArrayList<String> listAllCineplexes() {
         int idx = 1;
         ArrayList<String> stringList = new ArrayList<String>();
         for (CineplexEY c: this.masterCineplexes) {
@@ -79,6 +126,12 @@ public class CineplexManager extends Manager implements BaseManager {
         return stringList;
 	}
 
+    
+    /** 
+     * Method to search for cineplex by name
+     * @param cineplexName
+     * @return cineplex object which matches the provided name, else returns null
+     */
     public CineplexEY getCineplexByName(String cineplexName) {
         if (cineplexName.isEmpty()) { return null;}
         for(CineplexEY c: this.masterCineplexes) {
@@ -87,6 +140,11 @@ public class CineplexManager extends Manager implements BaseManager {
         }
         return null;
     }    
+    
+    /** 
+     * Method to read from the input data
+     * @throws IOException
+     */
     public void primeCineplex() throws IOException {
         String cineplexSEPARATOR = "|";
         String screenEPARATOR = "~";
@@ -120,6 +178,11 @@ public class CineplexManager extends Manager implements BaseManager {
         }
     }
 
+    
+    /** 
+     * Method to write back to the data files
+     * @throws IOException
+     */
     public void writeCineplex() throws IOException {
         String cineplexSEPARATOR = " | ";
         String screenEPARATOR = " ~ ";

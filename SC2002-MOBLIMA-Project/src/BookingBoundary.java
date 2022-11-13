@@ -5,24 +5,57 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Boundary Class of Booking
+ * 
+ * A <code>BookingBoundary</code> object contains all the attributes 
+ * and methods required for the interfacing of Bookings
+ */
+
 public class BookingBoundary extends Boundary implements BaseBoundary{
     // Managers
+    /**
+     * The Controller Class of Bookings
+     */
     BookingManager bookingManager;
+    /**
+     * The Controller Class of Screens
+     */
     ScreenManager screenManager;
+    /**
+     * The Controller Class of Cineplexes
+     */
     CineplexManager cineplexManager;
+    /**
+     * The Controller Class of Movies
+     */
     MovieManager movieManager;
+    /**
+     * The Controller Class of Shows
+     */
     ShowManager showManager;
 
     // Boundaries
+    /**
+     * The Boundary Class of Cineplexes
+     */
     CineplexBoundary cineplexBoundary;
+    /**
+     * The Boundary Class of Movies
+     */
     MovieBoundary movieBoundary;
     ShowBoundary showBoundary;
 
 
-
+    /**
+     * Default Constructor which creates an object of class BookingBoundary
+     */
     public BookingBoundary() {
     }
 
+    /**
+     * Method to set all the controllers classes taken as attributes
+     */
     @Override
     public void setManagers() {
         CentralManagerEY centralManager = this.getCentralManager();
@@ -34,6 +67,9 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
 
     }
 
+    /**
+     * Method to set all the boundaries taken as attributes
+     */
     @Override
     public void setBoundaries() {
         CentralManagerEY centralManager = this.getCentralManager();
@@ -42,12 +78,24 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         this.showBoundary = centralManager.getShowBoundary();
     }
 
+    
+    /** 
+     * Method to select the cineplex of choice
+     * 
+     * @return the Cinema ID
+     */
     public String getCineplexChoice() {
         this.print("Please enter the corresponding index of the cinema you would like to visit");
         this.cineplexBoundary.printAllCineplexes();
         return this.cineplexManager.convertIDX2CineplexID(this.getScanner().nextInt());
     }
 
+    
+    /** 
+     * Method to view movie details or select a movie to book 
+     * 
+     * @return The movie ID
+     */
     public String getMovieChoice() { // converts idx from user input to movieID
         int choice = this.getInputInt(
                 "\n Would you like to: \n" +
@@ -71,29 +119,53 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         return "";
     }
 
+    
+    /** 
+     * Method to get show dates
+     * 
+     * @return the show dates
+     */
     public String getShowDate(String cineplex, String movieID) { // prints out available show dates, gets show date from user
-        this.print("Please enter the corresponding index of the date you would like to book");
+        this.print("Please enter the correspon ing index of the date you would like to book");
         this.showBoundary.printShowDates(cineplex,movieID);
         int viewShow = this.getScanner().nextInt();
         return this.showManager.getShowIDFromShowDateIDX(cineplex,movieID,viewShow);
     }
 
+    
+    /** 
+     * Method to get show time
+     * @return show time
+     */
     public ArrayList<String> getShowTime(String cineplex, String movieID, String showDate) { // prints out available show timings, returns showTime, screenID
         this.print("Please enter the corresponding index of the time you would like to book");
         this.showBoundary.printShowTimes(cineplex,movieID,showDate);
         int viewShow = this.getScanner().nextInt();
         return this.showManager.getShowIDFromShowTimeIDX(cineplex,movieID,showDate,viewShow);    }
 
+    
+    /** 
+     * Method get total number of tickets to buy
+     * @return Number of tickets
+     */
     public Integer getNumTickets() {
         return this.getInputInt("How many tickets would you like to book? ");
     }
 
+    
+    
     // public String getShowSeat(int i) { // prints out Avail seat layout and gets seat based on seatNumber
     //     // TODO: 13/11/22 Print Avail Seat Layout
     //     return this.getInputLine("Please choose a seat for ticket " + (i+1));
 
     // }
 
+    
+    /** 
+     * Method to show all the details of the booking made
+     * 
+     * @param bookingID The unique ID of the booking
+     */
     public void showBooking(String bookingID) {
         BookingEY booking = bookingManager.getBookingByID(bookingID);
 
@@ -116,6 +188,12 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         }
     }
 
+    
+    /** 
+     * Method to create a ticket
+     * @param userID The unique ID of the user
+     * @throws ParseException
+     */
     public void BookingOperations(String userID) throws ParseException {
         String cineplex = this.getCineplexChoice();
         String movieID = this.getMovieChoice();
