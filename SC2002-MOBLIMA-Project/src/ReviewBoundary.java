@@ -24,7 +24,7 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
 
         while (scale > 5 || scale < 1) {
             try {
-                scale = this.getInputDouble("Please enter a rating between (1-5) for " + movieName);
+                scale = this.getInputDouble("Please enter a rating between (1-5) for " + movieName+" : ");
             } catch (Exception e) {
                 this.println("Enter Ratings between 1-5 Value only");
             }

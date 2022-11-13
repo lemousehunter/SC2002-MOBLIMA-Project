@@ -92,7 +92,7 @@ public class MoblimaApp {
         this.centralManager.getReviewMgr().primeViewerRatings();
         this.centralManager.getTicketPriceMgr().primeTicketPrice();
 
-
+ 
     }
 
     private void ManageStaffApp() {
@@ -211,7 +211,7 @@ public class MoblimaApp {
                     movieGoer = this.centralManager.getMovieGoerMgr().getUserByName(userName);
                     if (movieGoer != null) {
                         System.out.println("\n" + userName + "  Already Registered");
-                        this.ManageMovieGoerApp(); // go back to movieGoerMenu
+                        break;
                     }
                     System.out.print("Enter Email ID: ");
                     String emalid = sc.nextLine();

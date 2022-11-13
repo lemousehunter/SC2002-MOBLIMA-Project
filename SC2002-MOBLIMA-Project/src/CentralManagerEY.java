@@ -74,7 +74,7 @@ public class CentralManagerEY {
         if (this.dataFolder== null) {
             this.dataFolder = "";
             // remove below line as the folder is harcoded for testing
-            this.dataFolder = "C:\\Users\\swami\\Downloads\\Varsha\\SC2002-MOBLIMA-Project\\database\\";
+            this.dataFolder = "C:\\Users\\varsh\\OneDrive\\Documents\\NTU Coursework\\Y2S1\\CX2002 Object Oriented Design & Programming\\SC2002-MOBLIMA-Project\\SC2002-MOBLIMA-Project\\InputData\\";
         }
 
         // instantiate all managers

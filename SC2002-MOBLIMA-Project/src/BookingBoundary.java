@@ -129,7 +129,9 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
             this.print("Which movie would you like to book for? Please enter the corresponding integer.");
             this.movieBoundary.printMovieList();
             int idx = this.getScanner().nextInt();
-            return this.movieManager.getMovieIDFromCurrentShowingIDX(idx);
+            String selectedMovieId =this.movieManager.getMovieIDFromAllShowingIDX(idx);
+            return selectedMovieId;
+            
         }
         return "";
     }
@@ -204,6 +206,11 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     public void BookingOperations(String userID) throws ParseException {
         String cineplex = this.getCineplexChoice();
         String movieID = this.getMovieChoice();
+
+        if (movieID.equals("N/A")){
+            this.println("\nError : You have selected a movie that is not in SHOWING | PREVIEW Status for booking.\n");
+            return; 
+        }
         String showDate = this.getShowDate(cineplex, movieID);
         ArrayList<String> container = this.getShowTime(cineplex, movieID,showDate);
         String showTime = container.get(0);

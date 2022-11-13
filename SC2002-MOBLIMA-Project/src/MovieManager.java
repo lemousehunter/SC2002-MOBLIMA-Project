@@ -147,6 +147,16 @@ public class MovieManager extends Manager implements BaseManager {
         return this.getCurrentMovies().get(idx-1).getMovieID();
     }
 
+    public String getMovieIDFromAllShowingIDX(Integer idx) {
+        
+        if (masterMovies.get(idx-1).getShowStatus().toString().equals(ShowStatusEN.ENDOFSHOWING.toString()) ||
+            masterMovies.get(idx-1).getShowStatus().toString().equals(ShowStatusEN.COMINGSOON.toString()))
+            {
+                return "N/A";
+            }
+        return (masterMovies.get(idx-1).getMovieID());
+    }
+
     public MovieEY getMovieByName(String movieName) {
         if (movieName.isEmpty()) { return null;}
         for (MovieEY movie: this.masterMovies) {

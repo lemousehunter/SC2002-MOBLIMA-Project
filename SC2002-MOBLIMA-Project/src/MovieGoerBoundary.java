@@ -27,7 +27,12 @@ public class MovieGoerBoundary extends Boundary implements BaseBoundary {
     public void writeReview(String userID) {
         String movieName = this.movieBoundary.getMovieName();
         MovieEY movie = this.movieManager.searchMovie(movieName);
-        this.reviewBoundary.addReview(userID, movie.getMovieID());
+        if (movie == null) {
+            this.println("\nError : You have entred a Movie that doesnot exist\n");
+        }
+        else {
+            this.reviewBoundary.addReview(userID, movie.getMovieID());
+        }
     }
 
     public void listTop5MoviesRevenue() {
@@ -62,8 +67,8 @@ public class MovieGoerBoundary extends Boundary implements BaseBoundary {
                  """
 
         );
-        while (!(choice >= 1 && choice <= 7)) {
-            choice = this.getInputInt("Please only enter integers between 1 to 4 (inclusive).");
+        while (!(choice >= 1 && choice <= 8)) {
+            choice = this.getInputInt("Please only enter integers between 1 to 8 (inclusive).");
         }
         return choice;
     }
