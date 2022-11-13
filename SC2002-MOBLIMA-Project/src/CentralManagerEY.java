@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +56,7 @@ public class CentralManagerEY {
     /**
      * Method to create an object of CentralManagerEY
      */
-    public CentralManagerEY() {
+    public CentralManagerEY() throws IOException, ParseException {
 
         // Create Master lists
 
@@ -185,6 +187,21 @@ public class CentralManagerEY {
         this.ticketPriceBoundary.setBoundaries();   this.ticketPriceBoundary.setManagers();
         this.staffBoundary.setBoundaries();         this.staffBoundary.setManagers();
         this.movieGoerBoundary.setBoundaries();     this.movieGoerBoundary.setManagers();
+
+        // call all entity managers prime method to prime the array lists from files
+        this.primeAllObjectsFromDataFiles();
+    }
+
+    private void primeAllObjectsFromDataFiles() throws IOException, ParseException {
+        this.getHolidayMgr().primeHolidays();
+        this.getCineplexMgr().primeCineplex();
+        this.getScreenMgr().primeScreen();
+        this.getMovieMgr().primeMovie();
+        this.getShowMgr().primeShow();
+        this.getUserMgr().primeUser();
+        this.getBookingMgr().primeBookings();
+        this.getReviewMgr().primeViewerRatings();
+        this.getTicketPriceMgr().primeTicketPrice();
     }
 
     
@@ -498,7 +515,7 @@ public class CentralManagerEY {
     
     /** 
      * Set method for Ticket Manager
-     * @param ticketMgr The object of TicketManager
+     * @param ticketPriceMgr The object of TicketManager
      */
     public void setTicketPriceMgr(TicketPriceManager ticketPriceMgr) {
         this.ticketPriceMgr = ticketPriceMgr;
@@ -608,7 +625,7 @@ public class CentralManagerEY {
     
     /** 
      * Method to set new HolidayBoundary object
-     * @param bookingBoundary New BookingBoundary Object
+     * @param holidayBoundary New HolidayBoundary Object
      */
     public void setHolidayBoundary(HolidayBoundary holidayBoundary) {
         this.holidayBoundary = holidayBoundary;
@@ -680,7 +697,7 @@ public class CentralManagerEY {
     
     /** 
      * Method to set new TicketPriceBoundary object
-     * @param TicketPriceBoundary New TicketPriceBoundary Object
+     * @param ticketPriceBoundary New TicketPriceBoundary Object
      */
     public void setTicketPriceBoundary(TicketPriceBoundary ticketPriceBoundary) {
         this.ticketPriceBoundary = ticketPriceBoundary;
