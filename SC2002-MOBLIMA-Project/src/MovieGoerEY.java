@@ -2,16 +2,18 @@ import java.util.ArrayList;
 
 public class MovieGoerEY extends User{
     public final String email;
-    public final Integer mobileNumber;
+    public final String mobileNumber;
     public final Integer age;
     public final ArrayList<String> bookings;
 
 
     private MovieGoerAgeEN ageType;
 
-    public MovieGoerEY(String userID, String name, String email, Integer mobileNumber, Integer age, ArrayList<String> bookings)
+ 
+    public MovieGoerEY(String userID, String name, String email, String mobileNumber, Integer age, ArrayList<String> bookings)
     {
-        super(UserType.MOVIEGOER, name);
+        super(userID,UserType.MOVIEGOER, name);
+           
         this.email = email;
         this.mobileNumber = mobileNumber;
         this.age = age;
@@ -35,7 +37,7 @@ public class MovieGoerEY extends User{
     }
     public String getEmailID() { return this.email; }
 
-    public Integer getMobileNumber() { return this.mobileNumber; }
+    public String getMobileNumber() { return this.mobileNumber; }
 
     public Integer getAge() { return this.age; }
 

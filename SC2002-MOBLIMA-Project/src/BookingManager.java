@@ -17,7 +17,9 @@ public class BookingManager extends Manager implements BaseManager {
   private HolidayManager holidayMgr;
   private MovieManager movieMgr;
   private MovieGoerManager movieGoerMgr;
+  private ScreenManager screenManager;
   private IoManager ioManager;
+  private TicketPriceManager ticketPriceManager;
 
   // MasterLists
   private ArrayList<MovieGoerEY> masterMovieGoers;
@@ -37,6 +39,8 @@ public class BookingManager extends Manager implements BaseManager {
     this.movieMgr = this.getCentralManager().getMovieMgr();
     this.movieGoerMgr = this.getCentralManager().getMovieGoerMgr();
     this.ioManager = this.getCentralManager().getIoManager();
+    this.screenManager = this.getCentralManager().getScreenMgr();
+    this.ticketPriceManager = this.getCentralManager().getTicketPriceMgr();
     this.initializeHashMaps();
   }
 
@@ -78,7 +82,7 @@ public class BookingManager extends Manager implements BaseManager {
 
   public String BookTicket( String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
     String BookingID = genBookingID(userID);
-    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayMgr, this.movieMgr);
+    BookingEY booking = new BookingEY(BookingID, userID, movieID, screenID, cineplexID, date, time, seatIDs, -1, this.holidayMgr, this.movieMgr, this.screenManager, this.movieGoerMgr, this. ticketPriceManager);
     ArrayList<String> bookingList = this.bookingUserDict.get(userID);
     if (bookingList == null) { // initializes user list if not exist in hashmap
       bookingList = new ArrayList<String>();
@@ -199,7 +203,7 @@ public class BookingManager extends Manager implements BaseManager {
             seatIds.add(seatID);
         }
         BookingEY booking = new BookingEY(bookingID, userID, movieID, screenID, cineplexID, date, time, seatIds,
-                price, holidayMgr, this.movieMgr);
+                price, this.holidayMgr, this.movieMgr, this.screenManager, this.movieGoerMgr,this.ticketPriceManager);
         this.masterBookings.add(booking);
     }
 
@@ -241,5 +245,6 @@ public class BookingManager extends Manager implements BaseManager {
     ioManager.write(filename, alw);
 
 }
+
 
 }

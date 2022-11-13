@@ -1,33 +1,13 @@
 import java.util.Scanner;
 
-/**
- * A User App class that is utilized to display 
- * User app menu
- * 
- * 
- */
-
 public class UserApp{
-
          int choice;
          static Scanner sc=new Scanner(System.in);
-        /**
-         * Method to display user menu if the input is less than or equal 10
-         * 
-         */
-
-
-
          public void Process(){
              do{
                  DisplayUserMenu();
              }while (choice <=10);
          }
-         /**
-         * Method to print user menu 
-         * 
-         */
-
          public void DisplayUserMenu(){
              System.out.println("""
                      ==================== Welcome to User  APP ====================

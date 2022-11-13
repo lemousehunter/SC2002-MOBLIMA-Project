@@ -29,6 +29,7 @@ public class ReviewManager extends Manager implements BaseManager {
         for (MovieEY m : this.masterMovies) {
             if (m.getMovieID().equals(movieID)) {
                 m.addViewerRatingsID(review.getViewerRatingId());
+                break;
             }
 
         }

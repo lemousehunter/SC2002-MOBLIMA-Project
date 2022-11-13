@@ -28,11 +28,21 @@ public class ScreenManager extends Manager implements BaseManager {
 
 	public ScreenEY getScreenByID(String screenID) {
 		for(ScreenEY s:this.masterScreens) {
-			if(screenID.equals(s.getScreenID()))
+			if(screenID.equals(s.getScreenID())){
 				return s;
-			else
-				System.out.println("No screen exists with this ID!");
+            }
 		}
+        System.out.println("No screen exists with this ID!");
+		return null;
+	}
+
+    public String getScreenNameByID(String screenID) {
+		for(ScreenEY s:this.masterScreens) {
+			if(screenID.equals(s.getScreenID())){
+				return s.getScreenName();
+            }
+		}
+        System.out.println("No screen exists with this ID!");
 		return null;
 	}
 

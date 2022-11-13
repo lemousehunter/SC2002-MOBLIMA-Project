@@ -57,7 +57,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
             this.println("Showing ALL movies in movie list.");
         }
 
-        for (String line: this.movieManager.getAllMovies()) {
+        for (String line: lines) {
             this.println(line);
         }
     }
@@ -303,6 +303,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
     public void listAllShows() {
         String movieName = this.getMovieName();
         MovieEY movie = this.movieManager.searchMovie(movieName);
+        
         // TODO: 13/11/22 Call relevant showBoundary method to list all shows of movie
     }
 

@@ -43,36 +43,56 @@ public class MovieGoerBoundary extends Boundary implements BaseBoundary {
         this.println("=========================================");
     }
 
+    public int getMovieGoerMenuChoice() {
+        int choice = -1;
+        choice = this.getInputInt(
+                """
+                Movie goer menu:
+                
+                1. Search Movies
+                2. List shows of a Movie
+                3. Book Ticket
+                4. Write Review
+                5. List Top 5 Movies by Sales
+                6. List Top 5 Movies by Review
+                7. Exit Moblima App
+                
+                Enter choice : 
+                 """
+
+        );
+        while (!(choice >= 1 && choice <= 7)) {
+            choice = this.getInputInt("Please only enter integers between 1 to 4 (inclusive).");
+        }
+        return choice;
+    }
+
     public void MovieGoerOperations(String userID) throws ParseException {
-        int choice = this.getInputInt(
-        """
-        Movie goer menu:
-        
-        1. Search Movies
-        2. List shows of a Movie
-        3. Book Ticket
-        4. Write Review
-        5. List Top 5 Movies by Sales
-        6. List Top 5 Movies by Review
-        """);
-
-        while (choice < 1 || choice > 6) {
-            choice = this.getInputInt("Invalid choice. Please enter integers between 1 to 6 (inclusive) only.");
-        }
-
-        switch (choice) {
-            case 1:
-                this.movieBoundary.searchMovie();
-            case 2:
-                this.movieBoundary.listAllShows();
-            case 3:
-                this.bookingBoundary.BookingOperations(userID);
-            case 4:
-                this.writeReview(userID);
-            case 5:
-                this.listTop5MoviesRevenue();
-            case 6:
-                this.reviewBoundary.Top5MovPrint();
-        }
+        int moviGoerChoice = 0;
+        while (moviGoerChoice != 7) {
+            moviGoerChoice = this.getMovieGoerMenuChoice();
+            switch (moviGoerChoice) {
+                case 1:
+                    this.movieBoundary.searchMovie();
+                    break;
+                case 2:
+                    this.movieBoundary.listAllShows();
+                    break;
+                case 3:
+                    this.bookingBoundary.BookingOperations(userID);
+                    break;
+                case 4:
+                    this.writeReview(userID);
+                    break;
+                case 5:
+                    this.listTop5MoviesRevenue();
+                    break;
+                case 6:
+                    this.reviewBoundary.Top5MovPrint();
+                    break;
+                case 7:
+                    break;
+            }
+         }
     }
 }

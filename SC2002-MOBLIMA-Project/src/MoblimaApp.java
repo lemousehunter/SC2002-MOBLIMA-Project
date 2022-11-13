@@ -87,9 +87,9 @@ public class MoblimaApp {
         this.centralManager.getScreenMgr().primeScreen();
         this.centralManager.getMovieMgr().primeMovie();
         this.centralManager.getShowMgr().primeShow();
+        this.centralManager.getUserMgr().primeUser();
         this.centralManager.getBookingMgr().primeBookings();
         this.centralManager.getReviewMgr().primeViewerRatings();
-        this.centralManager.getUserMgr().primeUser();
         this.centralManager.getTicketPriceMgr().primeTicketPrice();
 
     }
@@ -101,7 +101,7 @@ public class MoblimaApp {
             System.out.println("\n========================= Welcome to Staff App =========================\n" +
                     "1. Register                                               \n" +
                     "2. Login                                                 \n" +
-                    "3. Go Back to Main Menu                                 \n" +
+                    "3. Exit Moblima App                               \n" +
                     "========================================================================");
             System.out.print("Enter choice: ");
             while (!sc.hasNextInt()) {
@@ -179,8 +179,88 @@ public class MoblimaApp {
         } while (subchoice < 3);
     }
 
-    private void ManageMovieGoerApp() {
-        this.centralManager.getMovieGoerMgr().process();
+    private void ManageMovieGoerApp() throws ParseException {
+        int subchoice;
+        boolean userLoggedin = false;
+        MovieGoerEY movieGoer = null;
+        do {
+            System.out.println("\n========================= Welcome to User  App =========================\n" +
+                    "1. Register                                               \n" +
+                    "2. Login                                                 \n" +
+                    "3. Exit Moblima App                                 \n" +
+                    "========================================================================");
+            System.out.print("Enter choice: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("Please enter an integer value.");
+                sc.next();
+            }
+            subchoice = sc.nextInt();
+            sc.nextLine();
+            switch (subchoice) {
+                case 1:
+                    System.out.print("Enter UserName: ");
+                    String userName = sc.nextLine();
+                    int masterUserListSize;
+                    if (this.centralManager.getMasterUsers().isEmpty()) {
+                        masterUserListSize = 0;
+                    } else {
+                        masterUserListSize = this.centralManager.getMasterUsers().size();
+                    }
+                    boolean userFound = false;
+                    for (int i = 0; i < masterUserListSize; i++) {
+                        if (this.centralManager.getMasterUsers().get(i).getUserName().equals(userName)) {
+                            System.out.println("\n" + userName + "  Already Registered");
+                            userFound = true;
+                            break;
+                        }
+                    }
+                    System.out.print("Enter Email ID: ");
+                    String emalid = sc.nextLine();
+                    System.out.print("Enter Mobile #: ");
+                    String  mobileNumber = sc.nextLine();
+                    System.out.print("Enter Age     : ");
+                    int  age  = sc.nextInt();
+                    ArrayList<String> bookings = new ArrayList<String>();
+
+                    String userid = UUID.randomUUID().toString();
+                    movieGoer = new MovieGoerEY(userid,userName,emalid,mobileNumber,age,bookings);
+                    this.centralManager.getMasterUsers().add(movieGoer);
+                    System.out.println("\n" + userName + " Successfully Registered");
+
+                    break;
+
+                case 2:
+                    userLoggedin = false;
+                    System.out.print("Enter UserName: ");
+                    userName = sc.nextLine();
+                    userFound = false;
+                    for (int i = 0; i < this.centralManager.getMasterUsers().size(); i++) {
+                        if (this.centralManager.getMasterUsers().get(i) instanceof MovieGoerEY) {
+
+                            movieGoer = (MovieGoerEY) this.centralManager.getMasterUsers().get(i);
+                            if (movieGoer.getUserName().equals(userName)) {
+                                userFound = true;
+                                userLoggedin = true;
+                            }
+                        }
+                    }
+                    if (!userFound) {
+                        System.out.println("\nUser " + userName + " not registered \n");
+                        System.out.println("Please Enter (1) to Register \n \n3");
+                        break;
+                    }
+                    if (userLoggedin) {
+                        this.centralManager.getMovieGoerBoundary().MovieGoerOperations(movieGoer.getUserID());
+                        // force user app to terminate by setting subchoice to 3
+                        subchoice = 3;
+                    }
+
+                    break;
+
+                case 3: // return to mainMenu
+                    break;
+            }
+        } while (subchoice < 3);
     }
 
 }

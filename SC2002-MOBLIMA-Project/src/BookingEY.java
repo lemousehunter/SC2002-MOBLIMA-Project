@@ -36,7 +36,7 @@ public class BookingEY {
      * @param seatIds The SeatIds
      * @param bookingAmount The total price
      */
-    public BookingEY(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time, ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
+    public BookingEY(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time, ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr, ScreenManager screenMgr, MovieGoerManager movieGoerMgr, TicketPriceManager ticketPriceManager) throws ParseException {
         this.bookingID = bookingID;
         this.userID = userID;
         this.movieID = movieID;
@@ -46,9 +46,10 @@ public class BookingEY {
         this.time = time;
         this.bookingAmount = bookingAmount;
         int numTickets = seatIds.size();
+        this.tickets = new ArrayList<TicketEY>();
         for (int i=0; i<numTickets; i++)
         {
-            this.tickets.add(new TicketEY(movieID, userID, screenID, date, time, seatIds.get(i), -1, bookingID, holidayManager, movieMgr));
+            this.tickets.add(new TicketEY(movieID, userID, screenID, date, time, seatIds.get(i), -1, bookingID, holidayManager, movieMgr, screenMgr, movieGoerMgr, ticketPriceManager));
         }
         if (this.bookingAmount == -1) {         // prime methods would always have bookingAmount
             this.bookingAmount = this.computeBookingAmount();

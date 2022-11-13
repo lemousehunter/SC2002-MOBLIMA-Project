@@ -35,7 +35,7 @@ public class HolidayManager extends Manager implements BaseManager {
   }
 
   public Boolean getWeekend(String date) throws ParseException {
-    DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     LocalDate date_dt = LocalDate.parse(date, dtFormatter);
     DayOfWeek day = date_dt.getDayOfWeek();
     return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;

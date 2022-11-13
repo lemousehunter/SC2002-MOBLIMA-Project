@@ -7,47 +7,27 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * A UserManager class to handle read/write of user data
- * 
- */
-
 public class UserManager extends Manager implements BaseManager {
 
   private CentralManagerEY centralManager;
   private ArrayList<User> masterUsers;
 
   private IoManager ioManager;
-/**
- * User Manager constructor
- * 
- */
+
   public UserManager() {
 
   }
 
-  /**
- *{@inheritDoc}
- */
-@Override
+  @Override
   public void setManagers() {
     this.ioManager = this.getCentralManager().getIoManager();
   }
 
-  /**
- *{@inheritDoc}
- */
-@Override
+  @Override
   public void setMasterLists() {
     CentralManagerEY centralMgr = this.getCentralManager();
     this.masterUsers = centralMgr.getMasterUsers();
   }
-  
-  /** 
-   * A method to prime User data from file 
-   * 
-   * @throws IOException If there's IO error
-   */
   public void primeUser() throws IOException {
     String userSEPARATOR = "|";
     String bookingsEPERATOR = "~";
@@ -74,7 +54,7 @@ public class UserManager extends Manager implements BaseManager {
             
         } else {
             String emailID = star.nextToken().trim();
-            int mobileNumber = Integer.parseInt(star.nextToken().trim());
+            String  mobileNumber = star.nextToken().trim();
             int movieGoerAge = Integer.parseInt(star.nextToken().trim());
             ArrayList<String> bookings = new ArrayList<String>();
             String bookingIDString = star.nextToken().trim();
@@ -91,11 +71,6 @@ public class UserManager extends Manager implements BaseManager {
     }
 }
 
-
-/** 
- * A method to write user data to a text file
- * @throws IOException If there's IO error
- */
 public void writeUser() throws IOException {
     String userSEPARATOR = " | ";
     String bookingSEPARATOR = " ~ ";
@@ -120,7 +95,7 @@ public void writeUser() throws IOException {
             MovieGoerEY movieGoer = (MovieGoerEY) user;
             st.append(movieGoer.getEmailID().trim());
             st.append(userSEPARATOR);
-            st.append(Integer.toString(movieGoer.getMobileNumber()));
+            st.append(movieGoer.getMobileNumber());
             st.append(userSEPARATOR);
             st.append(Integer.toString(movieGoer.getAge()));
             st.append(userSEPARATOR);

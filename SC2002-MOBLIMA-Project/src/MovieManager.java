@@ -109,10 +109,11 @@ public class MovieManager extends Manager implements BaseManager {
     }
 
     public ArrayList<String> getCurrentMoviesLines() {
-        int count = 0;
+        int count = 1;
         ArrayList<String> lines = new ArrayList<String>();
         for (MovieEY movie: this.masterMovies) {
-            if (movie.getShowStatus() == ShowStatusEN.SHOWING | movie.getShowStatus() == ShowStatusEN.PREVIEW) {
+            if (movie.getShowStatus().toString().equals(ShowStatusEN.SHOWING.toString()) || 
+                movie.getShowStatus().toString().equals(ShowStatusEN.PREVIEW.toString())) {
                 lines.add(count + ": " + movie.getName() + " - " + movie.getShowStatus());
                 count++;
             }
@@ -123,7 +124,8 @@ public class MovieManager extends Manager implements BaseManager {
     public ArrayList<MovieEY> getCurrentMovies() {
         ArrayList<MovieEY> movies = new ArrayList<MovieEY>();
         for (MovieEY movie: this.masterMovies) {
-            if (movie.getShowStatus() == ShowStatusEN.SHOWING | movie.getShowStatus() == ShowStatusEN.PREVIEW) {
+            if (movie.getShowStatus().toString().equals(ShowStatusEN.SHOWING.toString()) || 
+                movie.getShowStatus().toString().equals(ShowStatusEN.PREVIEW.toString())) {
                 movies.add(movie);
             }
         }

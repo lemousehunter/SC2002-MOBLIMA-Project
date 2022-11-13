@@ -1,15 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-/**
- * A TicketEY Object
- * 
- * <p>
- * A <code>Ticket</code> object used 
- * to store all parameters about tickets
- * </p>
- * 
- */
+
 public class TicketEY {
     private MovieManager movieMgr;
     private double price;
@@ -17,6 +9,7 @@ public class TicketEY {
     private MovieGoerManager movieGoerMgr;
     private String userID;
     private ScreenManager screenMgr;
+    private TicketPriceManager ticketPriceManager;
     private String screenID;
     private String date;
     private String time;
@@ -26,27 +19,19 @@ public class TicketEY {
     private HolidayManager holidayManager;
     private String bookingID;
 
-   
     /**
-     * The constructor for ticket object
-     * @param movieID The movieID
-     * @param userID The userID
-     * @param screenID The screenID
-     * @param date The date of the show
-     * @param time The time of the show
-     * @param seatId The seatID for the show
-     * @param price The price of the ticket
-     * @param bookingID The bookingID 
-     * @param holidayManager The holiday manager(controller) object 
-     * @param movieMgr The movie manager(controller) object
-     * @throws ParseException If there's parseException error
+     * @param movieID
+     * @param userID
+     * @param screenID
+     * @param time
      */
-    public TicketEY(String movieID, String userID, String screenID, String date, String time, String seatId, double price, String  bookingID, HolidayManager holidayManager, MovieManager movieMgr) throws ParseException {
+    public TicketEY(String movieID, String userID, String screenID, String date, String time, String seatId, double price, String  bookingID, HolidayManager holidayManager, MovieManager movieMgr, ScreenManager screenMgr, MovieGoerManager moviegoerMgr, TicketPriceManager ticketPriceManager) throws ParseException {
         // Passing in controller instances from MainApp
         this.movieMgr = movieMgr;
-        this.movieGoerMgr = new MovieGoerManager();
-        this.screenMgr = new ScreenManager();
+        this.movieGoerMgr = moviegoerMgr;
+        this.screenMgr = screenMgr;
         this.holidayManager = holidayManager;
+        this.ticketPriceManager = ticketPriceManager;
 
         // Class attributes
         this.movieID = movieID;
@@ -63,74 +48,37 @@ public class TicketEY {
         }
     }
 
-    /**
-     * Method to get the movieID
-     * @return the movieID
-     */
     public String getMovieID() {
         return this.movieID;
     }
 
-    /**
-     * Method to get the userID
-     * @return The userID
-     */
     public String getUserID() {
         return this.userID;
     }
 
-    /**
-     * Method to get screenID
-     * @return the screenID
-     */
     public String getScreenID() {
         return  this.screenID;
     }
 
-    /**
-     * Method to get date
-     * @return the date
-     */
     public String getDate() {
         return this.date;
     }
 
-    /**
-     * Method to get time
-     * @return the time
-     */
     public String getTime() { return this.time; }
     
-    /**
-     * Method to get seatID
-     * @return the seatID
-     */
     public String getSeatId() {
         return seatId;
     }
 
-    /**
-     * Method to set price
-     * @param price The price 
-     */
     public void setPrice(double price) {
         this.price = price;
     }
 
-    /**
-     * Method to get price
-     * @return the price
-     */
     public double getPrice() {
         return this.price;
     }
 
 
-    /**
-     * Method to compute price
-     * @return the price for the specific ticket
-     * @throws ParseException
-     */
     public double computePrice() throws ParseException {
         boolean isHoliday = this.holidayManager.isHoliday(this.date); // 1: holiday, 0: not holiday
         boolean isWeekend = this.holidayManager.getWeekend(this.date); // 1: weekend, 0: weekday
@@ -144,10 +92,33 @@ public class TicketEY {
         boolean HallType = screen.getBooleanScreenType(); // 1: Premium Hall, 0: Regular Hall
 
         MovieGoerEY movieGoer = movieGoerMgr.getUserByID(this.userID);
-
-        String movieGoerAge = movieGoer.getAgeType(); // 1: discounted price, 0: normal price
+        String movieGoerAge;
+        if (movieGoer == null ){
+            movieGoerAge = MovieGoerAgeEN.ADULT.toString();
+        }
+        else{
+            movieGoerAge = movieGoer.getAgeType(); // 1: discounted price, 0: normal price
+        }
 
         double price;
+        String dayType;
+        if (isSpecialDay){
+            dayType = DayTypeEN.HOLIDAY.toString();
+        }
+        else{
+            dayType = DayTypeEN.WEEKDAY.toString();
+        }
+        // Check Staff configured Ticket prices for any Match. If not found Compute price automatically
+
+        try {
+            price = ticketPriceManager.getTicketPrice(dayType, screen.getScreenClass().toString(), movieGoer.getAgeType(), movie.getMovieType().toString() );    
+            if (price != -1) {
+                return price;
+            }
+            
+        } catch (Exception e) {
+            price = -1;
+        }
 
         if (movie.getBoolType()){ // 1: blockbuster, 0: regular movies
             price = 15.0;

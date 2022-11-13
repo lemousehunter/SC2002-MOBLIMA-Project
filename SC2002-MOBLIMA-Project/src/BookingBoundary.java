@@ -1,6 +1,8 @@
 import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookingBoundary extends Boundary implements BaseBoundary{
@@ -14,6 +16,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     // Boundaries
     CineplexBoundary cineplexBoundary;
     MovieBoundary movieBoundary;
+    ShowBoundary showBoundary;
 
 
 
@@ -36,6 +39,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         CentralManagerEY centralManager = this.getCentralManager();
         this.cineplexBoundary = centralManager.getCineplexBoundary();
         this.movieBoundary = centralManager.getMovieBoundary();
+        this.showBoundary = centralManager.getShowBoundary();
     }
 
     public String getCineplexChoice() {
@@ -67,23 +71,28 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         return "";
     }
 
-    public String getShowDate() { // prints out available show dates, gets show date from user
-        return "";
+    public String getShowDate(String cineplex, String movieID) { // prints out available show dates, gets show date from user
+        this.print("Please enter the corresponding index of the date you would like to book");
+        this.showBoundary.printShowDates(cineplex,movieID);
+        int viewShow = this.getScanner().nextInt();
+        return this.showManager.getShowIDFromShowDateIDX(cineplex,movieID,viewShow);
     }
 
-    public ArrayList<String> getShowTime() { // prints out available show timings, returns showTime, screenID
-        return null;
-    }
+    public ArrayList<String> getShowTime(String cineplex, String movieID, String showDate) { // prints out available show timings, returns showTime, screenID
+        this.print("Please enter the corresponding index of the time you would like to book");
+        this.showBoundary.printShowTimes(cineplex,movieID,showDate);
+        int viewShow = this.getScanner().nextInt();
+        return this.showManager.getShowIDFromShowTimeIDX(cineplex,movieID,showDate,viewShow);    }
 
     public Integer getNumTickets() {
-        return this.getInputInt("How many tickets would you like to book?");
+        return this.getInputInt("How many tickets would you like to book? ");
     }
 
-    public String getShowSeat(int i) { // prints out Avail seat layout and gets seat based on seatNumber
-        // TODO: 13/11/22 Print Avail Seat Layout
-        return this.getInputLine("Please choose a seat for ticket " + (i+1));
+    // public String getShowSeat(int i) { // prints out Avail seat layout and gets seat based on seatNumber
+    //     // TODO: 13/11/22 Print Avail Seat Layout
+    //     return this.getInputLine("Please choose a seat for ticket " + (i+1));
 
-    }
+    // }
 
     public void showBooking(String bookingID) {
         BookingEY booking = bookingManager.getBookingByID(bookingID);
@@ -108,18 +117,45 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     public void BookingOperations(String userID) throws ParseException {
-        String cinemaID = this.getCineplexChoice();
+        String cineplex = this.getCineplexChoice();
         String movieID = this.getMovieChoice();
-        String showDate = this.getShowDate();
-        ArrayList<String> container = this.getShowTime();
+        String showDate = this.getShowDate(cineplex, movieID);
+        ArrayList<String> container = this.getShowTime(cineplex, movieID,showDate);
         String showTime = container.get(0);
         String screenID = container.get(1);
+        String showID   = container.get(2);
         Integer numTickets = this.getNumTickets();
+
+        
+        ArrayList<String> seatIDs = this.getShowSeat(showID,numTickets);
+        
+
+        String bookingID = this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cineplex, screenID, seatIDs);
+        this.showManager.setSeatOccupied(showID, seatIDs);
+        
+
+        this.println("\nBooking ID : " + bookingID + " : Your Tickets have been booked successfully!!  Amount Charged : " + this.bookingManager.getBookingByID(bookingID).getBookingAmount() + "\n");
+        
+    }
+
+    private ArrayList<String> getShowSeat(String showID, Integer numTickets) {
+        this.showBoundary.ShowSeatLayout(showID);
+
         ArrayList<String> seatIDs = new ArrayList<String>();
-        for (int i=0; i<numTickets; i++) {
-            seatIDs.add(this.getShowSeat(i));
+        String seatID="";
+        this.println("Please enter the seat numbers  : \n");
+
+        for (int i=1 ; i <= numTickets;i++){
+
+            seatID = this.getInputLine(i+". ");
+            if (i == 1) {
+                seatID =this.getScanner().nextLine();
+            }
+            seatIDs.add(seatID);
         }
-        this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cinemaID, screenID, seatIDs);
+        
+
+        return new ArrayList<String>(seatIDs);
     }
 
 }

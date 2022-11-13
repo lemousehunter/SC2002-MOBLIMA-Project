@@ -35,9 +35,11 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
 
     public void addReview(String userID, String movieID) {
         String movieName = this.movieManager.getMovieByID(movieID).getName();
-        String review = this.getInputLine("Please enter your review for " + movieName);
+        String review = this.getInputLine("Please enter your review for " + movieName + " : ");
         double scale = this.getScale(movieID);
         this.reviewManager.addReview(userID, movieID, scale, review);
+
+        this.println("\nReview for the movie " + movieName + " has been added");
     }
 
     public void AvgRatingPrint(String movieID) {
@@ -56,6 +58,8 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
         this.println("=========================================");
         this.println("----------Top 5 Movies By Rating---------");
         if (top5movies != null && top5movies.size() == 5) {
+            System.out.println("\nTop 5 movies by Average Viewer Ratings");
+            System.out.println("--------------------------------------");
             for (int i = 1; i <= top5movies.size(); i++) {
                 String movieName = top5movies.get(i - 1);
                 String movieID = this.movieManager.Name2ID(movieName);

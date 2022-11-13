@@ -1,9 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * @author harvi
- *
- */
 public class CentralManagerEY {
     // Master Lists
     private ArrayList<User> masterUsers;
@@ -45,6 +41,7 @@ public class CentralManagerEY {
     private TicketPriceBoundary ticketPriceBoundary;
     private ShowBoundary showBoundary;
     private MovieGoerBoundary movieGoerBoundary;
+
     private StaffBoundary staffBoundary;
 
     public CentralManagerEY() {
@@ -165,7 +162,8 @@ public class CentralManagerEY {
         this.staffBoundary = new StaffBoundary();
         this.staffBoundary.setCentralManager(this);
 
-        // invoke setManagers()  & setBoundaries to get the other manager instances required
+        // invoke setManagers()  & setBundaries to get the other manager instances required
+        
         this.bookingBoundary.setBoundaries();       this.bookingBoundary.setManagers();
         this.cineplexBoundary.setBoundaries();      this.cineplexBoundary.setManagers();
         this.holidayBoundary.setBoundaries();       this.holidayBoundary.setManagers();
@@ -421,6 +419,11 @@ public class CentralManagerEY {
     public void setStaffBoundary(StaffBoundary staffBoundary) {
         this.staffBoundary = staffBoundary;
     }
+
+    public MovieGoerBoundary getMovieGoerBoundary() {
+        return movieGoerBoundary;
+    }
+
     public String getDataFolder() {
         return dataFolder;
     }
