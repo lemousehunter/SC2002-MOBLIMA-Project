@@ -1,0 +1,6 @@
+package Enum;
+
+public enum ScreenClassEN {
+	PLATINUM_MOVIE_SUITES,
+	REGULAR_SCREEN
+}
