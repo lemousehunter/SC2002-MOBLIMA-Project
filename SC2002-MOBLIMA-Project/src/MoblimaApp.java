@@ -91,6 +91,8 @@ public class MoblimaApp {
         this.centralManager.getBookingMgr().primeBookings();
         this.centralManager.getReviewMgr().primeViewerRatings();
         this.centralManager.getTicketPriceMgr().primeTicketPrice();
+
+
     }
 
     private void ManageStaffApp() {
@@ -209,10 +211,10 @@ public class MoblimaApp {
                     movieGoer = this.centralManager.getMovieGoerMgr().getUserByName(userName);
                     if (movieGoer != null) {
                         System.out.println("\n" + userName + "  Already Registered");
-                        break;
+                        this.ManageMovieGoerApp(); // go back to movieGoerMenu
                     }
                     System.out.print("Enter Email ID: ");
-                    String emailID = sc.nextLine();
+                    String emalid = sc.nextLine();
                     System.out.print("Enter Mobile #: ");
                     String  mobileNumber = sc.nextLine();
                     System.out.print("Enter Age     : ");
@@ -220,7 +222,7 @@ public class MoblimaApp {
                     ArrayList<String> bookings = new ArrayList<String>();
 
                     String userid = UUID.randomUUID().toString();
-                    movieGoer = new MovieGoerEY(userid,userName,emailID,mobileNumber,age,bookings);
+                    movieGoer = new MovieGoerEY(userid,userName,emalid,mobileNumber,age,bookings);
                     this.centralManager.getMasterUsers().add(movieGoer);
                     System.out.println("\n" + userName + " Successfully Registered");
 

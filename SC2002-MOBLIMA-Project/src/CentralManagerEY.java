@@ -1,5 +1,3 @@
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -56,7 +54,7 @@ public class CentralManagerEY {
     /**
      * Method to create an object of CentralManagerEY
      */
-    public CentralManagerEY() throws IOException, ParseException {
+    public CentralManagerEY() {
 
         // Create Master lists
 
@@ -500,7 +498,7 @@ public class CentralManagerEY {
     
     /** 
      * Set method for Ticket Manager
-     * @param ticketPriceMgr The object of TicketManager
+     * @param ticketMgr The object of TicketManager
      */
     public void setTicketPriceMgr(TicketPriceManager ticketPriceMgr) {
         this.ticketPriceMgr = ticketPriceMgr;
@@ -610,7 +608,7 @@ public class CentralManagerEY {
     
     /** 
      * Method to set new HolidayBoundary object
-     * @param holidayBoundary New HolidayBoundary Object
+     * @param bookingBoundary New BookingBoundary Object
      */
     public void setHolidayBoundary(HolidayBoundary holidayBoundary) {
         this.holidayBoundary = holidayBoundary;
@@ -682,7 +680,7 @@ public class CentralManagerEY {
     
     /** 
      * Method to set new TicketPriceBoundary object
-     * @param ticketPriceBoundary New TicketPriceBoundary Object
+     * @param TicketPriceBoundary New TicketPriceBoundary Object
      */
     public void setTicketPriceBoundary(TicketPriceBoundary ticketPriceBoundary) {
         this.ticketPriceBoundary = ticketPriceBoundary;
