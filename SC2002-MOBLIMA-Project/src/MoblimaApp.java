@@ -235,9 +235,9 @@ public class MoblimaApp {
                     System.out.print("Enter UserName: ");
                     userName = sc.nextLine();
 
-                    MovieGoerEY user = this.centralManager.getMovieGoerMgr().getUserByName(userName);
+                    movieGoer = this.centralManager.getMovieGoerMgr().getUserByName(userName);
 
-                    if (user == null) {
+                    if (movieGoer == null) {
                         System.out.println("\nUser " + userName + " not registered \n");
                         System.out.println("Please Enter (1) to Register \n \n3");
                         break;
