@@ -16,11 +16,6 @@ import java.util.*;
 
 public class BookingManager extends Manager implements BaseManager {
     /**
-     * To generate booking ID
-     */
-    private Integer count;
-
-    /**
      * Hash Map to keep a record of users and the bookings they made
      */
     private HashMap<String, ArrayList<String>> bookingUserDict; // {User: [BookingID1, BookingID2]}
@@ -74,7 +69,6 @@ public class BookingManager extends Manager implements BaseManager {
      * Constructor method to create an object of class BookingManager
      */
     public BookingManager() {
-        this.count = 0; // to ensure that all booking IDs are unique
         this.bookingUserDict = new HashMap<String, ArrayList<String>>();
         this.bookingIDDict = new Hashtable<String, BookingEY>();
     }
@@ -136,7 +130,7 @@ public class BookingManager extends Manager implements BaseManager {
     /**
      * Method to generate a booking ID
      *
-     * @param userID The user ID
+     * @param cineplexID The cineplex ID
      * @return The booking ID
      */
     private String genBookingID(String cineplexID) {

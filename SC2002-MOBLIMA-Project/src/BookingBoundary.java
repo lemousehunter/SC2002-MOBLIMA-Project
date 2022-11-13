@@ -39,6 +39,11 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
      */
     ShowManager showManager;
 
+    /**
+     * The Controller Class of Movies
+     */
+    MovieGoerManager movieGoerManager;
+
 
     // Boundaries
     /**
@@ -74,6 +79,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         this.cineplexManager = centralManager.getCineplexMgr();
         this.movieManager = centralManager.getMovieMgr();
         this.showManager = centralManager.getShowMgr();
+        this.movieGoerManager = centralManager.getMovieGoerMgr();
     }
 
     /**
@@ -167,12 +173,13 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
      * @param bookingID The unique ID of the booking
      */
     public void showBooking(String bookingID) {
-        BookingEY booking = bookingManager.getBookingByID(bookingID);
+        BookingEY booking = this.bookingManager.getBookingByID(bookingID);
 
         this.println("================================");
         this.println("Booking: " + bookingID);
         this.println("--------------------------------");
         this.println("UserID: " + booking.getUserID());
+        this.println("Name: " + this.movieGoerManager.getUserByID(booking.getUserID()).getUserName());
         this.println("Movie: " + this.movieManager.getMovieByID(booking.getMovieID()).getName());
         this.println("Screen: " + this.screenManager.getScreenByID(booking.getScreenID()).getScreenName());
         this.println("Cinema: " + this.cineplexManager.getCineplexByID(booking.getCinemaID()).getName());
