@@ -1,15 +1,30 @@
 import java.util.Scanner;
-
+/**
+ * A Staff App Class
+ * 
+ * <p>
+ * A <code>StaffApp</code> class used 
+ * perform operations related to Staff application
+ * </p>
+ * 
+ */
 public class StaffApp {
     private static StaffApp currentInstance;
     static Scanner sc=new Scanner(System.in);
     private int choice;
     private StaffApp(){}
 
+    /**
+     * Method to get the instance of staff App object
+     * @return The staff app object
+     */
     public static synchronized StaffApp  getInstance() {
         if (currentInstance == null) currentInstance = new StaffApp();
         return currentInstance;
     }
+    /**
+     * Helper method to request for user choice 
+     */
     public void ProcessStaff() {
         System.out.println("Enter choice: ");
         do{
@@ -17,9 +32,15 @@ public class StaffApp {
         }while (choice<=10);
     }
 
+    /**
+     * Method to print User menu
+     */
     private void DisplayUserMenu() {
     }
 
+    /**
+     * Method to display staff menu and get user choice
+     */
     public void DisplayStaffMenu(){
         System.out.println("==================== Welcome to Staff  APP ====================\n" +
                 "1. Create Movie Listing                                              \n" +
@@ -41,17 +62,19 @@ public class StaffApp {
     }
 
 
+        
         /**
-         *
-         * @param ticket
+         * Method to set ticket prices
+         * @param ticket The TicketEY object 
          */
         public void setTicketPrices(TicketEY ticket) {
         // TODO - implement Staff.setTicketPrices
         throw new UnsupportedOperationException();
     }
 
+       
         /**
-         *
+         * Method to add movies
          * @param name
          * @param type
          * @param movieRating
@@ -66,11 +89,17 @@ public class StaffApp {
         throw new UnsupportedOperationException();
     }
 
+        /**
+         * 
+         */
         public void getTop5RankingMoviesByTicketSales() {
         // TODO - implement Staff.getTop5RankingMoviesByTicketSales
         throw new UnsupportedOperationException();
     }
 
+        /**
+         * 
+         */
         public void getTop5RakingMoviesByOverallReviews() {
         // TODO - implement Staff.getTop5RakingMoviesByOverallReviews
         throw new UnsupportedOperationException();

@@ -7,27 +7,47 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * A UserManager class to handle read/write of user data
+ * 
+ */
+
 public class UserManager extends Manager implements BaseManager {
 
   private CentralManagerEY centralManager;
   private ArrayList<User> masterUsers;
 
   private IoManager ioManager;
-
+/**
+ * User Manager constructor
+ * 
+ */
   public UserManager() {
 
   }
 
-  @Override
+  /**
+ *{@inheritDoc}
+ */
+@Override
   public void setManagers() {
     this.ioManager = this.getCentralManager().getIoManager();
   }
 
-  @Override
+  /**
+ *{@inheritDoc}
+ */
+@Override
   public void setMasterLists() {
     CentralManagerEY centralMgr = this.getCentralManager();
     this.masterUsers = centralMgr.getMasterUsers();
   }
+  
+  /** 
+   * A method to prime User data from file 
+   * 
+   * @throws IOException If there's IO error
+   */
   public void primeUser() throws IOException {
     String userSEPARATOR = "|";
     String bookingsEPERATOR = "~";
@@ -71,6 +91,11 @@ public class UserManager extends Manager implements BaseManager {
     }
 }
 
+
+/** 
+ * A method to write user data to a text file
+ * @throws IOException If there's IO error
+ */
 public void writeUser() throws IOException {
     String userSEPARATOR = " | ";
     String bookingSEPARATOR = " ~ ";
