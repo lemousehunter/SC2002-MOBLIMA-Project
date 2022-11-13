@@ -348,9 +348,7 @@ public class BookingManager extends Manager implements BaseManager {
 
 
     public ArrayList<String> getAllBookingsList(String userID) {
-        System.out.println("In Get All bookings");
         MovieGoerEY movieGoer = this.movieGoerMgr.getUserByID(userID);
-        System.out.println("MovieGoer name " + movieGoer.getUserName());
         for (String b : movieGoer.getBookings()) {
             System.out.println(b);
         }

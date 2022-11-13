@@ -248,6 +248,7 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         for (String bookingID: this.bookingManager.getAllBookingsList(userID)) {
             this.showBooking(bookingID);
         }
+        this.println("===================================");
     }
     
 
