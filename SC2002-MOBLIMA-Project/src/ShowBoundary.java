@@ -1,17 +1,33 @@
 import java.util.ArrayList;
-
+	/**
+	 * A Show boundary object that extends Boundary class and implements BaseBoundary interface  
+	 * 
+	 * <p>
+	 * A <code>ShowBoundary</code> object used to process all 
+	 * Show input and output
+	 * </p>
+	 */
 public class ShowBoundary extends Boundary implements BaseBoundary{
     ShowManager showManager;
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.showManager = this.getCentralManager().getShowMgr();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setBoundaries() {
 
     }
 
+    /**
+     * Method to add a show from user
+     */
     public void addShow() {
         boolean filter = false;
         String cineplexName = this.getCineplexName(filter);
@@ -56,6 +72,10 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
             }
     }
 
+    /**
+     * Method to set new movie from user
+     * @return The user input movie choice
+     */
     public String setNewMovieName() {
         String choice = this.getInputLine("Do you want to change the Movie  ?  (Y | N) :  ");
         if (!choice.equals("Y")) {
@@ -63,7 +83,11 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         }
         return "";
       }
-      public String setNewShowTime() {
+      /**
+       * Method to set new show time from user
+     * @return The user input show time
+     */
+    public String setNewShowTime() {
         String choice = this.getInputLine("Do you want to change the Show Time  ?  (Y | N) :  ");
         if (choice.equals("Y")) {
             return this.getInputLine("\nPlease enter Show Time  : ");
@@ -71,6 +95,11 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         return "";  
       }
     
+    /**
+     * Method to get show time from user
+     * @param filter The flag to filter
+     * @return The user show time input
+     */
     private String getShowTime(Boolean filter) {
         if (filter) {
             String choice = this.getInputLine("Do you want to filter by Show Time  ?  (Y | N)  :  ");
@@ -80,7 +109,11 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         }
         return this.getInputLine("\nPlease enter Show Time : ");
     }
-
+    /**
+     * Method to get show date from user
+     * @param filter The flag to filter
+     * @return The user show date input
+     */
     private String getShowDate(Boolean filter) {
         if (filter) {
             String choice =this.getInputLine("Do you want to filter by Show Date  ?  (Y | N)  :  ");
@@ -91,7 +124,11 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         return this.getInputLine("\nPlease enter Show Date : ");
 
     }
-
+    /**
+     * Method to get movie name from user
+     * @param filter The flag to filter
+     * @return The user movie name input
+     */
     private String getMovieName(Boolean filter) {
         if (filter) {
             String choice = this.getInputLine("Do you want to filter by Movie Name  ?  (Y | N) :  ");
@@ -103,6 +140,12 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
 
     }
 
+    
+    /**
+     * Method to get movie name from user
+     * @param filter The flag to filter
+     * @return The user movie name input
+     */
     private String getScreenName(Boolean filter) {
         if (filter) {
             String choice =  this.getInputLine("Do you want to filter by Screen  ?  (Y | N)     :  ");

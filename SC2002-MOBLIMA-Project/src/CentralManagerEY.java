@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * @author harvi
+ *
+ */
 public class CentralManagerEY {
     // Master Lists
     private ArrayList<User> masterUsers;

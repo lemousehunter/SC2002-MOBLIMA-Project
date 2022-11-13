@@ -1,26 +1,53 @@
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * A Ticket Price Manager Object
+ * 
+ * <p>
+ * A <code>TicketPriceManager</code> object used 
+ * process all ticket price information
+ * </p>
+ * 
+ */
 public class TicketPriceManager extends Manager implements BaseManager {
     // managers
     private IoManager ioManager;
 
     private ArrayList<TicketPrice> masterTicketPrices;
 
+    /**
+     * TicketPriceManager object constructor
+     */
     public TicketPriceManager() {
 
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setMasterLists() {
         this.masterTicketPrices = this.getCentralManager().getMasterTicketPrices();
     }
 
+    /**
+     * Method to add ticket price
+     * @param dateType The dateType (HOLIDAY or WEEKEND)
+     * @param screenClass The type of screen class (PLATINUM_MOVIE_SUITES or REGULAR_SCREEN)
+     * @param movieGoerAge The movie goer age
+     * @param movieType The movie type (Blockbuster/3D/Documentary)
+     * @param price The price of the ticket
+     * @return character U if successfully updated or I if has to be created and then updated
+     */
     public char addTicketPrice(String dateType, String screenClass, String movieGoerAge, String movieType, double price) {
         for (TicketPrice ticketPrice : this.masterTicketPrices) {
             if (ticketPrice.getDayType().toString().equals(dateType) &&
@@ -37,6 +64,10 @@ public class TicketPriceManager extends Manager implements BaseManager {
         return 'I';
     }
 
+    /**
+     * Method to return a list of all ticket prices
+     * @return An arrayList of ticket prices if exist
+     */
     public ArrayList<String> listAllTicketPrices() {
         ArrayList<String> printList = new ArrayList<String>();
         if (masterTicketPrices.size() > 0) {
@@ -56,6 +87,10 @@ public class TicketPriceManager extends Manager implements BaseManager {
         return printList;
     }
 
+    /**
+     * Method to read ticket prices from text file
+     * @throws IOException if there's IO error
+     */
     public void primeTicketPrice() throws IOException {
         String SEPARATOR = "|";
         String filename = this.getCentralManager().getDataFolder().concat("TicketPrices.txt");
@@ -77,6 +112,10 @@ public class TicketPriceManager extends Manager implements BaseManager {
         }
     }
 
+    /**
+     * Method to write ticket price to text file
+     * @throws IOException if there's IO error
+     */
     public void writeTicketPrice() throws IOException {
         String filename = this.getCentralManager().getDataFolder().concat("TicketPrices.txt");
         String SEPARATOR = "|";

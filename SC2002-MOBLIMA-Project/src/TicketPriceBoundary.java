@@ -1,21 +1,45 @@
 import java.util.ArrayList;
 
+/**
+ * A Ticket Price Boundary Object
+ * 
+ * <p>
+ * A <code>TicketPriceBoundary</code> object used 
+ * process all ticket price input and output
+ * </p>
+ * 
+ */
+
+
 public class TicketPriceBoundary extends Boundary implements BaseBoundary {
     TicketPriceManager ticketPriceManager;
 
+    /**
+     * Constructor to instantiate TicketPriceBoundary object
+     */
     public TicketPriceBoundary() {
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.ticketPriceManager = this.getCentralManager().getTicketPriceMgr();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setBoundaries() {
 
     }
 
+    /**
+     * Method to get day type from user
+     * @return day type (HOLIDAY or WEEKDAY)
+     */
     public String getDayType() {
 
         boolean firsttime = true;
@@ -40,6 +64,10 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
         return dayType;
     }
 
+    /**
+     * Method to get Screen Class from user
+     * @return type of screen class (REGULAR_SCREEN or PLATINUM_MOVIE_SUITES)
+     */
     public String getScreenClass() {
         String screenClass = "";
         while (true) {
@@ -60,6 +88,10 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
         return screenClass;
     }
 
+    /**
+     * Method to get movie goer age group from user
+     * @return the movie goer age group (ADULT,SENIOR or STUDENT)
+     */
     public String getMovieGoerAge() {
         String movieGoerAge = "";
         while (true) {
@@ -84,6 +116,10 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
         return movieGoerAge;
     }
 
+    /**
+     * Method to get movie type from user
+     * @return the type of movie (BLOCKBUSTER,THREEDIMENSION or DOCUMENTARY)
+     */
     public String getMovieType() {
         String movieType = "";
         while (true) {
@@ -108,10 +144,18 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
         return movieType;
     }
 
+    /**
+     * Method to get ticket price from user
+     * @return The ticket price
+     */
     public double getPrice() {
         return getInputDouble("Please enter Ticket Price : ");
     }
 
+    /**
+     * Method to print all ticket 
+     * @param printPrices The arraylist of ticket prices
+     */
     public void printAllTicketPrices(ArrayList<String> printPrices) {
         if (printPrices.size() > 0) {
             for (String printline : printPrices) {
@@ -122,6 +166,10 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
         }
     }
 
+    /**
+     * Method to obtain user choice from a printed menu     * 
+     * @return The user selection value
+     */
     public int getTicketPriceMenuChoice() {
         int choice = -1;
         choice = this.getInputInt(
@@ -135,6 +183,10 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
         return choice;
     }
 
+    /**
+     * Method to perform operations based on ticket price menu choice
+     * (add ticket price,list ticket price,return to staff menu)
+     */
     public void ticketPriceOperations() {
         int ticketPriceChoice = 0;
         while (ticketPriceChoice != 3) {
