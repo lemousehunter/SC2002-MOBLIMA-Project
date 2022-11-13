@@ -92,7 +92,6 @@ public class HolidayBoundary extends Boundary implements BaseBoundary {
             switch (holidayChoice) {
                 case 1:
                     String date = this.getHolidayDate();
-                    date = this.getScanner().nextLine();
                     int retCode = this.holidayManager.addHoliday(date);
                     if (retCode == 1 ) { // duplicate error
                         this.println("\n"+date + " already exits !!");
