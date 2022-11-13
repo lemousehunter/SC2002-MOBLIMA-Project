@@ -7,6 +7,19 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+	/**
+	 * A ShowManager object that extends Manager object 
+	 * and implements BaseManager interface
+	 * 
+	 * <p>
+	 * A <code>ShowManager</code> object used to process
+	 * all show related information
+	 * </p>
+	 * 
+	 * 
+	 */
+
+
 public class ShowManager extends Manager implements BaseManager {
 
     private CentralManagerEY centralManager;
@@ -22,10 +35,16 @@ public class ShowManager extends Manager implements BaseManager {
     MovieManager movieMgr;
     CineplexManager cineplexMgr;
 
+    /**
+     * Constructor for ShowManager object
+     */
     public ShowManager() {
         showIO = new ShowBoundary();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         screenMgr = this.getCentralManager().getScreenMgr();
@@ -34,6 +53,9 @@ public class ShowManager extends Manager implements BaseManager {
         this.ioManager = this.getCentralManager().getIoManager();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setMasterLists() {
         CentralManagerEY centralMgr = this.getCentralManager();
@@ -41,6 +63,16 @@ public class ShowManager extends Manager implements BaseManager {
     
     }
 
+    /**
+     * Method to add show
+     * @param cineplexName The cineplex name
+     * @param screenName The screen name
+     * @param movieName The movie name
+     * @param showDate The show date
+     * @param showTime The show time
+     * @return numeric value (0:successfully add show,1:cineplex is null,2: 
+     * screen is null,3:movie is null,4:show already exists)
+     */
     public int addShow(String cineplexName, String screenName, String movieName, String showDate, String showTime) {
 
         CineplexEY cineplex = this.cineplexMgr.getCineplexByName(cineplexName);
@@ -82,6 +114,19 @@ public class ShowManager extends Manager implements BaseManager {
 
     }
 
+    /**
+     * Method to update show with other show time or movie name
+     * @param cineplexName The cineplex name
+     * @param screenName The screen name
+     * @param movieName The movie name
+     * @param showDate The show date
+     * @param showTime The show time
+     * @param newShowTime The new show time
+     * @param newMovieName The new movie name
+     * @return numeric value (0: successfully updated show,1:all parameter are empty,2:cineplex is empty/null,
+     * 3:screen name is empty/null,4:movie name is empty/null,5: matching show is null,
+     * 6:new movie name & new showtime is empty,7:new movie is null)
+     */
     public int updateShow(String cineplexName, String screenName, String movieName, String showDate, String showTime, String newShowTime, String newMovieName) {
   
         if (cineplexName.isEmpty() && screenName.isEmpty() && movieName.isEmpty() && showDate.isEmpty()) {
@@ -137,6 +182,21 @@ public class ShowManager extends Manager implements BaseManager {
         return 0;
     }
 
+    /**
+     * Method to remove show
+     * @param cineplexName The cineplex name
+     * @param screenName The screen name
+     * @param movieName The movie name
+     * @param showDate The show date
+     * @param showTime The show time
+     * @return numeric value:0: successfully remove show
+     * 1: all parameter empty
+     * 2: cineplex name and cineplex object is null
+     * 3: screen name is empty screen object is null
+     * 4: movie name is empty and movie object is null
+     * 5: matching show is null
+     * 
+     */
     public int removeShow(String cineplexName, String screenName, String movieName, String showDate, String showTime) {
 
 
@@ -178,6 +238,15 @@ public class ShowManager extends Manager implements BaseManager {
         return 0;
     }
 
+    /**
+     * Method to list show details
+     * @param cineplexName The cineplex name
+     * @param screenName The screen name
+     * @param movieName The movie name
+     * @param showDate The show date
+     * @param showTime The show time
+     * @return prints screen name, movie name, show date and time, empty seats
+     */
     public ArrayList<String> listShows(String cineplexName, String screenName, String movieName, String showDate, String showTime) 
     {
    
@@ -216,7 +285,10 @@ public class ShowManager extends Manager implements BaseManager {
         }
         return printLines;
       }
-   
+
+    /**
+     * @throws IOException If there's read error
+     */
     public void primeShow() throws IOException {
         String showSEPARATOR = "|";
         String ShowSeatSEPARATOR = "~";
@@ -285,6 +357,10 @@ public class ShowManager extends Manager implements BaseManager {
 
     }
 
+    /**
+     * Method to write show details to text file
+     * @throws IOException If there's write error
+     */
     public void writeShow() throws IOException {
         String showSEPARATOR = " | ";
         String ShowSeatSEPARATOR = " ~ ";
@@ -340,6 +416,15 @@ public class ShowManager extends Manager implements BaseManager {
 
     }
 
+	/**
+	 * Method to validate information for show boundary
+	 * @param cineplexName The cineplex name
+     * @param screenName The screen name
+     * @param movieName The movie name
+     * @param showDate The show date
+     * @param showTime The show time
+	 * @return numeric value (0:credible information,1:no values entered,2:cineplex not found,3:screen not found,4:movie not found)
+	 */
 	public int validateList(String cineplexName, String screenName, String movieName, String showDate,
 			String showTime) {
    if (cineplexName.isEmpty() && screenName.isEmpty() && movieName.isEmpty() && showDate.isEmpty()) {

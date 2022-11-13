@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 import java.util.UUID;
-
+/**
+ * A ShowEY Object
+ * 
+ * <p>A <code>ShowEY</code> object used 
+ * to store all parameters about shows
+ * </p>
+ * 
+ */
 
 public class ShowEY {
 	private String showID;
@@ -25,9 +32,18 @@ public class ShowEY {
 	private ScreenManager screenMgr;
 
 	/**
-	 *
-	 * @param showDate
-	 * @param showTime
+	 * Constructor for ShowEY object
+	 * @param showID The showID
+	 * @param movieID The movieID
+	 * @param cineplexId The cineplexID
+	 * @param screenID The screenID
+	 * @param showDate The show date
+	 * @param showTime The show time
+	 * @param emptySeats The number of empty seats
+	 * @param numberOfRows The number of rows
+	 * @param seatsPerRow The number of seats per row
+	 * @param movieMgr A movie manager object
+	 * @param screenMgr A screen manager object
 	 */
 	public ShowEY(String showID, String movieID, String cineplexId, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, MovieManager movieMgr, ScreenManager screenMgr) {
 		// TODO - implement Show.Show
@@ -91,54 +107,111 @@ public class ShowEY {
 		this.screen = this.screenMgr.getScreenByID(screenID);
 		this.showSeats = showSeats;
 	}
+	/**
+	 * Method to get the showID
+	 * @return The showID
+	 */
 	public String getShowID(){
 		return this.showID;
 	}
 
+	/**
+	 * Method to get the movieID
+	 * @return The movieID
+	 */
 	public String getMovieID() {
 		return this.movieID;
 	}
 
+	/**
+	 * Method to get the show date
+	 * @return The show date
+	 */
 	public String getShowDate() {
 		return this.showDate;
 	}
 
+	/**
+	 * Method to get the show time
+	 * @return The show time
+	 */
 	public String getShowTime() {
 		return this.showTime;
 	}
 	
-		public String getScreenID() {
+		
+	/**
+	 * Method to get the screenID
+	 * @return The screen ID
+	 */
+	public String getScreenID() {
 		return screenID;
 	}
+	/**
+	 * Method to get the screen object
+	 * @return The screenEY object
+	 */
 	public ScreenEY getScreen() {
 		return screen;
 	}
+	/**
+	 * Method to get the MovieEY object
+	 * @return The MovieEY object
+	 */
 	public MovieEY getMovie() {
 		return movie;
 	}
 
+	/**
+	 * Method to get number of rows
+	 * @return The number of rows
+	 */
 	public int getNumberOfRows() {
 		return this.numberOfRows;
 	}
+	/**
+	 * Method to get the number of seats per row
+	 * @return The number of seats per row
+	 */
 	public int getSeatsPerRow() {
 		return this.seatsPerRow;
 	}
+	/**
+	 * Method to get the cineplexID
+	 * @return The cineplexID
+	 */
 	public String getCineplexID() {
 		return cineplexID;
 	}
 
+	/**
+	 * Method to set the movieID
+	 * @param movieID The movieID
+	 */
 	public void setMovieID(String movieID) {
 		this.movieID = movieID;
 	}
 
+	/**
+	 * Method to get number of empty seats
+	 * @return The number of empty seats
+	 */
 	public int getEmptySeats() {
 		return this.emptySeats;
 	}
 
+	/**
+	 * Method to get the seat layout
+	 * @return The layout of the seats in arraylist
+	 */
 	public ArrayList<ShowSeatEY> getSeatLayout() {
 		return showSeats;
 	}
 
+	/**
+	 * Method to change the show time
+	 * @param showTime The show time to change into
+	 */
 	public void changeShowTime(String showTime) {
 		this.showTime = showTime;
 	}
@@ -150,7 +223,9 @@ public class ShowEY {
 	public void setShowSeats(ArrayList<ShowSeatEY> showSeats) {
 		this.showSeats = showSeats;
 	}
-
+	/**
+	 * Method to print the seat layout in the cineplex
+	 */
 	public ArrayList<String> ShowSeatLayout() {
 
 		ArrayList<String> lines = new ArrayList<String>();

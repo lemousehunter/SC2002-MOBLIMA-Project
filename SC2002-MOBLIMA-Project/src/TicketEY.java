@@ -1,7 +1,15 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * A TicketEY Object
+ * 
+ * <p>
+ * A <code>Ticket</code> object used 
+ * to store all parameters about tickets
+ * </p>
+ * 
+ */
 public class TicketEY {
     private MovieManager movieMgr;
     private double price;
@@ -20,10 +28,18 @@ public class TicketEY {
     private String bookingID;
 
     /**
-     * @param movieID
-     * @param userID
-     * @param screenID
-     * @param time
+     * The constructor for ticket object
+     * @param movieID The movieID
+     * @param userID The userID
+     * @param screenID The screenID
+     * @param date The date of the show
+     * @param time The time of the show
+     * @param seatId The seatID for the show
+     * @param price The price of the ticket
+     * @param bookingID The bookingID 
+     * @param holidayManager The holiday manager(controller) object 
+     * @param movieMgr The movie manager(controller) object
+     * @throws ParseException If there's parseException error
      */
     public TicketEY(String movieID, String userID, String screenID, String date, String time, String seatId, double price, String  bookingID, HolidayManager holidayManager, MovieManager movieMgr, ScreenManager screenMgr, MovieGoerManager moviegoerMgr, TicketPriceManager ticketPriceManager) throws ParseException {
         // Passing in controller instances from MainApp
@@ -48,37 +64,74 @@ public class TicketEY {
         }
     }
 
+    /**
+     * Method to get the movieID
+     * @return the movieID
+     */
     public String getMovieID() {
         return this.movieID;
     }
 
+    /**
+     * Method to get the userID
+     * @return The userID
+     */
     public String getUserID() {
         return this.userID;
     }
 
+    /**
+     * Method to get screenID
+     * @return the screenID
+     */
     public String getScreenID() {
         return  this.screenID;
     }
 
+    /**
+     * Method to get date
+     * @return the date
+     */
     public String getDate() {
         return this.date;
     }
 
+    /**
+     * Method to get time
+     * @return the time
+     */
     public String getTime() { return this.time; }
     
+    /**
+     * Method to get seatID
+     * @return the seatID
+     */
     public String getSeatId() {
         return seatId;
     }
 
+    /**
+     * Method to set price
+     * @param price The price 
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Method to get price
+     * @return the price
+     */
     public double getPrice() {
         return this.price;
     }
 
 
+    /**
+     * Method to compute price
+     * @return the price for the specific ticket
+     * @throws ParseException
+     */
     public double computePrice() throws ParseException {
         boolean isHoliday = this.holidayManager.isHoliday(this.date); // 1: holiday, 0: not holiday
         boolean isWeekend = this.holidayManager.getWeekend(this.date); // 1: weekend, 0: weekday

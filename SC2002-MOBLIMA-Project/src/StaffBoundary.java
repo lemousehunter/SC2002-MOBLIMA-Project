@@ -1,5 +1,13 @@
 import java.util.*;
-
+/**
+ * A Staff Boundary Object
+ * 
+ * <p>
+ * A <code>StaffBoundary</code> object used 
+ *  process all Staff input and output
+ * </p>
+ * 
+ */
 public class StaffBoundary extends Boundary implements BaseBoundary {
     // Managers
     BookingManager bookingManager;
@@ -14,6 +22,9 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
     TicketPriceBoundary ticketPriceBoundary;
     HolidayBoundary holidayBoundary;
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.bookingManager = this.getCentralManager().getBookingMgr();
@@ -22,6 +33,9 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
 
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setBoundaries() {
         CentralManagerEY centralManager = this.getCentralManager();
@@ -32,9 +46,16 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
         this.ticketPriceBoundary = centralManager.getTicketPriceBoundary();
         this.holidayBoundary = centralManager.getHolidayBoundary();
     }
+    /**
+     * Constructor for StaffBoundary object
+     */
     public StaffBoundary() {
     }
 
+    /**
+     * Method to print main menu and get main menu choice
+     * @return The main menu choice
+     */
     public int getMainMenuChoice() {
 
       return this.getInputInt(
@@ -53,6 +74,11 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
       );
     }
 
+    /**
+     * Method to perform staff operations based on main menu choice
+     * (manage cineplex, screen,movies,shows, ticket prices, holidays)
+     * (list top 5 movies based on sales and ratings, exit application)
+     */
     public void staffOperations() {
         int choice = 0;
         while (choice != 9) {
@@ -96,6 +122,10 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
         }
     }
 
+    /**
+     * Method to print top 5 movies by viewer rating
+     * @param top5movies The top 5 movies based on viewer rating
+     */
     public void Top5MovPrint(ArrayList<String> top5movies)
     {
       if(top5movies!=null&&top5movies.size()==5)
