@@ -214,7 +214,7 @@ public class MoblimaApp {
                         break;
                     }
                     System.out.print("Enter Email ID: ");
-                    String emalid = sc.nextLine();
+                    String emailID = sc.nextLine();
                     System.out.print("Enter Mobile #: ");
                     String  mobileNumber = sc.nextLine();
                     System.out.print("Enter Age     : ");
@@ -222,7 +222,7 @@ public class MoblimaApp {
                     ArrayList<String> bookings = new ArrayList<String>();
 
                     String userid = UUID.randomUUID().toString();
-                    movieGoer = new MovieGoerEY(userid,userName,emalid,mobileNumber,age,bookings);
+                    movieGoer = new MovieGoerEY(userid,userName,emailID,mobileNumber,age,bookings);
                     this.centralManager.getMasterUsers().add(movieGoer);
                     System.out.println("\n" + userName + " Successfully Registered");
 
