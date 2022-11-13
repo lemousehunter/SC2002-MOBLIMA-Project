@@ -18,10 +18,14 @@ public class ReviewEY {
 	private double scale;
 	private String userID;
 	private String movieID;
+	/**
+	 * Holds the ID of the review object
+	 */
 	String reviewID;
 	
 	
 	/**
+	 * Constructor for ReviewEy object(require 4 parameter)
 	 * @param userID The User ID of the reviewer
 	 * @param movieID The Movie ID of the movie being reviewed
 	 * @param scale The rating being given to the movie
@@ -35,6 +39,7 @@ public class ReviewEY {
 		reviewID =UUID.randomUUID().toString();
 	}
 	/**
+	 * Constructor for ReviewEY object (require 5 parameter)
 	 * @param viewerRatingID The ID of the rating
 	 * @param userID The User ID of the reviewer
 	 * @param movieID The Movie ID of the movie being reviewedD

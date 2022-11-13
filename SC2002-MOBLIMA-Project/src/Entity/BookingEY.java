@@ -57,17 +57,22 @@ public class BookingEY {
 
 
     /**
-     * Creates new booking with the given attributes
-     * 
-     * @param bookingID This Booking ID
-     * @param userID This User ID
-     * @param movieID This Movie ID
-     * @param screenID This Screen ID
-     * @param cinemaID This Cinema ID
-     * @param date This Date
-     * @param time This Time
-     * @param seatIds This SeatIds
-     * @param bookingAmount This total price
+	* Create new booking with the given attributes
+     * @param bookingID The bookingID
+     * @param userID The userID
+     * @param movieID The movieID
+     * @param screenID The screenID
+     * @param cinemaID The cinemaID
+     * @param date The date
+     * @param time The time
+     * @param seatIds The seatIDs
+     * @param bookingAmount The booking amount
+     * @param holidayManager The holiday manager
+     * @param movieMgr The movie Manager
+     * @param screenMgr The screen Manager
+     * @param movieGoerMgr The MovieGoer manager
+     * @param ticketPriceManager The ticket price manager
+     * @throws ParseException If unable to create object
      */
     public BookingEY(String bookingID, String userID, String movieID, String screenID, String cinemaID, String date, String time, ArrayList<String>  seatIds, double bookingAmount, HolidayManager holidayManager, MovieManager movieMgr, ScreenManager screenMgr, MovieGoerManager movieGoerMgr, TicketPriceManager ticketPriceManager) throws ParseException {
         this.bookingID = bookingID;

@@ -13,6 +13,10 @@ public class ShowSeatEY extends SeatEY {
 
 	private boolean occupied;
 
+	/**
+	 * Method to set seat occupied
+	 * @param occupied true if occupied else false
+	 */
 	public void setOccupied(boolean occupied) {
         this.occupied = occupied;
     }

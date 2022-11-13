@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 
 public class TicketPriceBoundary extends Boundary implements BaseBoundary {
+    /**
+     * contains ticket price manager object to process all ticket price objects
+     */
     TicketPriceManager ticketPriceManager;
 
     /**

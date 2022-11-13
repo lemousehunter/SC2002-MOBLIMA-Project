@@ -15,12 +15,22 @@ import java.util.UUID;
 
 public class UserEY {
 
+	/**
+	 * A user type enum that has Moviegoer type and Staff type
+	 */
 	private UserTypeEN userType;
+	/**
+	 * To store username
+	 */
 	private String userName;
+	/**
+	 * to store user ID
+	 */
 	private String userID;
 
 	
 	/**
+	 * Constructor for User object(require 2 parameter)
 	 * @param userType type of user (Moviegoer or staff)
 	 * @param userName user name of the user
 	 */
@@ -30,6 +40,7 @@ public class UserEY {
 		this.userName = userName;
 	}
 	/**
+	 * Constructor for User object(require 3 parameter)
 	 * @param userID user ID of the user
 	 * @param userType type of user (Moviegoer or staff)
 	 * @param userName	user name of the user

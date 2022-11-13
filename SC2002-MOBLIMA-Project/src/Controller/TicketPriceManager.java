@@ -20,8 +20,14 @@ import java.util.*;
  */
 public class TicketPriceManager extends Manager implements BaseManager {
     // managers
+    /**
+     * Private IOManager object
+     */
     private IoManager ioManager;
 
+    /**
+     * Master ticket prices array list
+     */
     private ArrayList<TicketPrice> masterTicketPrices;
 
     /**
@@ -72,6 +78,14 @@ public class TicketPriceManager extends Manager implements BaseManager {
         return 'I';
     }
 
+    /**
+     * Method to get ticket price
+     * @param dayType The dateType (HOLIDAY or WEEKEND)
+     * @param screenClass The type of screen class (PLATINUM_MOVIE_SUITES or REGULAR_SCREEN)
+     * @param movieGoerAge The movie goer age
+     * @param movieType The movie type (Blockbuster/3D/Documentary)
+     * @return The ticket price
+     */
     public double getTicketPrice(String dayType, String screenClass, String movieGoerAge, String movieType)
     {
         for (TicketPrice ticketPrice : this.masterTicketPrices) {

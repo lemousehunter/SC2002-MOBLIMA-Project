@@ -131,10 +131,12 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     
-    /** 
-     * Method to get show dates
-     * 
-     * @return the show dates
+   
+    /**
+     * Method to get show date from user
+     * @param cineplex The cineplexID
+     * @param movieID The movieID
+     * @return The show dates
      */
     public String getShowDate(String cineplex, String movieID) { // prints out available show dates, gets show date from user
         this.print("Please enter the corresponding index of the date you would like to book");
@@ -144,9 +146,13 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
     }
 
     
-    /** 
-     * Method to get show time
-     * @return show time
+  
+    /**
+     * Method to get show time from user
+     * @param cineplex The cineplexID
+     * @param movieID The movieID
+     * @param showDate The show date
+     * @return The show time
      */
     public ArrayList<String> getShowTime(String cineplex, String movieID, String showDate) { // prints out available show timings, returns showTime, screenID
         this.print("Please enter the corresponding index of the time you would like to book");

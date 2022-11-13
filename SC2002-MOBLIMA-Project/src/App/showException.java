@@ -1,5 +1,11 @@
 package App;
 
+
+
+/**
+ * A showException class that extends RuntimeException
+ *
+ */
 public class showException extends RuntimeException {
 	
 	/**

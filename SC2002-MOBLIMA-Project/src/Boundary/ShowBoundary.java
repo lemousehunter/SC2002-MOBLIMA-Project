@@ -12,6 +12,9 @@ import java.util.ArrayList;
 	 * </p>
 	 */
 public class ShowBoundary extends Boundary implements BaseBoundary{
+    /**
+     * to contain show manager object to process all show related objects
+     */
     ShowManager showManager;
     /**
      *{@inheritDoc}
@@ -161,6 +164,11 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
 
     }
 
+    /**
+     * Method to get cineplex name
+     * @param filter The flag to filter
+     * @return The cineplex name
+     */
     private String getCineplexName(Boolean filter) {
         if (filter) {
             String choice = this.getInputLine("Do you want to filter by Cineplex  ?  (Y | N) :  ");
@@ -172,6 +180,10 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         return this.getInputLine("\nPlease enter Cineplex Name : ");
     }
 
+    /**
+     * Method to perform operations based on user menu choice
+     * 
+     */
     public void showOperations() {
         int showChoice = 0;
         while (showChoice != 5) {
@@ -196,6 +208,9 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
 
     }
 
+    /**
+     * Method to list shows for filtering
+     */
     private void listShows() {
         boolean filter = true;
         String cineplexName ="", screenName ="", movieName ="", showDate ="",showTime =""; 
@@ -232,6 +247,9 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         }
     }
 
+    /**
+     * Method for user to remove a show
+     */
     private void removeShow() {
         boolean filter = false;
         String cineplexName = this.getCineplexName(filter);
@@ -276,6 +294,9 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
             
     
 
+    /**
+     * Method for user to update show
+     */
     private void updateShow() {
         boolean filter = false;
         String cineplexName = this.getCineplexName(filter);
@@ -323,6 +344,10 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
             }
     }
 
+    /**
+     * Method to display menu and get user choice
+     * @return The user choice
+     */
     public int getShowMenuChoice() {
 
         return this.getInputInt(
@@ -337,6 +362,11 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         );
       }
 
+    /**
+     * Method to print show dates
+     * @param cineplexID The cineplexID
+     * @param movieID The movieID
+     */
     public void printShowDates(String cineplexID, String movieID) {
         int count = 1;
         this.println("\nList of Show Dates :\n");
@@ -347,6 +377,12 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         }
     }
 
+    /**
+     * Method to print show times
+     * @param cineplexID The cineplexID
+     * @param movieID The movieID
+     * @param showDate The show date
+     */
     public void printShowTimes(String cineplexID, String movieID, String showDate) {
 
         int count = 1;
@@ -358,6 +394,10 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         }
     }
 
+    /**
+     * Method to show seat layout
+     * @param showID The showID
+     */
     public void ShowSeatLayout(String showID) {
         int count = 1;
         this.println("\nList of Show Times and Screen :\n");

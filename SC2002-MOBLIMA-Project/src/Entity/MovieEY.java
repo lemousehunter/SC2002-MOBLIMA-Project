@@ -30,6 +30,10 @@ public class MovieEY {
 	private ArrayList<ReviewEY> reviews;
 	
 
+	/**
+	 * Method to set reviews
+	 * @param reviews The review object
+	 */
 	public void setReviews(ArrayList<ReviewEY> reviews) {
 		this.reviews = reviews;
 	}
@@ -290,10 +294,17 @@ public class MovieEY {
 		this.ratingsID.add(ratingsID);
 	}
 
+	/**
+	 * get method to get the movie type
+	 * @return movie type (BLOCKBUSTER,THREEDIMENSION,DOCUMENTAR)
+	 */
 	public MovieTypeEN getMovieType() {
 		return movieType;
 	}
 
+	/**
+	 * Method return a string representation/ also overriding toString method 
+	 */
 	public String toString() {
 		return   "\n" + this.name + "\n\n" + 
 				"Language     : " + this.movieLanguage + "\n" + 

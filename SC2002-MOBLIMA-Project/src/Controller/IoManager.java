@@ -8,24 +8,52 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+
+/**
+ * An IOManager Object
+ * 
+ * <p>
+ * An <code>IOManager</code> object used 
+ *  process input and output
+ * </p>
+ * 
+ */
 public class IoManager extends Manager implements BaseManager {
 
-  private ArrayList<String> masterHolidaysList;
+  /**
+ * A master list of holidays
+ */
+private ArrayList<String> masterHolidaysList;
 
-  public IoManager() {
+  /**
+ * Constructor for IOmanager
+ */
+public IoManager() {
   }
 
-  @Override
+  /**
+ *{@inheritDoc}
+ */
+@Override
   public void setManagers() {
     CentralManagerEY centralMgr = this.getCentralManager();
   }
 
-  @Override
+  /**
+ *{@inheritDoc}
+ */
+@Override
   public void setMasterLists() {
 
   }
 
-  public static void write(String fileName, List data) throws IOException {
+/**
+ * Method to write data to file
+ * @param fileName The file name
+ * @param data The data to be written
+ * @throws IOException If there's write error
+ */
+public static void write(String fileName, List data) throws IOException {
 
     PrintWriter out = new PrintWriter(new FileWriter(fileName));
 
@@ -38,7 +66,9 @@ public class IoManager extends Manager implements BaseManager {
     }
   }
 
-  /** Read the contents of the given file. */
+  /** Read the contents of the given file. 
+  * @param fileName The file name
+  */
   public static List read(String fileName) throws IOException {
     List data = new ArrayList();
     Scanner scanner = new Scanner(new FileInputStream(fileName));

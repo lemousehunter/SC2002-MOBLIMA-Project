@@ -92,7 +92,7 @@ public class CineplexManager extends Manager implements BaseManager {
     
     /** 
      * Method to search for cineplex by name
-     * @param name
+     * @param name The cineplex name
      * @return cineplex object which matches the provided name, else returns null
      */
     public CineplexEY searchCineplexByName(String name) { // returns cineplex object which matches the provided name, else returns null
@@ -134,7 +134,7 @@ public class CineplexManager extends Manager implements BaseManager {
     
     /** 
      * Method to search for cineplex by name
-     * @param cineplexName
+     * @param cineplexName The cineplex name
      * @return cineplex object which matches the provided name, else returns null
      */
     public CineplexEY getCineplexByName(String cineplexName) {

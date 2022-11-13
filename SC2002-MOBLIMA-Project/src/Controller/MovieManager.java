@@ -12,7 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-
+/**
+ * A MovieManager object
+ * <p>
+ * A <code>MovieManager</code> object contains all the parameters and methods required
+ * to communicate between entity and boundary of Movie Class
+ * </p>
+ */
 public class MovieManager extends Manager implements BaseManager {
 
     // managers
@@ -23,21 +29,35 @@ public class MovieManager extends Manager implements BaseManager {
     private ArrayList<ReviewEY> masterRatings;
 
 
+    /**
+     * Constructor for movie manager
+     */
     public MovieManager () {
 
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
     }
     
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setMasterLists() {
         this.masterMovies = this.getCentralManager().getMasterMovies();
         this.masterRatings= this.getCentralManager().getMasterRatings();             
     }
 
+    /**
+     * Method to get movie object by movieID
+     * @param movieID The movieID
+     * @return The Movie object
+     */
     public MovieEY getMovieByID(String movieID) { // returns movie object associated with specified movieID, else return null
         for(MovieEY m: this.masterMovies) {
             if(movieID.equals(m.getMovieID()))
@@ -47,6 +67,18 @@ public class MovieManager extends Manager implements BaseManager {
     }
 
 
+    /**
+     * Method to add movie
+     * @param movieName The movie name
+     * @param language The movie language
+     * @param movieType The movie type
+     * @param showStatus The showing status of the movie
+     * @param synopsis The synopsis of the movie
+     * @param movieRating The restriction type
+     * @param director The director of the movie
+     * @param cast The cast of the movie
+     * @return True if successfully added, False if movie already exists
+     */
     public Boolean addMovie(String movieName, String language, String movieType, String showStatus, String synopsis, String movieRating, String director, ArrayList<String> cast) {
         // Check if movie already exits
 
@@ -62,6 +94,18 @@ public class MovieManager extends Manager implements BaseManager {
         return true;
     }
 
+    /**
+     * Method to update movie attributes
+     * @param movieName The movie name
+     * @param language The movie language
+     * @param movieType The movie type
+     * @param showStatus The showing status of the movie
+     * @param synopsis The synopsis of the movie
+     * @param movieRating The restriction type
+     * @param director The director of the movie
+     * @param cast The cast of the movie
+     * @return True if successfully update, False if search error
+     */
     public Boolean updateMovie(String movieName, String language, String movieType, String movieRating, String showStatus, String synopsis, String director, ArrayList<String> cast) {
         // Check if movie already exits
 
@@ -86,6 +130,12 @@ public class MovieManager extends Manager implements BaseManager {
 
         return true; // success
     }
+    /**
+     * Method to update movie status
+     * @param movieName The movie name
+     * @param showStatus The show status (COMINGSOON,PREVIEW,SHOWING,ENDOFSHOWING)
+     * @return True if successfully updated the showing status, False if search error
+     */
     public boolean updateMovieStatus(String movieName, String showStatus) { // returns false if no movie found, else returns true after updating
         // Check if movie already exits
         MovieEY searchMovie = null;
@@ -102,6 +152,11 @@ public class MovieManager extends Manager implements BaseManager {
         return true;
     }
 
+    /**
+     * Method to search for movie object based on name
+     * @param movieName The movie name
+     * @return The movie object
+     */
     public MovieEY searchMovie(String movieName) {
         MovieEY searchMovie = null;
         for (MovieEY movie : this.masterMovies)
@@ -116,6 +171,10 @@ public class MovieManager extends Manager implements BaseManager {
         return searchMovie;
     }
 
+    /**
+     * Method to get list of movies that have SHOWING/PREVIEW status
+     * @return The list of details
+     */
     public ArrayList<String> getCurrentMoviesLines() {
         int count = 1;
         ArrayList<String> lines = new ArrayList<String>();
@@ -129,6 +188,10 @@ public class MovieManager extends Manager implements BaseManager {
         return lines;
     }
 
+    /**
+     * Method to get current movies that have SHOWING/PREVIEW status
+     * @return The movies
+     */
     public ArrayList<MovieEY> getCurrentMovies() {
         ArrayList<MovieEY> movies = new ArrayList<MovieEY>();
         for (MovieEY movie: this.masterMovies) {
@@ -141,6 +204,10 @@ public class MovieManager extends Manager implements BaseManager {
         return movies;
     }
 
+    /**
+     * Method to get all movies 
+     * @return The list of all movies with movie name and showing status
+     */
     public ArrayList<String> getAllMovies() {
         int count = 1;
         ArrayList<String> lines = new ArrayList<String>();
@@ -151,10 +218,19 @@ public class MovieManager extends Manager implements BaseManager {
         return lines;
     }
 
+    /**
+     * Method to get movieID from movies that are SHOWING/PREVIEW
+     * @param idx the index of the movie
+     * @return The movieID
+     */
     public String getMovieIDFromCurrentShowingIDX(Integer idx) {
         return this.getCurrentMovies().get(idx-1).getMovieID();
     }
-
+	/**
+     * Method to get movieID from all Current Showing or Preview movies
+     * @param idx the index of the movie
+     * @return The movieID
+     */
     public String getMovieIDFromAllShowingIDX(Integer idx) {
         
         if (masterMovies.get(idx-1).getShowStatus().toString().equals(ShowStatusEN.ENDOFSHOWING.toString()) ||
@@ -175,14 +251,28 @@ public class MovieManager extends Manager implements BaseManager {
         return null;    
     }
 
+    /**
+     * Method to get movie name from movieID
+     * @param movieID The movieID
+     * @return The movie name
+     */
     public String ID2Name(String movieID) {
         return this.getMovieByID(movieID).getName();
     }
 
+    /**
+     * Method to get movieID from movie name
+     * @param movieName The movie name
+     * @return The movieID
+     */
     public String Name2ID(String movieName) {
         return this.getMovieByName(movieName).getMovieID();
     }
 
+    /**
+     * Method to read movie objects to text file
+     * @throws IOException If there's read error
+     */
     public void primeMovie() throws IOException {
         String moviesEPARATOR = "|";
         String castSEPERATOR = "~";
@@ -227,6 +317,10 @@ public class MovieManager extends Manager implements BaseManager {
 
         }
     }
+    /**
+     * Method to write movie objects to text file
+     * @throws IOException If there's write error
+     */
     public void writeMovie() throws IOException {
         String moviesEPARATOR = " | ";
         String castSEPARATOR = " ~ ";

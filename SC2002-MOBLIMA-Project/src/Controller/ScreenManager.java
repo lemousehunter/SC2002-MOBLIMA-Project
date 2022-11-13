@@ -10,6 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * A ScreenManager object
+ * <p>
+ * A <code>ScreenManager</code> object contains all the parameters and methods required
+ * to communicate between entity and boundary of Screen Class
+ * </p>
+ */
+
 public class ScreenManager extends Manager implements BaseManager {
     // managers
     private IoManager ioManager;
@@ -18,22 +26,36 @@ public class ScreenManager extends Manager implements BaseManager {
     private ArrayList<ScreenEY> masterScreens;
     private CineplexManager cineplexManager;
 
+	/**
+	 * Constructor for screen manager
+	 */
 	public ScreenManager() {
 
     }
 
+	/**
+	 *{@inheritDoc}
+	 */
 	@Override
 	public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
         this.cineplexManager = this.getCentralManager().getCineplexMgr();
 	}
 
+	/**
+	 *{@inheritDoc}
+	 */
 	@Override
 	public void setMasterLists() {
 		this.masterCineplexes = this.getCentralManager().getMasterCineplexes();
 		this.masterScreens = this.getCentralManager().getMasterScreens();
 	}
 
+	/**
+	 * Method to get screenID
+	 * @param screenID The screenID
+	 * @return The screen object
+	 */
 	public ScreenEY getScreenByID(String screenID) {
 		for(ScreenEY s:this.masterScreens) {
 			if(screenID.equals(s.getScreenID())){
@@ -44,6 +66,11 @@ public class ScreenManager extends Manager implements BaseManager {
 		return null;
 	}
 
+    /**
+     * Method to get screen name by screenID
+     * @param screenID The screenID
+     * @return The screen name
+     */
     public String getScreenNameByID(String screenID) {
 		for(ScreenEY s:this.masterScreens) {
 			if(screenID.equals(s.getScreenID())){
@@ -54,6 +81,15 @@ public class ScreenManager extends Manager implements BaseManager {
 		return null;
 	}
 
+	/**
+	 * Method to add screen
+	 * @param cineplexName The cineplex name
+	 * @param screenName The screen name
+	 * @param screenClass the screen class
+	 * @param numRows The number of rows
+	 * @param seatsPerRow The number of seats per row
+	 * @return numeric value(0:duplicate screen,1: add screen successful,-1: cineplexID not found)
+	 */
 	public int addScreen(String cineplexName, String screenName, String screenClass, int numRows, int seatsPerRow) { // -1 for cineplex not found, 0 for duplicate error, 1 for success
 		String cineplexID = null;
 		for(CineplexEY c: this.masterCineplexes) {
@@ -80,6 +116,10 @@ public class ScreenManager extends Manager implements BaseManager {
 
 	}
 
+	/**
+	 * Method to list all screens
+	 * @return The list of screen name
+	 */
 	public ArrayList<String> listAllScreens() {
 		int idx = 1;
 		ArrayList<String> lines = new ArrayList<String>();
@@ -90,10 +130,20 @@ public class ScreenManager extends Manager implements BaseManager {
 		return lines;
 	}
 
+	/**
+	 * Method to convert index to screenID
+	 * @param idx An index
+	 * @return screenID
+	 */
 	public String convIDX2screenID(int idx) {
 		return this.masterScreens.get(idx - 1).getScreenID();
 	}
 
+	/**
+	 * Method to search screen
+	 * @param screenName The screen name
+	 * @return The screen object
+	 */
 	public ScreenEY searchScreen(String screenName) { // returns screen matching specified screenName, else returns null
 		for(ScreenEY s: this.masterScreens) {
 			if(s.getScreenName().equalsIgnoreCase(screenName))
@@ -104,6 +154,12 @@ public class ScreenManager extends Manager implements BaseManager {
 		return null;
 	}
 
+    /**
+     * Method to get cineplex screen by name
+     * @param cineplex The cineplex object
+     * @param screenName The screen name
+     * @return The ScreenEY object
+     */
     public ScreenEY getCineplexScreenByName(CineplexEY cineplex, String screenName) {
         if (screenName.isEmpty()) { return null;}
         for(ScreenEY s: this.masterScreens) {
@@ -115,6 +171,10 @@ public class ScreenManager extends Manager implements BaseManager {
         return null;
     }
 
+	/**
+	 * Method to read screen information from text file
+	 * @throws IOException If there's read error
+	 */
 	public void primeScreen() throws IOException {
         String screenEPARATOR = "|";
         String SeatSEPARATOR = "~";
@@ -155,6 +215,10 @@ public class ScreenManager extends Manager implements BaseManager {
             this.masterScreens.add(screen);
         }
     }
+	/**
+	 * Method to write screen information to text file
+	 * @throws IOException If there's read error
+	 */
 	public void writeScreen() throws IOException {
         String screenEPARATOR = " | ";
         String seatSEPARATOR = "~";

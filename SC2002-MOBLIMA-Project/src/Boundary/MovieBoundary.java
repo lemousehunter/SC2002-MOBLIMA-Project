@@ -8,16 +8,39 @@ import Entity.ReviewEY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * A Movie Boundary Object
+ * 
+ * <p>
+ * A <code>MovieBoundary</code> object used 
+ *  process all Movie input and output
+ * </p>
+ * 
+ */
 public class MovieBoundary extends Boundary implements BaseBoundary {
     // managers
+    /**
+     * A private MovieManager object 
+     */
     private MovieManager movieManager;
+    /**
+     * A private ReviewManager object
+     */
     private ReviewManager reviewManager;
+    /**
+     * A private ShowManager  object
+     */
     private ShowManager showMgr;
 
     // boundaries
+    /**
+     * A private ReviewBoundary object
+     */
     private ReviewBoundary reviewBoundary;
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.reviewManager = this.getCentralManager().getReviewMgr();
@@ -25,11 +48,18 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         this.showMgr = this. getCentralManager().getShowMgr();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setBoundaries() {
         this.reviewBoundary = this.getCentralManager().getReviewBoundary();
     }
 
+    /**
+     * Method to view movie details
+     * @param movieID The movieID
+     */
     public void viewMovieDetails(String movieID) {
         MovieEY movie = this.movieManager.getMovieByID(movieID);
         this.println("Movie Name: " + movie.getName());
@@ -52,6 +82,9 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         this.reviewBoundary.AvgRatingPrint(movieID);
     }
 
+	/**
+     * Method to print movie list
+     */
     public void printMovieList(boolean askCurrent) { // if askCurrent, then ask if user wants to view current movies only, else defaults to true
         boolean currentlyShowing;
         if (askCurrent) {
@@ -77,14 +110,27 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         }
     }
 
+    /**
+     * Method to get movie name from user
+     * @return The movie name
+     */
     public String getMovieName() {
         return this.getInputLine("Enter Movie Name: ");
     }
 
+    /**
+     * method to get partial or full movie name from user
+     * @return The movie name
+     */
     public String getMoviePartName() {
         return this.getInputLine("Enter Movie Name (Partial starting with or Full Name) : ");
     }
 
+    /**
+     * Method to update movie language from user
+     * @param insertUpdateFlag The update flag indicator
+     * @return The movie language
+     */
     public String getLanguage(char insertUpdateFlag) { // returns language if insert or if update and y else return null
         if (insertUpdateFlag == 'U') {
             String choice = this.getInputLine("Do you want to update Movie Language ?  (Y | N) ").toUpperCase();
@@ -96,6 +142,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return this.getInputLine("Enter Movie Language: ");
     }
 
+    /**
+     * Method get movie type from user
+     * @param insertUpdateFlag update flag indicator
+     * @return The movie type (BLOCKBUSTER,THREEDIMENSION,DOCUMENTARY)
+     */
     public String getMovieType(char insertUpdateFlag) {
 
         if (insertUpdateFlag == 'U') {
@@ -124,6 +175,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return movieType;
     }
 
+    /**
+     * Method to get movie restriction rating from user
+     * @param insertUpdateFlag An update flag indicator
+     * @return The movie restriction rating
+     */
     public String getMovieRating(char insertUpdateFlag) {
 
         if (insertUpdateFlag == 'U') {
@@ -148,6 +204,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return movieRating;
     }
 
+    /**
+     * Method to get show status from user
+     * @param insertUpdateFlag An update flag indicator
+     * @return The movie showing status
+     */
     public String getShowStatus(char insertUpdateFlag) {
 
         if (insertUpdateFlag == 'U') {
@@ -178,6 +239,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return showStatus;
     }
 
+    /**
+     * Method to get the movie synopsis from the user
+     * @param insertUpdateFlag An update flag indicator
+     * @return The movie synopsis
+     */
     public String getSynopsis(char insertUpdateFlag) {
 
         if (insertUpdateFlag == 'U') {
@@ -191,6 +257,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return this.getInputLine("Enter Movie Synopsis: ");
     }
 
+    /**
+     * Method to get director from the user
+     * @param insertUpdateFlag An update flag indicator
+     * @return The movie director
+     */
     public String getDirector(char insertUpdateFlag) {
 
         if (insertUpdateFlag == 'U') {
@@ -203,6 +274,11 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return this.getInputLine("Enter Movie Director Name: ");
     }
 
+    /**
+     * Method to get cast details from user
+     * @param insertUpdateFlag An update flag indicator
+     * @return The cast of the movie
+     */
     public ArrayList<String> getCast(char insertUpdateFlag) {
 
         if (insertUpdateFlag == 'U') {
@@ -215,11 +291,19 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return new ArrayList<String>(Arrays.asList(castString.split(",")));
     }
 
+    /**
+     * Method to implement flag to view currently showing movies only 
+     * @return True if "y" else is False
+     */
     public Boolean getCurrentlyShowing() {
         String currentlyShowing = this.getInputLine("Do you want to see Current Showing Movies ONLY : (Y | N)  : ");
         return currentlyShowing.equalsIgnoreCase("Y");
     }
 
+    /**
+     * Method to display user menu and get user selection
+     * @return The user selection
+     */
     public int getMovieMenuChoice() {
         int choice = -1;
         choice = this.getInputInt(
@@ -240,6 +324,10 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         return choice;
     }
 
+    /**
+     * Method to get movie update/add details details
+     * @param insertUpdateFlag An update flag indicator
+     */
     public void getDetails(char insertUpdateFlag) {
         String movieName = this.getMovieName();
         movieName = this.getScanner().nextLine();
@@ -274,7 +362,10 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
             }
         }
     }
-
+	/**
+	* Method to list all shows
+	*
+	*/
     public void listAllShows() {
         String movieName = this.getMovieName();
         MovieEY movie = this.movieManager.searchMovie(movieName);
@@ -284,7 +375,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
 
         }
     }
-
+	/**Method to search for a movie and print it*/
     public void searchMovie() {
         String movieName = this.getMoviePartName();
         MovieEY movie = this.movieManager.searchMovie(movieName);
@@ -294,7 +385,9 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
         }
         this.println(movie.toString());
     }
-
+/**
+     * Method to perform movie movie menu operations
+     */
     public void movieOperations() {
         int movieChoice = 0;
         while (movieChoice != 6) {

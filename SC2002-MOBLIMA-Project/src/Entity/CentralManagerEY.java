@@ -754,6 +754,10 @@ public class CentralManagerEY {
     }
 
 
+    /**
+     * Method to set get MovieGoerBoundary object
+     * @return The movieGoer boundary object
+     */
     public MovieGoerBoundary getMovieGoerBoundary() {
         return movieGoerBoundary;
     }

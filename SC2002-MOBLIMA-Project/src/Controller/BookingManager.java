@@ -150,6 +150,11 @@ public class BookingManager extends Manager implements BaseManager {
     }
 
 
+/**
+* Method to return total sales of a particular movie
+* @param movieID The movie ID
+* @return the total sales
+*/
     public double getTotalSales(String movieID) {
         double sales = 0;
         for (BookingEY booking: this.masterBookings) {

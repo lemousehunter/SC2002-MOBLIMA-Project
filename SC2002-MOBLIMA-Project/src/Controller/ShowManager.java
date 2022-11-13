@@ -31,8 +31,17 @@ public class ShowManager extends Manager implements BaseManager {
     // managers
     private IoManager ioManager;
 
+    /**
+     * contains screen manager object to process screen objects
+     */
     ScreenManager screenMgr;
+    /**
+     * contains movie manager object to process movie objects
+     */
     MovieManager movieMgr;
+    /**
+     * contains cineplex manager object to process cineplex objects
+     */
     CineplexManager cineplexMgr;
 
     /**
@@ -287,6 +296,7 @@ public class ShowManager extends Manager implements BaseManager {
       }
 
     /**
+     * Method to read show details from text file
      * @throws IOException If there's read error
      */
     public void primeShow() throws IOException {
@@ -449,6 +459,13 @@ public class ShowManager extends Manager implements BaseManager {
 		return 0;
 	}
 
+    /**
+     * Method to get showID from show date
+     * @param cineplexID The cineplexID
+     * @param movieID The movieID
+     * @param viewShow The user's choice of show
+     * @return The show date as the showID
+     */
     public String getShowIDFromShowDateIDX(String cineplexID, String movieID, int viewShow) {
         
         int count = 0;
@@ -467,6 +484,12 @@ public class ShowManager extends Manager implements BaseManager {
         return "";
     }
 
+    /**
+     * Method to get show date for a movie at A cineplex
+     * @param cineplexID The cineplexID
+     * @param movieID The movieID
+     * @return The list of show date for a movie at a cineplex
+     */
     public ArrayList<String> getShowDateForMovieAtCineplex(String cineplexID, String movieID) {
         ArrayList<String>  lines = new ArrayList<String> ();
         int count = 0;
@@ -483,6 +506,14 @@ public class ShowManager extends Manager implements BaseManager {
         return lines;
     }
 
+    /**
+     * Method to get showID from show time index
+     * @param cineplexID The cineplexID
+     * @param movieID The movieID
+     * @param showDate The show date
+     * @param viewShow The user choice of show
+     * @return The arraylist containing show time,screenID,showID and screenID
+     */
     public ArrayList<String> getShowIDFromShowTimeIDX(String cineplexID, String movieID, String showDate, int viewShow) {
         int count = 0;
         ArrayList<String>  showDateScreen = new ArrayList<String> ();
@@ -507,6 +538,13 @@ public class ShowManager extends Manager implements BaseManager {
             return null;
         }
 
+    /**
+     * Method to get show time for a movie at a cineplex
+     * @param cineplexID The cineplex ID
+     * @param movieID The movie ID
+     * @param showDate The show date
+     * @return The list of movie show time and screen names in a cineplex 
+     */
     public ArrayList<String>  getShowTimeForMovieAtCineplex(String cineplexID, String movieID, String showDate) {
         ArrayList<String>  lines = new ArrayList<String> ();
         int count = 0;
@@ -524,6 +562,11 @@ public class ShowManager extends Manager implements BaseManager {
         return lines;    
     }
 
+    /**
+     * Method to showSeatLayout
+     * @param showID The showID
+     * @return The seat layout for a show
+     */
     public ArrayList<String> ShowSeatLayout(String showID) {
         for (ShowEY show : masterShows)
         {
@@ -536,6 +579,11 @@ public class ShowManager extends Manager implements BaseManager {
         return null;
     }
 
+    /**
+     * Method set seat to occupied
+     * @param showID The showID
+     * @param seatIDs The seatIDs
+     */
     public void setSeatOccupied(String showID, ArrayList<String> seatIDs) {
         ShowEY  show = this.getShowbyID(showID);
         ArrayList<ShowSeatEY> showSeats = show.getShowSeats();
@@ -549,6 +597,11 @@ public class ShowManager extends Manager implements BaseManager {
 
     }
 
+    /**
+     * Method to get show by showID
+     * @param showID The showID
+     * @return The show object
+     */
     private ShowEY getShowbyID(String showID) {
         for (ShowEY show : masterShows){
             if (show.getShowID().equals(showID)){
@@ -559,7 +612,11 @@ public class ShowManager extends Manager implements BaseManager {
         return null;
 
     }
-
+	/**
+	* Method to get shows of a particular movie
+	* @param movie The movie whose shows are to be seen
+	* @return The list of shows
+	*/
     public ArrayList<String> getShowsByMovie(MovieEY movie) {
 
 

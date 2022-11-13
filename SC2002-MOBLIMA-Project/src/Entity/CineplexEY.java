@@ -42,6 +42,7 @@ public class CineplexEY {
 	 * @param cineplexID The unique ID of a cineplex
 	 * @param name The cineplex name
 	 * @param location The location of the cineplex
+	 * @param screenID The screenID
 	 */
 	public CineplexEY(String cineplexID, String name, String location, ArrayList<String>  screenID) {
 		// Attributes

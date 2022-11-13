@@ -17,16 +17,43 @@ import java.util.*;
  */
 public class StaffBoundary extends Boundary implements BaseBoundary {
     // Managers
+    /**
+     * contains	bookingManager object to process all booking object
+     */
     BookingManager bookingManager;
+    /**
+     * contains reviewManager object to process all  review  object
+     */
     ReviewManager reviewManager;
+    /**
+     * contains	movieManager object to process all movie  object
+     */
     MovieManager movieManager;
 
     // Boundaries
+    /**
+     * contains	cineplexBoundary object to process all cineplex input and output
+     */
     CineplexBoundary cineplexBoundary;
+    /**
+     * contains	screenBoundary	object to process all  screen  input and output
+     */
     ScreenBoundary screenBoundary;
+    /**
+     * contains	movieBoundary object to process all  movie  input and output
+     */
     MovieBoundary movieBoundary;
+    /**
+     * contains	showBoundary object to process all  show  input and output
+     */
     ShowBoundary showBoundary;
+    /**
+     * contains	ticketPriceBoundary	object to process all ticket  input and output
+     */
     TicketPriceBoundary ticketPriceBoundary;
+    /**
+     * contains	holidayBoundary	object to process all holiday input and output
+     */
     HolidayBoundary holidayBoundary;
 
     /**

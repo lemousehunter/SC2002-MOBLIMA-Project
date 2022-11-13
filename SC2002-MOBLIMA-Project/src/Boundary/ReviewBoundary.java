@@ -4,25 +4,53 @@ import Controller.MovieManager;
 import Controller.ReviewManager;
 
 import java.util.*;
-
+/**
+ * A Review Boundary Object
+ * 
+ * <p>
+ * A <code>ReviewBoundary</code> object used 
+ *  process all Review input and output
+ * </p>
+ * 
+ */
 public class ReviewBoundary extends Boundary implements BaseBoundary{
+    /**
+     * To contain reviewManager object to process review objects
+     */
     ReviewManager reviewManager;
+    /**
+     * To contain movieManager object to process review objects
+     */
     MovieManager movieManager;
+    /**
+     * Constructor for ReviewBoundary
+     */
     public ReviewBoundary() {
 
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.reviewManager = this.getCentralManager().getReviewMgr();
         this.movieManager = this.getCentralManager().getMovieMgr();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setBoundaries() {
 
     }
 
+    /**
+     * Method to get movie rating scale
+     * @param movieID The movieID
+     * @return The scale
+     */
     public double getScale(String movieID) {
         double scale = 0;
         String movieName = this.movieManager.getMovieByID(movieID).getName();
@@ -38,6 +66,11 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
         return scale;
     }
 
+    /**
+     * Method to add review
+     * @param userID The userID
+     * @param movieID The movieID
+     */
     public void addReview(String userID, String movieID) {
         String movieName = this.movieManager.getMovieByID(movieID).getName();
         String review = this.getInputLine("Please enter your review for " + movieName + " : ");
@@ -47,6 +80,10 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
         this.println("\nReview for the movie " + movieName + " has been added");
     }
 
+    /**
+     * Method to print average rating
+     * @param movieID The movieID
+     */
     public void AvgRatingPrint(String movieID) {
 
         double sum = this.reviewManager.getAvgRating(movieID);
@@ -58,6 +95,9 @@ public class ReviewBoundary extends Boundary implements BaseBoundary{
         }
     }
 
+    /**
+     * Method to print top 5 movies
+     */
     public void Top5MovPrint() {
         ArrayList<String> top5movies = this.reviewManager.top5MoviesByViewerRatings();
         this.println("=========================================");

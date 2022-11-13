@@ -12,20 +12,35 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * A Controller.UserManager class to handle read/write of user data
- * 
+ * A UserManager object
+ * <p>
+ * A <code>UserManager</code> object contains all the parameters and methods required
+ * to communicate between entity and boundary of User Class
+ * </p>
  */
 
 public class UserManager extends Manager implements BaseManager {
 
+/**
+ * A CentralManagerEY object
+ */
   private CentralManagerEY centralManager;
+/**
+ * an arraylist of master users
+ */
   private ArrayList<UserEY> masterUsers;
+  /**
+ * an arraylist of master movie goers
+ */
   private ArrayList<MovieGoerEY> masterMovieGoers;
 
-  private IoManager ioManager;
-/**
- * User Controller.Manager constructor
- * 
+  /**
+ * An IO manager object
+ */
+private IoManager ioManager;
+
+  /**
+ * Constructor for user manager
  */
   public UserManager() {
 

@@ -7,6 +7,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * A ReviewManager object
+ * <p>
+ * A <code>ReviewManager</code> object contains all the parameters and methods required
+ * to communicate between entity and boundary of Review Class
+ * </p>
+ */
+
 public class ReviewManager extends Manager implements BaseManager {
     // managers
     private IoManager ioManager;
@@ -15,18 +23,31 @@ public class ReviewManager extends Manager implements BaseManager {
     private ArrayList<MovieEY> masterMovies;
     private ArrayList<ReviewEY> masterRatings;
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setManagers() {
         this.ioManager = this.getCentralManager().getIoManager();
         this.movieManager = this.getCentralManager().getMovieMgr();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void setMasterLists() {
         this.masterMovies = this.getCentralManager().getMasterMovies();
         this.masterRatings = this.getCentralManager().getMasterRatings();
     }
 
+    /**
+     * Method to add review for movies
+     * @param userID The userID
+     * @param movieID The movieID
+     * @param scale The Scale(1-5)
+     * @param reviewString The review for movie
+     */
     public void addReview(String userID, String movieID, double scale, String reviewString) {
 
         ReviewEY review = new ReviewEY(userID, movieID, scale, reviewString);
@@ -40,6 +61,11 @@ public class ReviewManager extends Manager implements BaseManager {
         }
     }
 
+    /**
+     * Method to get review list by movieID
+     * @param movieId The movieID
+     * @return The review objects
+     */
     public ArrayList<ReviewEY> getListByMovieID(String movieId) {
         ArrayList<ReviewEY> reviewList = new ArrayList<ReviewEY>();
 
@@ -52,6 +78,11 @@ public class ReviewManager extends Manager implements BaseManager {
         return reviewList;
     }
 
+    /**
+     * Method to get review list by userID
+     * @param userId The userID
+     * @return The review objects
+     */
     public ArrayList<ReviewEY> getListByUserID(String userId) {
         ArrayList<ReviewEY> reviewByUser = new ArrayList<ReviewEY>();
 
@@ -65,6 +96,11 @@ public class ReviewManager extends Manager implements BaseManager {
     }
 
 
+    /**
+     * Method to get average rating for a movie
+     * @param movieId The movieID
+     * @return The average rating
+     */
     public double getAvgRating(String movieId) {
         double sum = 0;
         int i = 0;
@@ -86,6 +122,10 @@ public class ReviewManager extends Manager implements BaseManager {
         return sum;
     }
 
+    /**
+     * Method to get top 5 movies based on ratings
+     * @return The list of top 5 movies
+     */
     public ArrayList<String> top5MoviesByViewerRatings() // returns list of movieNames
     {
         HashMap<String, ArrayList<ReviewEY>> reviewMap = buildHashMap(this.masterRatings);// build hashmap of master reviews based on movieID as key
@@ -132,6 +172,11 @@ public class ReviewManager extends Manager implements BaseManager {
     }
     
 
+    /**
+     * Method to build hashmap based on movieID
+     * @param pass The review objects
+     * @return The review hashmap
+     */
     private HashMap<String, ArrayList<ReviewEY>> buildHashMap(ArrayList<ReviewEY> pass) {
         HashMap<String, ArrayList<ReviewEY>> reviewMap = new HashMap<String, ArrayList<ReviewEY>>();
         for (int i = 0; i < pass.size(); i++) {
@@ -145,6 +190,11 @@ public class ReviewManager extends Manager implements BaseManager {
         return reviewMap;
     }
 
+    /**
+     * Method to get movie ratings from review objects based on movie rating ID
+     * @param movie The movie object
+     * @return The movie reviews 
+     */
     public ArrayList<ReviewEY> getMovieRatings(MovieEY movie) {
         ArrayList<ReviewEY> movieViewerRatings = new ArrayList<ReviewEY>();
         for (String ratingID : movie.getViewerRatingsID()) {
@@ -159,6 +209,10 @@ public class ReviewManager extends Manager implements BaseManager {
         return movieViewerRatings;
     }
 
+    /**
+     * Method to read review object from file
+     * @throws IOException If there's read error
+     */
     public void primeViewerRatings() throws IOException {
         String bookingSEPARATOR = "|";
         String filename = this.getCentralManager().getDataFolder().concat("Ratings.txt");
@@ -184,6 +238,10 @@ public class ReviewManager extends Manager implements BaseManager {
         }
     }
 
+    /**
+     * Method to write review objects to text file
+     * @throws IOException If there's write error
+     */
     public void writeViewerRatings() throws IOException {
         String ratingsEPARATOR = " | ";
         String filename = this.getCentralManager().getDataFolder().concat("Ratings.txt");

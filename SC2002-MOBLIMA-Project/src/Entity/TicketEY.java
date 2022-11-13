@@ -50,6 +50,9 @@ public class TicketEY {
      * @param bookingID The bookingID 
      * @param holidayManager The holiday manager(controller) object 
      * @param movieMgr The movie manager(controller) object
+     * @param screenMgr The screen manager(controller) object
+     * @param moviegoerMgr The MovieGoer manager (controller) object
+     * @param ticketPriceManager The Ticket price manager(controller) object
      * @throws ParseException If there's parseException error
      */
     public TicketEY(String movieID, String userID, String screenID, String date, String time, String seatId, double price, String  bookingID, HolidayManager holidayManager, MovieManager movieMgr, ScreenManager screenMgr, MovieGoerManager moviegoerMgr, TicketPriceManager ticketPriceManager) throws ParseException {

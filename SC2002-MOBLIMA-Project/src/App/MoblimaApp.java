@@ -7,18 +7,39 @@ import Entity.StaffEY;
 import java.text.ParseException;
 import java.util.*;
 import java.io.IOException;
-
+/**
+* Moblima App 
+* 
+* 
+*/
 public class MoblimaApp {
 
+    /**
+     * A CentralManagerEY object variable
+     */
     CentralManagerEY centralManager;
 
+    /**
+     * Scanner object to get user input
+     */
     Scanner sc = new Scanner(System.in);
+    /**
+     * A string dataFolder variable
+     */
     private String dataFolder;
 
+    /**
+     * Constructor for Moblima App
+     */
     public MoblimaApp() {
 
     }
 
+    /**
+     * Main method
+     * @param args Stores arguments passed
+     * @throws IOException If There's read/write error
+     */
     public static void main(String[] args) throws IOException {
 
         MoblimaApp moblimaApp = new MoblimaApp();
@@ -41,6 +62,11 @@ public class MoblimaApp {
 
     }
 
+    /**
+     * Method to display startup user menu and get choice
+     * @param args stores args passed
+     * @throws IOException If there read/write error
+     */
     public void process(String[] args) throws IOException {
         try {
 
@@ -72,6 +98,10 @@ public class MoblimaApp {
 
     }
 
+    /**
+     * Method to write data to files
+     * @throws IOException If there's write error
+     */
     private void writeDataFiles() throws IOException {
         this.centralManager.getHolidayMgr().writeHolidays();
         this.centralManager.getCineplexMgr().writeCineplex();
@@ -84,6 +114,9 @@ public class MoblimaApp {
         this.centralManager.getTicketPriceMgr().writeTicketPrice();
     }
 
+	/**
+     * Method to manage staff menu
+     */
     private void ManageStaffApp() {
         int subchoice;
         boolean userLoggedin = false;
@@ -169,6 +202,10 @@ public class MoblimaApp {
         } while (subchoice < 3);
     }
 
+    /**
+     * Method to manage MovieGoer menu
+     * @throws ParseException
+     */
     private void ManageMovieGoerApp() throws ParseException {
         int subchoice;
         boolean userLoggedin = false;

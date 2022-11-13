@@ -83,7 +83,21 @@ public class ShowEY {
 		}
 
 	}
-
+	/**
+	 * Constructor for ShowEY object (requires 12 parameter)
+	 * @param showID The showID
+	 * @param movieID The movieID
+	 * @param cineplexId The cineplexID
+	 * @param screenID The screenID
+	 * @param showDate The show date
+	 * @param showTime The show time
+	 * @param emptySeats The number of empty seats
+	 * @param numberOfRows The number of rows
+	 * @param seatsPerRow The number of seats per row
+	 * @param showSeats A ShowSeatEY object
+	 * @param movieMgr A movie manager object
+	 * @param screenMgr A screen manager object
+	 */
 	public ShowEY(String showID, String movieID, String cineplexId, String screenID, String showDate, String showTime, int emptySeats, int numberOfRows, int seatsPerRow, ArrayList<ShowSeatEY> showSeats, MovieManager movieMgr, ScreenManager screenMgr) {
 		// TODO - implement Show.Show
 		// Managers
@@ -220,15 +234,24 @@ public class ShowEY {
 		this.showTime = showTime;
 	}
 
+	/**
+	 * Method to get show seats
+	 * @return The show seats
+	 */
 	public ArrayList<ShowSeatEY> getShowSeats() {
 		return showSeats;
 	}
 
+	/**
+	 * Method to set show seats
+	 * @param showSeats The list of Show Seats
+	 */
 	public void setShowSeats(ArrayList<ShowSeatEY> showSeats) {
 		this.showSeats = showSeats;
 	}
 	/**
 	 * Method to print the seat layout in the cineplex
+	 * @return The seat layout
 	 */
 	public ArrayList<String> ShowSeatLayout() {
 
