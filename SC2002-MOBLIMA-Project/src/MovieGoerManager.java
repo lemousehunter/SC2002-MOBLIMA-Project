@@ -33,6 +33,16 @@ public class MovieGoerManager extends Manager implements BaseManager {
         return null;      
     }
 
+    public MovieGoerEY getUserByName(String userName) { // gets user by specified userName, if not found return null
+        for (User user: this.masterUserList) {
+            if (user.getUserName().equals(userName)) {
+                return (MovieGoerEY) user;
+            }
+        }
+
+        return null;
+    }
+
     public ArrayList<MovieGoerEY> getAllMovieGoers() {
         ArrayList<MovieGoerEY> movieGoerEYList = new ArrayList<MovieGoerEY>();
         for ( User user : this.masterUserList){

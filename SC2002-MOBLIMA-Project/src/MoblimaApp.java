@@ -234,19 +234,10 @@ public class MoblimaApp {
                     userLoggedin = false;
                     System.out.print("Enter UserName: ");
                     userName = sc.nextLine();
-                    userFound = false;
-                    for (int i = 0; i < this.centralManager.getMasterUsers().size(); i++) {
-                        if (this.centralManager.getMasterUsers().get(i) instanceof MovieGoerEY) {
 
-                            movieGoer = (MovieGoerEY) this.centralManager.getMasterUsers().get(i);
-                            if (movieGoer.getUserName().equals(userName)) {
-                                userFound = true;
-                                userLoggedin = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!userFound) {
+                    MovieGoerEY user = this.centralManager.getMovieGoerMgr().getUserByName(userName);
+
+                    if (user == null) {
                         System.out.println("\nUser " + userName + " not registered \n");
                         System.out.println("Please Enter (1) to Register \n \n3");
                         break;
