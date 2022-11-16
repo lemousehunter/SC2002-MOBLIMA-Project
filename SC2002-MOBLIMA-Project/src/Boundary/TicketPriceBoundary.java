@@ -48,6 +48,7 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
      * @return day type (HOLIDAY or WEEKDAY)
      */
     public String getDayType() {
+       
         String dayType = "";
         while (true) {
             dayType = this.getInputLine("\nPlease enter Day Type (H for Holiday or W for weekday) : ");
@@ -56,7 +57,7 @@ public class TicketPriceBoundary extends Boundary implements BaseBoundary {
                 break;
             }
             if (dayType.toUpperCase().startsWith("W")) {
-                dayType = "WEEKEND";
+                dayType = "WEEKDAY";
                 break;
             }
             this.println("Day Type " + dayType + " is invalid. \n");

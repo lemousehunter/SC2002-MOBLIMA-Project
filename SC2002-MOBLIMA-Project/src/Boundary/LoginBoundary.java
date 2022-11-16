@@ -55,23 +55,18 @@ public class LoginBoundary extends Boundary implements BaseBoundary{
         this.userManager.registerStaff(userName, password);
         System.out.println(userName + " Successfully Registered");
     }
-
     public void registerMovieGoer() {
         String userName = this.getInputLine("Enter UserName: ");
-
         if (this.movieGoerManager.movieGoerExist(userName)) {
             System.out.println("\n" + userName + "  Already Registered");
             return;
         }
-
         String emailID = this.getInputLine("Enter Email ID: ");
         String  mobileNumber = this.getInputLine("Enter Mobile #: ");
         int  age  = this.getInputInt("Enter Age     : ");
         this.movieGoerManager.registerMovieGoer(userName, emailID, mobileNumber, age);
-
         System.out.println("\n" + userName + " Successfully Registered");
     }
-
     public MovieGoerEY getLoginSuccessMovieGoer() {
         String userName = this.getUserName();
 

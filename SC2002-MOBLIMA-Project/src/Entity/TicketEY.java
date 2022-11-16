@@ -144,7 +144,7 @@ public class TicketEY {
     /**
      * Method to compute price
      * @return the price for the specific ticket
-     * @throws ParseException
+     * @throws ParseException error
      */
     public double computePrice() throws ParseException {
         boolean isHoliday = this.holidayManager.isHoliday(this.date); // 1: holiday, 0: not holiday

@@ -164,11 +164,10 @@ public class ReviewManager extends Manager implements BaseManager {
                     avgRatingOfmasterMovies.put(key, -1.0);
                     top5mv.add(this.movieManager.ID2Name(key));
                     break;
+
                 }
             }
         }
-
-
         return top5mv;
     }
     

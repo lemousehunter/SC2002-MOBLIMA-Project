@@ -68,8 +68,11 @@ public static void write(String fileName, List data) throws IOException {
 
   /** Read the contents of the given file. 
   * @param fileName The file name
+  * @return A list of data
+  * @throws IOException error
   */
-  public static List read(String fileName) throws IOException {
+ 
+public static List read(String fileName) throws IOException {
     List data = new ArrayList();
     Scanner scanner = new Scanner(new FileInputStream(fileName));
     try {

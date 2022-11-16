@@ -214,9 +214,9 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
         for (int i=1 ; i <= numTickets;i++){
 
             seatID = this.getInputLine(i+". ");
-            if (i == 1) {
-                seatID =this.getScanner().nextLine();
-            }
+            // if (i == 1) {
+            //     seatID =this.getScanner().nextLine();
+            // }
             seatIDs.add(seatID);
         }
         
@@ -263,6 +263,20 @@ public class BookingBoundary extends Boundary implements BaseBoundary{
 
 
         ArrayList<String> seatIDs = this.getShowSeat(showID,numTickets);
+        
+        int prevSeatNo = 0;
+        for (String seatid : seatIDs )
+        {
+            int seatNo = Integer.parseInt(seatid.substring(1));
+            
+            if ((prevSeatNo == 0) ||((seatNo-prevSeatNo)==1)) {
+                prevSeatNo=seatNo;
+            }
+            else{
+                this.println("\nYou have not selected consecutive seats. Please retry your bookling!!\n");
+                return;
+            }
+        }
 
 
         String bookingID = this.bookingManager.BookTicket(userID, movieID, showDate, showTime, cineplex, screenID, seatIDs);

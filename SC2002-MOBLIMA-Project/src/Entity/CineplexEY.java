@@ -142,7 +142,7 @@ public class CineplexEY {
 	/** 
 	 * Get method for returning the screen ID
 	 * 
-	 * @return ArrayList<String>
+	 * @return Screen ID
 	 */
 	public ArrayList<String> getScreenID() {
 		return this.screenID;

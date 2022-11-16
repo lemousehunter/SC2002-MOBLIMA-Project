@@ -62,7 +62,6 @@ public class ShowEY {
 		else {
 			this.showID = showID;
 		}
-		this.showID = showID;
 		this.movieID = movieID;
 		this.showDate = showDate;
 		this.showTime = showTime;

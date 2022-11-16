@@ -138,7 +138,6 @@ public class ScreenBoundary extends Boundary implements BaseBoundary {
             switch (screenChoice) {
                 case 1:
                     String cineplexName = this.getCineplex();
-                    cineplexName=this.getScanner().nextLine();
                     String screenName = this.getScreen();
                     String screenClass = this.getScreenClass();
                     int numRows = this.getNumberOfRows();

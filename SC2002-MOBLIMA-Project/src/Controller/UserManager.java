@@ -178,6 +178,6 @@ public class UserManager extends Manager implements BaseManager {
         ioManager.write(filename, alw);
         ;
 
-    }
+}
 
 }

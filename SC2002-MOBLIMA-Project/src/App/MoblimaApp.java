@@ -21,9 +21,12 @@ public class MoblimaApp {
     CentralManagerEY centralManager;
 
     /**
-     * Input object to get user input (with wrapped validation)
+     * Scanner object to get user input
      */
     Input input;
+    /**
+    LoginBoundary loginBoundary;
+     */
 
     LoginBoundary loginBoundary;
 
@@ -133,14 +136,17 @@ public class MoblimaApp {
             switch (choice) {
                 case 1:
                     this.loginBoundary.registerStaff();
+
                     break;
 
                 case 2:
                     if (this.loginBoundary.getLoginSuccessStaff()) {
+
                         this.centralManager.getStaffBoundary().staffOperations();
-                        // force user app to terminate by setting choice to 3
+                        // force user app to terminate by setting subchoice to 3
                         choice = 3;
                     }
+
                     break;
 
                 case 3: // return to mainMenu
@@ -159,7 +165,6 @@ public class MoblimaApp {
         MovieGoerEY movieGoer = null;
         do {
             System.out.println("""
-
                     ========================= Welcome to User  App =========================
                     1. Register
                     2. Login
@@ -168,16 +173,23 @@ public class MoblimaApp {
             choice = this.input.getInt("Enter choice: ");
             switch (choice) {
                 case 1:
+
                     this.loginBoundary.registerMovieGoer();
+
                     break;
+
                 case 2:
+
                     movieGoer = this.loginBoundary.getLoginSuccessMovieGoer();
+
                     if (movieGoer !=  null) {
                         this.centralManager.getMovieGoerBoundary().MovieGoerOperations(movieGoer.getUserID());
-                        // force user app to terminate by setting choice to 3
+                        // force user app to terminate by setting subchoice to 3
                         choice = 3;
                     }
+
                     break;
+
                 case 3: // return to mainMenu
                     break;
             }

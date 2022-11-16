@@ -330,7 +330,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
      */
     public void getDetails(char insertUpdateFlag) {
         String movieName = this.getMovieName();
-        movieName = this.getScanner().nextLine();
+        //movieName = this.getScanner().nextLine();
         String language = this.getLanguage(insertUpdateFlag);
         String movieType = this.getMovieType(insertUpdateFlag);
         String showStatus = this.getShowStatus(insertUpdateFlag);
@@ -405,7 +405,7 @@ public class MovieBoundary extends Boundary implements BaseBoundary {
                     break;
                 case 3:
                     String movieName = this.getMovieName();
-                    movieName = this.getScanner().nextLine();
+                   //movieName = this.getScanner().nextLine();
                     String showStatus = this.getShowStatus('U');
                     boolean success = this.movieManager.updateMovieStatus(movieName, showStatus);
                     if (success) {

@@ -621,7 +621,11 @@ public class ShowManager extends Manager implements BaseManager {
 
 
         ArrayList<String> lines = new ArrayList<String>();
+        try {
         lines.add("\nFollowing are the Shows for the Movie : " + movie.getName() + "\n");
+        } catch (Exception e) {
+            return null;
+        }
         for (ShowEY show : this.masterShows){
             if (show.getMovieID().equals(movie.getMovieID())){
                 String screenName = this.screenMgr.getScreenNameByID(show.getScreenID());

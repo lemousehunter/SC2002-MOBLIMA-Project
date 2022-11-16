@@ -133,7 +133,7 @@ public class BookingManager extends Manager implements BaseManager {
      * @param screenID   The screen ID
      * @param seatIDs    The array list of all seat IDs
      * @return The booking ID
-     * @throws ParseException
+     * @throws ParseException error
      */
     public String BookTicket(String userID, String movieID, String date, String time, String cineplexID, String screenID, ArrayList<String> seatIDs) throws ParseException {
         String BookingID = genBookingID(cineplexID);
@@ -201,14 +201,13 @@ public class BookingManager extends Manager implements BaseManager {
 
         SortedSet<Double> sorted =  new TreeSet<>(top5Dict.values()).descendingSet();
         ArrayList<String> top5List = new ArrayList<String>();
-
-        int count = 0;
+        int count=0;
         for (double revenue : sorted) {
             for (String movieID :top5Dict.keySet()) {
                 if (count < 5) {
-                    if (top5Dict.get(movieID).equals(revenue)) {
-                        top5List.add(movieID);
-                        count++;
+                if (top5Dict.get(movieID).equals(revenue)) {
+                    top5List.add(movieID);
+                    count++;
                     }
                 }
                 else {
@@ -240,8 +239,8 @@ public class BookingManager extends Manager implements BaseManager {
     /**
      * Method to read the input data from the files
      *
-     * @throws IOException
-     * @throws ParseException
+     * @throws IOException error
+     * @throws ParseException error
      */
     public void primeBookings() throws IOException, ParseException {
         String bookingSEPARATOR = "|";
@@ -287,7 +286,7 @@ public class BookingManager extends Manager implements BaseManager {
     /**
      * Method to write data back to the files
      *
-     * @throws IOException
+     * @throws IOException error
      */
     public void writeBookings() throws IOException {
         String bookingSEPARATOR = " | ";
@@ -327,6 +326,11 @@ public class BookingManager extends Manager implements BaseManager {
     }
 
 
+    /**
+     * Method to get all booking list
+     * @param userID The UserID
+     * @return The bookings
+     */
     public ArrayList<String> getAllBookingsList(String userID) {
         MovieGoerEY movieGoer = this.movieGoerMgr.getUserByID(userID);
         for (String b : movieGoer.getBookings()) {

@@ -135,7 +135,6 @@ public class CineplexBoundary extends Boundary implements BaseBoundary{
             switch (cineplexChoice) {
                 case 1:
                     String cineplexName = this.getName();
-                    cineplexName = this.getScanner().nextLine();
                     String location = this.getLocation(cineplexName);
                     
                     Boolean success = this.cineplexMgr.addCineplex(cineplexName, location);

@@ -148,7 +148,7 @@ public class CineplexManager extends Manager implements BaseManager {
     
     /** 
      * Method to read from the input data
-     * @throws IOException
+     * @throws IOException error
      */
     public void primeCineplex() throws IOException {
         String cineplexSEPARATOR = "|";
@@ -186,7 +186,7 @@ public class CineplexManager extends Manager implements BaseManager {
     
     /** 
      * Method to write back to the data files
-     * @throws IOException
+     * @throws IOException error
      */
     public void writeCineplex() throws IOException {
         String cineplexSEPARATOR = " | ";

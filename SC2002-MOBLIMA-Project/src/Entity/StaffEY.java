@@ -1,18 +1,19 @@
 package Entity;
 import Enum.UserTypeEN;
+/**
+ * A Staff object that is derived from User object  
+ * 
+ * <p>
+ * A <code>Staff</code> object used to store all the parameters
+ * about a Staff
+ * </p>
+ * 
+ * 
+ */
 
 public class StaffEY extends UserEY {
 	
-	/**
-	 * A Staff object that is derived from User object  
-	 * 
-	 * <p>
-	 * A <code>Staff</code> object used to store all the parameters
-	 * about a Staff
-	 * </p>
-	 * 
-	 * 
-	 */
+	
 	
 	private String password;
 

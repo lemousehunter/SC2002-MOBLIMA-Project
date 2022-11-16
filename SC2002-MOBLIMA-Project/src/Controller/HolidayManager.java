@@ -71,7 +71,7 @@ public class HolidayManager extends Manager implements BaseManager {
    * Method to check if the date is a weekend
    * @param date Date
    * @return True if the date is a weekend, False otherwise
-   * @throws ParseException
+   * @throws ParseException error
    */
   public Boolean getWeekend(String date) throws ParseException {
     DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -127,7 +127,7 @@ public class HolidayManager extends Manager implements BaseManager {
   
   /**
    * Method to read the input data about holidays 
-   * @throws IOException
+   * @throws IOException error
    */
   public void primeHolidays() throws IOException {
     String filename = this.getCentralManager().getDataFolder().concat("Holidays.txt");
@@ -153,7 +153,7 @@ public class HolidayManager extends Manager implements BaseManager {
   
   /** 
    * Method to write back the data to the files
-   * @throws IOException
+   * @throws IOException error
    */
   public void writeHolidays() throws IOException {
     String filename = this.getCentralManager().getDataFolder().concat("Holidays.txt");

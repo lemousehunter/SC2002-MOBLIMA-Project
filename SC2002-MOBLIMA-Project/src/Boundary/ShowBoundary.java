@@ -38,7 +38,6 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
     public void addShow() {
         boolean filter = false;
         String cineplexName = this.getCineplexName(filter);
-        cineplexName        = this.getScanner().nextLine();
         String screenName   = this.getScreenName(filter);
         String movieName    = this.getMovieName(filter);
         String showDate     = this.getShowDate(filter);
@@ -172,7 +171,7 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
     private String getCineplexName(Boolean filter) {
         if (filter) {
             String choice = this.getInputLine("Do you want to filter by Cineplex  ?  (Y | N) :  ");
-            choice = this.getScanner().nextLine();
+            //choice = this.getScanner().nextLine();
             if (!choice.toUpperCase().equals("Y")) {
               return "";
             }
@@ -215,9 +214,6 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
         boolean filter = true;
         String cineplexName ="", screenName ="", movieName ="", showDate ="",showTime =""; 
         cineplexName = this.getCineplexName(filter);
-        if (!filter){
-            cineplexName = this.getScanner().nextLine();
-        }
         screenName   = this.getScreenName(filter);
         movieName    = this.getMovieName(filter);
         showDate     = this.getShowDate(filter);
@@ -253,7 +249,6 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
     private void removeShow() {
         boolean filter = false;
         String cineplexName = this.getCineplexName(filter);
-        cineplexName        = this.getScanner().nextLine();
         String screenName   = this.getScreenName(filter);
         String movieName    = this.getMovieName(filter);
         String showDate     = this.getShowDate(filter);
@@ -300,7 +295,6 @@ public class ShowBoundary extends Boundary implements BaseBoundary{
     private void updateShow() {
         boolean filter = false;
         String cineplexName = this.getCineplexName(filter);
-        cineplexName        = this.getScanner().nextLine();
         String screenName   = this.getScreenName(filter);
         String movieName    = this.getMovieName(filter);
         String showDate     = this.getShowDate(filter);

@@ -96,7 +96,6 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
 
       return this.getInputInt(
               """
-
                       ========================= Welcome to Staff App =========================
                       1.  Manage Cineplex
                       2.  Manage Screen

@@ -241,6 +241,11 @@ public class MovieManager extends Manager implements BaseManager {
         return (masterMovies.get(idx-1).getMovieID());
     }
 
+    /**
+     * Method to get movie object by movie name
+     * @param movieName The movie name
+     * @return movie object
+     */
     public MovieEY getMovieByName(String movieName) {
         if (movieName.isEmpty()) { return null;}
         for (MovieEY movie: this.masterMovies) {

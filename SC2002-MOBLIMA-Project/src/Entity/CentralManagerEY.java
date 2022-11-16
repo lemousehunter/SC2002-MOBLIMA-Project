@@ -42,6 +42,7 @@ public class CentralManagerEY {
     private TicketPriceManager ticketPriceMgr;
     private MovieGoerManager movieGoerMgr;
     private UserManager userMgr;
+
     private IoManager ioManager;
     private LoginManager loginManager;
 
@@ -56,11 +57,14 @@ public class CentralManagerEY {
     private TicketPriceBoundary ticketPriceBoundary;
     private ShowBoundary showBoundary;
     private MovieGoerBoundary movieGoerBoundary;
+
     private StaffBoundary staffBoundary;
     private LoginBoundary loginBoundary;
 
     /**
      * Method to create an object of Entity.CentralManagerEY
+     * @throws IOException error
+     * @throws ParseException error
      */
     public CentralManagerEY() throws IOException, ParseException {
 
@@ -124,7 +128,6 @@ public class CentralManagerEY {
 
         this.loginManager = new LoginManager();
         this.loginManager.setCentralManager(this);
-
         // set all master listts
 
         this.bookingMgr.setMasterLists();
@@ -188,7 +191,6 @@ public class CentralManagerEY {
 
         this.loginBoundary = new LoginBoundary();
         this.loginBoundary.setCentralManager(this);
-
         // invoke setManagers()  & setBundaries to get the other manager instances required
         
         this.bookingBoundary.setBoundaries();       this.bookingBoundary.setManagers();
@@ -605,8 +607,8 @@ public class CentralManagerEY {
     public LoginManager getLoginManager() {
         return this.loginManager;
     }
-
-    /**
+    
+    /** 
      * Method to set new Boundary.BookingBoundary object
      * @param bookingBoundary New Boundary.BookingBoundary Object
      */
@@ -780,11 +782,10 @@ public class CentralManagerEY {
     public void setLoginBoundary(LoginBoundary loginBoundary) {
         this.loginBoundary = loginBoundary;
     }
-
+    
     public LoginBoundary getLoginBoundary() {
         return this.loginBoundary;
     }
-
     /** Method to get new data folder
      * @return the data folder
      */
