@@ -55,6 +55,7 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
      * contains	holidayBoundary	object to process all holiday input and output
      */
     HolidayBoundary holidayBoundary;
+    ReviewBoundary reviewBoundary;
 
     /**
      *{@inheritDoc}
@@ -79,6 +80,7 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
         this.showBoundary = centralManager.getShowBoundary();
         this.ticketPriceBoundary = centralManager.getTicketPriceBoundary();
         this.holidayBoundary = centralManager.getHolidayBoundary();
+        this.reviewBoundary = centralManager.getReviewBoundary();
     }
     /**
      * Constructor for Boundary.StaffBoundary object
@@ -149,32 +151,11 @@ public class StaffBoundary extends Boundary implements BaseBoundary {
                     }
                     break;
                 case 8:
-                    Top5MovPrint(this.reviewManager.top5MoviesByViewerRatings());
+                    this.reviewBoundary.Top5MovPrint();
                     break;
                 case 9:
                     break;
             }
         }
-    }
-
-    /**
-     * Method to print top 5 movies by viewer rating
-     * @param top5movies The top 5 movies based on viewer rating
-     */
-    public void Top5MovPrint(ArrayList<String> top5movies)
-    {
-      if(top5movies!=null&&top5movies.size()==5)
-      {
-        System.out.println("\nTop 5 movies by Average Viewer Ratings");
-        System.out.println("--------------------------------------");
-        for (int i=1; i<=top5movies.size();i++){
-          System.out.println(i + ". " + top5movies.get(i-1));
-        }
-        
-
-      }else
-      {
-        System.out.println("NA");
-      }
     }
 }
