@@ -22,14 +22,29 @@ public class LoginBoundary extends Boundary implements BaseBoundary{
 
     }
 
+    
+    /** 
+     * Method to display a print message and ask user for input
+     * @return Displays a print message
+     */
     public String getUserName() {
         return this.getInputLine("Please enter your Username: ");
     }
 
+    
+    /** 
+     * Method to display a print message and ask user for input
+     * @return Displays a print message
+     */
     public String getPassword() {
         return this.getInputLine("Please enter your Password: ");
     }
 
+    
+    /** 
+     * Method to verify if the login credentials inputted by Staff were correct
+     * @return boolean value to check if the input credentials were correct
+     */
     public boolean getLoginSuccessStaff() {
         String userName = this.getUserName();
         String password = this.getPassword();
@@ -45,6 +60,9 @@ public class LoginBoundary extends Boundary implements BaseBoundary{
         return false;
     }
 
+    /**
+     * Method to register a new staff member
+     */
     public void registerStaff() {
         String userName = this.getInputLine("Please enter your Username: ");
         if (this.userManager.userExists(userName)) {
@@ -55,6 +73,9 @@ public class LoginBoundary extends Boundary implements BaseBoundary{
         this.userManager.registerStaff(userName, password);
         System.out.println(userName + " Successfully Registered");
     }
+    /**
+     * Method to register a new movie goer
+     */
     public void registerMovieGoer() {
         String userName = this.getInputLine("Enter UserName: ");
         if (this.movieGoerManager.movieGoerExist(userName)) {
@@ -67,6 +88,11 @@ public class LoginBoundary extends Boundary implements BaseBoundary{
         this.movieGoerManager.registerMovieGoer(userName, emailID, mobileNumber, age);
         System.out.println("\n" + userName + " Successfully Registered");
     }
+    
+    /** 
+     * Method to check the input credentials of a registered Movie Goer
+     * @return MovieGoerEY
+     */
     public MovieGoerEY getLoginSuccessMovieGoer() {
         String userName = this.getUserName();
 
