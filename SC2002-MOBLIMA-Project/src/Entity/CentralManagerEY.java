@@ -42,8 +42,8 @@ public class CentralManagerEY {
     private TicketPriceManager ticketPriceMgr;
     private MovieGoerManager movieGoerMgr;
     private UserManager userMgr;
-
     private IoManager ioManager;
+    private LoginManager loginManager;
 
 
     // Boundaries
@@ -56,8 +56,8 @@ public class CentralManagerEY {
     private TicketPriceBoundary ticketPriceBoundary;
     private ShowBoundary showBoundary;
     private MovieGoerBoundary movieGoerBoundary;
-
     private StaffBoundary staffBoundary;
+    private LoginBoundary loginBoundary;
 
     /**
      * Method to create an object of Entity.CentralManagerEY
@@ -122,6 +122,9 @@ public class CentralManagerEY {
         this.bookingMgr = new BookingManager();
         this.bookingMgr.setCentralManager(this);
 
+        this.loginManager = new LoginManager();
+        this.loginManager.setCentralManager(this);
+
         // set all master listts
 
         this.bookingMgr.setMasterLists();
@@ -135,6 +138,7 @@ public class CentralManagerEY {
         this.movieGoerMgr.setMasterLists();
         this.ioManager.setMasterLists();
         this.userMgr.setMasterLists();
+        this.loginManager.setMasterLists();
 
         // invoke setManager() to get the other manager instances required
         
@@ -149,6 +153,7 @@ public class CentralManagerEY {
         this.movieGoerMgr.setManagers();
         this.ioManager.setManagers();
         this.userMgr.setManagers();
+        this.loginManager.setManagers();
 
         // instantiate all boundary classes
         this.bookingBoundary = new BookingBoundary();
@@ -181,6 +186,9 @@ public class CentralManagerEY {
         this.staffBoundary = new StaffBoundary();
         this.staffBoundary.setCentralManager(this);
 
+        this.loginBoundary = new LoginBoundary();
+        this.loginBoundary.setCentralManager(this);
+
         // invoke setManagers()  & setBundaries to get the other manager instances required
         
         this.bookingBoundary.setBoundaries();       this.bookingBoundary.setManagers();
@@ -193,6 +201,7 @@ public class CentralManagerEY {
         this.ticketPriceBoundary.setBoundaries();   this.ticketPriceBoundary.setManagers();
         this.staffBoundary.setBoundaries();         this.staffBoundary.setManagers();
         this.movieGoerBoundary.setBoundaries();     this.movieGoerBoundary.setManagers();
+        this.loginBoundary.setBoundaries();         this.loginBoundary.setManagers();
 
         // call all entity managers prime method to prime the array lists from files
         this.primeAllObjectsFromDataFiles();
@@ -589,9 +598,15 @@ public class CentralManagerEY {
         this.ioManager = ioManager;
     }
 
+    public void setLoginManager(LoginManager loginManager) {
+        this.loginManager = loginManager;
+    }
 
-    
-    /** 
+    public LoginManager getLoginManager() {
+        return this.loginManager;
+    }
+
+    /**
      * Method to set new Boundary.BookingBoundary object
      * @param bookingBoundary New Boundary.BookingBoundary Object
      */
@@ -762,7 +777,14 @@ public class CentralManagerEY {
         return movieGoerBoundary;
     }
 
-    
+    public void setLoginBoundary(LoginBoundary loginBoundary) {
+        this.loginBoundary = loginBoundary;
+    }
+
+    public LoginBoundary getLoginBoundary() {
+        return this.loginBoundary;
+    }
+
     /** Method to get new data folder
      * @return the data folder
      */

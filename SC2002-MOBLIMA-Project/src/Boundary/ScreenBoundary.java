@@ -156,9 +156,13 @@ public class ScreenBoundary extends Boundary implements BaseBoundary {
                     break;
                 case 2:
                     screenName = this.getScreen();
-                    screenName=this.getScanner().nextLine();
                     ScreenEY screen = this.screenManager.searchScreen(screenName);
-                    this.println(screen.viewDetails());
+                    if (screen != null) {
+                        this.println(screen.viewDetails());
+                    }
+                    else {
+                        this.println("No screen matching "+ screenName + " was found.");
+                    }
                     break;
                 case 3:
                     this.printAllScreens();

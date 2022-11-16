@@ -1,5 +1,7 @@
 package App;
 
+import java.text.ParseException;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -31,8 +33,14 @@ public class Input {
      * @return ask for user input
      */
     public Integer getInt(String msgToPrint) {
-        System.out.print(msgToPrint);
-        return this.sc.nextInt();
+        do {
+            System.out.println(msgToPrint);
+            while (!sc.hasNextInt()) {
+                System.out.println("Please enter a valid integer.");
+                sc.next();
+            }
+            return sc.nextInt();
+        } while (true);
     }
 
     
@@ -42,8 +50,14 @@ public class Input {
      * @return ask for user input
      */
     public double getDouble(String msgToPrint) {
-        System.out.print(msgToPrint);
-        return this.sc.nextDouble();
+        do {
+            System.out.println(msgToPrint);
+            while (!sc.hasNextDouble()) {
+                System.out.println("Please enter a valid double.");
+                sc.next();
+            }
+            return sc.nextInt();
+        } while (true);
     }
 
     

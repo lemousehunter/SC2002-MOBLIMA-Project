@@ -1,5 +1,6 @@
 package App;
 
+import Boundary.LoginBoundary;
 import Entity.CentralManagerEY;
 import Entity.MovieGoerEY;
 import Entity.StaffEY;
@@ -20,19 +21,17 @@ public class MoblimaApp {
     CentralManagerEY centralManager;
 
     /**
-     * Scanner object to get user input
+     * Input object to get user input (with wrapped validation)
      */
-    Scanner sc = new Scanner(System.in);
-    /**
-     * A string dataFolder variable
-     */
-    private String dataFolder;
+    Input input;
+
+    LoginBoundary loginBoundary;
 
     /**
      * Constructor for Moblima App
      */
     public MoblimaApp() {
-
+        this.input = new Input(null);
     }
 
     /**
@@ -72,14 +71,15 @@ public class MoblimaApp {
 
             // Instantiate CentralManager
             centralManager = new CentralManagerEY();
+            this.loginBoundary = this.centralManager.getLoginBoundary();
 
-            System.out.println("\n==================== Welcome to Moblima Application ====================\n" +
-                    " 1. Staff  Application                                             \n" +
-                    " 2. User   Application                         \n" +
-                    " 3. Exit                                     \n" +
-                    "========================================================================");
-            System.out.print("Enter choice: ");
-            int choice = sc.nextInt();
+            System.out.println("""
+                    ==================== Welcome to Moblima Application ====================
+                     1. Staff  Application
+                     2. User   Application
+                     3. Exit
+                    ========================================================================""");
+            int choice = this.input.getInt("Enter choice: ");
             switch (choice) {
                 case 1:
                     ManageStaffApp();
@@ -118,33 +118,28 @@ public class MoblimaApp {
      * Method to manage staff menu
      */
     private void ManageStaffApp() {
-        int subchoice;
-        boolean userLoggedin = false;
+        int choice = -1;
         do {
-            System.out.println("\n========================= Welcome to Staff App =========================\n" +
-                    "1. Register                                               \n" +
-                    "2. Login                                                 \n" +
-                    "3. Exit Moblima App                               \n" +
-                    "========================================================================");
-            System.out.print("Enter choice: ");
-            while (!sc.hasNextInt()) {
-                System.out.println("Please enter an integer value.");
-                sc.next();
+            System.out.println("""
+                    ========================= Welcome to Staff App =========================
+                    1. Register
+                    2. Login
+                    3. Exit Moblima App
+                    ========================================================================""");
+            choice = this.input.getInt("Enter choice: ");
+            while (choice == -1) {
+                choice = this.input.getInt("Please enter an integer value.");
             }
-            subchoice = sc.nextInt();
-            sc.nextLine();
-            switch (subchoice) {
+            switch (choice) {
                 case 1:
-                    System.out.print("Enter UserName: ");
-                    String userName = sc.nextLine();
-                    System.out.print("Enter Password: ");
-                    String password = sc.nextLine();
+                    String userName = this.input.getLine("Please enter your Username: ");
                     int masterUserListSize;
                     if (this.centralManager.getMasterUsers().isEmpty()) {
                         masterUserListSize = 0;
                     } else {
                         masterUserListSize = this.centralManager.getMasterUsers().size();
                     }
+                    String password = this.input.getLine("Please enter your Password: ");
                     boolean userFound = false;
                     for (int i = 0; i < masterUserListSize; i++) {
                         if (this.centralManager.getMasterUsers().get(i).getUserName().equals(userName)) {
@@ -161,45 +156,17 @@ public class MoblimaApp {
                     break;
 
                 case 2:
-                    userLoggedin = false;
-                    System.out.print("Enter UserName: ");
-                    userName = sc.nextLine();
-                    System.out.print("Enter Password: ");
-                    password = sc.nextLine();
-                    userFound = false;
-                    for (int i = 0; i < this.centralManager.getMasterUsers().size(); i++) {
-                        if (this.centralManager.getMasterUsers().get(i) instanceof StaffEY) {
-
-                            StaffEY staffUser = (StaffEY) this.centralManager.getMasterUsers().get(i);
-                            if (staffUser.getUserName().equals(userName)) {
-                                userFound = true;
-                                if (staffUser.getPassword().equals(password)) {
-                                    System.out.println("\n" + userName + " Succesfully Logged in");
-                                    userLoggedin = true;
-                                    break;
-                                } else {
-                                    System.out.println("Invalid Password. Try Loggin in again \n");
-                                }
-                            }
-                        }
-                    }
-                    if (!userFound) {
-                        System.out.println("\nUser " + userName + " not registered \n");
-                        System.out.println("Please Enter (1) to Register \n \n3");
-                        break;
-                    }
-                    if (userLoggedin) {
+                    if (this.loginBoundary.getLoginSuccessStaff()) {
                         this.centralManager.getStaffBoundary().staffOperations();
-                        // force user app to terminate by setting subchoice to 3
-                        subchoice = 3;
+                        // force user app to terminate by setting choice to 3
+                        choice = 3;
                     }
-
                     break;
 
                 case 3: // return to mainMenu
                     break;
             }
-        } while (subchoice < 3);
+        } while (choice < 3);
     }
 
     /**
@@ -207,26 +174,22 @@ public class MoblimaApp {
      * @throws ParseException
      */
     private void ManageMovieGoerApp() throws ParseException {
-        int subchoice;
+        int choice = -1;
         boolean userLoggedin = false;
         MovieGoerEY movieGoer = null;
         do {
-            System.out.println("\n========================= Welcome to User  App =========================\n" +
-                    "1. Register                                               \n" +
-                    "2. Login                                                 \n" +
-                    "3. Exit Moblima App                                 \n" +
-                    "========================================================================");
-            System.out.print("Enter choice: ");
-            while (!sc.hasNextInt()) {
-                System.out.println("Please enter an integer value.");
-                sc.next();
-            }
-            subchoice = sc.nextInt();
-            sc.nextLine();
-            switch (subchoice) {
+            System.out.println("""
+
+                    ========================= Welcome to User  App =========================
+                    1. Register
+                    2. Login
+                    3. Exit Moblima App
+                    ========================================================================""");
+            choice = this.input.getInt("Enter choice: ");
+            switch (choice) {
                 case 1:
                     System.out.print("Enter UserName: ");
-                    String userName = sc.nextLine();
+                    String userName = this.input.getLine("Enter UserName: ");
                     int masterUserListSize;
                     if (this.centralManager.getMasterUsers().isEmpty()) {
                         masterUserListSize = 0;
@@ -239,44 +202,31 @@ public class MoblimaApp {
                         System.out.println("\n" + userName + "  Already Registered");
                         break;
                     }
-                    System.out.print("Enter Email ID: ");
-                    String emalid = sc.nextLine();
-                    System.out.print("Enter Mobile #: ");
-                    String  mobileNumber = sc.nextLine();
-                    System.out.print("Enter Age     : ");
-                    int  age  = sc.nextInt();
+                    String emailID = this.input.getLine("Enter Email ID: ");
+                    String  mobileNumber = this.input.getLine("Enter Mobile #: ");
+                    int  age  = this.input.getInt("Enter Age     : ");
                     ArrayList<String> bookings = new ArrayList<String>();
 
                     String userid = UUID.randomUUID().toString();
-                    movieGoer = new MovieGoerEY(userid,userName,emalid,mobileNumber,age,bookings);
+                    movieGoer = new MovieGoerEY(userid,userName,emailID,mobileNumber,age,bookings);
                     this.centralManager.getMasterUsers().add(movieGoer);
                     System.out.println("\n" + userName + " Successfully Registered");
 
                     break;
 
                 case 2:
-                    System.out.print("Enter UserName: ");
-                    userName = sc.nextLine();
-
-                    movieGoer = this.centralManager.getMovieGoerMgr().getUserByName(userName);
-
-                    if (movieGoer == null) {
-                        System.out.println("\nUser " + userName + " not registered \n");
-                        System.out.println("Please Enter (1) to Register \n \n3");
-                        break;
-                    }
-                    else {
+                    movieGoer = this.loginBoundary.getLoginSuccessMovieGoer();
+                    if (movieGoer !=  null) {
                         this.centralManager.getMovieGoerBoundary().MovieGoerOperations(movieGoer.getUserID());
-                        // force user app to terminate by setting subchoice to 3
-                        subchoice = 3;
+                        // force user app to terminate by setting choice to 3
+                        choice = 3;
                     }
-
                     break;
 
                 case 3: // return to mainMenu
                     break;
             }
-        } while (subchoice < 3);
+        } while (choice < 3);
     }
 
 }

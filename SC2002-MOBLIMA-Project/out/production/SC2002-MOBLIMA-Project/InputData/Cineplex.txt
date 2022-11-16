@@ -2,3 +2,6 @@
 19d7cf30-5f5c-11ed-9b6a-0242ac120002 | Shaw Theatres | Orchard Road | 19d7d066-5f5c-11ed-9b6a-0242ac120002 ~ 19d7d1b0-5f5c-11ed-9b6a-0242ac120002 ~ 19d7d2f0-5f5c-11ed-9b6a-0242ac120002 ~ 19d7d458-5f5c-11ed-9b6a-0242ac120002 ~ 19d7d994-5f5c-11ed-9b6a-0242ac120002 ~ 
 19d7dae8-5f5c-11ed-9b6a-0242ac120002 | Golden Village | Tiong Bahru | 19d7dae8-5f5c-11ed-9b6a-0242ac120002 ~ 19d7dc14-5f5c-11ed-9b6a-0242ac120002 ~ 19d7dd36-5f5c-11ed-9b6a-0242ac120002 ~ 
 f99788c4-e98c-47a6-8226-7a15d1ae5e46 | Test | TestLoc | f99788c4-e98c-47a6-8226-7a15d1ae5e46 ~ 
+6664cbd8-9f60-40ae-9091-b4bd7c0fc57b | TestC1 | Test | 6664cbd8-9f60-40ae-9091-b4bd7c0fc57b ~ 
+24ef6389-7b19-4ac7-a8fc-3c7ef4b7cedf | TestC | Test | 24ef6389-7b19-4ac7-a8fc-3c7ef4b7cedf ~ 
+9b0bb2c8-582d-4b18-8089-2053f4c1bf27 | Hello | World | 9b0bb2c8-582d-4b18-8089-2053f4c1bf27 ~ 
