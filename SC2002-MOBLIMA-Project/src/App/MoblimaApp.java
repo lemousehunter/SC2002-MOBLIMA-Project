@@ -132,27 +132,7 @@ public class MoblimaApp {
             }
             switch (choice) {
                 case 1:
-                    String userName = this.input.getLine("Please enter your Username: ");
-                    int masterUserListSize;
-                    if (this.centralManager.getMasterUsers().isEmpty()) {
-                        masterUserListSize = 0;
-                    } else {
-                        masterUserListSize = this.centralManager.getMasterUsers().size();
-                    }
-                    String password = this.input.getLine("Please enter your Password: ");
-                    boolean userFound = false;
-                    for (int i = 0; i < masterUserListSize; i++) {
-                        if (this.centralManager.getMasterUsers().get(i).getUserName().equals(userName)) {
-                            System.out.println("\n" + userName + "  Already Registered");
-                            userFound = true;
-                        }
-                    }
-                    if (!userFound) {
-                        StaffEY staff = new StaffEY(userName, password);
-                        this.centralManager.getMasterUsers().add(staff);
-                        System.out.println("\n" + userName + " Successfully Registered");
-
-                    }
+                    this.loginBoundary.registerStaff();
                     break;
 
                 case 2:
@@ -188,32 +168,8 @@ public class MoblimaApp {
             choice = this.input.getInt("Enter choice: ");
             switch (choice) {
                 case 1:
-                    System.out.print("Enter UserName: ");
-                    String userName = this.input.getLine("Enter UserName: ");
-                    int masterUserListSize;
-                    if (this.centralManager.getMasterUsers().isEmpty()) {
-                        masterUserListSize = 0;
-                    } else {
-                        masterUserListSize = this.centralManager.getMasterUsers().size();
-                    }
-                    boolean userFound = false;
-                    movieGoer = this.centralManager.getMovieGoerMgr().getUserByName(userName);
-                    if (movieGoer != null) {
-                        System.out.println("\n" + userName + "  Already Registered");
-                        break;
-                    }
-                    String emailID = this.input.getLine("Enter Email ID: ");
-                    String  mobileNumber = this.input.getLine("Enter Mobile #: ");
-                    int  age  = this.input.getInt("Enter Age     : ");
-                    ArrayList<String> bookings = new ArrayList<String>();
-
-                    String userid = UUID.randomUUID().toString();
-                    movieGoer = new MovieGoerEY(userid,userName,emailID,mobileNumber,age,bookings);
-                    this.centralManager.getMasterUsers().add(movieGoer);
-                    System.out.println("\n" + userName + " Successfully Registered");
-
+                    this.loginBoundary.registerMovieGoer();
                     break;
-
                 case 2:
                     movieGoer = this.loginBoundary.getLoginSuccessMovieGoer();
                     if (movieGoer !=  null) {
@@ -222,7 +178,6 @@ public class MoblimaApp {
                         choice = 3;
                     }
                     break;
-
                 case 3: // return to mainMenu
                     break;
             }

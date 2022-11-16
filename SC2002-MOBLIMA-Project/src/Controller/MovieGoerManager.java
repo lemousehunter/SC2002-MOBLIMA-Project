@@ -2,10 +2,12 @@ package Controller;
 
 import Entity.CentralManagerEY;
 import Entity.MovieGoerEY;
+import Entity.StaffEY;
 import Entity.UserEY;
 import Enum.UserTypeEN;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 /**
@@ -70,6 +72,26 @@ public class MovieGoerManager extends Manager implements BaseManager {
         }
 
         return null;
+    }
+
+    public boolean movieGoerExist(String userName) {
+        MovieGoerEY movieGoer = this.getCentralManager().getMovieGoerMgr().getUserByName(userName);
+        return movieGoer != null;
+    }
+
+    public boolean staffExist(String userName) {
+        StaffEY staff = (StaffEY) this.getCentralManager().getUserMgr().getUserByUserName(userName);
+        return staff != null;
+    }
+
+
+    public void registerMovieGoer(String userName, String emailID, String mobileNumber, int age) {
+
+        ArrayList<String> bookings = new ArrayList<String>();
+
+        String userid = UUID.randomUUID().toString();
+        MovieGoerEY movieGoer = new MovieGoerEY(userid,userName,emailID,mobileNumber,age,bookings);
+        this.getCentralManager().getMasterUsers().add(movieGoer);
     }
 	/**
      * Method to get all MovieGoers from master user list

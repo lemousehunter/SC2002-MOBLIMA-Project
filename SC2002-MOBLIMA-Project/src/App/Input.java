@@ -36,7 +36,7 @@ public class Input {
         do {
             System.out.println(msgToPrint);
             while (!sc.hasNextInt()) {
-                System.out.println("Please enter a valid integer.");
+                System.out.print("Please enter a valid integer.");
                 sc.next();
             }
             return sc.nextInt();
@@ -51,7 +51,7 @@ public class Input {
      */
     public double getDouble(String msgToPrint) {
         do {
-            System.out.println(msgToPrint);
+            System.out.print(msgToPrint);
             while (!sc.hasNextDouble()) {
                 System.out.println("Please enter a valid double.");
                 sc.next();

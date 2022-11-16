@@ -73,6 +73,15 @@ public class UserManager extends Manager implements BaseManager {
         return null;
     }
 
+    public void registerStaff(String userName, String password) {
+        StaffEY staff = new StaffEY(userName, password);
+        this.getCentralManager().getMasterUsers().add(staff);
+    }
+
+    public boolean userExists(String userName) {
+        return this.getUserByUserName(userName) != null;
+    }
+
     /**
      * A method to prime User data from file
      *

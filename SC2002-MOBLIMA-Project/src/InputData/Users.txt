@@ -15,3 +15,5 @@ e61d87a9-c78e-4b9f-88e0-d6102ffa457f | Jerome1 | STAFF | Password
 5e9eccc2-a465-4f7d-b89a-b29d4f0a3955 | Jeorme | STAFF | 1
 b9947ac6-9052-43c9-a11b-b04f89e76641 | Jerome2 | STAFF | Password
 e1cd253b-f302-45a1-970f-63dc93eba98e | Jerome3 | STAFF | Password
+28dfbc72-058d-4e8a-bea7-42120044e57f | helloworld123 | MOVIEGOER | helloworld@gmail.com | 87362373 | 20 | 
+8401a73e-f5df-441d-93b4-ecf6f840f6ca | hello | STAFF | world
