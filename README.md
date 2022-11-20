@@ -10,13 +10,13 @@ Code documentation was generated with JavaDocs and can be viewed on this reposit
 Latest release was compiled on MacOS Ventura, and can be downloaded from [releases](https://github.com/lemousehunter/SC2002-MOBLIMA-Project/releases). 
 To run, just type in `java -jar Path\To\SC2002-MOBLIMA-Project.jar` in your Command Prompt or Termainal. `Path\To\SC2002-MOBLIMA-Project.jar` refers to the absolute path where the `SC2002-MOBLIMA-Project.jar` is stored at. 
 
-Login details for the Moblima application are as follows:
-**MovieGoer**
-Username: varsha
+Login details for the Moblima application are as follows:  
+**MovieGoer**  
+Username: varsha  
 
-**Staff**
-Username: VARSHA
-Password: PASSWD123
+**Staff**  
+Username: VARSHA  
+Password: PASSWD123  
 
 
 ## Design Considerations
