@@ -7,14 +7,14 @@ Using this application, movie tickets can be booked and purchased online, movies
 Code documentation was generated with JavaDocs and can be viewed on this repository under [GitHub-Pages](https://lemousehunter.github.io/SC2002-MOBLIMA-Project).
 
 ## Release
-Latest release was compiled on MacOS Ventura, and can be downloaded from [release](https://github.com/lemousehunter/SC2002-MOBLIMA-Project/releases). 
+Latest release was compiled on MacOS Ventura, and can be downloaded from [releases](https://github.com/lemousehunter/SC2002-MOBLIMA-Project/releases). 
 To run, just type in `java -jar Path\To\SC2002-MOBLIMA-Project.jar` in your Command Prompt or Termainal. `Path\To\SC2002-MOBLIMA-Project.jar` refers to the absolute path where the `SC2002-MOBLIMA-Project.jar` is stored at. 
 
 Login details for the Moblima application are as follows:
-**MovieGoer*
+**MovieGoer**
 Username: varsha
 
-**Staff*
+**Staff**
 Username: VARSHA
 Password: PASSWD123
 
