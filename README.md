@@ -2,6 +2,23 @@
 Movie Booking and Listing Management Application (MOBLIMA) is built on Object-Oriented Programming concepts, such as Entity Controller Boundary (ECB) Architecture and SOLID principles.
 Using this application, movie tickets can be booked and purchased online, movies can be listed and sale reports can be generated. Both movie goers and cinema employees will have a unified point of entry, which will then lead two separate login pages running off the same controllers.
 
+# Documentation and Release
+## Documentation
+Code documentation was generated with JavaDocs and can be viewed on this repository under [GitHub-Pages](https://lemousehunter.github.io/SC2002-MOBLIMA-Project).
+
+## Release
+Latest release was compiled on MacOS Ventura, and can be downloaded from [release](https://github.com/lemousehunter/SC2002-MOBLIMA-Project/releases). 
+To run, just type in `java -jar Path\To\SC2002-MOBLIMA-Project.jar` in your Command Prompt or Termainal. `Path\To\SC2002-MOBLIMA-Project.jar` refers to the absolute path where the `SC2002-MOBLIMA-Project.jar` is stored at. 
+
+Login details for the Moblima application are as follows:
+**MovieGoer*
+Username: varsha
+
+**Staff*
+Username: VARSHA
+Password: PASSWD123
+
+
 ## Design Considerations
 ### ECB
 We have achieved ECB architecture by creating boundaries and entities for all the classes. The boundaries is the layer between user and controllers. Thus, boundary type classes are solely responsible for getting user input, and printing information gotten from controller classes to screen. The Manager (controller) objects on the other hand, solely responsible for reading and writing necessary information to and from files, and are designed to keep track of all the entities it is responsible for. For example, the BookingManager class, manages all the booking objects and contains methods that are relevant to processing bookings as well as passing required information to other Managers(controllers). Entity Classes have the sole responsibility of retaining data, and are treated as data containers. For example, a BookingEY entity contains all relevant booking information, much like what you would see in your receipt when tickets are booked. Any BookingEY entity will thus contain the bookingID, userID, movieID, screenID, cinemaID, date (of show) and time (of show).
